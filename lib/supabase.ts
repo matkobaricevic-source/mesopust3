@@ -5,8 +5,8 @@ import Constants from 'expo-constants';
 const getSupabaseConfig = () => {
   const config = Constants.expoConfig?.extra || Constants.manifest?.extra;
   return {
-    url: config?.supabaseUrl || 'https://0ec90b57d6e95fcbda19832f.supabase.co',
-    anonKey: config?.supabaseAnonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJib2x0IiwicmVmIjoiMGVjOTBiNTdkNmU5NWZjYmRhMTk4MzJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4ODE1NzQsImV4cCI6MTc1ODg4MTU3NH0.9I8-U0x86Ak8t2DGaIk0HfvTSLsAyzdnz-Nw00mMkKw'
+    url: config?.supabaseUrl || 'https://tehaefdnkovvtoxncxjq.supabase.co',
+    anonKey: config?.supabaseAnonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRlaGFlZmRua292dnRveG5jeGpxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzODYxODYsImV4cCI6MjA3ODk2MjE4Nn0.M4UYtXJysDFRZk2ZThdrIrjS253451am6nvCd6TUlHA'
   };
 };
 
