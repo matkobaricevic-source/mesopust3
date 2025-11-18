@@ -111,9 +111,7 @@ function AnimatedEventCard({
           </TouchableOpacity>
 
           <Animated.View style={[styles.categoriesSection, contentAnimatedStyle]}>
-            {hasSubEvents && item.sub_events!
-              .filter(subEvent => subEvent.title !== 'Zeča')
-              .map((subEvent) => (
+            {hasSubEvents && item.sub_events!.map((subEvent) => (
                 <TouchableOpacity
                   key={subEvent.id}
                   style={styles.categoryItem}
@@ -511,7 +509,7 @@ const styles = StyleSheet.create({
   },
   zecaBadge: {
     position: 'absolute',
-    top: 140,
+    top: 12,
     left: 16,
     backgroundColor: '#6b7280',
     paddingHorizontal: 14,

@@ -352,41 +352,75 @@ export default function EventDetailScreen() {
             </Text>
 
             <View style={styles.categoriesGrid}>
-              {[...categories.map(c => ({ ...c, type: 'category' })), ...subEvents.map(e => ({ ...e, type: 'event' }))]
-                .sort((a, b) => a.display_order - b.display_order)
-                .map((item, index) => {
+              {(() => {
+                const allItems = [...categories.map(c => ({ ...c, type: 'category' })), ...subEvents.map(e => ({ ...e, type: 'event' }))]
+                  .sort((a, b) => a.display_order - b.display_order);
+
+                const zecaIndex = allItems.findIndex(item => item.title === 'Zeča');
+                const tretiCetvrtakIndex = allItems.findIndex(item => item.title === 'Treti četrtak - Poberuhi');
+
+                // If both exist, move Zeča after Treti četrtak
+                if (zecaIndex !== -1 && tretiCetvrtakIndex !== -1 && zecaIndex < tretiCetvrtakIndex) {
+                  const zecaItem = allItems.splice(zecaIndex, 1)[0];
+                  const newTretiIndex = allItems.findIndex(item => item.title === 'Treti četrtak - Poberuhi');
+                  allItems.splice(newTretiIndex + 1, 0, zecaItem);
+                }
+
+                return allItems.map((item, index) => {
                   const isZeca = item.title === 'Zeča';
                   const isTretiCetvrtak = item.title === 'Treti četrtak - Poberuhi';
                   const shouldIndent = isZeca;
 
                   return (
                     <View key={item.id}>
-                      <TouchableOpacity
-                        style={[styles.categoryCard, shouldIndent && styles.categoryCardIndented]}
-                        onPress={() => item.type === 'category' ? handleCategoryPress(item) : router.push(`/event/${item.id}`)}
-                        activeOpacity={0.7}>
-                        <View style={styles.categoryContent}>
-                          <Text style={styles.categoryTitle}>{item.title}</Text>
-                          {item.title_local && item.title_local !== item.title && (
-                            <Text style={styles.categoryTitleLocal}>
-                              {item.title_local}
+                      {isTretiCetvrtak && (
+                        <TouchableOpacity
+                          style={[styles.categoryCard]}
+                          onPress={() => item.type === 'category' ? handleCategoryPress(item) : router.push(`/event/${item.id}`)}
+                          activeOpacity={0.7}>
+                          <View style={styles.categoryContent}>
+                            <Text style={styles.categoryTitle}>{item.title}</Text>
+                            {item.title_local && item.title_local !== item.title && (
+                              <Text style={styles.categoryTitleLocal}>
+                                {item.title_local}
+                              </Text>
+                            )}
+                            <Text style={styles.categoryDescription} numberOfLines={2}>
+                              {item.description_croatian || item.description}
                             </Text>
-                          )}
-                          <Text style={styles.categoryDescription} numberOfLines={2}>
-                            {item.description_croatian || item.description}
-                          </Text>
-                        </View>
-                        <ChevronRight size={20} color="#9ca3af" />
-                      </TouchableOpacity>
+                          </View>
+                          <ChevronRight size={20} color="#9ca3af" />
+                        </TouchableOpacity>
+                      )}
                       {isTretiCetvrtak && (
                         <View style={styles.sameDayIndicator}>
                           <View style={styles.sameDayLine} />
                           <Text style={styles.sameDayText}>Istog dana:</Text>
                         </View>
                       )}
+                      {!isTretiCetvrtak && (
+                        <TouchableOpacity
+                          style={[styles.categoryCard, shouldIndent && styles.categoryCardIndented]}
+                          onPress={() => item.type === 'category' ? handleCategoryPress(item) : router.push(`/event/${item.id}`)}
+                          activeOpacity={0.7}>
+                          <View style={styles.categoryContent}>
+                            <Text style={styles.categoryTitle}>{item.title}</Text>
+                            {item.title_local && item.title_local !== item.title && (
+                              <Text style={styles.categoryTitleLocal}>
+                                {item.title_local}
+                              </Text>
+                            )}
+                            <Text style={styles.categoryDescription} numberOfLines={2}>
+                              {item.description_croatian || item.description}
+                            </Text>
+                          </View>
+                          <ChevronRight size={20} color="#9ca3af" />
+                        </TouchableOpacity>
+                      )}
                     </View>
                   );
-                })}
+                });
+              })()}
             </View>
           </View>
         )}
