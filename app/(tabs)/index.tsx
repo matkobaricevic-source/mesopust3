@@ -511,7 +511,7 @@ const styles = StyleSheet.create({
   },
   zecaBadge: {
     position: 'absolute',
-    top: 12,
+    top: 140,
     left: 16,
     backgroundColor: '#6b7280',
     paddingHorizontal: 14,
