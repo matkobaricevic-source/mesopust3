@@ -406,9 +406,9 @@ export default function ParticipantDetailScreen() {
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
-                  <View style={styles.formationPersonLeader}>
-                    <Flag size={18} color="#dc2626" />
-                    <Text style={styles.formationPersonLeaderText}>Bandiraš</Text>
+                  <View style={styles.formationPersonFlag}>
+                    <Flag size={16} color="#6b7280" />
+                    <Text style={styles.formationPersonFlagText}>Bandiraš</Text>
                   </View>
                   <View style={styles.formationSpacer} />
                 </View>
@@ -431,22 +431,22 @@ export default function ParticipantDetailScreen() {
               <View style={styles.formationLegend}>
                 <View style={styles.formationLegendItem}>
                   <View style={styles.formationLegendBox} />
-                  <Text style={styles.formationLegendText}>Mesopustari (14 ukupno)</Text>
-                </View>
-                <View style={styles.formationLegendItem}>
-                  <View style={styles.formationLegendBoxCaptain} />
-                  <Text style={styles.formationLegendText}>Kapitani (2)</Text>
+                  <Text style={styles.formationLegendText}>Mesopustari (15 ukupno)</Text>
                 </View>
                 <View style={styles.formationLegendItem}>
                   <View style={styles.formationLegendBoxLeader} />
-                  <Text style={styles.formationLegendText}>Vođe formacije (2)</Text>
+                  <Text style={styles.formationLegendText}>Advitor - glavni vođa</Text>
+                </View>
+                <View style={styles.formationLegendItem}>
+                  <View style={styles.formationLegendBoxCaptain} />
+                  <Text style={styles.formationLegendText}>Kapitani - vođe redova (2)</Text>
                 </View>
               </View>
 
               <View style={styles.formationNote}>
                 <Info size={16} color="#6b7280" />
                 <Text style={styles.formationNoteText}>
-                  Prvi i drugi kapitan vode svoje redove. Advitor vodi cijelu formaciju, dok Bandiraš nosi zastavu u srednjem redu.
+                  Hijerarhija: Advitor vodi cijelu formaciju, prvi i drugi kapitan vode svoje redove. Bandiraš je Mesopustar koji nosi zastavu u srednjem redu.
                 </Text>
               </View>
             </View>
@@ -1082,6 +1082,21 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#d97706',
     fontWeight: '700',
+  },
+  formationPersonFlag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    padding: 10,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
+  formationPersonFlagText: {
+    fontSize: 13,
+    color: '#6b7280',
+    fontWeight: '500',
   },
   formationPersonLeader: {
     flexDirection: 'row',
