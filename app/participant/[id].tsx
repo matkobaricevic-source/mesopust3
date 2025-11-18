@@ -421,12 +421,14 @@ export default function ParticipantDetailScreen() {
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
                   <View style={styles.formationCircleFlag}>
                     <Flag size={18} color="#15803d" />
                   </View>
                 </View>
 
-                <View style={styles.formationColumn}>
+                <View style={styles.formationColumnRight}>
                   <Text style={styles.formationColumnLabel}>Desni red</Text>
                   <View style={styles.formationCircleLeader}>
                     <Users size={18} color="#f59e0b" />
@@ -1079,6 +1081,11 @@ const styles = StyleSheet.create({
   formationColumn: {
     flex: 1,
     gap: 8,
+  },
+  formationColumnRight: {
+    flex: 1,
+    gap: 8,
+    alignItems: 'flex-end',
   },
   formationColumnMiddle: {
     flex: 1,
