@@ -34,6 +34,7 @@ import {
   Pause,
   Shirt,
   Grid3x3,
+  Crown,
 } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 
@@ -397,20 +398,38 @@ export default function ParticipantDetailScreen() {
 
                 <View style={styles.formationColumnMiddle}>
                   <Text style={styles.formationColumnLabel}>Srednji red</Text>
-                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationPerson}>
+                    <Users size={16} color="#6b7280" />
+                    <Text style={styles.formationPersonText}>Mesopustar</Text>
+                  </View>
                   <View style={styles.formationPersonLeader}>
-                    <Flag size={18} color="#dc2626" />
+                    <Crown size={18} color="#f59e0b" />
                     <Text style={styles.formationPersonLeaderText}>Advitor</Text>
                   </View>
-                  <View style={styles.formationSpacer} />
-                  <View style={styles.formationSpacer} />
-                  <View style={styles.formationSpacer} />
-                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationPerson}>
+                    <Users size={16} color="#6b7280" />
+                    <Text style={styles.formationPersonText}>Mesopustar</Text>
+                  </View>
+                  <View style={styles.formationPerson}>
+                    <Users size={16} color="#6b7280" />
+                    <Text style={styles.formationPersonText}>Mesopustar</Text>
+                  </View>
+                  <View style={styles.formationPerson}>
+                    <Users size={16} color="#6b7280" />
+                    <Text style={styles.formationPersonText}>Mesopustar</Text>
+                  </View>
+                  <View style={styles.formationPerson}>
+                    <Users size={16} color="#6b7280" />
+                    <Text style={styles.formationPersonText}>Mesopustar</Text>
+                  </View>
                   <View style={styles.formationPersonFlag}>
                     <Flag size={16} color="#6b7280" />
                     <Text style={styles.formationPersonFlagText}>Bandiraš</Text>
                   </View>
-                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationPerson}>
+                    <Users size={16} color="#6b7280" />
+                    <Text style={styles.formationPersonText}>Mesopustar</Text>
+                  </View>
                 </View>
 
                 <View style={styles.formationColumn}>
@@ -435,11 +454,7 @@ export default function ParticipantDetailScreen() {
                 </View>
                 <View style={styles.formationLegendItem}>
                   <View style={styles.formationLegendBoxLeader} />
-                  <Text style={styles.formationLegendText}>Advitor - glavni vođa</Text>
-                </View>
-                <View style={styles.formationLegendItem}>
-                  <View style={styles.formationLegendBoxCaptain} />
-                  <Text style={styles.formationLegendText}>Kapitani - vođe redova (2)</Text>
+                  <Text style={styles.formationLegendText}>Vođe - Advitor (s krunom) i Kapitani (3)</Text>
                 </View>
               </View>
 
@@ -1073,14 +1088,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fef3c7',
     borderRadius: 8,
-    padding: 10,
+    padding: 12,
     gap: 8,
     borderWidth: 2,
     borderColor: '#f59e0b',
+    shadowColor: '#f59e0b',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   formationPersonCaptainText: {
-    fontSize: 13,
-    color: '#d97706',
+    fontSize: 14,
+    color: '#f59e0b',
     fontWeight: '700',
   },
   formationPersonFlag: {
@@ -1101,13 +1121,13 @@ const styles = StyleSheet.create({
   formationPersonLeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fef2f2',
+    backgroundColor: '#fef3c7',
     borderRadius: 8,
     padding: 12,
     gap: 8,
     borderWidth: 2,
-    borderColor: '#dc2626',
-    shadowColor: '#dc2626',
+    borderColor: '#f59e0b',
+    shadowColor: '#f59e0b',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -1115,7 +1135,7 @@ const styles = StyleSheet.create({
   },
   formationPersonLeaderText: {
     fontSize: 14,
-    color: '#dc2626',
+    color: '#f59e0b',
     fontWeight: '700',
   },
   formationSpacer: {
@@ -1141,21 +1161,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e5e7eb',
   },
-  formationLegendBoxCaptain: {
+  formationLegendBoxLeader: {
     width: 24,
     height: 24,
     backgroundColor: '#fef3c7',
     borderRadius: 6,
     borderWidth: 2,
     borderColor: '#f59e0b',
-  },
-  formationLegendBoxLeader: {
-    width: 24,
-    height: 24,
-    backgroundColor: '#fef2f2',
-    borderRadius: 6,
-    borderWidth: 2,
-    borderColor: '#dc2626',
   },
   formationLegendText: {
     fontSize: 14,
