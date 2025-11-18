@@ -385,12 +385,16 @@ export default function ParticipantDetailScreen() {
                 <View style={styles.formationColumn}>
                   <Text style={styles.formationColumnLabel}>Lijevi red</Text>
                   <View style={styles.formationPersonCaptain}>
-                    <Users size={16} color="#dc2626" />
+                    <View style={styles.formationCircleLeader}>
+                      <Users size={18} color="#f59e0b" />
+                    </View>
                     <Text style={styles.formationPersonCaptainText}>Drugi kapitan</Text>
                   </View>
                   {Array.from({ length: 7 }, (_, i) => (
                     <View key={`left-${i}`} style={styles.formationPerson}>
-                      <Users size={16} color="#6b7280" />
+                      <View style={styles.formationCircle}>
+                        <Users size={16} color="#6b7280" />
+                      </View>
                       <Text style={styles.formationPersonText}>Mesopustar {i + 2}</Text>
                     </View>
                   ))}
@@ -398,49 +402,38 @@ export default function ParticipantDetailScreen() {
 
                 <View style={styles.formationColumnMiddle}>
                   <Text style={styles.formationColumnLabel}>Srednji red</Text>
-                  <View style={styles.formationPerson}>
-                    <Users size={16} color="#6b7280" />
-                    <Text style={styles.formationPersonText}>Mesopustar</Text>
-                  </View>
+                  <View style={styles.formationSpacer} />
                   <View style={styles.formationPersonLeader}>
-                    <Crown size={18} color="#f59e0b" />
+                    <View style={styles.formationCircleLeader}>
+                      <Crown size={20} color="#f59e0b" />
+                    </View>
                     <Text style={styles.formationPersonLeaderText}>Advitor</Text>
                   </View>
-                  <View style={styles.formationPerson}>
-                    <Users size={16} color="#6b7280" />
-                    <Text style={styles.formationPersonText}>Mesopustar</Text>
-                  </View>
-                  <View style={styles.formationPerson}>
-                    <Users size={16} color="#6b7280" />
-                    <Text style={styles.formationPersonText}>Mesopustar</Text>
-                  </View>
-                  <View style={styles.formationPerson}>
-                    <Users size={16} color="#6b7280" />
-                    <Text style={styles.formationPersonText}>Mesopustar</Text>
-                  </View>
-                  <View style={styles.formationPerson}>
-                    <Users size={16} color="#6b7280" />
-                    <Text style={styles.formationPersonText}>Mesopustar</Text>
-                  </View>
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
                   <View style={styles.formationPersonFlag}>
-                    <Flag size={16} color="#6b7280" />
+                    <View style={styles.formationCircle}>
+                      <Flag size={18} color="#6b7280" />
+                    </View>
                     <Text style={styles.formationPersonFlagText}>Bandiraš</Text>
-                  </View>
-                  <View style={styles.formationPerson}>
-                    <Users size={16} color="#6b7280" />
-                    <Text style={styles.formationPersonText}>Mesopustar</Text>
                   </View>
                 </View>
 
                 <View style={styles.formationColumn}>
                   <Text style={styles.formationColumnLabel}>Desni red</Text>
                   <View style={styles.formationPersonCaptain}>
-                    <Users size={16} color="#dc2626" />
+                    <View style={styles.formationCircleLeader}>
+                      <Users size={18} color="#f59e0b" />
+                    </View>
                     <Text style={styles.formationPersonCaptainText}>Prvi kapitan</Text>
                   </View>
                   {Array.from({ length: 7 }, (_, i) => (
                     <View key={`right-${i}`} style={styles.formationPerson}>
-                      <Users size={16} color="#6b7280" />
+                      <View style={styles.formationCircle}>
+                        <Users size={16} color="#6b7280" />
+                      </View>
                       <Text style={styles.formationPersonText}>Mesopustar {i + 10}</Text>
                     </View>
                   ))}
@@ -1071,71 +1064,100 @@ const styles = StyleSheet.create({
   formationPerson: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 8,
-    padding: 10,
-    gap: 8,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    backgroundColor: '#f9fafb',
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    gap: 10,
+    borderWidth: 1.5,
+    borderColor: '#d1d5db',
   },
   formationPersonText: {
-    fontSize: 13,
-    color: '#6b7280',
-    fontWeight: '500',
+    fontSize: 12,
+    color: '#4b5563',
+    fontWeight: '600',
+  },
+  formationCircle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#ffffff',
+    borderWidth: 2,
+    borderColor: '#d1d5db',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  formationCircleLeader: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#fffbeb',
+    borderWidth: 2.5,
+    borderColor: '#f59e0b',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#f59e0b',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
   },
   formationPersonCaptain: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fef3c7',
-    borderRadius: 8,
-    padding: 12,
-    gap: 8,
-    borderWidth: 2,
+    borderRadius: 24,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    gap: 10,
+    borderWidth: 2.5,
     borderColor: '#f59e0b',
     shadowColor: '#f59e0b',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    elevation: 4,
   },
   formationPersonCaptainText: {
-    fontSize: 14,
-    color: '#f59e0b',
+    fontSize: 13,
+    color: '#d97706',
     fontWeight: '700',
   },
   formationPersonFlag: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 8,
-    padding: 10,
-    gap: 8,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    backgroundColor: '#f0fdf4',
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    gap: 10,
+    borderWidth: 1.5,
+    borderColor: '#86efac',
   },
   formationPersonFlagText: {
-    fontSize: 13,
-    color: '#6b7280',
-    fontWeight: '500',
+    fontSize: 12,
+    color: '#15803d',
+    fontWeight: '600',
   },
   formationPersonLeader: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fef3c7',
-    borderRadius: 8,
-    padding: 12,
-    gap: 8,
-    borderWidth: 2,
+    borderRadius: 24,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    gap: 10,
+    borderWidth: 2.5,
     borderColor: '#f59e0b',
     shadowColor: '#f59e0b',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    elevation: 4,
   },
   formationPersonLeaderText: {
-    fontSize: 14,
-    color: '#f59e0b',
+    fontSize: 13,
+    color: '#d97706',
     fontWeight: '700',
   },
   formationSpacer: {
@@ -1154,20 +1176,24 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   formationLegendBox: {
-    width: 24,
-    height: 24,
-    backgroundColor: '#ffffff',
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    width: 28,
+    height: 28,
+    backgroundColor: '#f9fafb',
+    borderRadius: 14,
+    borderWidth: 2,
+    borderColor: '#d1d5db',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   formationLegendBoxLeader: {
-    width: 24,
-    height: 24,
+    width: 28,
+    height: 28,
     backgroundColor: '#fef3c7',
-    borderRadius: 6,
-    borderWidth: 2,
+    borderRadius: 14,
+    borderWidth: 2.5,
     borderColor: '#f59e0b',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   formationLegendText: {
     fontSize: 14,
