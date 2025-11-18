@@ -384,126 +384,73 @@ export default function ParticipantDetailScreen() {
               <View style={styles.formationRow}>
                 <View style={styles.formationColumn}>
                   <Text style={styles.formationColumnLabel}>Lijevi red</Text>
-                  <View style={styles.formationPersonCaptain}>
-                    <View style={styles.formationCircleLeader}>
-                      <Users size={18} color="#f59e0b" />
-                    </View>
-                    <Text style={styles.formationPersonCaptainText}>Drugi kapitan</Text>
+                  <View style={styles.formationCircleLeader}>
+                    <Users size={18} color="#f59e0b" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Megaphone size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Odgovaralica</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Megaphone size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Wind size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Trumbeta</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Wind size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Disc3 size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Činele</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Disc3 size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Drum size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Veli bubanj</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Drum size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Drum size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Mali bubanj</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Drum size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Bell size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Zvonca</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Bell size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Triangle size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Triangl</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Triangle size={16} color="#7c3aed" />
                   </View>
                 </View>
 
                 <View style={styles.formationColumnMiddle}>
                   <Text style={styles.formationColumnLabel}>Srednji red</Text>
                   <View style={styles.formationSpacer} />
-                  <View style={styles.formationPersonLeader}>
-                    <View style={styles.formationCircleLeader}>
-                      <Crown size={20} color="#f59e0b" />
-                    </View>
-                    <Text style={styles.formationPersonLeaderText}>Advitor</Text>
+                  <View style={styles.formationCircleLeader}>
+                    <Crown size={20} color="#f59e0b" />
                   </View>
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
-                  <View style={styles.formationPersonFlag}>
-                    <View style={styles.formationCircle}>
-                      <Flag size={18} color="#6b7280" />
-                    </View>
-                    <Text style={styles.formationPersonFlagText}>Bandiraš</Text>
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationCircleFlag}>
+                    <Flag size={18} color="#15803d" />
                   </View>
                 </View>
 
                 <View style={styles.formationColumn}>
                   <Text style={styles.formationColumnLabel}>Desni red</Text>
-                  <View style={styles.formationPersonCaptain}>
-                    <View style={styles.formationCircleLeader}>
-                      <Users size={18} color="#f59e0b" />
-                    </View>
-                    <Text style={styles.formationPersonCaptainText}>Prvi kapitan</Text>
+                  <View style={styles.formationCircleLeader}>
+                    <Users size={18} color="#f59e0b" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Megaphone size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Odgovaralica</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Megaphone size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Wind size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Trumbeta</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Wind size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Disc3 size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Činele</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Disc3 size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Drum size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Veli bubanj</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Drum size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Drum size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Mali bubanj</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Drum size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Bell size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Zvonca</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Bell size={16} color="#7c3aed" />
                   </View>
-                  <View style={styles.formationPersonInstrument}>
-                    <View style={styles.formationCircleInstrument}>
-                      <Triangle size={16} color="#7c3aed" />
-                    </View>
-                    <Text style={styles.formationPersonInstrumentText}>Triangl</Text>
+                  <View style={styles.formationCircleInstrument}>
+                    <Triangle size={16} color="#7c3aed" />
                   </View>
                 </View>
               </View>
@@ -523,10 +470,24 @@ export default function ParticipantDetailScreen() {
                 </View>
               </View>
 
+              <View style={styles.formationPositions}>
+                <Text style={styles.formationPositionsTitle}>Raspored pozicija:</Text>
+                <View style={styles.formationPositionsList}>
+                  <Text style={styles.formationPositionItem}>1. Kapitan (vođa reda)</Text>
+                  <Text style={styles.formationPositionItem}>2. Odgovaralica (truba)</Text>
+                  <Text style={styles.formationPositionItem}>3. Trumbeta (tuba)</Text>
+                  <Text style={styles.formationPositionItem}>4. Činele</Text>
+                  <Text style={styles.formationPositionItem}>5. Veli bubanj</Text>
+                  <Text style={styles.formationPositionItem}>6. Mali bubanj</Text>
+                  <Text style={styles.formationPositionItem}>7. Zvonca</Text>
+                  <Text style={styles.formationPositionItem}>8. Triangl</Text>
+                </View>
+              </View>
+
               <View style={styles.formationNote}>
                 <Info size={16} color="#6b7280" />
                 <Text style={styles.formationNoteText}>
-                  Advitor (s krunom) vodi cijelu formaciju, kapitani vode svoje redove. Svaki red ima 7 glazbenika s različitim instrumentima, a Bandiraš nosi zastavu u središtu.
+                  Advitor (s krunom) vodi cijelu formaciju iz središta. Svaki red ima kapitana i 7 glazbenika s različitim instrumentima. Bandiraš nosi zastavu u središnjem redu.
                 </Text>
               </View>
             </View>
@@ -1160,11 +1121,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   formationCircleLeader: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     backgroundColor: '#fffbeb',
-    borderWidth: 2.5,
+    borderWidth: 3,
     borderColor: '#f59e0b',
     justifyContent: 'center',
     alignItems: 'center',
@@ -1173,6 +1134,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     elevation: 3,
+    marginVertical: 4,
   },
   formationPersonCaptain: {
     flexDirection: 'row',
@@ -1228,14 +1190,26 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   formationCircleInstrument: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     backgroundColor: '#f5f3ff',
-    borderWidth: 2,
+    borderWidth: 2.5,
     borderColor: '#a78bfa',
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: 4,
+  },
+  formationCircleFlag: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#f0fdf4',
+    borderWidth: 2.5,
+    borderColor: '#86efac',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 4,
   },
   formationPersonLeader: {
     flexDirection: 'row',
@@ -1317,6 +1291,28 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#6b7280',
     fontWeight: '500',
+  },
+  formationPositions: {
+    marginTop: 20,
+    padding: 16,
+    backgroundColor: '#fafaf9',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e7e5e4',
+  },
+  formationPositionsTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#292524',
+    marginBottom: 12,
+  },
+  formationPositionsList: {
+    gap: 6,
+  },
+  formationPositionItem: {
+    fontSize: 13,
+    color: '#57534e',
+    lineHeight: 20,
   },
   formationNote: {
     flexDirection: 'row',
