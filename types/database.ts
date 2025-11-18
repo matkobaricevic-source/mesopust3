@@ -3,6 +3,7 @@ export interface Event {
   title: string;
   title_local: string | null;
   description: string;
+  description_croatian: string | null;
   image_url: string | null;
   costume_note: string | null;
   event_date: string | null;
@@ -18,6 +19,7 @@ export interface Category {
   title: string;
   title_local: string | null;
   description: string;
+  description_croatian: string | null;
   icon_name: string | null;
   display_order: number;
   show_in_main_menu: boolean;

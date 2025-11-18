@@ -481,7 +481,7 @@ export default function ParticipantDetailScreen() {
                     <Text style={styles.eventRole}>{event.role_description}</Text>
                   )}
                   <Text style={styles.eventDescription} numberOfLines={2}>
-                    {event.description}
+                    {event.description_croatian || event.description}
                   </Text>
                 </TouchableOpacity>
               ))}

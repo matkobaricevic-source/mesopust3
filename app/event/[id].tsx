@@ -199,7 +199,7 @@ export default function EventDetailScreen() {
         </View>
 
         <View style={styles.eventInfo}>
-          <Text style={styles.eventDescription}>{event.description}</Text>
+          <Text style={styles.eventDescription}>{event.description_croatian || event.description}</Text>
 
           {event.costume_note && (
             <View style={styles.costumeNoteCard}>
@@ -373,7 +373,7 @@ export default function EventDetailScreen() {
                             </Text>
                           )}
                           <Text style={styles.categoryDescription} numberOfLines={2}>
-                            {item.description}
+                            {item.description_croatian || item.description}
                           </Text>
                         </View>
                         <ChevronRight size={20} color="#9ca3af" />
@@ -426,7 +426,7 @@ export default function EventDetailScreen() {
                     </Text>
                   )}
                   <Text style={styles.participantDescription} numberOfLines={2}>
-                    {participant.description}
+                    {participant.description_croatian || participant.description}
                   </Text>
                 </TouchableOpacity>
               ))}
@@ -464,7 +464,7 @@ export default function EventDetailScreen() {
             {event.title_local && (
               <Text style={styles.modalEventTitleLocal}>{event.title_local}</Text>
             )}
-            <Text style={styles.modalEventDescription}>{event.description}</Text>
+            <Text style={styles.modalEventDescription}>{event.description_croatian || event.description}</Text>
             <View style={styles.modalPlaceholder}>
               <Info size={48} color="#d1d5db" />
               <Text style={styles.modalPlaceholderText}>

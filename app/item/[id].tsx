@@ -141,10 +141,7 @@ export default function ItemDetailScreen() {
             <Text style={styles.itemNameLocal}>{item.name_local}</Text>
           )}
 
-          <Text style={styles.itemDescription}>{item.description}</Text>
-          {item.description_local && item.description_local !== item.description && (
-            <Text style={styles.itemDescriptionLocal}>{item.description_local}</Text>
-          )}
+          <Text style={styles.itemDescription}>{item.description_local || item.description}</Text>
         </View>
 
         {participants.length > 0 && (
@@ -181,7 +178,7 @@ export default function ItemDetailScreen() {
                     </Text>
                   )}
                   <Text style={styles.participantDescription} numberOfLines={2}>
-                    {participant.description}
+                    {participant.description_croatian || participant.description}
                   </Text>
                 </TouchableOpacity>
               ))}

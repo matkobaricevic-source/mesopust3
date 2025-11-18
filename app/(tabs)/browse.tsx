@@ -124,7 +124,7 @@ export default function ParticipantsScreen() {
               </View>
               <View style={styles.participantContent}>
                 <Text style={styles.participantDescription} numberOfLines={3}>
-                  {item.description}
+                  {item.description_croatian || item.description}
                 </Text>
                 {item.song_rhythm && (
                   <View style={styles.badge}>

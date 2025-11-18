@@ -329,7 +329,7 @@ export default function SearchScreen() {
                 <Text style={styles.resultTitleLocal}>{item.title_local}</Text>
               )}
               <Text style={styles.resultDescription} numberOfLines={2}>
-                {item.description}
+                {item.description_croatian || item.description_local || item.description}
               </Text>
             </TouchableOpacity>
           )}

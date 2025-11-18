@@ -129,7 +129,7 @@ export default function CategoryDetailScreen() {
             </Text>
           )}
           <Text style={styles.categoryDescription}>
-            {category.description}
+            {category.description_croatian || category.description}
           </Text>
         </View>
 

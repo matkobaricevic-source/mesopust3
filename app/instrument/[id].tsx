@@ -221,7 +221,7 @@ export default function InstrumentDetailScreen() {
                 )}
               </View>
               <Text style={styles.participantDescription} numberOfLines={2}>
-                {participant.description}
+                {participant.description_croatian || participant.description}
               </Text>
             </TouchableOpacity>
           </View>

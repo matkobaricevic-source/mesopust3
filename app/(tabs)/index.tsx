@@ -88,7 +88,7 @@ function AnimatedEventCard({
         </View>
         <View style={styles.eventContent}>
           <Text style={[styles.eventDescription, isZeca && styles.zecaDescription]} numberOfLines={isZeca ? 2 : 3}>
-            {item.description}
+            {item.description_croatian || item.description}
           </Text>
         </View>
       </TouchableOpacity>
