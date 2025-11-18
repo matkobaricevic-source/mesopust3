@@ -111,7 +111,9 @@ function AnimatedEventCard({
           </TouchableOpacity>
 
           <Animated.View style={[styles.categoriesSection, contentAnimatedStyle]}>
-            {hasSubEvents && item.sub_events!.map((subEvent) => (
+            {hasSubEvents && item.sub_events!
+              .filter(subEvent => subEvent.title !== 'Zeča')
+              .map((subEvent) => (
                 <TouchableOpacity
                   key={subEvent.id}
                   style={styles.categoryItem}
