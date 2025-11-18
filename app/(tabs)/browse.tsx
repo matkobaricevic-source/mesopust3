@@ -23,6 +23,10 @@ const getResponsiveImageHeight = () => {
   if (screenWidth < 414) return 180;
   return 200;
 };
+const getResponsivePadding = () => {
+  if (screenWidth < 375) return 12;
+  return 16;
+};
 
 export default function ParticipantsScreen() {
   const [participants, setParticipants] = useState<Participant[]>([]);
@@ -170,6 +174,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f7',
+    overflow: 'hidden',
   },
   centerContainer: {
     flex: 1,
@@ -234,14 +239,12 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   listContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: getResponsivePadding(),
     paddingBottom: 120,
-    alignItems: 'center',
   },
   participantCardWrapper: {
     marginBottom: 24,
     width: '100%',
-    maxWidth: 600,
   },
   participantCard: {
     backgroundColor: '#ffffff',

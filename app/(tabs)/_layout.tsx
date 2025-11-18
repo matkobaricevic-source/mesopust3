@@ -124,5 +124,6 @@ const styles = StyleSheet.create({
   page: {
     width,
     flex: 1,
+    overflow: 'hidden',
   },
 });

@@ -24,6 +24,10 @@ const getResponsiveImageHeight = () => {
   if (screenWidth < 414) return 180;
   return 200;
 };
+const getResponsivePadding = () => {
+  if (screenWidth < 375) return 12;
+  return 16;
+};
 
 interface EventWithCategories extends Event {
   categories?: Category[];
@@ -330,6 +334,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f7',
+    overflow: 'hidden',
   },
   centerContainer: {
     flex: 1,
@@ -402,14 +407,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   listContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: getResponsivePadding(),
     paddingBottom: 120,
-    alignItems: 'center',
   },
   eventCardWrapper: {
     marginBottom: 24,
     width: '100%',
-    maxWidth: 600,
   },
   eventCard: {
     backgroundColor: '#ffffff',
