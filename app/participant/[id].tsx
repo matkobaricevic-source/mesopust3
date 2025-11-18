@@ -383,16 +383,21 @@ export default function ParticipantDetailScreen() {
               <View style={styles.formationRow}>
                 <View style={styles.formationColumn}>
                   <Text style={styles.formationColumnLabel}>Lijevi red</Text>
-                  {Array.from({ length: 8 }, (_, i) => (
+                  <View style={styles.formationPersonCaptain}>
+                    <Users size={16} color="#dc2626" />
+                    <Text style={styles.formationPersonCaptainText}>Drugi kapitan</Text>
+                  </View>
+                  {Array.from({ length: 7 }, (_, i) => (
                     <View key={`left-${i}`} style={styles.formationPerson}>
                       <Users size={16} color="#6b7280" />
-                      <Text style={styles.formationPersonText}>Mesopustar {i + 1}</Text>
+                      <Text style={styles.formationPersonText}>Mesopustar {i + 2}</Text>
                     </View>
                   ))}
                 </View>
 
                 <View style={styles.formationColumnMiddle}>
                   <Text style={styles.formationColumnLabel}>Srednji red</Text>
+                  <View style={styles.formationSpacer} />
                   <View style={styles.formationPersonLeader}>
                     <Flag size={18} color="#dc2626" />
                     <Text style={styles.formationPersonLeaderText}>Advitor</Text>
@@ -401,19 +406,23 @@ export default function ParticipantDetailScreen() {
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
-                  <View style={styles.formationSpacer} />
                   <View style={styles.formationPersonLeader}>
                     <Flag size={18} color="#dc2626" />
                     <Text style={styles.formationPersonLeaderText}>Bandiraš</Text>
                   </View>
+                  <View style={styles.formationSpacer} />
                 </View>
 
                 <View style={styles.formationColumn}>
                   <Text style={styles.formationColumnLabel}>Desni red</Text>
-                  {Array.from({ length: 8 }, (_, i) => (
+                  <View style={styles.formationPersonCaptain}>
+                    <Users size={16} color="#dc2626" />
+                    <Text style={styles.formationPersonCaptainText}>Prvi kapitan</Text>
+                  </View>
+                  {Array.from({ length: 7 }, (_, i) => (
                     <View key={`right-${i}`} style={styles.formationPerson}>
                       <Users size={16} color="#6b7280" />
-                      <Text style={styles.formationPersonText}>Mesopustar {i + 9}</Text>
+                      <Text style={styles.formationPersonText}>Mesopustar {i + 10}</Text>
                     </View>
                   ))}
                 </View>
@@ -422,18 +431,22 @@ export default function ParticipantDetailScreen() {
               <View style={styles.formationLegend}>
                 <View style={styles.formationLegendItem}>
                   <View style={styles.formationLegendBox} />
-                  <Text style={styles.formationLegendText}>Mesopustari (16 ukupno)</Text>
+                  <Text style={styles.formationLegendText}>Mesopustari (14 ukupno)</Text>
+                </View>
+                <View style={styles.formationLegendItem}>
+                  <View style={styles.formationLegendBoxCaptain} />
+                  <Text style={styles.formationLegendText}>Kapitani (2)</Text>
                 </View>
                 <View style={styles.formationLegendItem}>
                   <View style={styles.formationLegendBoxLeader} />
-                  <Text style={styles.formationLegendText}>Vođe formacije</Text>
+                  <Text style={styles.formationLegendText}>Vođe formacije (2)</Text>
                 </View>
               </View>
 
               <View style={styles.formationNote}>
                 <Info size={16} color="#6b7280" />
                 <Text style={styles.formationNoteText}>
-                  Advitor vodi formaciju s prednje strane, dok Bandiraš nosi zastavu na stražnjoj strani srednjeg reda.
+                  Prvi i drugi kapitan vode svoje redove. Advitor vodi cijelu formaciju, dok Bandiraš nosi zastavu u srednjem redu.
                 </Text>
               </View>
             </View>
@@ -1055,6 +1068,21 @@ const styles = StyleSheet.create({
     color: '#6b7280',
     fontWeight: '500',
   },
+  formationPersonCaptain: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fef3c7',
+    borderRadius: 8,
+    padding: 10,
+    gap: 8,
+    borderWidth: 2,
+    borderColor: '#f59e0b',
+  },
+  formationPersonCaptainText: {
+    fontSize: 13,
+    color: '#d97706',
+    fontWeight: '700',
+  },
   formationPersonLeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -1097,6 +1125,14 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth: 1,
     borderColor: '#e5e7eb',
+  },
+  formationLegendBoxCaptain: {
+    width: 24,
+    height: 24,
+    backgroundColor: '#fef3c7',
+    borderRadius: 6,
+    borderWidth: 2,
+    borderColor: '#f59e0b',
   },
   formationLegendBoxLeader: {
     width: 24,
