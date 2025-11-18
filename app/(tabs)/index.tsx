@@ -111,18 +111,20 @@ function AnimatedEventCard({
           </TouchableOpacity>
 
           <Animated.View style={[styles.categoriesSection, contentAnimatedStyle]}>
-            {hasSubEvents && item.sub_events!.map((subEvent) => (
-              <TouchableOpacity
-                key={subEvent.id}
-                style={styles.categoryItem}
-                onPress={() => onSubEventPress(subEvent.id)}
-                activeOpacity={0.7}>
-                <View style={styles.categoryDot} />
-                <Text style={styles.categoryItemTitle}>
-                  {subEvent.title_local || subEvent.title}
-                </Text>
-              </TouchableOpacity>
-            ))}
+            {hasSubEvents && item.sub_events!
+              .filter(subEvent => subEvent.title !== 'Zeča')
+              .map((subEvent) => (
+                <TouchableOpacity
+                  key={subEvent.id}
+                  style={styles.categoryItem}
+                  onPress={() => onSubEventPress(subEvent.id)}
+                  activeOpacity={0.7}>
+                  <View style={styles.categoryDot} />
+                  <Text style={styles.categoryItemTitle}>
+                    {subEvent.title_local || subEvent.title}
+                  </Text>
+                </TouchableOpacity>
+              ))}
             {hasCategories && item.categories!.map((category) => (
               <TouchableOpacity
                 key={category.id}
