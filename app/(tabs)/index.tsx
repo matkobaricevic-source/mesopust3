@@ -84,6 +84,9 @@ function AnimatedEventCard({
             <Text style={[styles.eventTitle, isZeca && styles.zecaTitle]}>
               {item.title_local || item.title}
             </Text>
+            {item.day_name && (
+              <Text style={styles.dayName}>{item.day_name}</Text>
+            )}
           </View>
         </View>
         <View style={styles.eventContent}>
@@ -280,9 +283,9 @@ export default function HomeScreen() {
 
             return (
               <View style={styles.eventCardWrapper}>
-                {isZeca && (
+                {item.day_name && (
                   <View style={styles.zecaBadge}>
-                    <Text style={styles.zecaBadgeText}>3. dan Napovidanja</Text>
+                    <Text style={styles.zecaBadgeText}>{item.day_name}</Text>
                   </View>
                 )}
                 {isHappeningToday && (
@@ -491,6 +494,12 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: fonts.title,
     color: '#ffffff',
+  },
+  dayName: {
+    fontSize: 12,
+    fontFamily: fonts.medium,
+    color: 'rgba(255, 255, 255, 0.8)',
+    marginTop: 4,
   },
   eventDescription: {
     fontSize: 15,
