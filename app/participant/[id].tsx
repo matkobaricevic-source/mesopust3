@@ -33,6 +33,7 @@ import {
   Play,
   Pause,
   Shirt,
+  Grid3x3,
 } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 
@@ -370,6 +371,74 @@ export default function ParticipantDetailScreen() {
             </TouchableOpacity>
           </View>
         </View>
+
+        {participant.name === 'Mesopustari' && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Formacija</Text>
+            <Text style={styles.sectionSubtitle}>
+              Raspored Mesopustara u formaciji
+            </Text>
+
+            <View style={styles.formationContainer}>
+              <View style={styles.formationRow}>
+                <View style={styles.formationColumn}>
+                  <Text style={styles.formationColumnLabel}>Lijevi red</Text>
+                  {Array.from({ length: 8 }, (_, i) => (
+                    <View key={`left-${i}`} style={styles.formationPerson}>
+                      <Users size={16} color="#6b7280" />
+                      <Text style={styles.formationPersonText}>Mesopustar {i + 1}</Text>
+                    </View>
+                  ))}
+                </View>
+
+                <View style={styles.formationColumnMiddle}>
+                  <Text style={styles.formationColumnLabel}>Srednji red</Text>
+                  <View style={styles.formationPersonLeader}>
+                    <Flag size={18} color="#dc2626" />
+                    <Text style={styles.formationPersonLeaderText}>Advitor</Text>
+                  </View>
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationPersonLeader}>
+                    <Flag size={18} color="#dc2626" />
+                    <Text style={styles.formationPersonLeaderText}>Bandiraš</Text>
+                  </View>
+                </View>
+
+                <View style={styles.formationColumn}>
+                  <Text style={styles.formationColumnLabel}>Desni red</Text>
+                  {Array.from({ length: 8 }, (_, i) => (
+                    <View key={`right-${i}`} style={styles.formationPerson}>
+                      <Users size={16} color="#6b7280" />
+                      <Text style={styles.formationPersonText}>Mesopustar {i + 9}</Text>
+                    </View>
+                  ))}
+                </View>
+              </View>
+
+              <View style={styles.formationLegend}>
+                <View style={styles.formationLegendItem}>
+                  <View style={styles.formationLegendBox} />
+                  <Text style={styles.formationLegendText}>Mesopustari (16 ukupno)</Text>
+                </View>
+                <View style={styles.formationLegendItem}>
+                  <View style={styles.formationLegendBoxLeader} />
+                  <Text style={styles.formationLegendText}>Vođe formacije</Text>
+                </View>
+              </View>
+
+              <View style={styles.formationNote}>
+                <Info size={16} color="#6b7280" />
+                <Text style={styles.formationNoteText}>
+                  Advitor vodi formaciju s prednje strane, dok Bandiraš nosi zastavu na stražnjoj strani srednjeg reda.
+                </Text>
+              </View>
+            </View>
+          </View>
+        )}
 
         {hierarchyRoles.length > 0 && (
           <View style={styles.section}>
@@ -940,5 +1009,123 @@ const styles = StyleSheet.create({
     color: '#9ca3af',
     textAlign: 'center',
     marginTop: 12,
+  },
+  formationContainer: {
+    backgroundColor: '#f9fafb',
+    borderRadius: 16,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
+  formationRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 16,
+  },
+  formationColumn: {
+    flex: 1,
+    gap: 8,
+  },
+  formationColumnMiddle: {
+    flex: 1,
+    gap: 8,
+    alignItems: 'center',
+  },
+  formationColumnLabel: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#dc2626',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  formationPerson: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    padding: 10,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
+  formationPersonText: {
+    fontSize: 13,
+    color: '#6b7280',
+    fontWeight: '500',
+  },
+  formationPersonLeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fef2f2',
+    borderRadius: 8,
+    padding: 12,
+    gap: 8,
+    borderWidth: 2,
+    borderColor: '#dc2626',
+    shadowColor: '#dc2626',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  formationPersonLeaderText: {
+    fontSize: 14,
+    color: '#dc2626',
+    fontWeight: '700',
+  },
+  formationSpacer: {
+    height: 8,
+  },
+  formationLegend: {
+    marginTop: 20,
+    gap: 12,
+    paddingTop: 20,
+    borderTopWidth: 1,
+    borderTopColor: '#e5e7eb',
+  },
+  formationLegendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  formationLegendBox: {
+    width: 24,
+    height: 24,
+    backgroundColor: '#ffffff',
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
+  formationLegendBoxLeader: {
+    width: 24,
+    height: 24,
+    backgroundColor: '#fef2f2',
+    borderRadius: 6,
+    borderWidth: 2,
+    borderColor: '#dc2626',
+  },
+  formationLegendText: {
+    fontSize: 14,
+    color: '#6b7280',
+    fontWeight: '500',
+  },
+  formationNote: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 10,
+    marginTop: 16,
+    padding: 14,
+    backgroundColor: '#eff6ff',
+    borderRadius: 10,
+    borderLeftWidth: 3,
+    borderLeftColor: '#3b82f6',
+  },
+  formationNoteText: {
+    flex: 1,
+    fontSize: 13,
+    color: '#1e40af',
+    lineHeight: 19,
   },
 });
