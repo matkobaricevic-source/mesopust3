@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
   },
   participantImage: {
     width: '100%',
-    height: 220,
+    height: 160,
   },
   imageGradient: {
     position: 'absolute',

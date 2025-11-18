@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
   },
   contentImage: {
     width: '100%',
-    height: 200,
+    height: 160,
     borderRadius: 8,
     marginBottom: 12,
   },
