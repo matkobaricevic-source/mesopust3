@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  Dimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
@@ -16,6 +17,13 @@ import { Calendar, ChevronDown, ChevronUp } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, interpolate } from 'react-native-reanimated';
 import { fonts } from '@/constants/fonts';
+
+const { width: screenWidth } = Dimensions.get('window');
+const getResponsiveImageHeight = () => {
+  if (screenWidth < 375) return 140;
+  if (screenWidth < 414) return 180;
+  return 200;
+};
 
 interface EventWithCategories extends Event {
   categories?: Category[];
@@ -465,7 +473,7 @@ const styles = StyleSheet.create({
   },
   eventImage: {
     width: '100%',
-    height: 160,
+    height: getResponsiveImageHeight(),
   },
   imageGradient: {
     position: 'absolute',

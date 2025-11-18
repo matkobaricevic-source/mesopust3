@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
+  Dimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
@@ -15,6 +16,13 @@ import { Participant } from '@/types/database';
 import { Users, Music, Heart, ChevronRight } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
+
+const { width: screenWidth } = Dimensions.get('window');
+const getResponsiveImageHeight = () => {
+  if (screenWidth < 375) return 140;
+  if (screenWidth < 414) return 180;
+  return 200;
+};
 
 export default function ParticipantsScreen() {
   const [participants, setParticipants] = useState<Participant[]>([]);
@@ -248,7 +256,7 @@ const styles = StyleSheet.create({
   },
   participantImage: {
     width: '100%',
-    height: 160,
+    height: getResponsiveImageHeight(),
   },
   imageGradient: {
     position: 'absolute',

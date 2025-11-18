@@ -7,11 +7,19 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
+  Dimensions,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Category, ContentItem } from '@/types/database';
 import { ArrowLeft, FileText, Image as ImageIcon, Music, Video } from 'lucide-react-native';
+
+const { width: screenWidth } = Dimensions.get('window');
+const getResponsiveImageHeight = () => {
+  if (screenWidth < 375) return 120;
+  if (screenWidth < 414) return 150;
+  return 160;
+};
 
 export default function CategoryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -350,7 +358,7 @@ const styles = StyleSheet.create({
   },
   contentImage: {
     width: '100%',
-    height: 160,
+    height: getResponsiveImageHeight(),
     borderRadius: 8,
     marginBottom: 12,
   },
