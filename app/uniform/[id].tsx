@@ -12,7 +12,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { HierarchyRole, UniformItem, Instrument } from '@/types/database';
-import { ArrowLeft, Shirt, Music, Disc3 } from 'lucide-react-native';
+import { ArrowLeft, Shirt, Music, Disc3, ChevronRight } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -160,6 +160,14 @@ export default function UniformDetailScreen() {
                       <Text style={styles.uniformItemDescription}>
                         {item.description_croatian}
                       </Text>
+                    )}
+                    {item.additional_info_url && (
+                      <TouchableOpacity
+                        style={styles.moreInfoButton}
+                        onPress={() => router.push(item.additional_info_url as any)}>
+                        <Text style={styles.moreInfoButtonText}>Saznaj više</Text>
+                        <ChevronRight size={18} color="#dc2626" />
+                      </TouchableOpacity>
                     )}
                   </View>
                 ))}
@@ -394,6 +402,26 @@ const styles = StyleSheet.create({
     color: '#4b5563',
     lineHeight: 22,
     marginLeft: 44,
+    marginBottom: 12,
+  },
+  moreInfoButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fef2f2',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 8,
+    marginTop: 8,
+    marginLeft: 44,
+    borderWidth: 1,
+    borderColor: '#fecaca',
+  },
+  moreInfoButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#dc2626',
+    marginRight: 4,
   },
   instrumentsGrid: {
     gap: 16,
