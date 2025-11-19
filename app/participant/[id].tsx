@@ -483,9 +483,9 @@ export default function ParticipantDetailScreen() {
                   <TouchableOpacity style={styles.formationCircleLeader} onPress={() => navigateToRole('drugi kapetan')} activeOpacity={0.7}>
                     <Users size={18} color="#f59e0b" />
                   </TouchableOpacity>
-                  <View style={styles.formationCircleSupport}>
+                  <TouchableOpacity style={styles.formationCircleSupport} onPress={() => navigateToRole('kasir')} activeOpacity={0.7}>
                     <Wallet size={16} color="#059669" />
-                  </View>
+                  </TouchableOpacity>
                   <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('odgovaralica')} activeOpacity={0.7}>
                     <Megaphone size={16} color="#7c3aed" />
                   </TouchableOpacity>
@@ -535,9 +535,9 @@ export default function ParticipantDetailScreen() {
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
-                  <View style={styles.formationCircleSupport}>
+                  <TouchableOpacity style={styles.formationCircleSupport} onPress={() => navigateToRole('magaziner')} activeOpacity={0.7}>
                     <PackageOpen size={16} color="#059669" />
-                  </View>
+                  </TouchableOpacity>
                 </View>
 
                 <View style={styles.formationColumnRight}>
@@ -545,9 +545,9 @@ export default function ParticipantDetailScreen() {
                   <TouchableOpacity style={styles.formationCircleLeader} onPress={() => navigateToRole('prvi kapetan')} activeOpacity={0.7}>
                     <Users size={18} color="#f59e0b" />
                   </TouchableOpacity>
-                  <View style={styles.formationCircleSupport}>
+                  <TouchableOpacity style={styles.formationCircleSupport} onPress={() => navigateToRole('kasir')} activeOpacity={0.7}>
                     <Wallet size={16} color="#059669" />
-                  </View>
+                  </TouchableOpacity>
                   <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('odgovaralica')} activeOpacity={0.7}>
                     <Megaphone size={16} color="#7c3aed" />
                   </TouchableOpacity>
