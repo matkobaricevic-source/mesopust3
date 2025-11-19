@@ -332,6 +332,13 @@ export default function ParticipantDetailScreen() {
                     })}
                   </View>
                 )}
+
+                <View style={styles.zogaInfoBox}>
+                  <Info size={16} color="#6b7280" />
+                  <Text style={styles.zogaInfoText}>
+                    Mesopustari su glazbeni sastav sastavljen od dvadesetak mladića s instrumentima koji predstavljaju glavnu okosnica novljanskih mesopusnih običaja. Ključni su akteri koji koordiniraju celokupnom radnjom mesopusta vodeći je kroz sva tri tjedna trajanja izvedbe.
+                  </Text>
+                </View>
               </View>
             )}
 
@@ -1451,5 +1458,22 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#92400e',
     flex: 1,
+  },
+  zogaInfoBox: {
+    flexDirection: 'row',
+    backgroundColor: '#fef3c7',
+    padding: 14,
+    borderRadius: 10,
+    gap: 12,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#fbbf24',
+  },
+  zogaInfoText: {
+    flex: 1,
+    fontSize: 13,
+    color: '#92400e',
+    lineHeight: 19,
+    fontWeight: '500',
   },
 });
