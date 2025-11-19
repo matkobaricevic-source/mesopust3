@@ -93,13 +93,13 @@ export default function UniformDetailScreen() {
 
   const getUniformPartPosition = (itemName: string) => {
     const positions: Record<string, { top: string; left: string }> = {
-      'Rapčinac / Kapa': { top: '9%', left: '53%' },
-      'Kurdela / Mala traka trobojnica': { top: '28%', left: '48%' },
-      'Bela košulja / Bijela košulja': { top: '32%', left: '38%' },
-      'Mala gora / Mala tustika': { top: '40%', left: '50%' },
-      'Kokarda / Ukras od male trake trobojnice': { top: '49%', left: '53%' },
-      'Široka trobojnica / Široka traka trobojnica': { top: '57%', left: '38%' },
-      'Škura plava jaketa / Tamno plavi sako': { top: '67%', left: '42%' },
+      'Rapčinac / Kapa': { top: '8%', left: '51%' },
+      'Kurdela / Mala traka trobojnica': { top: '24%', left: '49%' },
+      'Bela košulja / Bijela košulja': { top: '33%', left: '36%' },
+      'Mala gora / Mala tustika': { top: '39%', left: '50%' },
+      'Kokarda / Ukras od male trake trobojnice': { top: '48%', left: '52%' },
+      'Široka trobojnica / Široka traka trobojnica': { top: '56%', left: '37%' },
+      'Škura plava jaketa / Tamno plavi sako': { top: '65%', left: '41%' },
     };
     return positions[itemName] || null;
   };
@@ -159,7 +159,7 @@ export default function UniformDetailScreen() {
             <View style={styles.visualUniformContainer}>
               <View style={styles.uniformBackground}>
                 <Image
-                  source={require('@/assets/images/Mesopustar_uiforma.jpg')}
+                  source={require('@/assets/images/Mesopustar_uiforma_dotted.jpg')}
                   style={styles.uniformPhoto}
                   resizeMode="cover"
                 />
