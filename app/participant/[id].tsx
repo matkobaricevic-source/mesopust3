@@ -73,6 +73,8 @@ export default function ParticipantDetailScreen() {
   const [isFormationExpanded, setIsFormationExpanded] = useState(false);
   const [isFormationDescExpanded, setIsFormationDescExpanded] = useState(false);
   const [isZogaExpanded, setIsZogaExpanded] = useState(false);
+  const [isRolesExpanded, setIsRolesExpanded] = useState(false);
+  const [isUniformExpanded, setIsUniformExpanded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -613,40 +615,148 @@ export default function ParticipantDetailScreen() {
           </View>
         )}
 
-        {hierarchyRoles.length > 0 && (
+        {participant.name === 'Mesopustari' && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Hijerarhija</Text>
+            <TouchableOpacity
+              style={styles.rolesHeader}
+              onPress={() => setIsRolesExpanded(!isRolesExpanded)}
+              activeOpacity={0.7}>
+              <View style={styles.rolesHeaderContent}>
+                <Text style={styles.sectionTitle}>Uloge običnog mesopustara</Text>
+                <ChevronDown
+                  size={24}
+                  color="#1f2937"
+                  style={{
+                    transform: [{ rotate: isRolesExpanded ? '180deg' : '0deg' }],
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
             <Text style={styles.sectionSubtitle}>
-              Struktura grupe Mesopustara
+              Sve uloge su jednake važnosti
             </Text>
 
-            <View style={styles.hierarchyGrid}>
-              {hierarchyRoles.map((role) => (
-                <TouchableOpacity
-                  key={role.id}
-                  style={styles.hierarchyCard}
-                  onPress={() => handleRolePress(role)}
-                  activeOpacity={0.7}>
-                  <View style={styles.hierarchyHeader}>
-                    <Users size={20} color="#dc2626" />
-                    <View style={styles.hierarchyHeaderText}>
-                      <Text style={styles.hierarchyTitle}>
-                        {role.title_croatian}
-                      </Text>
+            {isRolesExpanded && (
+              <View style={styles.rolesList}>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>1</Text></View>
+                  <Text style={styles.roleText}>Kasir prvog kapitana <Text style={styles.roleSubtext}>(blagajnik prvog kapetana)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>2</Text></View>
+                  <Text style={styles.roleText}>Kasir drugog kapitana <Text style={styles.roleSubtext}>(blagajnik drugog kapetana)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>3</Text></View>
+                  <Text style={styles.roleText}>Sopila mala</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>4</Text></View>
+                  <Text style={styles.roleText}>Sopila vela</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>5</Text></View>
+                  <Text style={styles.roleText}>Bubanj veli</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>6</Text></View>
+                  <Text style={styles.roleText}>Bubanj srednji</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>7</Text></View>
+                  <Text style={styles.roleText}>Bubanj mali</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>8</Text></View>
+                  <Text style={styles.roleText}>Odgovaralica <Text style={styles.roleSubtext}>(vrsta limenog puhačkog instrumenta u mesopustarskoj glazbi)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>9</Text></View>
+                  <Text style={styles.roleText}>Bandira i švikavac</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>10</Text></View>
+                  <Text style={styles.roleText}>Vela trumbeta <Text style={styles.roleSubtext}>(vrsta limenog puhačkog instrumenta u mesopustarskoj glazbi)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>11</Text></View>
+                  <Text style={styles.roleText}>Manja trumbeta <Text style={styles.roleSubtext}>(vrsta limenog puhačkog instrumenta u mesopustarskoj glazbi)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>12</Text></View>
+                  <Text style={styles.roleText}>Činele</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>13</Text></View>
+                  <Text style={styles.roleText}>Kosa <Text style={styles.roleSubtext}>("Instrument" nastao od metalnog dijela stare kose (poljoprivrednog alata za košnju trave). U tupo metalno sječivo, koje je skinuto s drvenog držala, mesopustar bi udarao manjim komadom metala. Time bi proizvodio specifičan, rezonantan zvuk koji služi kao ritamska pratnja.)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>14</Text></View>
+                  <Text style={styles.roleText}>Trijangul <Text style={styles.roleSubtext}>(triangl)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>15</Text></View>
+                  <Text style={styles.roleText}>Avan <Text style={styles.roleSubtext}>(metalna mužara)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>16</Text></View>
+                  <Text style={styles.roleText}>Magaziner</Text>
+                </View>
+              </View>
+            )}
+          </View>
+        )}
+
+        {hierarchyRoles.length > 0 && (
+          <View style={styles.section}>
+            <TouchableOpacity
+              style={styles.uniformHeader}
+              onPress={() => setIsUniformExpanded(!isUniformExpanded)}
+              activeOpacity={0.7}>
+              <View style={styles.uniformHeaderContent}>
+                <Text style={styles.sectionTitle}>Uniforme</Text>
+                <ChevronDown
+                  size={24}
+                  color="#1f2937"
+                  style={{
+                    transform: [{ rotate: isUniformExpanded ? '180deg' : '0deg' }],
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+            <Text style={styles.sectionSubtitle}>
+              Hijerarhija i uniforma grupe Mesopustara
+            </Text>
+
+            {isUniformExpanded && (
+              <View style={styles.hierarchyGrid}>
+                {hierarchyRoles.map((role) => (
+                  <TouchableOpacity
+                    key={role.id}
+                    style={styles.hierarchyCard}
+                    onPress={() => handleRolePress(role)}
+                    activeOpacity={0.7}>
+                    <View style={styles.hierarchyHeader}>
+                      <Users size={20} color="#dc2626" />
+                      <View style={styles.hierarchyHeaderText}>
+                        <Text style={styles.hierarchyTitle}>
+                          {role.title_croatian}
+                        </Text>
+                      </View>
+                      <ChevronRight size={20} color="#9ca3af" />
                     </View>
-                    <ChevronRight size={20} color="#9ca3af" />
-                  </View>
-                  {role.description_croatian && (
-                    <Text style={styles.hierarchyDescription}>
-                      {role.description_croatian}
+                    {role.description_croatian && (
+                      <Text style={styles.hierarchyDescription}>
+                        {role.description_croatian}
+                      </Text>
+                    )}
+                    <Text style={styles.hierarchyViewUniform}>
+                      Pogledaj uniformu →
                     </Text>
-                  )}
-                  <Text style={styles.hierarchyViewUniform}>
-                    Pogledaj uniformu →
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
           </View>
         )}
 
@@ -1582,5 +1692,79 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#fecaca',
+  },
+  rolesHeader: {
+    width: '100%',
+    marginBottom: 8,
+  },
+  rolesHeaderContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
+  rolesList: {
+    marginTop: 16,
+    gap: 12,
+  },
+  roleItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    backgroundColor: '#ffffff',
+    padding: 14,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  roleNumber: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#dc2626',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+    marginTop: 2,
+  },
+  roleNumberText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#ffffff',
+  },
+  roleText: {
+    flex: 1,
+    fontSize: 15,
+    color: '#111827',
+    lineHeight: 22,
+    fontWeight: '600',
+  },
+  roleSubtext: {
+    fontSize: 14,
+    color: '#6b7280',
+    fontWeight: '400',
+    fontStyle: 'italic',
+  },
+  uniformHeader: {
+    width: '100%',
+    marginBottom: 8,
+  },
+  uniformHeaderContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
 });
