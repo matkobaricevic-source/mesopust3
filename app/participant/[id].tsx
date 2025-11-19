@@ -495,7 +495,7 @@ export default function ParticipantDetailScreen() {
               <View style={styles.formationNote}>
                 <Info size={16} color="#6b7280" />
                 <Text style={styles.formationNoteText}>
-                  Advitor (s krunom) vodi cijelu formaciju iz središta. Svaki red ima kapitana i 7 glazbenika s različitim instrumentima. Bandiraš nosi zastavu u središnjem redu.
+                  Mesopustari stoje i kreću se u dva reda. Na prvom mjestu u lijevom i desnom redu stoje prvi i drugi mesopusni kapitan. Iza svakog kapitana redom jedan iza drugoga slijede: vela i mala sopila (svaka u jednom redu), vela trumbeta, manja trumbeta i odgovaralica, veli bubanj, činele, srednji bubanj, mali bubanj, zvončići, avan, triangul, kosa i kasiri. U sredini stoji advitor a iza njega magaziner. Od mesopusne nedilje do čiste srede (kada mesopustari nose svoje svečane odore) između advitora i magazinera stoji bandiraš koji nosi bandiru (zastavu) i puše po ritmu zoge u švikavac (žviždaljku). Svi se mesopustari kreću u ritmu zoge koju dirigira advitor, prema naprijed, sa sinkroniziranim korakom bez odstupanja.
                 </Text>
               </View>
             </View>
