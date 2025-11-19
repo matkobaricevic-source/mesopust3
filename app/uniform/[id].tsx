@@ -141,9 +141,6 @@ export default function UniformDetailScreen() {
                 />
               </View>
             </TouchableOpacity>
-            <Text style={styles.sectionSubtitle}>
-              Sve uloge su jednake važnosti
-            </Text>
 
             {isRolesExpanded && (
               <View style={styles.rolesList}>
