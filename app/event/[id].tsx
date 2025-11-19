@@ -322,13 +322,16 @@ export default function EventDetailScreen() {
               ]}>
                 {(() => {
                   let stationCounter = 0;
-                  return eventSteps.map((step, index) => {
+                  const napovidanjePerformance = categories.find(cat => cat.title_local === 'Napovidanje (izvedba)');
+                  const items: any[] = [];
+
+                  eventSteps.forEach((step, index) => {
                     const titleLower = step.title.toLowerCase();
                     const isStation = titleLower.includes('stanica') || titleLower.includes('stanici') || titleLower.includes('stanicu');
                     if (isStation) stationCounter++;
                     const stationNumber = isStation ? stationCounter : null;
 
-                    return (
+                    items.push(
                       <View key={step.id} style={styles.timelineItem}>
                         <View style={styles.timelineMarker}>
                           <View style={[styles.timelineNumber, isStation && styles.stationNumber]}>
@@ -336,7 +339,7 @@ export default function EventDetailScreen() {
                               {step.step_number}
                             </Text>
                           </View>
-                          {index < eventSteps.length - 1 && <View style={styles.timelineLine} />}
+                          {(index < eventSteps.length - 1 || step.step_number === 4) && <View style={styles.timelineLine} />}
                         </View>
                         <View style={styles.timelineContent}>
                           {step.image_url && getImageSource(step.image_url) && (
@@ -367,7 +370,42 @@ export default function EventDetailScreen() {
                         </View>
                       </View>
                     );
+
+                    // Insert the clickable performance category after step 4
+                    if (step.step_number === 4 && napovidanjePerformance) {
+                      items.push(
+                        <TouchableOpacity
+                          key={napovidanjePerformance.id}
+                          style={styles.timelineItem}
+                          onPress={() => router.push(`/category/${napovidanjePerformance.id}`)}
+                          activeOpacity={0.7}>
+                          <View style={styles.timelineMarker}>
+                            <View style={styles.timelinePerformanceMarker}>
+                              <Info size={16} color="#dc2626" />
+                            </View>
+                            <View style={styles.timelineLine} />
+                          </View>
+                          <View style={[styles.timelineContent, styles.performanceContent]}>
+                            {napovidanjePerformance.image_url && getImageSource(napovidanjePerformance.image_url) && (
+                              <Image
+                                source={getImageSource(napovidanjePerformance.image_url)!}
+                                style={styles.timelineImage}
+                                resizeMode="cover"
+                              />
+                            )}
+                            <View style={[styles.timelineTextContainer, styles.performanceTextContainer]}>
+                              <Text style={styles.performanceTitle}>
+                                {napovidanjePerformance.title_local || napovidanjePerformance.title}
+                              </Text>
+                              <ChevronRight size={20} color="#dc2626" style={styles.performanceChevron} />
+                            </View>
+                          </View>
+                        </TouchableOpacity>
+                      );
+                    }
                   });
+
+                  return items;
                 })()}
               </Animated.View>
           </View>
@@ -1090,6 +1128,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  timelinePerformanceMarker: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#fef2f2',
+    borderWidth: 2,
+    borderColor: '#dc2626',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   timelineNumberText: {
     color: '#ffffff',
     fontSize: 13,
@@ -1138,6 +1186,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: '#374151',
+  },
+  performanceContent: {
+    backgroundColor: '#fef2f2',
+    borderWidth: 1,
+    borderColor: '#fecaca',
+  },
+  performanceTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  performanceTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#dc2626',
+    flex: 1,
+  },
+  performanceChevron: {
+    marginLeft: 8,
   },
   stationTimeNote: {
     flexDirection: 'row',
