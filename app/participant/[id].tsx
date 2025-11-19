@@ -291,16 +291,31 @@ export default function ParticipantDetailScreen() {
             </Text>
 
             {participant.name_croatian === 'Mesopustari' && (
-              <TouchableOpacity
-                style={styles.zogaInfoBox}
-                onPress={() => router.push('/item/99e511f0-0742-45bc-bbf1-78ac32430dc3')}
-                activeOpacity={0.7}>
-                <Info size={16} color="#92400e" />
-                <Text style={styles.zogaInfoText}>
-                  MESOPUSTARSKA ZOGA
-                </Text>
-                <ChevronRight size={16} color="#92400e" />
-              </TouchableOpacity>
+              <View style={styles.zogaInfoBox}>
+                <View style={styles.zogaInfoContent}>
+                  <Info size={18} color="#dc2626" />
+                  <TouchableOpacity
+                    style={styles.zogaTextContainer}
+                    onPress={() => router.push('/item/99e511f0-0742-45bc-bbf1-78ac32430dc3')}
+                    activeOpacity={0.7}>
+                    <Text style={styles.zogaInfoTitle}>MESOPUSTARSKA ZOGA</Text>
+                    <Text style={styles.zogaInfoSongName}>
+                      Još Hrvatska ni propala
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.zogaPlayButton}
+                    onPress={() => {
+                      if (participant.song_rhythm_audio_url) {
+                        // TODO: Play audio
+                        console.log('Play audio:', participant.song_rhythm_audio_url);
+                      }
+                    }}
+                    activeOpacity={0.7}>
+                    <Disc3 size={20} color="#dc2626" />
+                  </TouchableOpacity>
+                </View>
+              </View>
             )}
 
             {participant.song_rhythm && (
@@ -1466,22 +1481,38 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   zogaInfoBox: {
-    flexDirection: 'row',
-    backgroundColor: '#fef3c7',
-    padding: 12,
-    borderRadius: 10,
-    gap: 10,
     marginTop: 12,
-    borderWidth: 1,
-    borderColor: '#fbbf24',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    padding: 14,
+    backgroundColor: '#f5f5f4',
+    borderRadius: 10,
+    borderLeftWidth: 3,
+    borderLeftColor: '#dc2626',
   },
-  zogaInfoText: {
+  zogaInfoContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  zogaTextContainer: {
     flex: 1,
+  },
+  zogaInfoTitle: {
     fontSize: 14,
-    color: '#92400e',
-    fontWeight: '600',
+    color: '#292524',
+    fontWeight: '700',
     letterSpacing: 0.5,
+    marginBottom: 2,
+  },
+  zogaInfoSongName: {
+    fontSize: 12,
+    color: '#57534e',
+    fontStyle: 'italic',
+  },
+  zogaPlayButton: {
+    padding: 8,
+    backgroundColor: '#fef2f2',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#fecaca',
   },
 });
