@@ -20,6 +20,8 @@ import {
   Heart,
   Users,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
   Disc3,
   Info,
   Drum,
@@ -67,6 +69,7 @@ export default function ParticipantDetailScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showDetailedInfo, setShowDetailedInfo] = useState(false);
+  const [showFullDescription, setShowFullDescription] = useState(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -285,6 +288,29 @@ export default function ParticipantDetailScreen() {
             <Text style={styles.participantDescriptionCroatian}>
               {participant.description_croatian}
             </Text>
+
+            {participant.description && participant.description !== participant.description_croatian && (
+              <>
+                {showFullDescription && (
+                  <Text style={styles.participantExtendedDescription}>
+                    {participant.description}
+                  </Text>
+                )}
+                <TouchableOpacity
+                  style={styles.moreInfoButton}
+                  onPress={() => setShowFullDescription(!showFullDescription)}
+                  activeOpacity={0.7}>
+                  <Text style={styles.moreInfoButtonText}>
+                    {showFullDescription ? 'Sakrij detalje' : 'Više informacija'}
+                  </Text>
+                  {showFullDescription ? (
+                    <ChevronUp size={18} color="#6b7280" />
+                  ) : (
+                    <ChevronDown size={18} color="#6b7280" />
+                  )}
+                </TouchableOpacity>
+              </>
+            )}
 
             {participant.song_rhythm && (
               <View style={styles.detailCard}>
@@ -764,7 +790,30 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#9ca3af',
     lineHeight: 23,
+    marginBottom: 12,
+  },
+  participantExtendedDescription: {
+    fontSize: 15,
+    color: '#9ca3af',
+    lineHeight: 23,
+    marginTop: 8,
+    marginBottom: 12,
+  },
+  moreInfoButton: {
+    backgroundColor: '#374151',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
     marginBottom: 16,
+  },
+  moreInfoButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#9ca3af',
   },
   darkContainer: {
     backgroundColor: '#1f2937',
