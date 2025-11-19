@@ -70,6 +70,7 @@ export default function ParticipantDetailScreen() {
   const [showDetailedInfo, setShowDetailedInfo] = useState(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [isFormationExpanded, setIsFormationExpanded] = useState(false);
+  const [isFormationDescExpanded, setIsFormationDescExpanded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -382,7 +383,7 @@ export default function ParticipantDetailScreen() {
               onPress={() => setIsFormationExpanded(!isFormationExpanded)}
               activeOpacity={0.7}>
               <View style={styles.formationHeaderContent}>
-                <Text style={styles.sectionTitle}>Formacija mesopustara - pogledaj više</Text>
+                <Text style={styles.sectionTitle}>Formacija</Text>
                 <ChevronDown
                   size={24}
                   color="#1f2937"
@@ -394,6 +395,10 @@ export default function ParticipantDetailScreen() {
             </TouchableOpacity>
 
             {isFormationExpanded && (
+              <>
+              <Text style={styles.sectionSubtitle}>
+                Raspored Mesopustara u formaciji
+              </Text>
               <View style={styles.formationContainer}>
               <View style={styles.formationRow}>
                 <View style={styles.formationColumn}>
@@ -505,14 +510,33 @@ export default function ParticipantDetailScreen() {
                   <Text style={styles.formationPositionItem}>8. Triangl</Text>
                 </View>
               </View>
+            </View>
+            </>
+            )}
 
+            <TouchableOpacity
+              style={styles.formationHeader}
+              onPress={() => setIsFormationDescExpanded(!isFormationDescExpanded)}
+              activeOpacity={0.7}>
+              <View style={styles.formationHeaderContent}>
+                <Text style={styles.sectionTitle}>Formacija mesopustara - pogledaj više</Text>
+                <ChevronDown
+                  size={24}
+                  color="#1f2937"
+                  style={{
+                    transform: [{ rotate: isFormationDescExpanded ? '180deg' : '0deg' }],
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+
+            {isFormationDescExpanded && (
               <View style={styles.formationNote}>
                 <Info size={16} color="#6b7280" />
                 <Text style={styles.formationNoteText}>
                   Mesopustari stoje i kreću se u dva reda. Na prvom mjestu u lijevom i desnom redu stoje prvi i drugi mesopusni kapitan. Iza svakog kapitana redom jedan iza drugoga slijede: vela i mala sopila (svaka u jednom redu), vela trumbeta, manja trumbeta i odgovaralica, veli bubanj, činele, srednji bubanj, mali bubanj, zvončići, avan, triangul, kosa i kasiri. U sredini stoji advitor a iza njega magaziner. Od mesopusne nedilje do čiste srede (kada mesopustari nose svoje svečane odore) između advitora i magazinera stoji bandiraš koji nosi bandiru (zastavu) i puše po ritmu zoge u švikavac (žviždaljku). Svi se mesopustari kreću u ritmu zoge koju dirigira advitor, prema naprijed, sa sinkroniziranim korakom bez odstupanja.
                 </Text>
               </View>
-            </View>
             )}
           </View>
         )}
