@@ -585,10 +585,13 @@ export default function ParticipantDetailScreen() {
                 onPress={() => setIsFormationDescExpanded(!isFormationDescExpanded)}
                 activeOpacity={0.7}>
                 <View style={styles.formationDescHeaderContent}>
-                  <Text style={styles.formationDescTitle}>Formacija mesopustara - pogledaj više</Text>
+                  <View style={styles.formationDescTitleContainer}>
+                    <Text style={styles.formationDescTitle}>Formacija mesopustara</Text>
+                    <Text style={styles.formationDescSubtitle}>pogledaj više</Text>
+                  </View>
                   <ChevronDown
                     size={20}
-                    color="#1f2937"
+                    color="#e5e7eb"
                     style={{
                       transform: [{ rotate: isFormationDescExpanded ? '180deg' : '0deg' }],
                     }}
@@ -1531,11 +1534,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#374151',
   },
+  formationDescTitleContainer: {
+    flex: 1,
+  },
   formationDescTitle: {
     fontSize: 15,
-    fontWeight: '600',
-    color: '#e5e7eb',
-    flex: 1,
+    fontWeight: '700',
+    color: '#ffffff',
+    marginBottom: 2,
+  },
+  formationDescSubtitle: {
+    fontSize: 12,
+    fontWeight: '400',
+    color: '#9ca3af',
   },
   zogaInfoBox: {
     marginTop: 12,
