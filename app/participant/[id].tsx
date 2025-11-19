@@ -1526,15 +1526,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 14,
-    backgroundColor: '#fef3c7',
+    backgroundColor: '#1f2937',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fbbf24',
+    borderColor: '#374151',
   },
   formationDescTitle: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#92400e',
+    color: '#e5e7eb',
     flex: 1,
   },
   zogaInfoBox: {
