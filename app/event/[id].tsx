@@ -488,12 +488,15 @@ export default function EventDetailScreen() {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Događaji</Text>
             <Text style={styles.sectionSubtitle}>
-              {categories.length + subEvents.length} {(categories.length + subEvents.length) === 1 ? 'događaj' : 'događaja'}
+              {(() => {
+                const filteredCount = categories.filter(c => c.title_local !== 'Napovidanje (izvedba)').length + subEvents.length;
+                return `${filteredCount} ${filteredCount === 1 ? 'događaj' : 'događaja'}`;
+              })()}
             </Text>
 
             <View style={styles.categoriesGrid}>
               {(() => {
-                const allItems = [...categories.map(c => ({ ...c, type: 'category' })), ...subEvents.map(e => ({ ...e, type: 'event' }))]
+                const allItems = [...categories.filter(c => c.title_local !== 'Napovidanje (izvedba)').map(c => ({ ...c, type: 'category' })), ...subEvents.map(e => ({ ...e, type: 'event' }))]
                   .sort((a, b) => a.display_order - b.display_order);
 
                 const zecaIndex = allItems.findIndex(item => item.title === 'Zeča');
