@@ -152,14 +152,6 @@ export default function ParticipantsScreen() {
                     </Text>
                   </View>
                 )}
-                {Array.isArray(item.instruments) && item.instruments.length > 0 && (
-                  <View style={styles.badge}>
-                    <Music size={14} color="#dc2626" />
-                    <Text style={styles.badgeText}>
-                      {item.instruments.map(inst => inst.name_croatian).join(', ')}
-                    </Text>
-                  </View>
-                )}
               </View>
               </TouchableOpacity>
             </View>
