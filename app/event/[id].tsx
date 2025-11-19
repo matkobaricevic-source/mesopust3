@@ -1071,7 +1071,7 @@ const styles = StyleSheet.create({
   },
   timelineContainer: {
     paddingTop: 8,
-    paddingLeft: 8,
+    paddingLeft: 0,
   },
   timelineItem: {
     flexDirection: 'row',
@@ -1079,8 +1079,8 @@ const styles = StyleSheet.create({
   },
   timelineMarker: {
     alignItems: 'center',
-    marginRight: 16,
-    width: 48,
+    marginRight: 12,
+    width: 40,
   },
   timelineNumber: {
     width: 32,
@@ -1115,7 +1115,8 @@ const styles = StyleSheet.create({
     height: 160,
   },
   timelineTextContainer: {
-    padding: 14,
+    padding: 12,
+    paddingLeft: 8,
   },
   timelineStepTitle: {
     fontSize: 14,
