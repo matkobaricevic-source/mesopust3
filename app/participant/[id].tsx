@@ -483,30 +483,30 @@ export default function ParticipantDetailScreen() {
                   <TouchableOpacity style={styles.formationCircleLeader} onPress={() => navigateToRole('kapetan')} activeOpacity={0.7}>
                     <Users size={18} color="#f59e0b" />
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleSupport} onPress={() => navigateToRole('kasir')} activeOpacity={0.7}>
+                  <View style={styles.formationCircleSupport}>
                     <Wallet size={16} color="#059669" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('odgovaralica')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Megaphone size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('švikavac')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Wind size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('činele')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Disc3 size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('mali bubanj')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Drum size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('veli bubanj')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Drum size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('zvonca')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Bell size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('triangl')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Triangle size={16} color="#7c3aed" />
-                  </TouchableOpacity>
+                  </View>
                 </View>
 
                 <View style={styles.formationColumnMiddle}>
@@ -527,17 +527,17 @@ export default function ParticipantDetailScreen() {
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
-                  <TouchableOpacity style={styles.formationCircleFlag} onPress={() => navigateToInstrument('bandira')} activeOpacity={0.7}>
+                  <View style={styles.formationCircleFlag}>
                     <Flag size={18} color="#15803d" />
-                  </TouchableOpacity>
+                  </View>
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
-                  <TouchableOpacity style={styles.formationCircleSupport} onPress={() => navigateToRole('magaziner')} activeOpacity={0.7}>
+                  <View style={styles.formationCircleSupport}>
                     <PackageOpen size={16} color="#059669" />
-                  </TouchableOpacity>
+                  </View>
                 </View>
 
                 <View style={styles.formationColumnRight}>
@@ -545,30 +545,30 @@ export default function ParticipantDetailScreen() {
                   <TouchableOpacity style={styles.formationCircleLeader} onPress={() => navigateToRole('kapetan')} activeOpacity={0.7}>
                     <Users size={18} color="#f59e0b" />
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleSupport} onPress={() => navigateToRole('kasir')} activeOpacity={0.7}>
+                  <View style={styles.formationCircleSupport}>
                     <Wallet size={16} color="#059669" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('odgovaralica')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Megaphone size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('švikavac')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Wind size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('činele')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Disc3 size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('mali bubanj')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Drum size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('veli bubanj')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Drum size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('zvonca')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Bell size={16} color="#7c3aed" />
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.formationCircleInstrument} onPress={() => navigateToInstrument('triangl')} activeOpacity={0.7}>
+                  </View>
+                  <View style={styles.formationCircleInstrument}>
                     <Triangle size={16} color="#7c3aed" />
-                  </TouchableOpacity>
+                  </View>
                 </View>
               </View>
 
