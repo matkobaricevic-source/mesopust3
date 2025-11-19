@@ -480,7 +480,7 @@ export default function ParticipantDetailScreen() {
               <View style={styles.formationRow}>
                 <View style={styles.formationColumn}>
                   <Text style={styles.formationColumnLabel}>Lijevi red</Text>
-                  <TouchableOpacity style={styles.formationCircleLeader} onPress={() => navigateToRole('kapetan')} activeOpacity={0.7}>
+                  <TouchableOpacity style={styles.formationCircleLeader} onPress={() => navigateToRole('drugi kapetan')} activeOpacity={0.7}>
                     <Users size={18} color="#f59e0b" />
                   </TouchableOpacity>
                   <View style={styles.formationCircleSupport}>
@@ -542,7 +542,7 @@ export default function ParticipantDetailScreen() {
 
                 <View style={styles.formationColumnRight}>
                   <Text style={styles.formationColumnLabel}>Desni red</Text>
-                  <TouchableOpacity style={styles.formationCircleLeader} onPress={() => navigateToRole('kapetan')} activeOpacity={0.7}>
+                  <TouchableOpacity style={styles.formationCircleLeader} onPress={() => navigateToRole('prvi kapetan')} activeOpacity={0.7}>
                     <Users size={18} color="#f59e0b" />
                   </TouchableOpacity>
                   <View style={styles.formationCircleSupport}>
