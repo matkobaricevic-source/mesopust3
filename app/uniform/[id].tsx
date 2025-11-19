@@ -93,17 +93,15 @@ export default function UniformDetailScreen() {
 
   const getUniformPartPosition = (itemName: string) => {
     const positions: Record<string, { top: string; left: string }> = {
-      'Rapčinac / Kapa': { top: '14%', left: '50%' },
-      'Kokarda / Ukras od male trake trobojnice': { top: '42%', left: '38%' },
-      'Mala gora / Mala tustika': { top: '42%', left: '62%' },
-      'Bela košulja / Bijela košulja': { top: '38%', left: '50%' },
-      'Škura plava jaketa / Tamno plavi sako': { top: '50%', left: '50%' },
-      'Kurdela / Mala traka trobojnica': { top: '32%', left: '50%' },
-      'Široka trobojnica / Široka traka trobojnica': { top: '48%', left: '28%' },
-      'Bele gaće / Bijele hlače': { top: '70%', left: '50%' },
-      'Crne postole / Crne cipele': { top: '94%', left: '50%' },
+      'Rapčinac / Kapa': { top: '13%', left: '60%' },
+      'Kokarda / Ukras od male trake trobojnice': { top: '55%', left: '48%' },
+      'Mala gora / Mala tustika': { top: '45%', left: '68%' },
+      'Bela košulja / Bijela košulja': { top: '40%', left: '60%' },
+      'Škura plava jaketa / Tamno plavi sako': { top: '58%', left: '65%' },
+      'Kurdela / Mala traka trobojnica': { top: '35%', left: '60%' },
+      'Široka trobojnica / Široka traka trobojnica': { top: '52%', left: '45%' },
     };
-    return positions[itemName] || { top: '50%', left: '50%' };
+    return positions[itemName] || null;
   };
 
   if (error || !role) {
@@ -169,6 +167,7 @@ export default function UniformDetailScreen() {
 
                 {uniformItems.map((item) => {
                   const position = getUniformPartPosition(item.item_name_croatian);
+                  if (!position) return null;
                   return (
                     <TouchableOpacity
                       key={item.id}
@@ -425,9 +424,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   uniformPhoto: {
-    width: '100%',
+    width: '130%',
     height: '100%',
     position: 'absolute',
+    left: '-15%',
   },
   overlay: {
     position: 'absolute',
