@@ -454,6 +454,11 @@ export default function ParticipantDetailScreen() {
                   <View style={styles.formationCircleFlag}>
                     <Flag size={18} color="#15803d" />
                   </View>
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
                   <View style={styles.formationCircleSupport}>
                     <PackageOpen size={16} color="#059669" />
                   </View>
