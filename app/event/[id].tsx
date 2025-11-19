@@ -21,6 +21,13 @@ interface EventStep {
   title: string;
   image_url: string | null;
 }
+
+interface EventCrossroad {
+  id: string;
+  crossroad_number: number;
+  title: string;
+  image_url: string | null;
+}
 import { ArrowLeft, Users, ChevronRight, Info, Shirt, HelpCircle, ChevronDown, ChevronUp, Clock } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 
@@ -35,6 +42,7 @@ export default function EventDetailScreen() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [subEvents, setSubEvents] = useState<Event[]>([]);
   const [eventSteps, setEventSteps] = useState<EventStep[]>([]);
+  const [eventCrossroads, setEventCrossroads] = useState<EventCrossroad[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showDetailedInfo, setShowDetailedInfo] = useState(false);
@@ -42,16 +50,28 @@ export default function EventDetailScreen() {
   const [showImenovanjeInfo, setShowImenovanjeInfo] = useState(false);
   const [showMisenjeInfo, setShowMisenjeInfo] = useState(false);
   const [showEventSteps, setShowEventSteps] = useState(false);
+  const [showCrossroads, setShowCrossroads] = useState(false);
   const eventStepsAnimation = useSharedValue(0);
+  const crossroadsAnimation = useSharedValue(0);
   const router = useRouter();
 
   const chevronAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${interpolate(eventStepsAnimation.value, [0, 1], [0, 180])}deg` }],
   }));
 
+  const chevronCrossroadsAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${interpolate(crossroadsAnimation.value, [0, 1], [0, 180])}deg` }],
+  }));
+
   const timelineAnimatedStyle = useAnimatedStyle(() => ({
     maxHeight: interpolate(eventStepsAnimation.value, [0, 1], [0, 5000]),
     opacity: interpolate(eventStepsAnimation.value, [0, 0.5, 1], [0, 1, 1]),
+    overflow: 'hidden',
+  }));
+
+  const crossroadsAnimatedStyle = useAnimatedStyle(() => ({
+    maxHeight: interpolate(crossroadsAnimation.value, [0, 1], [0, 5000]),
+    opacity: interpolate(crossroadsAnimation.value, [0, 0.5, 1], [0, 1, 1]),
     overflow: 'hidden',
   }));
 
@@ -133,6 +153,15 @@ export default function EventDetailScreen() {
 
       if (stepsError) throw stepsError;
       setEventSteps(stepsData || []);
+
+      const { data: crossroadsData, error: crossroadsError } = await supabase
+        .from('event_crossroads')
+        .select('*')
+        .eq('event_id', id)
+        .order('crossroad_number', { ascending: true });
+
+      if (crossroadsError) throw crossroadsError;
+      setEventCrossroads(crossroadsData || []);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : 'Failed to load event details'
@@ -340,6 +369,62 @@ export default function EventDetailScreen() {
                     );
                   });
                 })()}
+              </Animated.View>
+          </View>
+        )}
+
+        {eventCrossroads.length > 0 && (
+          <View style={styles.section}>
+            <TouchableOpacity
+              style={styles.timelineHeader}
+              onPress={() => {
+                setShowCrossroads(!showCrossroads);
+                crossroadsAnimation.value = withTiming(showCrossroads ? 0 : 1, { duration: 300 });
+              }}
+              activeOpacity={0.7}>
+              <View style={styles.timelineHeaderContent}>
+                <View>
+                  <Text style={styles.sectionTitle}>Raskrižja napovidi</Text>
+                  <Text style={styles.sectionSubtitle}>
+                    {eventCrossroads.length} {eventCrossroads.length === 1 ? 'raskrižje' : 'raskrižja'}
+                  </Text>
+                </View>
+                <Animated.View style={chevronCrossroadsAnimatedStyle}>
+                  <ChevronDown size={24} color="#dc2626" />
+                </Animated.View>
+              </View>
+            </TouchableOpacity>
+            <Animated.View
+              style={[
+                styles.timelineContainer,
+                crossroadsAnimatedStyle,
+              ]}>
+                {eventCrossroads.map((crossroad, index) => (
+                  <View key={crossroad.id} style={styles.timelineItem}>
+                    <View style={styles.timelineMarker}>
+                      <View style={[styles.timelineNumber, styles.crossroadNumber]}>
+                        <Text style={[styles.timelineNumberText, styles.crossroadNumberText]}>
+                          {crossroad.crossroad_number}
+                        </Text>
+                      </View>
+                      {index < eventCrossroads.length - 1 && <View style={styles.timelineLine} />}
+                    </View>
+                    <View style={styles.timelineContent}>
+                      {crossroad.image_url && getImageSource(crossroad.image_url) && (
+                        <Image
+                          source={getImageSource(crossroad.image_url)!}
+                          style={styles.timelineImage}
+                          resizeMode="cover"
+                        />
+                      )}
+                      <View style={[styles.timelineTextContainer, styles.crossroadTextContainer]}>
+                        <Text style={[styles.timelineStepTitle, styles.crossroadTitle]}>
+                          {crossroad.title}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                ))}
               </Animated.View>
           </View>
         )}
@@ -1111,5 +1196,28 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 14,
     fontWeight: '800',
+  },
+  crossroadNumber: {
+    backgroundColor: '#f59e0b',
+    shadowColor: '#f59e0b',
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    borderWidth: 3,
+    borderColor: '#fef3c7',
+  },
+  crossroadNumberText: {
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  crossroadTextContainer: {
+    backgroundColor: '#fef3c7',
+    borderColor: '#fde68a',
+    borderWidth: 2,
+  },
+  crossroadTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#92400e',
   },
 });
