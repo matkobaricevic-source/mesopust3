@@ -526,10 +526,7 @@ export default function EventDetailScreen() {
           <ScrollView style={styles.modalContent}>
             <Text style={styles.modalEventTitle}>Što je "dešpet"?</Text>
             <Text style={styles.modalEventDescription}>
-              "Dešpet" je tradicijska praksa koju Mesopustari izvode tijekom Napovidanja. Ovo uključuje posjećivanje kuća u zajednici i donošenje blagoslova.
-            </Text>
-            <Text style={styles.modalEventDescription} style={{ marginTop: 16 }}>
-              Tijekom dešpeta, Mesopustari obavljaju rituale koji su duboko ukorijenjeni u lokalnim tradicijama i običajima.
+              U starija vremena, nakon službenog dijela napovidanja, mesopustari su se raspuštali i odlazili na prela – druženja po kućama kod mladih djevojaka. Nakon što bi prela završila, znali su napraviti "dešpet" (šaljivu nepodopštinu) obiteljima koje imaju neudanu djevojku, osobito onima koji im nisu otvorili vrata. Ukrali bi nešto i izložili to na Placu (glavnom gradskom trgu, centru), pazeći da se ukradeno ne uništi. Ujutro bi ukradene stvari bile dostupne za povratak kući. Premda su prela nestala, bar u navedenom obliku („po kućama"), dešpet se i dalje prakticira.
             </Text>
           </ScrollView>
         </View>
