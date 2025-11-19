@@ -368,55 +368,36 @@ export default function EventDetailScreen() {
 
                 return allItems.map((item, index) => {
                   const isZeca = item.title === 'Zeča';
-                  const isTretiCetvrtak = item.title === 'Treti četrtak - Poberuhi';
+                  const isTretiCetvrtak = item.title === 'Treti mesopusni četrtak – „POBERUHI"';
                   const shouldIndent = isZeca;
+                  const prevItem = index > 0 ? allItems[index - 1] : null;
+                  const isPrevTretiCetvrtak = prevItem?.title === 'Treti mesopusni četrtak – „POBERUHI"';
 
                   return (
                     <View key={item.id}>
-                      {isTretiCetvrtak && (
-                        <TouchableOpacity
-                          style={[styles.categoryCard]}
-                          onPress={() => item.type === 'category' ? handleCategoryPress(item) : router.push(`/event/${item.id}`)}
-                          activeOpacity={0.7}>
-                          <View style={styles.categoryContent}>
-                            <Text style={styles.categoryTitle}>{item.title}</Text>
-                            {item.title_local && item.title_local !== item.title && (
-                              <Text style={styles.categoryTitleLocal}>
-                                {item.title_local}
-                              </Text>
-                            )}
-                            <Text style={styles.categoryDescription} numberOfLines={2}>
-                              {item.description_croatian || item.description}
-                            </Text>
-                          </View>
-                          <ChevronRight size={20} color="#9ca3af" />
-                        </TouchableOpacity>
-                      )}
-                      {isTretiCetvrtak && (
+                      {isPrevTretiCetvrtak && isZeca && (
                         <View style={styles.sameDayIndicator}>
                           <View style={styles.sameDayLine} />
                           <Text style={styles.sameDayText}>Istog dana:</Text>
                         </View>
                       )}
-                      {!isTretiCetvrtak && (
-                        <TouchableOpacity
-                          style={[styles.categoryCard, shouldIndent && styles.categoryCardIndented]}
-                          onPress={() => item.type === 'category' ? handleCategoryPress(item) : router.push(`/event/${item.id}`)}
-                          activeOpacity={0.7}>
-                          <View style={styles.categoryContent}>
-                            <Text style={styles.categoryTitle}>{item.title}</Text>
-                            {item.title_local && item.title_local !== item.title && (
-                              <Text style={styles.categoryTitleLocal}>
-                                {item.title_local}
-                              </Text>
-                            )}
-                            <Text style={styles.categoryDescription} numberOfLines={2}>
-                              {item.description_croatian || item.description}
+                      <TouchableOpacity
+                        style={[styles.categoryCard, shouldIndent && styles.categoryCardIndented]}
+                        onPress={() => item.type === 'category' ? handleCategoryPress(item) : router.push(`/event/${item.id}`)}
+                        activeOpacity={0.7}>
+                        <View style={styles.categoryContent}>
+                          <Text style={styles.categoryTitle}>{item.title}</Text>
+                          {item.title_local && item.title_local !== item.title && (
+                            <Text style={styles.categoryTitleLocal}>
+                              {item.title_local}
                             </Text>
-                          </View>
-                          <ChevronRight size={20} color="#9ca3af" />
-                        </TouchableOpacity>
-                      )}
+                          )}
+                          <Text style={styles.categoryDescription} numberOfLines={2}>
+                            {item.description_croatian || item.description}
+                          </Text>
+                        </View>
+                        <ChevronRight size={20} color="#9ca3af" />
+                      </TouchableOpacity>
                     </View>
                   );
                 });
