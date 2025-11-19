@@ -20,6 +20,7 @@ import {
   Heart,
   Users,
   ChevronRight,
+  ChevronDown,
   Disc3,
   Info,
   Drum,
@@ -68,6 +69,7 @@ export default function ParticipantDetailScreen() {
   const [error, setError] = useState<string | null>(null);
   const [showDetailedInfo, setShowDetailedInfo] = useState(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const [isFormationExpanded, setIsFormationExpanded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -375,12 +377,24 @@ export default function ParticipantDetailScreen() {
 
         {participant.name === 'Mesopustari' && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Formacija</Text>
-            <Text style={styles.sectionSubtitle}>
-              Raspored Mesopustara u formaciji
-            </Text>
+            <TouchableOpacity
+              style={styles.formationHeader}
+              onPress={() => setIsFormationExpanded(!isFormationExpanded)}
+              activeOpacity={0.7}>
+              <View style={styles.formationHeaderContent}>
+                <Text style={styles.sectionTitle}>Formacija mesopustara - pogledaj više</Text>
+                <ChevronDown
+                  size={24}
+                  color="#1f2937"
+                  style={{
+                    transform: [{ rotate: isFormationExpanded ? '180deg' : '0deg' }],
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
 
-            <View style={styles.formationContainer}>
+            {isFormationExpanded && (
+              <View style={styles.formationContainer}>
               <View style={styles.formationRow}>
                 <View style={styles.formationColumn}>
                   <Text style={styles.formationColumnLabel}>Lijevi red</Text>
@@ -499,6 +513,7 @@ export default function ParticipantDetailScreen() {
                 </Text>
               </View>
             </View>
+            )}
           </View>
         )}
 
@@ -1337,5 +1352,19 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: '#1e40af',
     lineHeight: 19,
+  },
+  formationHeader: {
+    width: '100%',
+    marginBottom: 16,
+  },
+  formationHeaderContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
 });
