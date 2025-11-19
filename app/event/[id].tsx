@@ -241,15 +241,32 @@ export default function EventDetailScreen() {
           )}
 
           {event.id === '4bacfe02-bdda-4bdf-8f4d-c589647fb0c3' && (
-            <TouchableOpacity
-              style={styles.dispetNoteCard}
-              onPress={() => setShowDispetInfo(true)}
-              activeOpacity={0.7}>
-              <View style={styles.costumeNoteHeader}>
-                <HelpCircle size={18} color="#6b7280" />
-                <Text style={styles.costumeNoteText}>Mesopustari rade "dešpet"</Text>
-              </View>
-            </TouchableOpacity>
+            <>
+              <TouchableOpacity
+                style={styles.dispetNoteCard}
+                onPress={() => setShowDispetInfo(true)}
+                activeOpacity={0.7}>
+                <View style={styles.costumeNoteHeader}>
+                  <HelpCircle size={18} color="#6b7280" />
+                  <Text style={styles.costumeNoteText}>Mesopustari rade "dešpet"</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.performanceNoteCard}
+                onPress={() => {
+                  const napovidanjePerformance = categories.find(cat => cat.title_local === 'Napovidanje (izvedba)');
+                  if (napovidanjePerformance) {
+                    router.push(`/category/${napovidanjePerformance.id}`);
+                  }
+                }}
+                activeOpacity={0.7}>
+                <View style={styles.costumeNoteHeader}>
+                  <Info size={18} color="#dc2626" />
+                  <Text style={styles.performanceNoteText}>Napovidanje (izvedba)</Text>
+                </View>
+              </TouchableOpacity>
+            </>
           )}
 
           {event.id === 'c67ad74c-2cd6-4aec-8351-799c052c72d8' && (
@@ -838,6 +855,20 @@ const styles = StyleSheet.create({
     marginTop: 12,
     borderWidth: 1,
     borderColor: '#e5e7eb',
+  },
+  performanceNoteCard: {
+    backgroundColor: '#fef2f2',
+    borderRadius: 8,
+    padding: 14,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#fecaca',
+  },
+  performanceNoteText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#dc2626',
+    letterSpacing: 0.5,
   },
   infoNoteCard: {
     backgroundColor: '#f9fafb',
