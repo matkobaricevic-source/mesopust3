@@ -12,7 +12,7 @@ import {
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { HierarchyRole, UniformItem, Instrument } from '@/types/database';
-import { ArrowLeft, Shirt, Music, Disc3, ChevronRight } from 'lucide-react-native';
+import { ArrowLeft, Shirt, Music, Disc3, ChevronRight, ChevronDown } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -25,6 +25,7 @@ export default function UniformDetailScreen() {
   const [instruments, setInstruments] = useState<Instrument[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isRolesExpanded, setIsRolesExpanded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -121,6 +122,98 @@ export default function UniformDetailScreen() {
             </Text>
           )}
         </View>
+
+        {role.title_croatian === 'Mesopustar' && (
+          <View style={styles.section}>
+            <TouchableOpacity
+              style={styles.rolesHeader}
+              onPress={() => setIsRolesExpanded(!isRolesExpanded)}
+              activeOpacity={0.7}>
+              <View style={styles.rolesHeaderContent}>
+                <Text style={styles.sectionTitle}>Uloge mesopustara</Text>
+                <ChevronDown
+                  size={24}
+                  color="#1f2937"
+                  style={{
+                    transform: [{ rotate: isRolesExpanded ? '180deg' : '0deg' }],
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+            <Text style={styles.sectionSubtitle}>
+              Sve uloge su jednake važnosti
+            </Text>
+
+            {isRolesExpanded && (
+              <View style={styles.rolesList}>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>1</Text></View>
+                  <Text style={styles.roleText}>Kasir prvog kapitana <Text style={styles.roleSubtext}>(blagajnik prvog kapetana)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>2</Text></View>
+                  <Text style={styles.roleText}>Kasir drugog kapitana <Text style={styles.roleSubtext}>(blagajnik drugog kapetana)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>3</Text></View>
+                  <Text style={styles.roleText}>Sopila mala</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>4</Text></View>
+                  <Text style={styles.roleText}>Sopila vela</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>5</Text></View>
+                  <Text style={styles.roleText}>Bubanj veli</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>6</Text></View>
+                  <Text style={styles.roleText}>Bubanj srednji</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>7</Text></View>
+                  <Text style={styles.roleText}>Bubanj mali</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>8</Text></View>
+                  <Text style={styles.roleText}>Odgovaralica <Text style={styles.roleSubtext}>(vrsta limenog puhačkog instrumenta u mesopustarskoj glazbi)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>9</Text></View>
+                  <Text style={styles.roleText}>Bandira i švikavac</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>10</Text></View>
+                  <Text style={styles.roleText}>Vela trumbeta <Text style={styles.roleSubtext}>(vrsta limenog puhačkog instrumenta u mesopustarskoj glazbi)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>11</Text></View>
+                  <Text style={styles.roleText}>Manja trumbeta <Text style={styles.roleSubtext}>(vrsta limenog puhačkog instrumenta u mesopustarskoj glazbi)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>12</Text></View>
+                  <Text style={styles.roleText}>Činele</Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>13</Text></View>
+                  <Text style={styles.roleText}>Kosa <Text style={styles.roleSubtext}>("Instrument" nastao od metalnog dijela stare kose (poljoprivrednog alata za košnju trave). U tupo metalno sječivo, koje je skinuto s drvenog držala, mesopustar bi udarao manjim komadom metala. Time bi proizvodio specifičan, rezonantan zvuk koji služi kao ritamska pratnja.)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>14</Text></View>
+                  <Text style={styles.roleText}>Trijangul <Text style={styles.roleSubtext}>(triangl)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>15</Text></View>
+                  <Text style={styles.roleText}>Avan <Text style={styles.roleSubtext}>(metalna mužara)</Text></Text>
+                </View>
+                <View style={styles.roleItem}>
+                  <View style={styles.roleNumber}><Text style={styles.roleNumberText}>16</Text></View>
+                  <Text style={styles.roleText}>Magaziner</Text>
+                </View>
+              </View>
+            )}
+          </View>
+        )}
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Uniforma</Text>
@@ -502,5 +595,65 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#dc2626',
     marginLeft: 6,
+  },
+  rolesHeader: {
+    width: '100%',
+    marginBottom: 8,
+  },
+  rolesHeaderContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
+  rolesList: {
+    marginTop: 16,
+    gap: 12,
+  },
+  roleItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    backgroundColor: '#ffffff',
+    padding: 14,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  roleNumber: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#dc2626',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+    marginTop: 2,
+  },
+  roleNumberText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#ffffff',
+  },
+  roleText: {
+    flex: 1,
+    fontSize: 15,
+    color: '#111827',
+    lineHeight: 22,
+    fontWeight: '600',
+  },
+  roleSubtext: {
+    fontSize: 14,
+    color: '#6b7280',
+    fontWeight: '400',
+    fontStyle: 'italic',
   },
 });
