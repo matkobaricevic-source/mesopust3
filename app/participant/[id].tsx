@@ -291,12 +291,21 @@ export default function ParticipantDetailScreen() {
             </Text>
 
             {participant.name_croatian === 'Mesopustari' && (
-              <View style={styles.zogaInfoBox}>
+              <TouchableOpacity
+                style={styles.zogaInfoBox}
+                onPress={() => router.push('/item/99e511f0-0742-45bc-bbf1-78ac32430dc3')}
+                activeOpacity={0.7}>
                 <Info size={16} color="#6b7280" />
-                <Text style={styles.zogaInfoText}>
-                  Mesopustari su glazbeni sastav sastavljen od dvadesetak mladića s instrumentima koji predstavljaju glavnu okosnica novljanskih mesopusnih običaja. Ključni su akteri koji koordiniraju celokupnom radnjom mesopusta vodeći je kroz sva tri tjedna trajanja izvedbe.
-                </Text>
-              </View>
+                <View style={styles.zogaInfoTextContainer}>
+                  <Text style={styles.zogaInfoText}>
+                    Mesopustari su glazbeni sastav sastavljen od dvadesetak mladića s instrumentima koji predstavljaju glavnu okosnica novljanskih mesopusnih običaja. Ključni su akteri koji koordiniraju celokupnom radnjom mesopusta vodeći je kroz sva tri tjedna trajanja izvedbe.
+                  </Text>
+                  <Text style={styles.zogaInfoLink}>
+                    Više informacija
+                  </Text>
+                </View>
+                <ChevronRight size={16} color="#6b7280" />
+              </TouchableOpacity>
             )}
 
             {participant.song_rhythm && (
@@ -1470,12 +1479,22 @@ const styles = StyleSheet.create({
     marginTop: 12,
     borderWidth: 1,
     borderColor: '#fbbf24',
+    alignItems: 'center',
+  },
+  zogaInfoTextContainer: {
+    flex: 1,
   },
   zogaInfoText: {
-    flex: 1,
     fontSize: 13,
     color: '#92400e',
     lineHeight: 19,
     fontWeight: '500',
+    marginBottom: 4,
+  },
+  zogaInfoLink: {
+    fontSize: 13,
+    color: '#d97706',
+    fontWeight: '600',
+    textDecorationLine: 'underline',
   },
 });
