@@ -141,36 +141,47 @@ export default function UniformDetailScreen() {
               />
 
               <View style={styles.uniformList}>
-                {uniformItems.map((item, index) => (
-                  <View key={item.id} style={styles.uniformItem}>
-                    <View style={styles.uniformItemHeader}>
-                      <View style={styles.uniformItemNumber}>
-                        <Text style={styles.uniformItemNumberText}>{index + 1}</Text>
+                {uniformItems.map((item, index) => {
+                  const nameParts = item.item_name_croatian.split(' / ');
+                  const mainName = nameParts[0];
+                  const secondaryName = nameParts[1];
+
+                  return (
+                    <View key={item.id} style={styles.uniformItem}>
+                      <View style={styles.uniformItemHeader}>
+                        <View style={styles.uniformItemNumber}>
+                          <Text style={styles.uniformItemNumberText}>{index + 1}</Text>
+                        </View>
+                        <View style={styles.uniformItemTitleContainer}>
+                          <Text style={styles.uniformItemTitle}>{mainName}</Text>
+                          {secondaryName && (
+                            <Text style={styles.uniformItemSecondaryName}>
+                              {secondaryName}
+                            </Text>
+                          )}
+                        </View>
                       </View>
-                      <Text style={styles.uniformItemTitle}>
-                        {item.item_name_croatian}
-                      </Text>
+                      {item.item_name && (
+                        <Text style={styles.uniformItemSubtitle}>
+                          {item.item_name}
+                        </Text>
+                      )}
+                      {item.description_croatian && (
+                        <Text style={styles.uniformItemDescription}>
+                          {item.description_croatian}
+                        </Text>
+                      )}
+                      {item.additional_info_url && (
+                        <TouchableOpacity
+                          style={styles.moreInfoButton}
+                          onPress={() => router.push(item.additional_info_url as any)}>
+                          <Text style={styles.moreInfoButtonText}>Saznaj više</Text>
+                          <ChevronRight size={18} color="#dc2626" />
+                        </TouchableOpacity>
+                      )}
                     </View>
-                    {item.item_name && (
-                      <Text style={styles.uniformItemSubtitle}>
-                        {item.item_name}
-                      </Text>
-                    )}
-                    {item.description_croatian && (
-                      <Text style={styles.uniformItemDescription}>
-                        {item.description_croatian}
-                      </Text>
-                    )}
-                    {item.additional_info_url && (
-                      <TouchableOpacity
-                        style={styles.moreInfoButton}
-                        onPress={() => router.push(item.additional_info_url as any)}>
-                        <Text style={styles.moreInfoButtonText}>Saznaj više</Text>
-                        <ChevronRight size={18} color="#dc2626" />
-                      </TouchableOpacity>
-                    )}
-                  </View>
-                ))}
+                  );
+                })}
               </View>
             </View>
           )}
@@ -367,7 +378,7 @@ const styles = StyleSheet.create({
   },
   uniformItemHeader: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     marginBottom: 8,
   },
   uniformItemNumber: {
@@ -378,17 +389,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
+    marginTop: 2,
   },
   uniformItemNumberText: {
     fontSize: 16,
     fontWeight: '700',
     color: '#ffffff',
   },
+  uniformItemTitleContainer: {
+    flex: 1,
+  },
   uniformItemTitle: {
     fontSize: 18,
     fontWeight: '600',
     color: '#111827',
-    flex: 1,
+    marginBottom: 2,
+  },
+  uniformItemSecondaryName: {
+    fontSize: 15,
+    fontWeight: '400',
+    color: '#6b7280',
   },
   uniformItemSubtitle: {
     fontSize: 14,
