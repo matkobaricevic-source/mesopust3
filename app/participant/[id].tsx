@@ -411,19 +411,6 @@ export default function ParticipantDetailScreen() {
               </View>
             )}
 
-            {participant.instruments && (
-              <View style={styles.detailCard}>
-                <View style={styles.detailCardHeader}>
-                  <View style={styles.detailIconContainer}>
-                    <Music size={20} color="#9ca3af" />
-                  </View>
-                  <View style={styles.detailCardContent}>
-                    <Text style={styles.detailLabel}>INSTRUMENTI</Text>
-                    <Text style={styles.detailText}>{participant.instruments}</Text>
-                  </View>
-                </View>
-              </View>
-            )}
 
             {participant.costume_description && (
               <View style={styles.detailCard}>
