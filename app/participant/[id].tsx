@@ -317,33 +317,6 @@ export default function ParticipantDetailScreen() {
               {participant.description_croatian}
             </Text>
 
-            {participant.name_croatian === 'Mesopustari' && (
-              <View style={styles.zogaInfoBox}>
-                <View style={styles.zogaInfoContent}>
-                  <Info size={18} color="#dc2626" />
-                  <TouchableOpacity
-                    style={styles.zogaTextContainer}
-                    onPress={() => router.push('/item/99e511f0-0742-45bc-bbf1-78ac32430dc3')}
-                    activeOpacity={0.7}>
-                    <Text style={styles.zogaInfoTitle}>MESOPUSTARSKA ZOGA</Text>
-                    <Text style={styles.zogaInfoSongName}>
-                      Još Hrvatska ni propala
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.zogaPlayButton}
-                    onPress={() => {
-                      if (participant.song_rhythm_audio_url) {
-                        // TODO: Play audio
-                        console.log('Play audio:', participant.song_rhythm_audio_url);
-                      }
-                    }}
-                    activeOpacity={0.7}>
-                    <Disc3 size={20} color="#dc2626" />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            )}
 
             {participant.song_rhythm && (
               <View style={styles.detailCard}>
