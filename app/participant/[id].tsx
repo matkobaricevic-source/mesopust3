@@ -290,6 +290,15 @@ export default function ParticipantDetailScreen() {
               {participant.description_croatian}
             </Text>
 
+            {participant.name_croatian === 'Mesopustari' && (
+              <View style={styles.zogaInfoBox}>
+                <Info size={16} color="#6b7280" />
+                <Text style={styles.zogaInfoText}>
+                  Mesopustari su glazbeni sastav sastavljen od dvadesetak mladića s instrumentima koji predstavljaju glavnu okosnica novljanskih mesopusnih običaja. Ključni su akteri koji koordiniraju celokupnom radnjom mesopusta vodeći je kroz sva tri tjedna trajanja izvedbe.
+                </Text>
+              </View>
+            )}
+
             {participant.song_rhythm && (
               <View style={styles.detailCard}>
                 <View style={styles.detailCardHeader}>
@@ -332,13 +341,6 @@ export default function ParticipantDetailScreen() {
                     })}
                   </View>
                 )}
-
-                <View style={styles.zogaInfoBox}>
-                  <Info size={16} color="#6b7280" />
-                  <Text style={styles.zogaInfoText}>
-                    Mesopustari su glazbeni sastav sastavljen od dvadesetak mladića s instrumentima koji predstavljaju glavnu okosnica novljanskih mesopusnih običaja. Ključni su akteri koji koordiniraju celokupnom radnjom mesopusta vodeći je kroz sva tri tjedna trajanja izvedbe.
-                  </Text>
-                </View>
               </View>
             )}
 
