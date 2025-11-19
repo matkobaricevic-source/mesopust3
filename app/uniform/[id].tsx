@@ -26,6 +26,7 @@ export default function UniformDetailScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isRolesExpanded, setIsRolesExpanded] = useState(false);
+  const [isUniformExpanded, setIsUniformExpanded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -216,7 +217,21 @@ export default function UniformDetailScreen() {
         )}
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Uniforma</Text>
+          <TouchableOpacity
+            style={styles.uniformHeader}
+            onPress={() => setIsUniformExpanded(!isUniformExpanded)}
+            activeOpacity={0.7}>
+            <View style={styles.uniformHeaderContent}>
+              <Text style={styles.sectionTitle}>Uniforma</Text>
+              <ChevronDown
+                size={24}
+                color="#1f2937"
+                style={{
+                  transform: [{ rotate: isUniformExpanded ? '180deg' : '0deg' }],
+                }}
+              />
+            </View>
+          </TouchableOpacity>
 
           {uniformItems.length === 0 ? (
             <View style={styles.emptyUniform}>
@@ -226,57 +241,59 @@ export default function UniformDetailScreen() {
               </Text>
             </View>
           ) : (
-            <View>
-              <Image
-                source={require('@/assets/images/Mesopustar_uiforma.jpg')}
-                style={styles.uniformPhoto}
-                resizeMode="contain"
-              />
+            isUniformExpanded && (
+              <View>
+                <Image
+                  source={require('@/assets/images/Mesopustar_uiforma.jpg')}
+                  style={styles.uniformPhoto}
+                  resizeMode="contain"
+                />
 
-              <View style={styles.uniformList}>
-                {uniformItems.map((item, index) => {
-                  const nameParts = item.item_name_croatian.split(' / ');
-                  const mainName = nameParts[0];
-                  const secondaryName = nameParts[1];
+                <View style={styles.uniformList}>
+                  {uniformItems.map((item, index) => {
+                    const nameParts = item.item_name_croatian.split(' / ');
+                    const mainName = nameParts[0];
+                    const secondaryName = nameParts[1];
 
-                  return (
-                    <View key={item.id} style={styles.uniformItem}>
-                      <View style={styles.uniformItemHeader}>
-                        <View style={styles.uniformItemNumber}>
-                          <Text style={styles.uniformItemNumberText}>{index + 1}</Text>
+                    return (
+                      <View key={item.id} style={styles.uniformItem}>
+                        <View style={styles.uniformItemHeader}>
+                          <View style={styles.uniformItemNumber}>
+                            <Text style={styles.uniformItemNumberText}>{index + 1}</Text>
+                          </View>
+                          <View style={styles.uniformItemTitleContainer}>
+                            <Text style={styles.uniformItemTitle}>{mainName}</Text>
+                            {secondaryName && (
+                              <Text style={styles.uniformItemSecondaryName}>
+                                {secondaryName}
+                              </Text>
+                            )}
+                          </View>
                         </View>
-                        <View style={styles.uniformItemTitleContainer}>
-                          <Text style={styles.uniformItemTitle}>{mainName}</Text>
-                          {secondaryName && (
-                            <Text style={styles.uniformItemSecondaryName}>
-                              {secondaryName}
-                            </Text>
-                          )}
-                        </View>
+                        {item.item_name && (
+                          <Text style={styles.uniformItemSubtitle}>
+                            {item.item_name}
+                          </Text>
+                        )}
+                        {item.description_croatian && (
+                          <Text style={styles.uniformItemDescription}>
+                            {item.description_croatian}
+                          </Text>
+                        )}
+                        {item.additional_info_url && (
+                          <TouchableOpacity
+                            style={styles.moreInfoButton}
+                            onPress={() => router.push(item.additional_info_url as any)}>
+                            <Text style={styles.moreInfoButtonText}>Saznaj više</Text>
+                            <ChevronRight size={18} color="#dc2626" />
+                          </TouchableOpacity>
+                        )}
                       </View>
-                      {item.item_name && (
-                        <Text style={styles.uniformItemSubtitle}>
-                          {item.item_name}
-                        </Text>
-                      )}
-                      {item.description_croatian && (
-                        <Text style={styles.uniformItemDescription}>
-                          {item.description_croatian}
-                        </Text>
-                      )}
-                      {item.additional_info_url && (
-                        <TouchableOpacity
-                          style={styles.moreInfoButton}
-                          onPress={() => router.push(item.additional_info_url as any)}>
-                          <Text style={styles.moreInfoButtonText}>Saznaj više</Text>
-                          <ChevronRight size={18} color="#dc2626" />
-                        </TouchableOpacity>
-                      )}
-                    </View>
-                  );
-                })}
+                    );
+                  })}
+                </View>
               </View>
-            </View>
+            )
           )}
         </View>
 
@@ -655,5 +672,19 @@ const styles = StyleSheet.create({
     color: '#6b7280',
     fontWeight: '400',
     fontStyle: 'italic',
+  },
+  uniformHeader: {
+    width: '100%',
+    marginBottom: 16,
+  },
+  uniformHeaderContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
 });
