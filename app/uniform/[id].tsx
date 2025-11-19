@@ -7,13 +7,12 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
-  Modal,
   Dimensions,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { HierarchyRole, UniformItem, Instrument } from '@/types/database';
-import { ArrowLeft, Shirt, Music, Disc3, X } from 'lucide-react-native';
+import { ArrowLeft, Shirt, Music, Disc3 } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -26,8 +25,6 @@ export default function UniformDetailScreen() {
   const [instruments, setInstruments] = useState<Instrument[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedItem, setSelectedItem] = useState<UniformItem | null>(null);
-  const [modalVisible, setModalVisible] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -86,23 +83,6 @@ export default function UniformDetailScreen() {
     );
   }
 
-  const handleItemPress = (item: UniformItem) => {
-    setSelectedItem(item);
-    setModalVisible(true);
-  };
-
-  const getUniformPartPosition = (itemName: string) => {
-    const positions: Record<string, { top: string; left: string }> = {
-      'Rapčinac / Kapa': { top: '7%', left: '50%' },
-      'Kurdela / Mala traka trobojnica': { top: '22%', left: '50%' },
-      'Bela košulja / Bijela košulja': { top: '30%', left: '42%' },
-      'Mala gora / Mala tustika': { top: '38%', left: '51%' },
-      'Kokarda / Ukras od male trake trobojnice': { top: '47%', left: '50%' },
-      'Široka trobojnica / Široka traka trobojnica': { top: '55%', left: '44%' },
-      'Škura plava jaketa / Tamno plavi sako': { top: '64%', left: '48%' },
-    };
-    return positions[itemName] || null;
-  };
 
   if (error || !role) {
     return (
@@ -144,9 +124,6 @@ export default function UniformDetailScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Uniforma</Text>
-          <Text style={styles.sectionSubtitle}>
-            Dodirnite dijelove uniforme za više informacija
-          </Text>
 
           {uniformItems.length === 0 ? (
             <View style={styles.emptyUniform}>
@@ -156,86 +133,40 @@ export default function UniformDetailScreen() {
               </Text>
             </View>
           ) : (
-            <View style={styles.visualUniformContainer}>
-              <View style={styles.uniformBackground}>
-                <Image
-                  source={require('@/assets/images/Mesopustar_uiforma_dotted.jpg')}
-                  style={styles.uniformPhoto}
-                  resizeMode="cover"
-                />
-                <View style={styles.overlay} />
+            <View>
+              <Image
+                source={require('@/assets/images/Mesopustar_uiforma.jpg')}
+                style={styles.uniformPhoto}
+                resizeMode="contain"
+              />
 
-                {uniformItems.map((item) => {
-                  const position = getUniformPartPosition(item.item_name_croatian);
-                  if (!position) return null;
-                  return (
-                    <TouchableOpacity
-                      key={item.id}
-                      style={[
-                        styles.uniformHotspot,
-                        { top: position.top, left: position.left },
-                      ]}
-                      onPress={() => handleItemPress(item)}
-                      activeOpacity={0.7}>
-                      <View style={styles.hotspotPulse} />
-                      <View style={styles.hotspotDot} />
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-
-              <View style={styles.uniformLegend}>
-                <Text style={styles.legendTitle}>Dijelovi uniforme:</Text>
+              <View style={styles.uniformList}>
                 {uniformItems.map((item, index) => (
-                  <TouchableOpacity
-                    key={item.id}
-                    style={styles.legendItem}
-                    onPress={() => handleItemPress(item)}>
-                    <View style={styles.legendDot} />
-                    <Text style={styles.legendText}>
-                      {index + 1}. {item.item_name_croatian}
-                    </Text>
-                  </TouchableOpacity>
+                  <View key={item.id} style={styles.uniformItem}>
+                    <View style={styles.uniformItemHeader}>
+                      <View style={styles.uniformItemNumber}>
+                        <Text style={styles.uniformItemNumberText}>{index + 1}</Text>
+                      </View>
+                      <Text style={styles.uniformItemTitle}>
+                        {item.item_name_croatian}
+                      </Text>
+                    </View>
+                    {item.item_name && (
+                      <Text style={styles.uniformItemSubtitle}>
+                        {item.item_name}
+                      </Text>
+                    )}
+                    {item.description_croatian && (
+                      <Text style={styles.uniformItemDescription}>
+                        {item.description_croatian}
+                      </Text>
+                    )}
+                  </View>
                 ))}
               </View>
             </View>
           )}
         </View>
-
-        <Modal
-          visible={modalVisible}
-          transparent={true}
-          animationType="fade"
-          onRequestClose={() => setModalVisible(false)}>
-          <View style={styles.modalOverlay}>
-            <View style={styles.modalContent}>
-              <TouchableOpacity
-                style={styles.modalCloseButton}
-                onPress={() => setModalVisible(false)}>
-                <X size={24} color="#6b7280" />
-              </TouchableOpacity>
-
-              {selectedItem && (
-                <View style={styles.modalBody}>
-                  <View style={styles.modalIconContainer}>
-                    <Shirt size={32} color="#dc2626" />
-                  </View>
-                  <Text style={styles.modalTitle}>
-                    {selectedItem.item_name_croatian}
-                  </Text>
-                  <Text style={styles.modalSubtitle}>
-                    {selectedItem.item_name}
-                  </Text>
-                  {selectedItem.description_croatian && (
-                    <Text style={styles.modalDescription}>
-                      {selectedItem.description_croatian}
-                    </Text>
-                  )}
-                </View>
-              )}
-            </View>
-          </View>
-        </Modal>
 
         {role.title_croatian === 'Mesopustar' && instruments.length > 0 && (
           <View style={styles.section}>
@@ -406,157 +337,63 @@ const styles = StyleSheet.create({
     marginTop: 12,
     textAlign: 'center',
   },
-  visualUniformContainer: {
-    backgroundColor: '#ffffff',
-    borderRadius: 16,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  uniformBackground: {
-    position: 'relative',
-    width: '100%',
-    height: 600,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   uniformPhoto: {
-    width: '130%',
-    height: '100%',
-    position: 'absolute',
-    left: '-15%',
-  },
-  overlay: {
-    position: 'absolute',
     width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.15)',
-  },
-  uniformHotspot: {
-    position: 'absolute',
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    transform: [{ translateX: -20 }, { translateY: -20 }],
-  },
-  hotspotPulse: {
-    position: 'absolute',
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    borderWidth: 3,
-    borderColor: 'rgba(255, 255, 255, 0.8)',
-  },
-  hotspotDot: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    height: 500,
     backgroundColor: '#ffffff',
-    borderWidth: 3,
-    borderColor: '#dc2626',
+    borderRadius: 12,
+    marginBottom: 20,
+  },
+  uniformList: {
+    gap: 16,
+  },
+  uniformItem: {
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.4,
-    shadowRadius: 6,
-    elevation: 5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  uniformLegend: {
-    padding: 20,
-    backgroundColor: '#f9fafb',
-    borderTopWidth: 1,
-    borderTopColor: '#e5e7eb',
-  },
-  legendTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#111827',
-    marginBottom: 12,
-  },
-  legendItem: {
+  uniformItemHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
-  },
-  legendDot: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: '#dc2626',
-    marginRight: 12,
-  },
-  legendText: {
-    fontSize: 14,
-    color: '#4b5563',
-    flex: 1,
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  modalContent: {
-    width: '100%',
-    maxWidth: 400,
-    backgroundColor: '#ffffff',
-    borderRadius: 20,
-    padding: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 8,
-  },
-  modalCloseButton: {
-    position: 'absolute',
-    top: 16,
-    right: 16,
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: '#f3f4f6',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1,
-  },
-  modalBody: {
-    alignItems: 'center',
-    paddingTop: 20,
-  },
-  modalIconContainer: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    backgroundColor: '#fef2f2',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  modalTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#dc2626',
-    textAlign: 'center',
     marginBottom: 8,
   },
-  modalSubtitle: {
+  uniformItemNumber: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#dc2626',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  uniformItemNumberText: {
     fontSize: 16,
+    fontWeight: '700',
+    color: '#ffffff',
+  },
+  uniformItemTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#111827',
+    flex: 1,
+  },
+  uniformItemSubtitle: {
+    fontSize: 14,
     color: '#6b7280',
     fontStyle: 'italic',
-    textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: 8,
+    marginLeft: 44,
   },
-  modalDescription: {
+  uniformItemDescription: {
     fontSize: 15,
     color: '#4b5563',
-    lineHeight: 24,
-    textAlign: 'center',
+    lineHeight: 22,
+    marginLeft: 44,
   },
   instrumentsGrid: {
     gap: 16,
