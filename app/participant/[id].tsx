@@ -36,6 +36,7 @@ import {
   Shirt,
   Grid3x3,
   Crown,
+  PackageOpen,
 } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 
@@ -406,6 +407,9 @@ export default function ParticipantDetailScreen() {
                   <View style={styles.formationCircleLeader}>
                     <Users size={18} color="#f59e0b" />
                   </View>
+                  <View style={styles.formationCircleSupport}>
+                    <Wallet size={16} color="#059669" />
+                  </View>
                   <View style={styles.formationCircleInstrument}>
                     <Megaphone size={16} color="#7c3aed" />
                   </View>
@@ -447,9 +451,11 @@ export default function ParticipantDetailScreen() {
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
-                  <View style={styles.formationSpacer} />
                   <View style={styles.formationCircleFlag}>
                     <Flag size={18} color="#15803d" />
+                  </View>
+                  <View style={styles.formationCircleSupport}>
+                    <PackageOpen size={16} color="#059669" />
                   </View>
                 </View>
 
@@ -457,6 +463,9 @@ export default function ParticipantDetailScreen() {
                   <Text style={styles.formationColumnLabel}>Desni red</Text>
                   <View style={styles.formationCircleLeader}>
                     <Users size={18} color="#f59e0b" />
+                  </View>
+                  <View style={styles.formationCircleSupport}>
+                    <Wallet size={16} color="#059669" />
                   </View>
                   <View style={styles.formationCircleInstrument}>
                     <Megaphone size={16} color="#7c3aed" />
@@ -488,6 +497,10 @@ export default function ParticipantDetailScreen() {
                   <Text style={styles.formationLegendText}>Vođe - Advitor (s krunom) i Kapitani (3)</Text>
                 </View>
                 <View style={styles.formationLegendItem}>
+                  <View style={styles.formationLegendBoxSupport} />
+                  <Text style={styles.formationLegendText}>Podrška - Kasiri (2) i Magaziner (1)</Text>
+                </View>
+                <View style={styles.formationLegendItem}>
                   <View style={styles.formationLegendBoxInstrument} />
                   <Text style={styles.formationLegendText}>Instrumenti (14)</Text>
                 </View>
@@ -501,13 +514,14 @@ export default function ParticipantDetailScreen() {
                 <Text style={styles.formationPositionsTitle}>Raspored pozicija:</Text>
                 <View style={styles.formationPositionsList}>
                   <Text style={styles.formationPositionItem}>1. Kapitan (vođa reda)</Text>
-                  <Text style={styles.formationPositionItem}>2. Odgovaralica (truba)</Text>
-                  <Text style={styles.formationPositionItem}>3. Trumbeta (tuba)</Text>
-                  <Text style={styles.formationPositionItem}>4. Činele</Text>
-                  <Text style={styles.formationPositionItem}>5. Veli bubanj</Text>
-                  <Text style={styles.formationPositionItem}>6. Mali bubanj</Text>
-                  <Text style={styles.formationPositionItem}>7. Zvonca</Text>
-                  <Text style={styles.formationPositionItem}>8. Triangl</Text>
+                  <Text style={styles.formationPositionItem}>2. Kasir (blagajnik)</Text>
+                  <Text style={styles.formationPositionItem}>3. Odgovaralica (truba)</Text>
+                  <Text style={styles.formationPositionItem}>4. Trumbeta (tuba)</Text>
+                  <Text style={styles.formationPositionItem}>5. Činele</Text>
+                  <Text style={styles.formationPositionItem}>6. Veli bubanj</Text>
+                  <Text style={styles.formationPositionItem}>7. Mali bubanj</Text>
+                  <Text style={styles.formationPositionItem}>8. Zvonca</Text>
+                  <Text style={styles.formationPositionItem}>9. Triangl</Text>
                 </View>
               </View>
 
@@ -1257,6 +1271,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 4,
   },
+  formationCircleSupport: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#d1fae5',
+    borderWidth: 2.5,
+    borderColor: '#10b981',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 4,
+  },
   formationPersonLeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -1330,6 +1355,16 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     borderWidth: 2,
     borderColor: '#86efac',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  formationLegendBoxSupport: {
+    width: 28,
+    height: 28,
+    backgroundColor: '#d1fae5',
+    borderRadius: 14,
+    borderWidth: 2.5,
+    borderColor: '#10b981',
     justifyContent: 'center',
     alignItems: 'center',
   },
