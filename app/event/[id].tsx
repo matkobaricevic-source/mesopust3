@@ -218,7 +218,7 @@ export default function EventDetailScreen() {
               activeOpacity={0.7}>
               <View style={styles.costumeNoteHeader}>
                 <HelpCircle size={18} color="#6b7280" />
-                <Text style={styles.costumeNoteText}>Mesopustari rade "dišpet"</Text>
+                <Text style={styles.costumeNoteText}>Mesopustari rade "dešpet"</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -516,7 +516,7 @@ export default function EventDetailScreen() {
         onRequestClose={() => setShowDispetInfo(false)}>
         <View style={styles.modalContainer}>
           <View style={styles.modalHeader}>
-            <Text style={styles.modalTitle}>Dišpet</Text>
+            <Text style={styles.modalTitle}>Dešpet</Text>
             <TouchableOpacity
               style={styles.modalCloseButton}
               onPress={() => setShowDispetInfo(false)}>
@@ -524,12 +524,12 @@ export default function EventDetailScreen() {
             </TouchableOpacity>
           </View>
           <ScrollView style={styles.modalContent}>
-            <Text style={styles.modalEventTitle}>Što je "dišpet"?</Text>
+            <Text style={styles.modalEventTitle}>Što je "dešpet"?</Text>
             <Text style={styles.modalEventDescription}>
-              "Dišpet" je tradicijska praksa koju Mesopustari izvode tijekom Napovidanja. Ovo uključuje posjećivanje kuća u zajednici i donošenje blagoslova.
+              "Dešpet" je tradicijska praksa koju Mesopustari izvode tijekom Napovidanja. Ovo uključuje posjećivanje kuća u zajednici i donošenje blagoslova.
             </Text>
             <Text style={styles.modalEventDescription} style={{ marginTop: 16 }}>
-              Tijekom dišpeta, Mesopustari obavljaju rituale koji su duboko ukorijenjeni u lokalnim tradicijama i običajima.
+              Tijekom dešpeta, Mesopustari obavljaju rituale koji su duboko ukorijenjeni u lokalnim tradicijama i običajima.
             </Text>
           </ScrollView>
         </View>
