@@ -4,6 +4,7 @@ export interface Event {
   title_local: string | null;
   description: string;
   description_croatian: string | null;
+  description_croatian_full: string | null;
   image_url: string | null;
   costume_note: string | null;
   event_date: string | null;

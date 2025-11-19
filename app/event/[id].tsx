@@ -498,7 +498,7 @@ export default function EventDetailScreen() {
             {event.title_local && (
               <Text style={styles.modalEventTitleLocal}>{event.title_local}</Text>
             )}
-            <Text style={styles.modalEventDescription}>{event.description_croatian || event.description}</Text>
+            <Text style={styles.modalEventDescription}>{event.description_croatian_full || event.description_croatian || event.description}</Text>
             <View style={styles.modalPlaceholder}>
               <Info size={48} color="#d1d5db" />
               <Text style={styles.modalPlaceholderText}>
