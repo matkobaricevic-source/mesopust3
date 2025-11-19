@@ -72,6 +72,7 @@ export default function ParticipantDetailScreen() {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [isFormationExpanded, setIsFormationExpanded] = useState(false);
   const [isFormationDescExpanded, setIsFormationDescExpanded] = useState(false);
+  const [isZogaExpanded, setIsZogaExpanded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -320,45 +321,66 @@ export default function ParticipantDetailScreen() {
 
             {participant.song_rhythm && (
               <View style={styles.detailCard}>
-                <View style={styles.detailCardHeader}>
+                <TouchableOpacity
+                  style={styles.detailCardHeader}
+                  onPress={() => setIsZogaExpanded(!isZogaExpanded)}
+                  activeOpacity={0.7}>
                   <View style={styles.detailIconContainer}>
                     <Play size={20} color="#9ca3af" />
                   </View>
                   <View style={styles.detailCardContent}>
-                    <Text style={styles.detailLabel}>MESOPUSTARSKA ZOGA</Text>
-                    <Text style={styles.detailText}>{participant.song_rhythm}</Text>
+                    <Text style={styles.detailLabel}>MESOPUSTARSKA ZOGA - POVIJEST</Text>
+                    <Text style={styles.detailHint}>Pritisni za više informacija</Text>
                   </View>
-                  {participant.song_rhythm_audio_url && Platform.OS === 'web' && (
-                    <TouchableOpacity
-                      style={styles.audioPlayButton}
-                      onPress={toggleAudio}
-                      activeOpacity={0.7}>
-                      {isPlayingAudio ? (
-                        <Pause size={16} color="#ffffff" />
-                      ) : (
-                        <Play size={16} color="#ffffff" />
-                      )}
-                    </TouchableOpacity>
-                  )}
-                </View>
-                {participant.song_rhythm_audio_url && Platform.OS === 'web' && isPlayingAudio && (
-                  <View style={styles.visualizerContainer}>
-                    {audioData.map((value, index) => {
-                      const height = Math.max(4, value * 32);
-                      return (
-                        <View
-                          key={index}
-                          style={[
-                            styles.visualizerBar,
-                            {
-                              height: height,
-                              opacity: 0.6 + (value * 0.4),
-                            },
-                          ]}
-                        />
-                      );
-                    })}
-                  </View>
+                  <ChevronDown
+                    size={20}
+                    color="#9ca3af"
+                    style={{
+                      transform: [{ rotate: isZogaExpanded ? '180deg' : '0deg' }],
+                    }}
+                  />
+                </TouchableOpacity>
+                {isZogaExpanded && (
+                  <>
+                    <Text style={styles.detailTextExpanded}>{participant.song_rhythm}</Text>
+                    {participant.song_rhythm_audio_url && Platform.OS === 'web' && (
+                      <TouchableOpacity
+                        style={styles.audioPlayButtonExpanded}
+                        onPress={toggleAudio}
+                        activeOpacity={0.7}>
+                        {isPlayingAudio ? (
+                          <>
+                            <Pause size={16} color="#ffffff" />
+                            <Text style={styles.audioButtonText}>Zaustavi audio</Text>
+                          </>
+                        ) : (
+                          <>
+                            <Play size={16} color="#ffffff" />
+                            <Text style={styles.audioButtonText}>Sviraj audio</Text>
+                          </>
+                        )}
+                      </TouchableOpacity>
+                    )}
+                    {participant.song_rhythm_audio_url && Platform.OS === 'web' && isPlayingAudio && (
+                      <View style={styles.visualizerContainer}>
+                        {audioData.map((value, index) => {
+                          const height = Math.max(4, value * 32);
+                          return (
+                            <View
+                              key={index}
+                              style={[
+                                styles.visualizerBar,
+                                {
+                                  height: height,
+                                  opacity: 0.6 + (value * 0.4),
+                                },
+                              ]}
+                            />
+                          );
+                        })}
+                      </View>
+                    )}
+                  </>
                 )}
               </View>
             )}
@@ -918,6 +940,41 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#9ca3af',
     lineHeight: 20,
+  },
+  detailHint: {
+    fontSize: 12,
+    color: '#9ca3af',
+    fontStyle: 'italic',
+  },
+  detailTextExpanded: {
+    fontSize: 14,
+    color: '#4b5563',
+    lineHeight: 22,
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#e5e7eb',
+  },
+  audioPlayButtonExpanded: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    backgroundColor: '#dc2626',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    marginTop: 16,
+    shadowColor: '#dc2626',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  audioButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#ffffff',
   },
   section: {
     padding: 20,
