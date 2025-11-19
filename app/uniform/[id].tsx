@@ -93,15 +93,15 @@ export default function UniformDetailScreen() {
 
   const getUniformPartPosition = (itemName: string) => {
     const positions: Record<string, { top: string; left: string }> = {
-      'Rapčinac / Kapa': { top: '8%', left: '50%' },
-      'Kokarda / Ukras od male trake trobojnice': { top: '12%', left: '35%' },
-      'Mala gora / Mala tustika': { top: '12%', left: '65%' },
-      'Bela košulja / Bijela košulja': { top: '32%', left: '50%' },
-      'Škura plava jaketa / Tamno plavi sako': { top: '40%', left: '50%' },
-      'Kurdela / Mala traka trobojnica': { top: '28%', left: '50%' },
-      'Široka trobojnica / Široka traka trobojnica': { top: '35%', left: '25%' },
-      'Bele gaće / Bijele hlače': { top: '65%', left: '50%' },
-      'Crne postole / Crne cipele': { top: '90%', left: '50%' },
+      'Rapčinac / Kapa': { top: '14%', left: '50%' },
+      'Kokarda / Ukras od male trake trobojnice': { top: '42%', left: '38%' },
+      'Mala gora / Mala tustika': { top: '42%', left: '62%' },
+      'Bela košulja / Bijela košulja': { top: '38%', left: '50%' },
+      'Škura plava jaketa / Tamno plavi sako': { top: '50%', left: '50%' },
+      'Kurdela / Mala traka trobojnica': { top: '32%', left: '50%' },
+      'Široka trobojnica / Široka traka trobojnica': { top: '48%', left: '28%' },
+      'Bele gaće / Bijele hlače': { top: '70%', left: '50%' },
+      'Crne postole / Crne cipele': { top: '94%', left: '50%' },
     };
     return positions[itemName] || { top: '50%', left: '50%' };
   };
@@ -159,14 +159,13 @@ export default function UniformDetailScreen() {
             </View>
           ) : (
             <View style={styles.visualUniformContainer}>
-              <LinearGradient
-                colors={['#f3f4f6', '#ffffff', '#f3f4f6']}
-                style={styles.uniformBackground}>
-                <View style={styles.personSilhouette}>
-                  <View style={styles.head} />
-                  <View style={styles.torso} />
-                  <View style={styles.legs} />
-                </View>
+              <View style={styles.uniformBackground}>
+                <Image
+                  source={require('@/assets/images/Mesopustar_uiforma.jpg')}
+                  style={styles.uniformPhoto}
+                  resizeMode="cover"
+                />
+                <View style={styles.overlay} />
 
                 {uniformItems.map((item) => {
                   const position = getUniformPartPosition(item.item_name_croatian);
@@ -184,7 +183,7 @@ export default function UniformDetailScreen() {
                     </TouchableOpacity>
                   );
                 })}
-              </LinearGradient>
+              </View>
 
               <View style={styles.uniformLegend}>
                 <Text style={styles.legendTitle}>Dijelovi uniforme:</Text>
@@ -421,36 +420,20 @@ const styles = StyleSheet.create({
   uniformBackground: {
     position: 'relative',
     width: '100%',
-    height: 500,
+    height: 600,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  personSilhouette: {
+  uniformPhoto: {
+    width: '100%',
+    height: '100%',
     position: 'absolute',
-    width: 120,
-    height: 400,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
   },
-  head: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#e5e7eb',
-    marginBottom: 10,
-  },
-  torso: {
-    width: 100,
-    height: 160,
-    backgroundColor: '#e5e7eb',
-    borderRadius: 20,
-    marginBottom: 10,
-  },
-  legs: {
-    width: 80,
-    height: 150,
-    backgroundColor: '#e5e7eb',
-    borderRadius: 15,
+  overlay: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.15)',
   },
   uniformHotspot: {
     position: 'absolute',
@@ -462,25 +445,25 @@ const styles = StyleSheet.create({
   },
   hotspotPulse: {
     position: 'absolute',
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(220, 38, 38, 0.2)',
-    borderWidth: 2,
-    borderColor: 'rgba(220, 38, 38, 0.4)',
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    borderWidth: 3,
+    borderColor: 'rgba(255, 255, 255, 0.8)',
   },
   hotspotDot: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: '#dc2626',
-    borderWidth: 2,
-    borderColor: '#ffffff',
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#ffffff',
+    borderWidth: 3,
+    borderColor: '#dc2626',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 5,
   },
   uniformLegend: {
     padding: 20,
