@@ -510,33 +510,33 @@ export default function ParticipantDetailScreen() {
                   <Text style={styles.formationPositionItem}>8. Triangl</Text>
                 </View>
               </View>
+
+              <TouchableOpacity
+                style={styles.formationDescHeader}
+                onPress={() => setIsFormationDescExpanded(!isFormationDescExpanded)}
+                activeOpacity={0.7}>
+                <View style={styles.formationDescHeaderContent}>
+                  <Text style={styles.formationDescTitle}>Formacija mesopustara - pogledaj više</Text>
+                  <ChevronDown
+                    size={20}
+                    color="#1f2937"
+                    style={{
+                      transform: [{ rotate: isFormationDescExpanded ? '180deg' : '0deg' }],
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>
+
+              {isFormationDescExpanded && (
+                <View style={styles.formationNote}>
+                  <Info size={16} color="#6b7280" />
+                  <Text style={styles.formationNoteText}>
+                    Mesopustari stoje i kreću se u dva reda. Na prvom mjestu u lijevom i desnom redu stoje prvi i drugi mesopusni kapitan. Iza svakog kapitana redom jedan iza drugoga slijede: vela i mala sopila (svaka u jednom redu), vela trumbeta, manja trumbeta i odgovaralica, veli bubanj, činele, srednji bubanj, mali bubanj, zvončići, avan, triangul, kosa i kasiri. U sredini stoji advitor a iza njega magaziner. Od mesopusne nedilje do čiste srede (kada mesopustari nose svoje svečane odore) između advitora i magazinera stoji bandiraš koji nosi bandiru (zastavu) i puše po ritmu zoge u švikavac (žviždaljku). Svi se mesopustari kreću u ritmu zoge koju dirigira advitor, prema naprijed, sa sinkroniziranim korakom bez odstupanja.
+                  </Text>
+                </View>
+              )}
             </View>
             </>
-            )}
-
-            <TouchableOpacity
-              style={styles.formationHeader}
-              onPress={() => setIsFormationDescExpanded(!isFormationDescExpanded)}
-              activeOpacity={0.7}>
-              <View style={styles.formationHeaderContent}>
-                <Text style={styles.sectionTitle}>Formacija mesopustara - pogledaj više</Text>
-                <ChevronDown
-                  size={24}
-                  color="#1f2937"
-                  style={{
-                    transform: [{ rotate: isFormationDescExpanded ? '180deg' : '0deg' }],
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
-
-            {isFormationDescExpanded && (
-              <View style={styles.formationNote}>
-                <Info size={16} color="#6b7280" />
-                <Text style={styles.formationNoteText}>
-                  Mesopustari stoje i kreću se u dva reda. Na prvom mjestu u lijevom i desnom redu stoje prvi i drugi mesopusni kapitan. Iza svakog kapitana redom jedan iza drugoga slijede: vela i mala sopila (svaka u jednom redu), vela trumbeta, manja trumbeta i odgovaralica, veli bubanj, činele, srednji bubanj, mali bubanj, zvončići, avan, triangul, kosa i kasiri. U sredini stoji advitor a iza njega magaziner. Od mesopusne nedilje do čiste srede (kada mesopustari nose svoje svečane odore) između advitora i magazinera stoji bandiraš koji nosi bandiru (zastavu) i puše po ritmu zoge u švikavac (žviždaljku). Svi se mesopustari kreću u ritmu zoge koju dirigira advitor, prema naprijed, sa sinkroniziranim korakom bez odstupanja.
-                </Text>
-              </View>
             )}
           </View>
         )}
@@ -1390,5 +1390,26 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: '#e5e7eb',
+  },
+  formationDescHeader: {
+    width: '100%',
+    marginTop: 16,
+    marginBottom: 12,
+  },
+  formationDescHeaderContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 14,
+    backgroundColor: '#fef3c7',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fbbf24',
+  },
+  formationDescTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#92400e',
+    flex: 1,
   },
 });
