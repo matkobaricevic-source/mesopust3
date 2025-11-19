@@ -130,7 +130,7 @@ export default function InstrumentDetailScreen() {
           </View>
         </TouchableOpacity>
         <Text style={styles.headerTitle} numberOfLines={1}>
-          {instrument.name}
+          {instrument.name_croatian}
         </Text>
       </View>
 
@@ -166,16 +166,10 @@ export default function InstrumentDetailScreen() {
             )}
           </View>
 
-          <Text style={styles.instrumentName}>{instrument.name}</Text>
-          {instrument.name_croatian && instrument.name_croatian !== instrument.name && (
-            <Text style={styles.instrumentNameLocal}>{instrument.name_croatian}</Text>
-          )}
+          <Text style={styles.instrumentName}>{instrument.name_croatian}</Text>
 
-          {instrument.description && (
-            <Text style={styles.instrumentDescription}>{instrument.description}</Text>
-          )}
-          {instrument.description_croatian && instrument.description_croatian !== instrument.description && (
-            <Text style={styles.instrumentDescriptionLocal}>{instrument.description_croatian}</Text>
+          {instrument.description_croatian && (
+            <Text style={styles.instrumentDescription}>{instrument.description_croatian}</Text>
           )}
 
           {instrument.playing_technique && (
@@ -183,9 +177,8 @@ export default function InstrumentDetailScreen() {
               <Disc3 size={20} color="#dc2626" />
               <View style={styles.techniqueContent}>
                 <Text style={styles.techniqueLabel}>Tehnika sviranja</Text>
-                <Text style={styles.techniqueText}>{instrument.playing_technique}</Text>
-                {instrument.playing_technique_croatian && instrument.playing_technique_croatian !== instrument.playing_technique && (
-                  <Text style={styles.techniqueTextLocal}>{instrument.playing_technique_croatian}</Text>
+                {instrument.playing_technique_croatian && (
+                  <Text style={styles.techniqueText}>{instrument.playing_technique_croatian}</Text>
                 )}
               </View>
             </View>
@@ -212,13 +205,8 @@ export default function InstrumentDetailScreen() {
               activeOpacity={0.7}>
               <View style={styles.participantHeader}>
                 <Text style={styles.participantName}>
-                  {participant.name}
+                  {participant.name_croatian || participant.name}
                 </Text>
-                {participant.name_croatian && participant.name_croatian !== participant.name && (
-                  <Text style={styles.participantNameCroatian}>
-                    {participant.name_croatian}
-                  </Text>
-                )}
               </View>
               <Text style={styles.participantDescription} numberOfLines={2}>
                 {participant.description_croatian || participant.description}
