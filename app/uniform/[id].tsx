@@ -93,13 +93,13 @@ export default function UniformDetailScreen() {
 
   const getUniformPartPosition = (itemName: string) => {
     const positions: Record<string, { top: string; left: string }> = {
-      'Rapčinac / Kapa': { top: '13%', left: '60%' },
-      'Kokarda / Ukras od male trake trobojnice': { top: '55%', left: '48%' },
-      'Mala gora / Mala tustika': { top: '45%', left: '68%' },
-      'Bela košulja / Bijela košulja': { top: '40%', left: '60%' },
-      'Škura plava jaketa / Tamno plavi sako': { top: '58%', left: '65%' },
-      'Kurdela / Mala traka trobojnica': { top: '35%', left: '60%' },
-      'Široka trobojnica / Široka traka trobojnica': { top: '52%', left: '45%' },
+      'Rapčinac / Kapa': { top: '9%', left: '53%' },
+      'Kurdela / Mala traka trobojnica': { top: '28%', left: '48%' },
+      'Bela košulja / Bijela košulja': { top: '32%', left: '38%' },
+      'Mala gora / Mala tustika': { top: '40%', left: '50%' },
+      'Kokarda / Ukras od male trake trobojnice': { top: '49%', left: '53%' },
+      'Široka trobojnica / Široka traka trobojnica': { top: '57%', left: '38%' },
+      'Škura plava jaketa / Tamno plavi sako': { top: '67%', left: '42%' },
     };
     return positions[itemName] || null;
   };
