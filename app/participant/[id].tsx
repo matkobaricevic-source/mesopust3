@@ -709,54 +709,38 @@ export default function ParticipantDetailScreen() {
 
         {hierarchyRoles.length > 0 && (
           <View style={styles.section}>
-            <TouchableOpacity
-              style={styles.uniformHeader}
-              onPress={() => setIsUniformExpanded(!isUniformExpanded)}
-              activeOpacity={0.7}>
-              <View style={styles.uniformHeaderContent}>
-                <Text style={styles.sectionTitle}>Uniforme</Text>
-                <ChevronDown
-                  size={24}
-                  color="#1f2937"
-                  style={{
-                    transform: [{ rotate: isUniformExpanded ? '180deg' : '0deg' }],
-                  }}
-                />
-              </View>
-            </TouchableOpacity>
+            <Text style={styles.sectionTitle}>Hijerarhija</Text>
             <Text style={styles.sectionSubtitle}>
-              Hijerarhija i uniforma grupe Mesopustara
+              Struktura grupe Mesopustara
             </Text>
 
-            {isUniformExpanded && (
-              <View style={styles.hierarchyGrid}>
-                {hierarchyRoles.map((role) => (
-                  <TouchableOpacity
-                    key={role.id}
-                    style={styles.hierarchyCard}
-                    onPress={() => handleRolePress(role)}
-                    activeOpacity={0.7}>
-                    <View style={styles.hierarchyHeader}>
-                      <Users size={20} color="#dc2626" />
-                      <View style={styles.hierarchyHeaderText}>
-                        <Text style={styles.hierarchyTitle}>
-                          {role.title_croatian}
-                        </Text>
-                      </View>
-                      <ChevronRight size={20} color="#9ca3af" />
-                    </View>
-                    {role.description_croatian && (
-                      <Text style={styles.hierarchyDescription}>
-                        {role.description_croatian}
+            <View style={styles.hierarchyGrid}>
+              {hierarchyRoles.map((role) => (
+                <TouchableOpacity
+                  key={role.id}
+                  style={styles.hierarchyCard}
+                  onPress={() => handleRolePress(role)}
+                  activeOpacity={0.7}>
+                  <View style={styles.hierarchyHeader}>
+                    <Users size={20} color="#dc2626" />
+                    <View style={styles.hierarchyHeaderText}>
+                      <Text style={styles.hierarchyTitle}>
+                        {role.title_croatian}
                       </Text>
-                    )}
-                    <Text style={styles.hierarchyViewUniform}>
-                      Pogledaj uniformu →
+                    </View>
+                    <ChevronRight size={20} color="#9ca3af" />
+                  </View>
+                  {role.description_croatian && (
+                    <Text style={styles.hierarchyDescription}>
+                      {role.description_croatian}
                     </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            )}
+                  )}
+                  <Text style={styles.hierarchyViewUniform}>
+                    Pogledaj uniformu →
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
           </View>
         )}
 
