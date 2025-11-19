@@ -636,6 +636,47 @@ export default function ParticipantDetailScreen() {
           </View>
         )}
 
+        {instruments.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Instrumenti</Text>
+            <Text style={styles.sectionSubtitle}>
+              Glazbala koja koriste Mesopustari
+            </Text>
+
+            <View style={styles.instrumentsGrid}>
+              {instruments.map((instrument) => {
+                const IconComponent = getInstrumentIcon(instrument.name_croatian);
+                return (
+                  <TouchableOpacity
+                    key={instrument.id}
+                    style={styles.instrumentCard}
+                    onPress={() => router.push(`/instrument/${instrument.id}`)}
+                    activeOpacity={0.7}>
+                    <View style={styles.instrumentContent}>
+                      <View style={styles.instrumentHeader}>
+                        <IconComponent size={18} color="#6b7280" />
+                        <Text style={styles.instrumentName}>
+                          {instrument.name_croatian}
+                        </Text>
+                        <ChevronRight size={18} color="#9ca3af" />
+                      </View>
+
+                      {instrument.description_croatian && (
+                        <Text style={styles.instrumentDescription} numberOfLines={2}>
+                          {instrument.description_croatian}
+                        </Text>
+                      )}
+
+                      <Text style={styles.instrumentViewMore}>
+                        Pogledaj detalje →
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </View>
+        )}
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Događaji</Text>
