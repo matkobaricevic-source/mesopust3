@@ -220,11 +220,12 @@ export default function SearchScreen() {
         if (!existing) {
           deduplicatedResults.set(normalizedTitle, result);
         } else {
-          // Prefer instrument over glossary
-          if (result.type === 'instrument' && existing.type === 'glossary') {
+          // Always prefer instrument over glossary when names match
+          if (result.type === 'instrument') {
             deduplicatedResults.set(normalizedTitle, result);
-          } else if (result.type === 'glossary' && existing.type === 'instrument') {
-            // Keep existing instrument
+          } else if (existing.type === 'instrument') {
+            // Keep existing instrument, don't replace with glossary
+            return;
           } else if (result.relevance > existing.relevance) {
             // For other cases, keep the one with higher relevance
             deduplicatedResults.set(normalizedTitle, result);
