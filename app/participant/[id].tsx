@@ -301,7 +301,7 @@ export default function ParticipantDetailScreen() {
       <ScrollView
         style={styles.content}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={styles.scrollContent}
       >
         {participant.image_url && getImageSource(participant.image_url) && (
           <Image
@@ -836,8 +836,11 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingTop: 100,
     width: '100%',
+  },
+  scrollContent: {
+    paddingTop: 100,
+    paddingBottom: 40,
   },
   participantImage: {
     width: '100%',
