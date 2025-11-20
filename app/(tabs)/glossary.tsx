@@ -69,13 +69,14 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f7',
+    backgroundColor: '#f8f9fa',
   },
   header: {
     paddingTop: 60,
-    paddingBottom: 20,
+    paddingBottom: 24,
     width: '100%',
     alignItems: 'center',
+    backgroundColor: '#f8f9fa',
   },
   headerContent: {
     width: '100%',
@@ -83,9 +84,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   headerTitle: {
-    fontSize: 32,
+    fontSize: 28,
     fontFamily: fonts.title,
-    color: '#111827',
+    color: '#2d3436',
+    letterSpacing: -0.5,
   },
   content: {
     padding: 20,
@@ -94,10 +96,13 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
     backgroundColor: '#ffffff',
-    borderRadius: 20,
+    borderRadius: 16,
     padding: 24,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -105,14 +110,14 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   sectionTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
     marginLeft: 12,
   },
   sectionText: {
     fontSize: 16,
-    color: '#374151',
+    color: '#636e72',
     lineHeight: 26,
     marginBottom: 12,
   },
@@ -124,7 +129,7 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
   },
   participantCard: {
     backgroundColor: '#ffffff',
@@ -160,14 +165,10 @@ const styles = StyleSheet.create({
   footer: {
     marginTop: 20,
     paddingTop: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#e5e7eb',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
-    borderRadius: 12,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 16,
     padding: 24,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
   },
   footerText: {
     fontSize: 16,

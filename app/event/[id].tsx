@@ -835,14 +835,14 @@ export default function EventDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f7',
+    backgroundColor: '#f8f9fa',
     width: '100%',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#f8f9fa',
     padding: 20,
   },
   heroContainer: {
@@ -921,11 +921,14 @@ const styles = StyleSheet.create({
   eventInfo: {
     marginTop: -30,
     marginHorizontal: 16,
-    padding: 24,
+    padding: 28,
     backgroundColor: '#ffffff',
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
     marginBottom: 16,
   },
   eventTitle: {
@@ -941,17 +944,15 @@ const styles = StyleSheet.create({
   },
   eventDescription: {
     fontSize: 16,
-    color: '#4b5563',
-    lineHeight: 26,
+    color: '#636e72',
+    lineHeight: 28,
     marginBottom: 8,
   },
   costumeNoteCard: {
-    backgroundColor: '#f9fafb',
-    borderRadius: 14,
-    padding: 16,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 16,
+    padding: 18,
     marginTop: 16,
-    borderWidth: 1.5,
-    borderColor: '#e5e7eb',
   },
   costumeNoteHeader: {
     flexDirection: 'row',
@@ -963,8 +964,8 @@ const styles = StyleSheet.create({
   costumeNoteText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#6b7280',
-    letterSpacing: 0.5,
+    color: '#636e72',
+    letterSpacing: 0.3,
   },
   costumeNoteDescription: {
     fontSize: 13,
@@ -1055,21 +1056,24 @@ const styles = StyleSheet.create({
   section: {
     marginHorizontal: 16,
     marginBottom: 16,
-    padding: 24,
+    padding: 28,
     backgroundColor: '#ffffff',
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 4,
   },
   sectionSubtitle: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     marginBottom: 16,
   },
   categoriesGrid: {
@@ -1078,9 +1082,9 @@ const styles = StyleSheet.create({
   categoryCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
-    borderRadius: 14,
-    padding: 16,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 16,
+    padding: 18,
     borderLeftWidth: 4,
     borderLeftColor: '#dc2626',
   },
@@ -1113,7 +1117,7 @@ const styles = StyleSheet.create({
   categoryTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 2,
   },
   categoryTitleLocal: {
@@ -1124,8 +1128,8 @@ const styles = StyleSheet.create({
   },
   categoryDescription: {
     fontSize: 14,
-    color: '#6b7280',
-    lineHeight: 20,
+    color: '#636e72',
+    lineHeight: 22,
   },
   participantsGrid: {
     gap: 12,
@@ -1133,9 +1137,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   participantCard: {
-    backgroundColor: '#f9fafb',
-    borderRadius: 14,
-    padding: 18,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 16,
+    padding: 20,
     width: '100%',
     maxWidth: 600,
   },
@@ -1151,7 +1155,7 @@ const styles = StyleSheet.create({
   participantName: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
   },
   participantNameCroatian: {
     fontSize: 15,
@@ -1168,8 +1172,8 @@ const styles = StyleSheet.create({
   },
   participantDescription: {
     fontSize: 14,
-    color: '#6b7280',
-    lineHeight: 20,
+    color: '#636e72',
+    lineHeight: 22,
   },
   relatedEventButtonMain: {
     flexDirection: 'row',
@@ -1192,10 +1196,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#dc2626',
-    borderRadius: 14,
-    paddingVertical: 16,
+    borderRadius: 16,
+    paddingVertical: 18,
     paddingHorizontal: 24,
     marginTop: 20,
+    shadowColor: '#dc2626',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
   },
   moreInfoButtonText: {
     fontSize: 16,
@@ -1322,12 +1331,10 @@ const styles = StyleSheet.create({
   },
   timelineContent: {
     flex: 1,
-    backgroundColor: '#f9fafb',
-    borderRadius: 8,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 12,
     overflow: 'hidden',
     marginBottom: 12,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
   },
   timelineImage: {
     width: '100%',
@@ -1340,8 +1347,8 @@ const styles = StyleSheet.create({
   timelineStepTitle: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#374151',
-    lineHeight: 20,
+    color: '#2d3436',
+    lineHeight: 22,
   },
   stationNumber: {
     backgroundColor: '#dc2626',

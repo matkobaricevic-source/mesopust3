@@ -165,20 +165,21 @@ export default function ParticipantsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f7',
+    backgroundColor: '#f8f9fa',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#f8f9fa',
     padding: 20,
   },
   header: {
     paddingTop: 60,
-    paddingBottom: 20,
+    paddingBottom: 24,
     width: '100%',
     alignItems: 'center',
+    backgroundColor: '#f8f9fa',
   },
   headerContent: {
     width: '100%',
@@ -186,9 +187,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   headerTitle: {
-    fontSize: 32,
+    fontSize: 28,
     fontFamily: fonts.title,
-    color: '#111827',
+    color: '#2d3436',
+    letterSpacing: -0.5,
   },
   headerSubtitle: {
     fontSize: 14,
@@ -198,7 +200,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#6b7280',
+    color: '#636e72',
   },
   errorText: {
     fontSize: 16,
@@ -239,10 +241,13 @@ const styles = StyleSheet.create({
   },
   participantCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 20,
+    borderRadius: 16,
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
   },
   imageContainer: {
     position: 'relative',
@@ -274,7 +279,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   participantContent: {
-    padding: 20,
+    padding: 24,
     paddingTop: 20,
   },
   participantNameOverlay: {
@@ -285,21 +290,19 @@ const styles = StyleSheet.create({
   participantDescription: {
     fontSize: 15,
     fontFamily: fonts.regular,
-    color: '#4b5563',
-    lineHeight: 22,
+    color: '#636e72',
+    lineHeight: 24,
     marginBottom: 8,
   },
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fef2f2',
+    backgroundColor: '#fff5f5',
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 20,
     marginTop: 8,
     alignSelf: 'flex-start',
-    borderWidth: 1,
-    borderColor: '#fecaca',
   },
   badgeText: {
     fontSize: 13,
