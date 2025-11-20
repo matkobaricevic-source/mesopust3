@@ -367,7 +367,20 @@ export default function EventDetailScreen() {
             </View>
           )}
 
-          {event.related_event_id ? (
+          {event.id === 'a3b4c5d6-e7f8-a9b0-c1d2-e3f4a5b6c7d8' ? (
+            <TouchableOpacity
+              style={styles.relatedEventButtonMain}
+              onPress={() => {
+                const tretoNapovidanjeCategory = categories.find(cat => cat.title_local === 'Treto napovidanje - izvedba');
+                if (tretoNapovidanjeCategory) {
+                  router.push(`/category/${tretoNapovidanjeCategory.id}`);
+                }
+              }}
+              activeOpacity={0.8}>
+              <Info size={20} color="#ffffff" />
+              <Text style={styles.relatedEventButtonMainText}>Treto napovidanje - izvedba</Text>
+            </TouchableOpacity>
+          ) : event.related_event_id ? (
             <TouchableOpacity
               style={styles.relatedEventButtonMain}
               onPress={() => router.push(`/event/${event.related_event_id}`)}
@@ -382,21 +395,6 @@ export default function EventDetailScreen() {
               activeOpacity={0.8}>
               <Info size={20} color="#ffffff" />
               <Text style={styles.moreInfoButtonText}>Više informacija</Text>
-            </TouchableOpacity>
-          )}
-
-          {event.id === 'a3b4c5d6-e7f8-a9b0-c1d2-e3f4a5b6c7d8' && (
-            <TouchableOpacity
-              style={[styles.relatedEventButtonMain, { marginTop: 12 }]}
-              onPress={() => {
-                const tretoNapovidanjeCategory = categories.find(cat => cat.title_local === 'Treto napovidanje - izvedba');
-                if (tretoNapovidanjeCategory) {
-                  router.push(`/category/${tretoNapovidanjeCategory.id}`);
-                }
-              }}
-              activeOpacity={0.8}>
-              <Info size={20} color="#ffffff" />
-              <Text style={styles.relatedEventButtonMainText}>Treto napovidanje - izvedba</Text>
             </TouchableOpacity>
           )}
         </View>
