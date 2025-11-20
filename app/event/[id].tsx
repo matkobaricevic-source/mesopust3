@@ -254,22 +254,6 @@ export default function EventDetailScreen() {
                   {isDescriptionExpanded ? 'Prikaži manje' : 'Prikaži više'}
                 </Text>
               </TouchableOpacity>
-
-              <View style={styles.criticalNoteCard}>
-                <View style={styles.criticalNoteHeader}>
-                  <AlertCircle size={20} color="#dc2626" />
-                  <Text style={styles.criticalNoteTitle}>Očuvanje tradicije</Text>
-                </View>
-                <Text style={styles.criticalNoteText}>
-                  Iako se običaj s vremenom prilagođava, u duhu očuvanja autentičnosti, prioritet je zadržati ono što je izvorno. Običaj nalaže povratak tradicionalnim kostimima (kotige i sarze), s obzirom na to da su prikazi u kostimima mornara i kapetana sve učestaliji.
-                </Text>
-                <Text style={styles.criticalNoteText}>
-                  Izvorni prikaz podrazumijeva pjevanje narodnih pjesama, dok se elementi poput baklji i razne netradicionalne glazbe ne nalaze u temeljnoj izvedbi običaja.
-                </Text>
-                <Text style={styles.criticalNoteText}>
-                  Da bi se očuvala izvorna simbolika civilne odjeće na ,napovidanjima', poželjno je da se ,mesopustari' — koji danas sudjeluju u ,Zeči', iako to nije dio tradicije — nakon tog segmenta vrate u civilno ruho, što je danas izvedivo jer ,Zeča' započinje za dana, a ne predvečer, kao nekada. Na taj bi se način očuvala nekadašnja praksa, a ,mesopustari' bi ostali usmjereni na obavljanje svog dijela običaja i svoje primarne obveze, što zahtijeva punu usredotočenost.
-                </Text>
-              </View>
             </View>
           ) : (
             <Text style={styles.eventDescription}>{event.description_croatian || event.description}</Text>
@@ -674,6 +658,23 @@ export default function EventDetailScreen() {
               <Text style={styles.modalEventTitleLocal}>{event.title_local}</Text>
             )}
             <Text style={styles.modalEventDescription}>{event.description_croatian_full || event.description_croatian || event.description}</Text>
+
+            <View style={styles.criticalNoteCard}>
+              <View style={styles.criticalNoteHeader}>
+                <AlertCircle size={20} color="#dc2626" />
+                <Text style={styles.criticalNoteTitle}>Očuvanje tradicije</Text>
+              </View>
+              <Text style={styles.criticalNoteText}>
+                Iako se običaj s vremenom prilagođava, u duhu očuvanja autentičnosti, prioritet je zadržati ono što je izvorno. Običaj nalaže povratak tradicionalnim kostimima (kotige i sarze), s obzirom na to da su prikazi u kostimima mornara i kapetana sve učestaliji.
+              </Text>
+              <Text style={styles.criticalNoteText}>
+                Izvorni prikaz podrazumijeva pjevanje narodnih pjesama, dok se elementi poput baklji i razne netradicionalne glazbe ne nalaze u temeljnoj izvedbi običaja.
+              </Text>
+              <Text style={styles.criticalNoteText}>
+                Da bi se očuvala izvorna simbolika civilne odjeće na ,napovidanjima', poželjno je da se ,mesopustari' — koji danas sudjeluju u ,Zeči', iako to nije dio tradicije — nakon tog segmenta vrate u civilno ruho, što je danas izvedivo jer ,Zeča' započinje za dana, a ne predvečer, kao nekada. Na taj bi se način očuvala nekadašnja praksa, a ,mesopustari' bi ostali usmjereni na obavljanje svog dijela običaja i svoje primarne obveze, što zahtijeva punu usredotočenost.
+              </Text>
+            </View>
+
             <View style={styles.modalPlaceholder}>
               <Info size={48} color="#d1d5db" />
               <Text style={styles.modalPlaceholderText}>
