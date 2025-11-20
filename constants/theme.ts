@@ -54,7 +54,7 @@ export const theme = {
       primary: '#F5F5F5',
       secondary: '#A3A3A3',
       tertiary: '#737373',
-      inverse: '#0F0F0F',
+      inverse: '#FFFFFF',
     },
     overlay: {
       light: 'rgba(15, 15, 15, 0.9)',

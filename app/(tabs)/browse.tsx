@@ -12,7 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Participant } from '@/types/database';
-import { Users, Music, Shirt, Crown, Award, Flag } from 'lucide-react-native';
+import { Users, Music, Shirt, Crown, Award, Flag, ChevronDown, ChevronUp } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
 import { theme } from '@/constants/theme';
@@ -34,6 +34,8 @@ export default function ParticipantsScreen() {
   const [hierarchyRoles, setHierarchyRoles] = useState<HierarchyRole[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isHierarchyExpanded, setIsHierarchyExpanded] = useState(false);
+  const [isFormationExpanded, setIsFormationExpanded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -174,27 +176,107 @@ export default function ParticipantsScreen() {
                     {mesopustari.description_croatian || mesopustari.description}
                   </Text>
 
-                  {/* Hierarchy and Formation */}
-                  {mesopustariRoles.length > 0 && (
-                    <View style={styles.hierarchyContainer}>
-                      <Text style={styles.hierarchyTitle}>Hijerarhija i Formacija</Text>
-                      {mesopustariRoles.map((role, index) => (
-                        <View key={role.id} style={styles.hierarchyRole}>
-                          <View style={styles.roleIconContainer}>
-                            {getHierarchyIcon(role.display_order)}
-                          </View>
-                          <View style={styles.roleInfo}>
-                            <Text style={styles.hierarchyRoleName}>{role.title_croatian}</Text>
-                            {role.description_croatian && (
-                              <Text style={styles.hierarchyRoleDesc} numberOfLines={2}>
-                                {role.description_croatian}
-                              </Text>
-                            )}
-                          </View>
+                  {/* Hierarchy Dropdown */}
+                  {mesopustariRoles.filter(r => r.display_order <= 4).length > 0 && (
+                    <View style={styles.dropdownContainer}>
+                      <TouchableOpacity
+                        style={styles.dropdownHeader}
+                        onPress={() => setIsHierarchyExpanded(!isHierarchyExpanded)}
+                        activeOpacity={0.7}
+                      >
+                        <Crown size={20} color={theme.colors.accent.main} strokeWidth={2} />
+                        <Text style={styles.dropdownTitle}>Hijerarhija</Text>
+                        {isHierarchyExpanded ? (
+                          <ChevronUp size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                        ) : (
+                          <ChevronDown size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                        )}
+                      </TouchableOpacity>
+                      {isHierarchyExpanded && (
+                        <View style={styles.dropdownContent}>
+                          {mesopustariRoles
+                            .filter(r => r.display_order <= 4)
+                            .map((role, index) => (
+                              <View key={role.id} style={styles.hierarchyRole}>
+                                <View style={styles.roleIconContainer}>
+                                  {getHierarchyIcon(role.display_order)}
+                                </View>
+                                <View style={styles.roleInfo}>
+                                  <Text style={styles.hierarchyRoleName}>{role.title_croatian}</Text>
+                                  {role.description_croatian && (
+                                    <Text style={styles.hierarchyRoleDesc}>
+                                      {role.description_croatian}
+                                    </Text>
+                                  )}
+                                </View>
+                              </View>
+                            ))}
                         </View>
-                      ))}
+                      )}
                     </View>
                   )}
+
+                  {/* Formation Dropdown */}
+                  <View style={styles.dropdownContainer}>
+                    <TouchableOpacity
+                      style={styles.dropdownHeader}
+                      onPress={() => setIsFormationExpanded(!isFormationExpanded)}
+                      activeOpacity={0.7}
+                    >
+                      <Users size={20} color={theme.colors.primary.main} strokeWidth={2} />
+                      <Text style={styles.dropdownTitle}>Formacija</Text>
+                      {isFormationExpanded ? (
+                        <ChevronUp size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                      ) : (
+                        <ChevronDown size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                      )}
+                    </TouchableOpacity>
+                    {isFormationExpanded && (
+                      <View style={styles.dropdownContent}>
+                        <View style={styles.formationScheme}>
+                          {/* Formation visual representation */}
+                          <View style={styles.formationRow}>
+                            <View style={styles.formationPosition}>
+                              <Crown size={16} color={theme.colors.accent.main} strokeWidth={2} />
+                              <Text style={styles.formationText}>Advitor</Text>
+                            </View>
+                          </View>
+                          <View style={styles.formationRow}>
+                            <View style={styles.formationPosition}>
+                              <Award size={16} color={theme.colors.primary.main} strokeWidth={2} />
+                              <Text style={styles.formationText}>Prvi Kapetan</Text>
+                            </View>
+                            <View style={styles.formationPosition}>
+                              <Award size={16} color={theme.colors.primary.main} strokeWidth={2} />
+                              <Text style={styles.formationText}>Drugi Kapetan</Text>
+                            </View>
+                          </View>
+                          <View style={styles.formationRow}>
+                            <View style={styles.formationPositionSmall}>
+                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
+                            </View>
+                            <View style={styles.formationPositionSmall}>
+                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
+                            </View>
+                            <View style={styles.formationPositionSmall}>
+                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
+                            </View>
+                          </View>
+                          <View style={styles.formationRow}>
+                            <View style={styles.formationPositionSmall}>
+                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
+                            </View>
+                            <View style={styles.formationPositionSmall}>
+                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
+                            </View>
+                            <View style={styles.formationPositionSmall}>
+                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                    )}
+                  </View>
                 </View>
               </ModernCard>
             </Animated.View>
@@ -402,17 +484,28 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: theme.colors.primary.main,
   },
-  hierarchyContainer: {
-    marginTop: theme.spacing.lg,
-    paddingTop: theme.spacing.lg,
+  dropdownContainer: {
+    marginTop: theme.spacing.md,
     borderTopWidth: 1,
     borderTopColor: theme.colors.neutral[200],
+    paddingTop: theme.spacing.md,
   },
-  hierarchyTitle: {
-    ...theme.typography.h4,
+  dropdownHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+    paddingVertical: theme.spacing.sm,
+  },
+  dropdownTitle: {
+    ...theme.typography.body1,
     fontFamily: fonts.title,
     color: theme.colors.text.primary,
-    marginBottom: theme.spacing.md,
+    fontWeight: '600',
+    flex: 1,
+  },
+  dropdownContent: {
+    marginTop: theme.spacing.sm,
+    paddingLeft: theme.spacing.sm,
   },
   hierarchyRole: {
     flexDirection: 'row',
@@ -442,5 +535,44 @@ const styles = StyleSheet.create({
     ...theme.typography.body2,
     color: theme.colors.text.secondary,
     lineHeight: 18,
+  },
+  formationScheme: {
+    paddingVertical: theme.spacing.md,
+    gap: theme.spacing.lg,
+  },
+  formationRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: theme.spacing.md,
+  },
+  formationPosition: {
+    alignItems: 'center',
+    backgroundColor: theme.colors.neutral[100],
+    paddingHorizontal: theme.spacing.lg,
+    paddingVertical: theme.spacing.md,
+    borderRadius: theme.borderRadius.md,
+    minWidth: 120,
+    gap: theme.spacing.xs,
+  },
+  formationPositionSmall: {
+    alignItems: 'center',
+    backgroundColor: theme.colors.neutral[100],
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    borderRadius: theme.borderRadius.sm,
+    minWidth: 80,
+  },
+  formationText: {
+    ...theme.typography.body2,
+    fontWeight: '600',
+    color: theme.colors.text.primary,
+    textAlign: 'center',
+  },
+  formationTextSmall: {
+    ...theme.typography.caption,
+    fontWeight: '600',
+    color: theme.colors.text.primary,
+    textAlign: 'center',
   },
 });
