@@ -32,7 +32,7 @@ function AnimatedIcon({ icon: IconComponent, index, scrollOffset }: { icon: any;
       return interpolateColor(
         distance,
         [0, 1],
-        [theme.colors.primary.main, '#FFFFFF']
+        ['#FFFFFF', '#737373']
       );
     },
     (result) => {
@@ -40,12 +40,28 @@ function AnimatedIcon({ icon: IconComponent, index, scrollOffset }: { icon: any;
     }
   );
 
+  const animatedStyle = useAnimatedStyle(() => {
+    const distance = Math.abs(scrollOffset.value - index);
+    const scale = interpolate(
+      distance,
+      [0, 1],
+      [1.1, 1],
+      Extrapolation.CLAMP
+    );
+
+    return {
+      transform: [{ scale }],
+    };
+  });
+
   return (
-    <IconComponent
-      size={22}
-      color={color}
-      strokeWidth={2}
-    />
+    <Animated.View style={animatedStyle}>
+      <IconComponent
+        size={24}
+        color={color}
+        strokeWidth={2.5}
+      />
+    </Animated.View>
   );
 }
 
@@ -68,13 +84,13 @@ export function GlassTabBar({ currentIndex, scrollOffset, onTabPress }: GlassTab
 
   return (
     <View style={[styles.container, { paddingBottom: insets.bottom || 12 }]}>
-      <BlurView intensity={80} tint="light" style={styles.blur}>
+      <BlurView intensity={90} tint="dark" style={styles.blur}>
         <View style={styles.content}>
           <Animated.View style={[styles.indicator, indicatorStyle]}>
             <LinearGradient
-              colors={['rgba(255, 255, 255, 0.9)', 'rgba(255, 255, 255, 0.7)']}
+              colors={theme.colors.primary.gradient}
               start={{ x: 0, y: 0 }}
-              end={{ x: 0, y: 1 }}
+              end={{ x: 1, y: 1 }}
               style={styles.indicatorGradient}
             />
           </Animated.View>
@@ -133,8 +149,6 @@ const styles = StyleSheet.create({
   },
   indicatorGradient: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: 'rgba(99, 102, 241, 0.2)',
     borderRadius: theme.borderRadius.lg,
   },
 });

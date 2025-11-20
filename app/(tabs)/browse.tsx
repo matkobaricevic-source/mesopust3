@@ -93,9 +93,50 @@ export default function ParticipantsScreen() {
   }
 
   function handleFormationRolePress(roleName: string) {
-    const participant = findParticipantByName(roleName);
-    if (participant) {
-      router.push(`/participant/${participant.id}`);
+    const lowerRoleName = roleName.toLowerCase();
+
+    if (lowerRoleName.includes('advitor')) {
+      const advitor = participants.find(p => p.name_croatian?.toLowerCase() === 'advitor');
+      if (advitor) {
+        router.push(`/participant/${advitor.id}`);
+        return;
+      }
+    }
+
+    if (lowerRoleName.includes('kapetan') || lowerRoleName.includes('kasir') ||
+        lowerRoleName.includes('bandiraš') || lowerRoleName.includes('magaziner')) {
+      const mesopustari = participants.find(p => p.name_croatian?.toLowerCase() === 'mesopustari');
+      if (mesopustari) {
+        router.push(`/participant/${mesopustari.id}`);
+        return;
+      }
+    }
+
+    const mesopustari = participants.find(p => p.name_croatian?.toLowerCase() === 'mesopustari');
+    if (mesopustari && mesopustari.instruments && mesopustari.instruments.length > 0) {
+      const instrumentName = roleName
+        .replace('vela', '')
+        .replace('veli', '')
+        .replace('mala', '')
+        .replace('mali', '')
+        .replace('manja', '')
+        .replace('srednji', '')
+        .trim()
+        .toLowerCase();
+
+      const instrument = mesopustari.instruments.find((i: any) =>
+        i.name_croatian?.toLowerCase().includes(instrumentName) ||
+        instrumentName.includes(i.name_croatian?.toLowerCase())
+      );
+
+      if (instrument) {
+        router.push(`/instrument/${instrument.id}`);
+        return;
+      }
+    }
+
+    if (mesopustari) {
+      router.push(`/participant/${mesopustari.id}`);
     }
   }
 
