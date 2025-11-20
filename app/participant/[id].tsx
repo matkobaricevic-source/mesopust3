@@ -312,10 +312,21 @@ export default function ParticipantDetailScreen() {
         )}
 
         <View style={styles.participantInfo}>
-          <View style={styles.darkContainer}>
-            <Text style={styles.participantDescriptionCroatian}>
-              {participant.description_croatian}
-            </Text>
+          <Text style={styles.participantNameCroatian}>
+            {participant.name_croatian}
+          </Text>
+          <Text style={styles.participantName}>
+            {participant.name}
+          </Text>
+          <View style={styles.descriptionDivider} />
+          <Text style={styles.participantDescription}>
+            {participant.description}
+          </Text>
+          <Text style={styles.participantDescriptionCroatian}>
+            {participant.description_croatian}
+          </Text>
+
+          <View style={styles.detailsContainer}>
 
 
             {participant.song_rhythm && (
@@ -405,14 +416,16 @@ export default function ParticipantDetailScreen() {
               </View>
             )}
 
-            <TouchableOpacity
-              style={styles.moreInfoButton}
-              onPress={() => setShowDetailedInfo(true)}
-              activeOpacity={0.7}>
-              <Info size={20} color="#ffffff" />
-              <Text style={styles.moreInfoButtonText}>Više informacija</Text>
-            </TouchableOpacity>
           </View>
+
+          <TouchableOpacity
+            style={styles.moreInfoButton}
+            onPress={() => setShowDetailedInfo(true)}
+            activeOpacity={0.7}>
+            <Info size={18} color="#e07856" />
+            <Text style={styles.moreInfoButtonText}>Detaljnije</Text>
+            <ChevronRight size={18} color="#e07856" />
+          </TouchableOpacity>
         </View>
 
         {participant.name === 'Mesopustari' && (
@@ -836,64 +849,76 @@ const styles = StyleSheet.create({
     height: 280,
   },
   participantInfo: {
-    marginHorizontal: 24,
-    marginTop: 24,
-    padding: 40,
+    marginHorizontal: 0,
+    marginTop: -60,
+    paddingTop: 80,
+    paddingHorizontal: 32,
+    paddingBottom: 48,
     backgroundColor: '#ffffff',
-    borderRadius: 24,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.03,
-    shadowRadius: 24,
-    elevation: 1,
-    marginBottom: 32,
-    borderTopWidth: 4,
-    borderTopColor: '#e07856',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.06,
+    shadowRadius: 32,
+    elevation: 8,
+    marginBottom: 0,
   },
   participantName: {
-    fontSize: 36,
-    fontWeight: '300',
+    fontSize: 48,
+    fontWeight: '200',
     color: '#1a1a1a',
-    marginBottom: 4,
-    letterSpacing: -1.2,
-    lineHeight: 42,
+    marginBottom: 24,
+    letterSpacing: -2.5,
+    lineHeight: 52,
+    marginTop: 8,
   },
   participantNameCroatian: {
-    fontSize: 14,
-    fontWeight: '400',
-    color: '#9a9a9a',
-    marginBottom: 32,
-    letterSpacing: 2,
+    fontSize: 11,
+    fontWeight: '500',
+    color: '#b8b8b8',
+    marginBottom: 8,
+    letterSpacing: 3,
     textTransform: 'uppercase',
   },
   participantDescription: {
-    fontSize: 17,
-    color: '#4a4a4a',
-    lineHeight: 30,
-    marginBottom: 12,
+    fontSize: 19,
+    color: '#2a2a2a',
+    lineHeight: 32,
+    marginBottom: 20,
     fontWeight: '300',
-    letterSpacing: 0.2,
+    letterSpacing: 0.3,
   },
   participantDescriptionCroatian: {
     fontSize: 15,
-    color: '#9ca3af',
-    lineHeight: 23,
-    marginBottom: 16,
+    color: '#8a8a8a',
+    lineHeight: 26,
+    marginBottom: 40,
+    fontWeight: '300',
+    fontStyle: 'italic',
   },
-  darkContainer: {
-    backgroundColor: '#1f2937',
-    borderRadius: 20,
-    padding: 20,
-    marginTop: 4,
+  descriptionDivider: {
+    width: 60,
+    height: 2,
+    backgroundColor: '#e07856',
+    marginBottom: 32,
+  },
+  detailsContainer: {
+    gap: 20,
   },
   detailCard: {
     backgroundColor: '#fafaf8',
-    borderRadius: 20,
-    padding: 28,
-    marginTop: 16,
+    borderRadius: 24,
+    padding: 32,
+    marginTop: 0,
+    marginBottom: 20,
     borderWidth: 0,
-    borderLeftWidth: 3,
-    borderLeftColor: '#e07856',
+    marginHorizontal: -8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.03,
+    shadowRadius: 16,
+    elevation: 2,
   },
   detailCardHeader: {
     flexDirection: 'row',
@@ -939,22 +964,24 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   detailLabel: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '600',
-    color: '#636e72',
+    color: '#b8b8b8',
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginBottom: 6,
+    letterSpacing: 2.5,
+    marginBottom: 12,
   },
   detailText: {
-    fontSize: 14,
-    color: '#9ca3af',
-    lineHeight: 20,
+    fontSize: 15,
+    color: '#4a4a4a',
+    lineHeight: 24,
+    fontWeight: '300',
   },
   detailHint: {
     fontSize: 12,
-    color: '#9ca3af',
+    color: '#c8c8c8',
     fontStyle: 'italic',
+    fontWeight: '300',
   },
   detailTextExpanded: {
     fontSize: 14,
@@ -987,30 +1014,30 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   section: {
-    marginHorizontal: 24,
-    marginBottom: 32,
-    padding: 40,
-    backgroundColor: '#ffffff',
-    borderRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.03,
-    shadowRadius: 24,
-    elevation: 1,
+    marginHorizontal: 0,
+    marginBottom: 0,
+    marginTop: 24,
+    padding: 32,
+    paddingTop: 48,
+    backgroundColor: '#fafaf8',
+    borderRadius: 0,
+    borderTopWidth: 1,
+    borderTopColor: '#f0f0f0',
   },
   sectionTitle: {
-    fontSize: 28,
-    fontWeight: '300',
+    fontSize: 36,
+    fontWeight: '200',
     color: '#1a1a1a',
-    marginBottom: 6,
-    letterSpacing: -0.8,
+    marginBottom: 8,
+    letterSpacing: -1.5,
   },
   sectionSubtitle: {
-    fontSize: 13,
-    color: '#b8b8b8',
-    marginBottom: 32,
+    fontSize: 14,
+    color: '#9a9a9a',
+    marginBottom: 40,
     fontWeight: '300',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
+    lineHeight: 22,
   },
   emptyEvents: {
     padding: 40,
@@ -1029,24 +1056,23 @@ const styles = StyleSheet.create({
   eventCard: {
     backgroundColor: '#ffffff',
     borderRadius: 20,
-    padding: 28,
+    padding: 32,
     borderWidth: 0,
-    borderTopWidth: 3,
-    borderTopColor: '#e07856',
     width: '100%',
     maxWidth: 600,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.02,
-    shadowRadius: 16,
-    elevation: 1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 20,
+    elevation: 2,
+    marginHorizontal: 16,
   },
   eventTitle: {
-    fontSize: 20,
-    fontWeight: '400',
+    fontSize: 24,
+    fontWeight: '300',
     color: '#1a1a1a',
-    marginBottom: 4,
-    letterSpacing: -0.4,
+    marginBottom: 8,
+    letterSpacing: -0.8,
   },
   eventTitleLocal: {
     fontSize: 15,
@@ -1071,15 +1097,14 @@ const styles = StyleSheet.create({
   hierarchyCard: {
     backgroundColor: '#ffffff',
     borderRadius: 20,
-    padding: 28,
+    padding: 32,
     borderWidth: 0,
-    borderLeftWidth: 4,
-    borderLeftColor: '#e07856',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.02,
-    shadowRadius: 16,
-    elevation: 1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 20,
+    elevation: 2,
+    marginHorizontal: 16,
   },
   hierarchyHeader: {
     flexDirection: 'row',
@@ -1091,10 +1116,11 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   hierarchyTitle: {
-    fontSize: 20,
-    fontWeight: '400',
-    color: '#e07856',
-    letterSpacing: -0.4,
+    fontSize: 24,
+    fontWeight: '300',
+    color: '#1a1a1a',
+    letterSpacing: -0.8,
+    marginBottom: 8,
   },
   hierarchyDescription: {
     fontSize: 14,
@@ -1150,23 +1176,22 @@ const styles = StyleSheet.create({
   moreInfoButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#e07856',
-    borderRadius: 12,
+    justifyContent: 'flex-start',
+    backgroundColor: 'transparent',
+    borderRadius: 0,
     paddingVertical: 16,
-    paddingHorizontal: 20,
-    marginTop: 16,
-    shadowColor: '#e07856',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3,
+    paddingHorizontal: 0,
+    marginTop: 32,
+    borderTopWidth: 1,
+    borderTopColor: '#f0f0f0',
+    paddingTop: 24,
   },
   moreInfoButtonText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#ffffff',
-    marginLeft: 8,
+    fontSize: 14,
+    fontWeight: '400',
+    color: '#e07856',
+    letterSpacing: 0.5,
+    flex: 1,
   },
   modalContainer: {
     flex: 1,
@@ -1236,10 +1261,16 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   formationContainer: {
-    backgroundColor: '#fafaf8',
-    borderRadius: 20,
-    padding: 32,
+    backgroundColor: '#ffffff',
+    borderRadius: 24,
+    padding: 40,
     borderWidth: 0,
+    marginHorizontal: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 20,
+    elevation: 2,
   },
   formationRow: {
     flexDirection: 'row',
@@ -1532,19 +1563,17 @@ const styles = StyleSheet.create({
   },
   formationHeader: {
     width: '100%',
-    marginBottom: 24,
+    marginBottom: 32,
   },
   formationHeaderContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 20,
-    paddingHorizontal: 24,
-    backgroundColor: '#fafaf8',
-    borderRadius: 20,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+    backgroundColor: 'transparent',
+    borderRadius: 0,
     borderWidth: 0,
-    borderLeftWidth: 4,
-    borderLeftColor: '#e07856',
   },
   formationDescHeader: {
     width: '100%',
