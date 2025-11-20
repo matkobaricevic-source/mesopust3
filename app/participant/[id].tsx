@@ -267,7 +267,7 @@ export default function ParticipantDetailScreen() {
                   style={styles.cardWrapper}
                 >
                   <ModernCard
-                    onPress={role.related_participant_id ? () => router.push(`/participant/${role.related_participant_id}`) : undefined}
+                    onPress={() => router.push(`/role/${role.id}`)}
                   >
                     <View style={styles.roleCard}>
                       <View style={styles.roleCardContent}>
