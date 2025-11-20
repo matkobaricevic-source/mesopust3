@@ -14,7 +14,7 @@ import { BlurView } from 'expo-blur';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Participant, Event, HierarchyRole, Instrument } from '@/types/database';
-import { ArrowLeft, Calendar, Music, Shirt, Users, ChevronRight, Crown } from 'lucide-react-native';
+import { ArrowLeft, Calendar, Music, Shirt, Users, ChevronRight, Crown, ChevronDown, ChevronUp } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
 import { theme } from '@/constants/theme';
@@ -34,6 +34,8 @@ export default function ParticipantDetailScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [isInstrumentsExpanded, setIsInstrumentsExpanded] = useState(false);
+  const [isRolesExpanded, setIsRolesExpanded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -197,14 +199,26 @@ export default function ParticipantDetailScreen() {
 
           {instruments.length > 0 && (
             <Animated.View entering={FadeInDown.delay(400).springify()}>
-              <View style={styles.sectionHeader}>
-                <Music size={24} color={theme.colors.primary.main} strokeWidth={2} />
-                <Text style={styles.sectionTitle}>Instrumenti ({instruments.length})</Text>
-              </View>
-              {instruments.map((instrument, index) => (
+              <TouchableOpacity
+                onPress={() => setIsInstrumentsExpanded(!isInstrumentsExpanded)}
+                activeOpacity={0.7}
+              >
+                <View style={styles.sectionHeader}>
+                  <View style={styles.sectionHeaderLeft}>
+                    <Music size={24} color={theme.colors.primary.main} strokeWidth={2} />
+                    <Text style={styles.sectionTitle}>Instrumenti ({instruments.length})</Text>
+                  </View>
+                  {isInstrumentsExpanded ? (
+                    <ChevronUp size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
+                  ) : (
+                    <ChevronDown size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
+                  )}
+                </View>
+              </TouchableOpacity>
+              {isInstrumentsExpanded && instruments.map((instrument, index) => (
                 <Animated.View
                   key={instrument.id}
-                  entering={FadeInDown.delay(400 + index * 50).springify()}
+                  entering={FadeInDown.delay(50 + index * 30).springify()}
                   style={styles.cardWrapper}
                 >
                   <ModernCard onPress={() => router.push(`/instrument/${instrument.id}`)}>
@@ -229,14 +243,26 @@ export default function ParticipantDetailScreen() {
 
           {hierarchyRoles.length > 0 && (
             <Animated.View entering={FadeInDown.delay(500).springify()}>
-              <View style={styles.sectionHeader}>
-                <Crown size={24} color={theme.colors.primary.main} strokeWidth={2} />
-                <Text style={styles.sectionTitle}>Uloge u hijerarhiji ({hierarchyRoles.length})</Text>
-              </View>
-              {hierarchyRoles.map((role, index) => (
+              <TouchableOpacity
+                onPress={() => setIsRolesExpanded(!isRolesExpanded)}
+                activeOpacity={0.7}
+              >
+                <View style={styles.sectionHeader}>
+                  <View style={styles.sectionHeaderLeft}>
+                    <Crown size={24} color={theme.colors.primary.main} strokeWidth={2} />
+                    <Text style={styles.sectionTitle}>Uloge u hijerarhiji ({hierarchyRoles.length})</Text>
+                  </View>
+                  {isRolesExpanded ? (
+                    <ChevronUp size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
+                  ) : (
+                    <ChevronDown size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
+                  )}
+                </View>
+              </TouchableOpacity>
+              {isRolesExpanded && hierarchyRoles.map((role, index) => (
                 <Animated.View
                   key={role.id}
-                  entering={FadeInDown.delay(500 + index * 50).springify()}
+                  entering={FadeInDown.delay(50 + index * 30).springify()}
                   style={styles.cardWrapper}
                 >
                   <ModernCard
@@ -408,8 +434,16 @@ const styles = StyleSheet.create({
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     gap: theme.spacing.md,
     marginBottom: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+  },
+  sectionHeaderLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.md,
+    flex: 1,
   },
   sectionTitle: {
     ...theme.typography.h4,
