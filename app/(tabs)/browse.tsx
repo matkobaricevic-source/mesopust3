@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList,
+  ScrollView,
   TouchableOpacity,
   ActivityIndicator,
   Image,
@@ -12,36 +12,58 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Participant } from '@/types/database';
-import { Users, Music, Shirt } from 'lucide-react-native';
+import { Users, Music, Shirt, Crown, Award, Flag } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
 import { theme } from '@/constants/theme';
 import { ModernCard } from '@/components/ModernCard';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
+interface HierarchyRole {
+  id: string;
+  participant_id: string;
+  title: string;
+  title_croatian: string;
+  description: string;
+  description_croatian: string;
+  display_order: number;
+}
+
 export default function ParticipantsScreen() {
   const [participants, setParticipants] = useState<Participant[]>([]);
+  const [hierarchyRoles, setHierarchyRoles] = useState<HierarchyRole[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    loadParticipants();
+    loadData();
   }, []);
 
-  async function loadParticipants() {
+  async function loadData() {
     try {
       setLoading(true);
       setError(null);
 
-      const { data, error: fetchError } = await supabase
+      // Load participants
+      const { data: participantsData, error: participantsError } = await supabase
         .from('participants')
         .select('*, instruments(*)')
         .eq('show_in_main_menu', true)
         .order('display_order', { ascending: true });
 
-      if (fetchError) throw fetchError;
-      setParticipants(data || []);
+      if (participantsError) throw participantsError;
+
+      // Load hierarchy roles for Mesopustari
+      const { data: hierarchyData, error: hierarchyError } = await supabase
+        .from('hierarchy_roles')
+        .select('*')
+        .order('display_order', { ascending: true });
+
+      if (hierarchyError) throw hierarchyError;
+
+      setParticipants(participantsData || []);
+      setHierarchyRoles(hierarchyData || []);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : 'Failed to load participants'
@@ -53,6 +75,13 @@ export default function ParticipantsScreen() {
 
   function handleParticipantPress(participant: Participant) {
     router.push(`/participant/${participant.id}`);
+  }
+
+  function getHierarchyIcon(displayOrder: number) {
+    if (displayOrder === 1) return <Crown size={20} color={theme.colors.accent.main} strokeWidth={2} />;
+    if (displayOrder <= 3) return <Award size={20} color={theme.colors.primary.main} strokeWidth={2} />;
+    if (displayOrder >= 50) return <Flag size={20} color={theme.colors.secondary.main} strokeWidth={2} />;
+    return <Users size={20} color={theme.colors.neutral[400]} strokeWidth={2} />;
   }
 
   if (loading) {
@@ -70,12 +99,17 @@ export default function ParticipantsScreen() {
         <Text style={styles.errorText}>{error}</Text>
         <TouchableOpacity
           style={styles.retryButton}
-          onPress={loadParticipants}>
+          onPress={loadData}>
           <Text style={styles.retryButtonText}>Pokušaj ponovno</Text>
         </TouchableOpacity>
       </View>
     );
   }
+
+  // Find Mesopustari participant to show hierarchy
+  const mesopustari = participants.find(p => p.name === 'Mesopustari');
+  const mesopustariRoles = hierarchyRoles.filter(r => r.participant_id === mesopustari?.id);
+  const otherParticipants = participants.filter(p => p.name !== 'Mesopustari');
 
   return (
     <View style={styles.container}>
@@ -85,27 +119,92 @@ export default function ParticipantsScreen() {
           <Text style={styles.emptyText}>Nema dostupnih sudionika</Text>
         </View>
       ) : (
-        <FlatList
-          data={participants}
-          keyExtractor={(item) => item.id}
+        <ScrollView
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
-          ListHeaderComponent={
-            <Animated.View entering={FadeIn} style={styles.header}>
-              <LinearGradient
-                colors={theme.colors.secondary.gradient}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.headerGradient}
-              >
-                <Text style={styles.headerTitle}>Sudionici{'\n'}Mesopusta</Text>
-                <Text style={styles.headerSubtitle}>Otkrijte sve uloge i ljude</Text>
-              </LinearGradient>
-            </Animated.View>
-          }
-          renderItem={({ item, index }) => (
+        >
+          <Animated.View entering={FadeIn} style={styles.header}>
+            <LinearGradient
+              colors={theme.colors.secondary.gradient}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.headerGradient}
+            >
+              <Text style={styles.headerTitle}>Sudionici{'\n'}Mesopusta</Text>
+              <Text style={styles.headerSubtitle}>Otkrijte sve uloge i ljude</Text>
+            </LinearGradient>
+          </Animated.View>
+
+          {/* Mesopustari Hierarchy Section */}
+          {mesopustari && mesopustariRoles.length > 0 && (
             <Animated.View
-              entering={FadeInDown.delay(index * 80).springify()}
+              entering={FadeInDown.delay(100).springify()}
+              style={styles.section}
+            >
+              <TouchableOpacity
+                onPress={() => handleParticipantPress(mesopustari)}
+                activeOpacity={0.7}
+              >
+                <ModernCard>
+                  <View style={styles.imageContainer}>
+                    {mesopustari.image_url && getImageSource(mesopustari.image_url) ? (
+                      <Image
+                        source={getImageSource(mesopustari.image_url)!}
+                        style={styles.participantImage}
+                        resizeMode="cover"
+                      />
+                    ) : (
+                      <LinearGradient
+                        colors={theme.colors.secondary.gradient}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.participantImagePlaceholder}
+                      >
+                        <Users size={48} color="rgba(255,255,255,0.8)" strokeWidth={1.5} />
+                      </LinearGradient>
+                    )}
+                    <LinearGradient
+                      colors={['transparent', 'rgba(0,0,0,0.8)']}
+                      style={styles.imageGradient}
+                    />
+                    <View style={styles.overlayContent}>
+                      <Text style={styles.participantNameOverlay}>
+                        {mesopustari.name_croatian || mesopustari.name}
+                      </Text>
+                    </View>
+                  </View>
+                </ModernCard>
+              </TouchableOpacity>
+
+              <View style={styles.hierarchySection}>
+                <Text style={styles.sectionTitle}>Hijerarhija i Formacija</Text>
+                {mesopustariRoles.map((role, index) => (
+                  <Animated.View
+                    key={role.id}
+                    entering={FadeInDown.delay(200 + index * 60).springify()}
+                    style={styles.roleCard}
+                  >
+                    <View style={styles.roleHeader}>
+                      {getHierarchyIcon(role.display_order)}
+                      <View style={styles.roleTitleContainer}>
+                        <Text style={styles.roleTitle}>{role.title_croatian}</Text>
+                        <Text style={styles.roleSubtitle}>{role.title}</Text>
+                      </View>
+                    </View>
+                    {role.description_croatian && (
+                      <Text style={styles.roleDescription}>{role.description_croatian}</Text>
+                    )}
+                  </Animated.View>
+                ))}
+              </View>
+            </Animated.View>
+          )}
+
+          {/* Other Participants */}
+          {otherParticipants.map((item, index) => (
+            <Animated.View
+              key={item.id}
+              entering={FadeInDown.delay(300 + index * 80).springify()}
               style={styles.participantCardWrapper}
             >
               <ModernCard onPress={() => handleParticipantPress(item)}>
@@ -157,8 +256,8 @@ export default function ParticipantsScreen() {
                 </View>
               </ModernCard>
             </Animated.View>
-          )}
-        />
+          ))}
+        </ScrollView>
       )}
     </View>
   );
@@ -302,5 +401,55 @@ const styles = StyleSheet.create({
     ...theme.typography.caption,
     fontWeight: '600',
     color: theme.colors.primary.main,
+  },
+  section: {
+    marginBottom: theme.spacing.xl,
+    paddingHorizontal: theme.spacing.md,
+  },
+  sectionTitle: {
+    ...theme.typography.h3,
+    fontFamily: fonts.title,
+    color: theme.colors.text.primary,
+    marginTop: theme.spacing.xl,
+    marginBottom: theme.spacing.lg,
+    paddingHorizontal: theme.spacing.sm,
+  },
+  hierarchySection: {
+    marginTop: theme.spacing.lg,
+  },
+  roleCard: {
+    backgroundColor: theme.colors.background.primary,
+    borderRadius: theme.borderRadius.lg,
+    padding: theme.spacing.lg,
+    marginBottom: theme.spacing.md,
+    ...theme.shadows.sm,
+    borderLeftWidth: 3,
+    borderLeftColor: theme.colors.primary.main,
+  },
+  roleHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: theme.spacing.sm,
+    gap: theme.spacing.md,
+  },
+  roleTitleContainer: {
+    flex: 1,
+  },
+  roleTitle: {
+    ...theme.typography.h4,
+    fontFamily: fonts.title,
+    color: theme.colors.text.primary,
+    marginBottom: 2,
+  },
+  roleSubtitle: {
+    ...theme.typography.caption,
+    color: theme.colors.text.secondary,
+    fontStyle: 'italic',
+  },
+  roleDescription: {
+    ...theme.typography.body2,
+    color: theme.colors.text.secondary,
+    lineHeight: 20,
+    marginTop: theme.spacing.sm,
   },
 });
