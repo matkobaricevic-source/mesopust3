@@ -65,7 +65,7 @@ export default function RoleDetailScreen() {
 
       const { data: roleData, error: roleError } = await supabase
         .from('hierarchy_roles')
-        .select('*, participants(image_url)')
+        .select('*, participants!hierarchy_roles_participant_id_fkey(image_url)')
         .eq('id', id)
         .maybeSingle();
 
