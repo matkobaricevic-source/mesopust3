@@ -14,11 +14,11 @@ interface GlassTabBarProps {
 }
 
 const tabs = [
-  { name: 'index', icon: CalendarDays },
-  { name: 'browse', icon: UsersRound },
-  { name: 'social', icon: Camera },
-  { name: 'search', icon: Search },
-  { name: 'glossary', icon: BookText },
+  { name: 'index', icon: CalendarDays, gradient: theme.colors.primary.gradient },
+  { name: 'browse', icon: UsersRound, gradient: theme.colors.secondary.gradient },
+  { name: 'social', icon: Camera, gradient: theme.colors.accent.gradient },
+  { name: 'search', icon: Search, gradient: theme.colors.success.gradient },
+  { name: 'glossary', icon: BookText, gradient: theme.colors.primary.gradient },
 ];
 
 const TAB_COUNT = 5;
@@ -76,17 +76,43 @@ export function GlassTabBar({ currentIndex, scrollOffset, onTabPress }: GlassTab
     };
   });
 
+  const getGradientOpacity = (tabIndex: number) => {
+    return useAnimatedStyle(() => {
+      const progress = scrollOffset.value;
+      const distance = Math.abs(progress - tabIndex);
+
+      const opacity = interpolate(
+        distance,
+        [0, 0.5, 1],
+        [1, 0.5, 0],
+        Extrapolation.CLAMP
+      );
+
+      return { opacity };
+    });
+  };
+
   return (
     <View style={styles.container}>
       <BlurView intensity={90} tint="dark" style={styles.blur}>
         <View style={[styles.content, { paddingBottom: insets.bottom || 8 }]}>
           <Animated.View style={[styles.indicator, indicatorStyle]}>
-            <LinearGradient
-              colors={theme.colors.primary.gradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.indicatorGradient}
-            />
+            {tabs.map((tab, index) => (
+              <Animated.View
+                key={`gradient-${index}`}
+                style={[
+                  StyleSheet.absoluteFill,
+                  getGradientOpacity(index),
+                ]}
+              >
+                <LinearGradient
+                  colors={tab.gradient as any}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.indicatorGradient}
+                />
+              </Animated.View>
+            ))}
           </Animated.View>
           {tabs.map((tab, index) => (
             <TouchableOpacity

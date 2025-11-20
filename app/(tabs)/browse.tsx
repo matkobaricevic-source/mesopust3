@@ -26,6 +26,7 @@ interface HierarchyRole {
   title_croatian: string;
   description: string;
   description_croatian: string;
+  related_participant_id: string | null;
   display_order: number;
 }
 
@@ -141,7 +142,11 @@ export default function ParticipantsScreen() {
   }
 
   function handleHierarchyRolePress(role: HierarchyRole) {
-    router.push(`/participant/${role.participant_id}`);
+    if (role.related_participant_id) {
+      router.push(`/participant/${role.related_participant_id}`);
+    } else {
+      router.push(`/participant/${role.participant_id}`);
+    }
   }
 
   if (loading) {
