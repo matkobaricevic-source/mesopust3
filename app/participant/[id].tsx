@@ -68,6 +68,7 @@ export default function ParticipantDetailScreen() {
           .from('hierarchy_roles')
           .select('*')
           .eq('participant_id', id)
+          .eq('show_in_main_menu', true)
           .order('display_order', { ascending: true }),
         supabase
           .from('instruments')
