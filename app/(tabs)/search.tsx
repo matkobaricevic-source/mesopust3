@@ -197,6 +197,7 @@ export default function SearchScreen() {
       const { data: roles } = await supabase
         .from('hierarchy_roles')
         .select('id, participant_id, title, title_croatian, description, description_croatian')
+        .eq('show_in_main_menu', true)
         .or(`title.ilike.${searchPattern},title_croatian.ilike.${searchPattern},description.ilike.${searchPattern},description_croatian.ilike.${searchPattern}`);
 
       if (roles) {
