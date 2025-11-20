@@ -77,9 +77,9 @@ export function GlassTabBar({ currentIndex, scrollOffset, onTabPress }: GlassTab
   });
 
   return (
-    <View style={[styles.container, { paddingBottom: insets.bottom || 12 }]}>
+    <View style={styles.container}>
       <BlurView intensity={90} tint="dark" style={styles.blur}>
-        <View style={styles.content}>
+        <View style={[styles.content, { paddingBottom: insets.bottom || 8 }]}>
           <Animated.View style={[styles.indicator, indicatorStyle]}>
             <LinearGradient
               colors={theme.colors.primary.gradient}
