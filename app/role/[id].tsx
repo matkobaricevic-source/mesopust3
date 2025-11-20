@@ -175,7 +175,7 @@ export default function RoleDetailScreen() {
             <Animated.View entering={FadeInDown.delay(300).springify()}>
               <View style={styles.sectionHeader}>
                 <Shirt size={24} color={theme.colors.primary.main} strokeWidth={2} />
-                <Text style={styles.sectionTitle}>Dijelovi Nošnje ({uniformItems.length})</Text>
+                <Text style={styles.sectionTitle}>Dijelovi uniforme ({uniformItems.length})</Text>
               </View>
               {uniformItems.map((item, index) => (
                 <Animated.View
