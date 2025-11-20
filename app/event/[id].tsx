@@ -716,12 +716,24 @@ export default function EventDetailScreen() {
               </View>
             )}
 
-            <View style={styles.modalPlaceholder}>
-              <Info size={48} color="#d1d5db" />
-              <Text style={styles.modalPlaceholderText}>
-                Ovdje možete dodati detaljne informacije o događaju
-              </Text>
-            </View>
+            {event.related_event_id ? (
+              <TouchableOpacity
+                style={styles.relatedEventButton}
+                onPress={() => {
+                  setShowDetailedInfo(false);
+                  router.push(`/event/${event.related_event_id}`);
+                }}>
+                <Text style={styles.relatedEventButtonText}>Napovidanje dovcen i dovican</Text>
+                <ChevronRight size={20} color="#0ea5e9" />
+              </TouchableOpacity>
+            ) : (
+              <View style={styles.modalPlaceholder}>
+                <Info size={48} color="#d1d5db" />
+                <Text style={styles.modalPlaceholderText}>
+                  Ovdje možete dodati detaljne informacije o događaju
+                </Text>
+              </View>
+            )}
           </ScrollView>
         </View>
       </Modal>
@@ -1209,6 +1221,23 @@ const styles = StyleSheet.create({
     color: '#4b5563',
     lineHeight: 26,
     marginBottom: 24,
+  },
+  relatedEventButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+    backgroundColor: '#f0f9ff',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#0ea5e9',
+    marginTop: 16,
+  },
+  relatedEventButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#0ea5e9',
+    flex: 1,
   },
   modalPlaceholder: {
     alignItems: 'center',
