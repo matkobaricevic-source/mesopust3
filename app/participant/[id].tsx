@@ -263,7 +263,7 @@ export default function ParticipantDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#a855f7" />
+        <ActivityIndicator size="large" color="#dc2626" />
       </View>
     );
   }
@@ -409,7 +409,7 @@ export default function ParticipantDetailScreen() {
               style={styles.moreInfoButton}
               onPress={() => setShowDetailedInfo(true)}
               activeOpacity={0.7}>
-              <Info size={20} color="#7c3aed" />
+              <Info size={20} color="#ffffff" />
               <Text style={styles.moreInfoButtonText}>Više informacija</Text>
             </TouchableOpacity>
           </View>
@@ -621,7 +621,7 @@ export default function ParticipantDetailScreen() {
                     onPress={() => handleRolePress(role)}
                     activeOpacity={0.7}>
                     <View style={styles.hierarchyHeader}>
-                      <Users size={20} color="#a855f7" />
+                      <Users size={20} color="#dc2626" />
                       <View style={styles.hierarchyHeaderText}>
                         <Text style={styles.hierarchyTitle}>
                           {role.title_croatian}
@@ -870,15 +870,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   darkContainer: {
-    backgroundColor: '#7c3aed',
-    borderRadius: 24,
+    backgroundColor: '#1f2937',
+    borderRadius: 20,
     padding: 20,
     marginTop: 4,
-    shadowColor: '#7c3aed',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
-    elevation: 6,
   },
   detailCard: {
     backgroundColor: '#ffffff',
@@ -931,7 +926,7 @@ const styles = StyleSheet.create({
   },
   visualizerBar: {
     width: 6,
-    backgroundColor: '#a855f7',
+    backgroundColor: '#dc2626',
     borderRadius: 3,
   },
   detailLabel: {
@@ -966,16 +961,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    backgroundColor: '#a855f7',
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 16,
+    backgroundColor: '#dc2626',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
     marginTop: 16,
-    shadowColor: '#7c3aed',
-    shadowOffset: { width: 0, height: 3 },
+    shadowColor: '#dc2626',
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowRadius: 4,
+    elevation: 3,
   },
   audioButtonText: {
     fontSize: 14,
@@ -1051,15 +1046,15 @@ const styles = StyleSheet.create({
   },
   hierarchyCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 16,
-    padding: 18,
-    shadowColor: '#7c3aed',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
-    elevation: 4,
-    borderLeftWidth: 5,
-    borderLeftColor: '#a855f7',
+    borderRadius: 12,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
+    borderLeftWidth: 4,
+    borderLeftColor: '#dc2626',
   },
   hierarchyHeader: {
     flexDirection: 'row',
@@ -1073,7 +1068,7 @@ const styles = StyleSheet.create({
   hierarchyTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#7c3aed',
+    color: '#dc2626',
   },
   hierarchyDescription: {
     fontSize: 14,
@@ -1083,7 +1078,7 @@ const styles = StyleSheet.create({
   },
   hierarchyViewUniform: {
     fontSize: 13,
-    color: '#a855f7',
+    color: '#dc2626',
     fontWeight: '600',
   },
   instrumentsGrid: {
@@ -1124,30 +1119,28 @@ const styles = StyleSheet.create({
   },
   instrumentViewMore: {
     fontSize: 13,
-    color: '#a855f7',
-    fontWeight: '600',
+    color: '#dc2626',
+    fontWeight: '500',
   },
   moreInfoButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 16,
+    backgroundColor: '#dc2626',
+    borderRadius: 12,
     paddingVertical: 16,
     paddingHorizontal: 20,
     marginTop: 16,
-    borderWidth: 2,
-    borderColor: '#e9d5ff',
-    shadowColor: '#7c3aed',
+    shadowColor: '#dc2626',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
     elevation: 3,
   },
   moreInfoButtonText: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#7c3aed',
+    color: '#ffffff',
     marginLeft: 8,
   },
   modalContainer: {
