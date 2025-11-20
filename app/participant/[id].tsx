@@ -298,7 +298,11 @@ export default function ParticipantDetailScreen() {
         </Text>
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.content}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
         {participant.image_url && getImageSource(participant.image_url) && (
           <Image
             source={getImageSource(participant.image_url)!}
