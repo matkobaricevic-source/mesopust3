@@ -607,31 +607,36 @@ export default function ParticipantDetailScreen() {
             </Text>
 
             <View style={styles.hierarchyGrid}>
-              {hierarchyRoles.map((role) => (
-                <TouchableOpacity
-                  key={role.id}
-                  style={styles.hierarchyCard}
-                  onPress={() => handleRolePress(role)}
-                  activeOpacity={0.7}>
-                  <View style={styles.hierarchyHeader}>
-                    <Users size={20} color="#dc2626" />
-                    <View style={styles.hierarchyHeaderText}>
-                      <Text style={styles.hierarchyTitle}>
-                        {role.title_croatian}
-                      </Text>
+              {hierarchyRoles
+                .filter(role =>
+                  role.title_croatian !== 'Magaziner' &&
+                  role.title_croatian !== 'Bandiraš'
+                )
+                .map((role) => (
+                  <TouchableOpacity
+                    key={role.id}
+                    style={styles.hierarchyCard}
+                    onPress={() => handleRolePress(role)}
+                    activeOpacity={0.7}>
+                    <View style={styles.hierarchyHeader}>
+                      <Users size={20} color="#dc2626" />
+                      <View style={styles.hierarchyHeaderText}>
+                        <Text style={styles.hierarchyTitle}>
+                          {role.title_croatian}
+                        </Text>
+                      </View>
+                      <ChevronRight size={20} color="#9ca3af" />
                     </View>
-                    <ChevronRight size={20} color="#9ca3af" />
-                  </View>
-                  {role.description_croatian && (
-                    <Text style={styles.hierarchyDescription}>
-                      {role.description_croatian}
+                    {role.description_croatian && (
+                      <Text style={styles.hierarchyDescription}>
+                        {role.description_croatian}
+                      </Text>
+                    )}
+                    <Text style={styles.hierarchyViewUniform}>
+                      Pogledaj uniformu →
                     </Text>
-                  )}
-                  <Text style={styles.hierarchyViewUniform}>
-                    Pogledaj uniformu →
-                  </Text>
-                </TouchableOpacity>
-              ))}
+                  </TouchableOpacity>
+                ))}
             </View>
           </View>
         )}
