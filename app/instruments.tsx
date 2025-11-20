@@ -1,45 +1,15 @@
 import { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  ActivityIndicator,
-  Image,
-} from 'react-native';
+import { View, Text, StyleSheet, FlatList, ActivityIndicator, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Instrument } from '@/types/database';
-import {
-  ArrowLeft,
-  Music,
-  Disc3,
-  Drum,
-  Bell,
-  Flag,
-  Megaphone,
-  Triangle,
-  CookingPot,
-  Wallet,
-  Wind,
-} from 'lucide-react-native';
-
-function getInstrumentIcon(instrumentName: string) {
-  const name = instrumentName.toLowerCase();
-  if (name.includes('odgovaralica')) return Megaphone;
-  if (name.includes('mali bubanj')) return Drum;
-  if (name.includes('veli bubanj')) return Drum;
-  if (name.includes('činele')) return Disc3;
-  if (name.includes('zvonca')) return Bell;
-  if (name.includes('trumbeta')) return Music;
-  if (name.includes('triangl')) return Triangle;
-  if (name.includes('avan')) return CookingPot;
-  if (name.includes('bandira')) return Flag;
-  if (name.includes('švikavac')) return Wind;
-  if (name.includes('kasa')) return Wallet;
-  return Music;
-}
+import { Music } from 'lucide-react-native';
+import { getImageSource } from '@/lib/imageUtils';
+import { fonts } from '@/constants/fonts';
+import { theme } from '@/constants/theme';
+import { ModernCard } from '@/components/ModernCard';
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
 export default function InstrumentsScreen() {
   const [instruments, setInstruments] = useState<Instrument[]>([]);
@@ -54,30 +24,14 @@ export default function InstrumentsScreen() {
   async function loadInstruments() {
     try {
       setLoading(true);
-      setError(null);
-
-      const { data: participantData } = await supabase
-        .from('participants')
-        .select('id')
-        .eq('name', 'Mesopustari')
-        .maybeSingle();
-
-      if (!participantData) {
-        throw new Error('Mesopustari not found');
-      }
-
-      const { data, error: instrumentsError } = await supabase
+      const { data, error: fetchError } = await supabase
         .from('instruments')
         .select('*')
-        .eq('participant_id', participantData.id)
         .order('display_order', { ascending: true });
-
-      if (instrumentsError) throw instrumentsError;
+      if (fetchError) throw fetchError;
       setInstruments(data || []);
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : 'Failed to load instruments'
-      );
+      setError(err instanceof Error ? err.message : 'Failed to load instruments');
     } finally {
       setLoading(false);
     }
@@ -85,15 +39,15 @@ export default function InstrumentsScreen() {
 
   if (loading) {
     return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" color="#dc2626" />
+      <View style={styles.centerContainer}>
+        <ActivityIndicator size="large" color={theme.colors.primary.main} />
       </View>
     );
   }
 
   if (error) {
     return (
-      <View style={styles.centered}>
+      <View style={styles.centerContainer}>
         <Text style={styles.errorText}>{error}</Text>
       </View>
     );
@@ -101,59 +55,62 @@ export default function InstrumentsScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-          activeOpacity={0.7}>
-          <ArrowLeft size={24} color="#111827" />
-        </TouchableOpacity>
-        <View style={styles.headerContent}>
-          <View style={styles.headerIcon}>
-            <Music size={32} color="#dc2626" />
-          </View>
-          <View>
-            <Text style={styles.headerTitle}>Instrumenti</Text>
-            <Text style={styles.headerSubtitle}>
-              Glazbala Mesopustara
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.instrumentsGrid}>
-          {instruments.map((instrument) => {
-            const IconComponent = getInstrumentIcon(instrument.name_croatian);
-            return (
-              <TouchableOpacity
-                key={instrument.id}
-                style={styles.instrumentCard}
-                onPress={() => router.push(`/instrument/${instrument.id}`)}
-                activeOpacity={0.7}>
-                <View style={styles.instrumentContent}>
-                  <View style={styles.instrumentHeader}>
-                    <IconComponent size={18} color="#6b7280" />
-                    <Text style={styles.instrumentName}>
-                      {instrument.name_croatian}
-                    </Text>
-                  </View>
-
-                  {instrument.description_croatian && (
+      <FlatList
+        data={instruments}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <Animated.View entering={FadeIn} style={styles.header}>
+            <LinearGradient
+              colors={theme.colors.secondary.gradient}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.headerGradient}
+            >
+              <Text style={styles.headerTitle}>Instrumenti</Text>
+              <Text style={styles.headerSubtitle}>Svi glazbeni instrumenti</Text>
+            </LinearGradient>
+          </Animated.View>
+        }
+        renderItem={({ item, index }) => (
+          <Animated.View
+            entering={FadeInDown.delay(index * 50).springify()}
+            style={styles.cardWrapper}
+          >
+            <ModernCard onPress={() => router.push(`/instrument/${item.id}`)}>
+              <View style={styles.instrumentCard}>
+                {item.image_url && getImageSource(item.image_url) ? (
+                  <Image
+                    source={getImageSource(item.image_url)!}
+                    style={styles.instrumentImage}
+                    resizeMode="cover"
+                  />
+                ) : (
+                  <LinearGradient
+                    colors={theme.colors.secondary.gradient}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={styles.instrumentImagePlaceholder}
+                  >
+                    <Music size={32} color="rgba(255,255,255,0.8)" strokeWidth={1.5} />
+                  </LinearGradient>
+                )}
+                <View style={styles.instrumentInfo}>
+                  <Text style={styles.instrumentName}>
+                    {item.name_croatian || item.name}
+                  </Text>
+                  {item.description_croatian && (
                     <Text style={styles.instrumentDescription} numberOfLines={2}>
-                      {instrument.description_croatian}
+                      {item.description_croatian}
                     </Text>
                   )}
-
-                  <Text style={styles.instrumentViewMore}>
-                    Pogledaj detalje →
-                  </Text>
                 </View>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </ScrollView>
+              </View>
+            </ModernCard>
+          </Animated.View>
+        )}
+      />
     </View>
   );
 }
@@ -161,99 +118,77 @@ export default function InstrumentsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: theme.colors.background.secondary,
   },
-  centered: {
+  centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
+    backgroundColor: theme.colors.background.secondary,
   },
   errorText: {
-    fontSize: 16,
-    color: '#dc2626',
-    textAlign: 'center',
+    ...theme.typography.body1,
+    color: theme.colors.error.main,
   },
   header: {
-    backgroundColor: '#ffffff',
-    paddingTop: 60,
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    marginBottom: theme.spacing.lg,
+    overflow: 'hidden',
+    borderRadius: theme.borderRadius.xl,
+    marginHorizontal: theme.spacing.md,
   },
-  backButton: {
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    marginBottom: 16,
-  },
-  headerContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: '#fef2f2',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 16,
+  headerGradient: {
+    padding: theme.spacing.xl,
+    paddingTop: 80,
+    paddingBottom: theme.spacing.xl,
   },
   headerTitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#111827',
+    ...theme.typography.display,
+    fontSize: 36,
+    color: theme.colors.text.inverse,
+    fontFamily: fonts.title,
+    marginBottom: theme.spacing.sm,
   },
   headerSubtitle: {
-    fontSize: 16,
-    color: '#6b7280',
-    marginTop: 4,
+    ...theme.typography.body1,
+    color: 'rgba(255, 255, 255, 0.9)',
   },
-  content: {
-    flex: 1,
+  listContent: {
+    paddingTop: theme.spacing.lg,
+    paddingBottom: 120,
   },
-  instrumentsGrid: {
-    padding: 16,
-    gap: 12,
+  cardWrapper: {
+    marginBottom: theme.spacing.md,
+    paddingHorizontal: theme.spacing.md,
   },
   instrumentCard: {
-    backgroundColor: '#ffffff',
-    borderRadius: 8,
-    padding: 14,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 1,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-  },
-  instrumentContent: {
-    flex: 1,
-  },
-  instrumentHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    gap: theme.spacing.md,
+    padding: theme.spacing.md,
   },
-  instrumentName: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#111827',
-    marginLeft: 10,
+  instrumentImage: {
+    width: 80,
+    height: 80,
+    borderRadius: theme.borderRadius.md,
+  },
+  instrumentImagePlaceholder: {
+    width: 80,
+    height: 80,
+    borderRadius: theme.borderRadius.md,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  instrumentInfo: {
     flex: 1,
   },
-  instrumentDescription: {
-    fontSize: 14,
-    color: '#6b7280',
-    lineHeight: 20,
-    marginBottom: 8,
+  instrumentName: {
+    ...theme.typography.body1,
+    color: theme.colors.text.primary,
+    fontWeight: '600',
+    marginBottom: 4,
   },
-  instrumentViewMore: {
-    fontSize: 13,
-    color: '#dc2626',
-    fontWeight: '500',
+  instrumentDescription: {
+    ...theme.typography.body2,
+    color: theme.colors.text.secondary,
   },
 });

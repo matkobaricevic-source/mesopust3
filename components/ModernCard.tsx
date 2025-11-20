@@ -51,7 +51,7 @@ export function ModernCard({ children, onPress, style, gradient = false, gradien
         disabled={!onPress}
       >
         <LinearGradient
-          colors={gradientColors || theme.colors.primary.gradient}
+          colors={(gradientColors || theme.colors.primary.gradient) as any}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={[styles.card, style]}

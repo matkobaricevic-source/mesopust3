@@ -16,7 +16,7 @@ export default function InfoScreen() {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Animated.View entering={FadeIn} style={styles.header}>
         <LinearGradient
-          colors={theme.colors.success.gradient || ['#10B981', '#059669']}
+          colors={theme.colors.success.gradient || ['#10B981', '#059669'] as const}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.headerGradient}
