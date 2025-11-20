@@ -630,7 +630,9 @@ const styles = StyleSheet.create({
   },
   zecaNotice: {
     backgroundColor: '#fef3c7',
+    borderWidth: 1,
     borderBottomWidth: 1,
+    borderColor: '#fbbf24',
     borderBottomColor: '#fbbf24',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
