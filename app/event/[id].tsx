@@ -367,20 +367,7 @@ export default function EventDetailScreen() {
             </View>
           )}
 
-          {event.id === 'a3b4c5d6-e7f8-a9b0-c1d2-e3f4a5b6c7d8' ? (
-            <TouchableOpacity
-              style={styles.relatedEventButtonMain}
-              onPress={() => {
-                const tretoNapovidanjeCategory = categories.find(cat => cat.title_local === 'Treto napovidanje - izvedba');
-                if (tretoNapovidanjeCategory) {
-                  router.push(`/category/${tretoNapovidanjeCategory.id}`);
-                }
-              }}
-              activeOpacity={0.8}>
-              <Info size={20} color="#ffffff" />
-              <Text style={styles.relatedEventButtonMainText}>Treto napovidanje - izvedba</Text>
-            </TouchableOpacity>
-          ) : event.related_event_id ? (
+          {event.related_event_id ? (
             <TouchableOpacity
               style={styles.relatedEventButtonMain}
               onPress={() => router.push(`/event/${event.related_event_id}`)}
@@ -395,6 +382,21 @@ export default function EventDetailScreen() {
               activeOpacity={0.8}>
               <Info size={20} color="#ffffff" />
               <Text style={styles.moreInfoButtonText}>Više informacija</Text>
+            </TouchableOpacity>
+          )}
+
+          {event.id === 'a3b4c5d6-e7f8-a9b0-c1d2-e3f4a5b6c7d8' && (
+            <TouchableOpacity
+              style={[styles.relatedEventButtonMain, { marginTop: 12 }]}
+              onPress={() => {
+                const tretoNapovidanjeCategory = categories.find(cat => cat.title_local === 'Treto napovidanje - izvedba');
+                if (tretoNapovidanjeCategory) {
+                  router.push(`/category/${tretoNapovidanjeCategory.id}`);
+                }
+              }}
+              activeOpacity={0.8}>
+              <Info size={20} color="#ffffff" />
+              <Text style={styles.relatedEventButtonMainText}>Treto napovidanje - izvedba</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -583,14 +585,14 @@ export default function EventDetailScreen() {
             <Text style={styles.sectionTitle}>Događaji</Text>
             <Text style={styles.sectionSubtitle}>
               {(() => {
-                const filteredCount = categories.filter(c => c.title_local !== 'Napovidanje (izvedba)').length + subEvents.length;
+                const filteredCount = categories.filter(c => c.title_local !== 'Napovidanje (izvedba)' && c.title_local !== 'Treto napovidanje - izvedba').length + subEvents.length;
                 return `${filteredCount} ${filteredCount === 1 ? 'događaj' : 'događaja'}`;
               })()}
             </Text>
 
             <View style={styles.categoriesGrid}>
               {(() => {
-                const allItems = [...categories.filter(c => c.title_local !== 'Napovidanje (izvedba)').map(c => ({ ...c, type: 'category' })), ...subEvents.map(e => ({ ...e, type: 'event' }))]
+                const allItems = [...categories.filter(c => c.title_local !== 'Napovidanje (izvedba)' && c.title_local !== 'Treto napovidanje - izvedba').map(c => ({ ...c, type: 'category' })), ...subEvents.map(e => ({ ...e, type: 'event' }))]
                   .sort((a, b) => a.display_order - b.display_order);
 
                 const zecaIndex = allItems.findIndex(item => item.title === 'Zeča');
