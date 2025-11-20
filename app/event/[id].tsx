@@ -20,6 +20,7 @@ interface EventStep {
   step_number: number;
   title: string;
   image_url: string | null;
+  note: string | null;
 }
 
 interface EventCrossroad {
@@ -382,6 +383,12 @@ export default function EventDetailScreen() {
                               <Text style={styles.stationTimeNoteText}>
                                 1. Četrtak 22:00 • 2. Četrtak 23:00 • 3. Četrtak 00:00
                               </Text>
+                            </View>
+                          )}
+                          {step.note && (
+                            <View style={styles.stepNoteContainer}>
+                              <Info size={14} color="#6b7280" />
+                              <Text style={styles.stepNoteText}>{step.note}</Text>
                             </View>
                           )}
                         </View>
@@ -1294,5 +1301,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: '#374151',
+  },
+  stepNoteContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 8,
+    backgroundColor: '#fffbeb',
+    padding: 12,
+    borderRadius: 6,
+    marginTop: 8,
+    borderWidth: 1,
+    borderColor: '#fcd34d',
+  },
+  stepNoteText: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: '#78350f',
+    flex: 1,
+    lineHeight: 18,
   },
 });
