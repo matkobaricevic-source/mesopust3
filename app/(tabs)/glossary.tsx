@@ -21,7 +21,7 @@ export default function InfoScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <MapPin size={24} color="#dc2626" />
-            <Text style={styles.sectionTitle}>Location</Text>
+            <Text style={styles.sectionTitle}>Lokacija</Text>
           </View>
           <Text style={styles.sectionText}>
             <Text style={styles.bold}>Novi Vinodolski</Text>, a historic town on
@@ -38,7 +38,7 @@ export default function InfoScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <CalendarIcon size={24} color="#dc2626" />
-            <Text style={styles.sectionTitle}>What is Mesopust?</Text>
+            <Text style={styles.sectionTitle}>Što je Mesopust?</Text>
           </View>
           <Text style={styles.sectionText}>
             Mesopust is a traditional carnival celebration that marks the period
@@ -55,7 +55,7 @@ export default function InfoScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Users size={24} color="#dc2626" />
-            <Text style={styles.sectionTitle}>Main Participants</Text>
+            <Text style={styles.sectionTitle}>Glavni sudionici</Text>
           </View>
 
           <View style={styles.participantCard}>
@@ -90,7 +90,7 @@ export default function InfoScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Heart size={24} color="#dc2626" />
-            <Text style={styles.sectionTitle}>Cultural Significance</Text>
+            <Text style={styles.sectionTitle}>Kulturni značaj</Text>
           </View>
           <Text style={styles.sectionText}>
             The Mesopust tradition preserves Croatian cultural heritage and
