@@ -707,15 +707,13 @@ export default function ParticipantDetailScreen() {
                   style={styles.eventCard}
                   onPress={() => handleEventPress(event)}
                   activeOpacity={0.7}>
-                  {event.title !== 'Mlada mesopustova' && (
-                    <Text style={styles.eventTitle}>{event.title}</Text>
-                  )}
-                  {event.title_local && event.title_local !== event.title && event.title !== 'Mlada mesopustova' && (
+                  <Text style={styles.eventTitle}>{event.title}</Text>
+                  {event.title_local && event.title_local !== event.title && (
                     <Text style={styles.eventTitleLocal}>
                       {event.title_local}
                     </Text>
                   )}
-                  {event.role_description && (
+                  {event.role_description && event.title !== 'Mlada mesopustova' && (
                     <Text style={styles.eventRole}>{event.role_description}</Text>
                   )}
                   <Text style={styles.eventDescription} numberOfLines={2}>
