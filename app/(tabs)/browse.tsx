@@ -144,6 +144,8 @@ export default function ParticipantsScreen() {
   function handleHierarchyRolePress(role: HierarchyRole) {
     if (role.related_participant_id) {
       router.push(`/participant/${role.related_participant_id}`);
+    } else if (role.title_croatian === 'Mesopustar') {
+      router.push(`/uniform/${role.id}`);
     } else {
       router.push(`/participant/${role.participant_id}`);
     }
@@ -322,7 +324,7 @@ export default function ParticipantsScreen() {
                                 activeOpacity={0.7}
                               >
                                 <Award size={14} color={theme.colors.primary.main} strokeWidth={2} />
-                                <Text style={styles.formationMemberText}>Prvi Kapetan</Text>
+                                <Text style={styles.formationMemberText}>Drugi Kapetan</Text>
                               </TouchableOpacity>
                               <TouchableOpacity
                                 style={styles.formationMember}
@@ -425,7 +427,7 @@ export default function ParticipantsScreen() {
                                 activeOpacity={0.7}
                               >
                                 <Award size={14} color={theme.colors.primary.main} strokeWidth={2} />
-                                <Text style={styles.formationMemberText}>Drugi Kapetan</Text>
+                                <Text style={styles.formationMemberText}>Prvi Kapetan</Text>
                               </TouchableOpacity>
                               <TouchableOpacity
                                 style={styles.formationMember}
