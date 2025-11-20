@@ -422,7 +422,7 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#4b5563',
+    color: '#636e72',
     marginTop: 16,
   },
   emptySubtext: {
@@ -453,7 +453,7 @@ const styles = StyleSheet.create({
   resultType: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#6b7280',
+    color: '#636e72',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginLeft: 6,

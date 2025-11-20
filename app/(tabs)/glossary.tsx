@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   sectionTextCroatian: {
     fontSize: 15,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 24,
     fontStyle: 'italic',
   },
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   participantTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 8,
   },
   participantText: {
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   },
   participantTextCroatian: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 22,
     fontStyle: 'italic',
   },
@@ -173,12 +173,12 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
     textAlign: 'center',
   },
   footerTextCroatian: {
     fontSize: 15,
-    color: '#6b7280',
+    color: '#636e72',
     marginTop: 4,
     textAlign: 'center',
     fontStyle: 'italic',

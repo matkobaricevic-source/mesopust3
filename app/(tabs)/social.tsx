@@ -383,7 +383,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 32,
     fontFamily: fonts.title,
-    color: '#111827',
+    color: '#2d3436',
   },
   headerLogo: {
     height: 140,
@@ -483,7 +483,7 @@ const styles = StyleSheet.create({
     borderStyle: 'dashed',
   },
   imagePickerText: {
-    color: '#6b7280',
+    color: '#636e72',
     fontSize: 16,
     marginTop: 8,
   },
@@ -580,7 +580,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   noEventText: {
-    color: '#6b7280',
+    color: '#636e72',
     fontSize: 16,
     textAlign: 'center',
     marginTop: 12,

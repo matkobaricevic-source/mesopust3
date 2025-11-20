@@ -222,13 +222,13 @@ export default function InstrumentDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#f8f9fa',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#f8f9fa',
     padding: 20,
   },
   header: {
@@ -238,9 +238,7 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    backgroundColor: '#f8f9fa',
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 16,
@@ -296,10 +294,17 @@ const styles = StyleSheet.create({
     height: 280,
   },
   instrumentInfo: {
-    padding: 20,
+    marginHorizontal: 16,
+    marginTop: 16,
+    padding: 24,
     backgroundColor: '#ffffff',
-    borderBottomWidth: 8,
-    borderBottomColor: '#f3f4f6',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
+    marginBottom: 16,
   },
   topRow: {
     flexDirection: 'row',
@@ -340,7 +345,7 @@ const styles = StyleSheet.create({
   instrumentName: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 8,
   },
   instrumentNameLocal: {
@@ -351,12 +356,12 @@ const styles = StyleSheet.create({
   },
   instrumentDescription: {
     fontSize: 16,
-    color: '#4b5563',
+    color: '#636e72',
     lineHeight: 24,
   },
   instrumentDescriptionLocal: {
     fontSize: 15,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 22,
     marginTop: 8,
     fontStyle: 'italic',
@@ -408,9 +413,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   section: {
-    padding: 20,
-    borderBottomWidth: 8,
-    borderBottomColor: '#f3f4f6',
+    marginHorizontal: 16,
+    marginBottom: 16,
+    padding: 24,
+    backgroundColor: '#ffffff',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -421,7 +433,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
   },
   participantCard: {
     backgroundColor: '#ffffff',
@@ -441,7 +453,7 @@ const styles = StyleSheet.create({
   participantName: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
   },
   participantNameCroatian: {
     fontSize: 15,
@@ -451,7 +463,7 @@ const styles = StyleSheet.create({
   },
   participantDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 20,
   },
 });

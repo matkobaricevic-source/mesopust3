@@ -217,13 +217,13 @@ export default function CategoryDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#f8f9fa',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#f8f9fa',
     padding: 20,
   },
   header: {
@@ -233,9 +233,7 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    backgroundColor: '#f8f9fa',
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 16,
@@ -251,12 +249,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#d1d5db',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
     elevation: 3,
   },
   headerTitle: {
@@ -287,15 +283,22 @@ const styles = StyleSheet.create({
     paddingTop: 100,
   },
   categoryInfo: {
-    padding: 20,
+    marginHorizontal: 16,
+    marginTop: 16,
+    padding: 24,
     backgroundColor: '#ffffff',
-    borderBottomWidth: 8,
-    borderBottomColor: '#f3f4f6',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
+    marginBottom: 16,
   },
   categoryTitle: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 6,
   },
   categoryTitleLocal: {
@@ -306,7 +309,7 @@ const styles = StyleSheet.create({
   },
   categoryDescription: {
     fontSize: 16,
-    color: '#4b5563',
+    color: '#636e72',
     lineHeight: 24,
   },
   emptyContent: {
@@ -344,7 +347,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
   },
   contentTitleLocal: {
     fontSize: 14,
@@ -386,7 +389,7 @@ const styles = StyleSheet.create({
   },
   contextText: {
     fontSize: 14,
-    color: '#4b5563',
+    color: '#636e72',
     lineHeight: 22,
   },
 });

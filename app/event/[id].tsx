@@ -1012,7 +1012,7 @@ const styles = StyleSheet.create({
   infoNoteText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#6b7280',
+    color: '#636e72',
     textAlign: 'center',
     flex: 1,
   },
@@ -1039,7 +1039,7 @@ const styles = StyleSheet.create({
   subEventTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 2,
   },
   subEventTitleLocal: {
@@ -1050,7 +1050,7 @@ const styles = StyleSheet.create({
   },
   subEventDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 20,
   },
   section: {
@@ -1108,7 +1108,7 @@ const styles = StyleSheet.create({
   sameDayText: {
     fontSize: 13,
     fontWeight: '500',
-    color: '#6b7280',
+    color: '#636e72',
     fontStyle: 'italic',
   },
   categoryContent: {
@@ -1230,7 +1230,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
   },
   modalCloseButton: {
     paddingVertical: 6,
@@ -1248,7 +1248,7 @@ const styles = StyleSheet.create({
   modalEventTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 8,
   },
   modalEventTitleLocal: {
@@ -1259,7 +1259,7 @@ const styles = StyleSheet.create({
   },
   modalEventDescription: {
     fontSize: 16,
-    color: '#4b5563',
+    color: '#636e72',
     lineHeight: 26,
     marginBottom: 24,
   },
@@ -1551,7 +1551,7 @@ const styles = StyleSheet.create({
   },
   collapsibleDescription: {
     fontSize: 14,
-    color: '#4b5563',
+    color: '#636e72',
     lineHeight: 22,
     marginBottom: 12,
   },

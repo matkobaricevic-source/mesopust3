@@ -204,11 +204,11 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
   },
   headerSubtitle: {
     fontSize: 16,
-    color: '#6b7280',
+    color: '#636e72',
     marginTop: 4,
   },
   content: {
@@ -241,13 +241,13 @@ const styles = StyleSheet.create({
   instrumentName: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
     marginLeft: 10,
     flex: 1,
   },
   instrumentDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 20,
     marginBottom: 8,
   },

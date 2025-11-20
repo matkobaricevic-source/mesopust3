@@ -203,14 +203,14 @@ export default function ItemDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#f8f9fa',
     width: '100%',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#f8f9fa',
     padding: 20,
   },
   header: {
@@ -220,9 +220,7 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    backgroundColor: '#f8f9fa',
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 16,
@@ -238,12 +236,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#d1d5db',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
     elevation: 3,
   },
   headerTitle: {
@@ -279,10 +275,17 @@ const styles = StyleSheet.create({
     height: 280,
   },
   itemInfo: {
-    padding: 20,
+    marginHorizontal: 16,
+    marginTop: 16,
+    padding: 24,
     backgroundColor: '#ffffff',
-    borderBottomWidth: 8,
-    borderBottomColor: '#f3f4f6',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
+    marginBottom: 16,
   },
   categoryBadge: {
     flexDirection: 'row',
@@ -305,7 +308,7 @@ const styles = StyleSheet.create({
   itemName: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 8,
   },
   itemNameLocal: {
@@ -316,20 +319,27 @@ const styles = StyleSheet.create({
   },
   itemDescription: {
     fontSize: 16,
-    color: '#4b5563',
+    color: '#636e72',
     lineHeight: 24,
   },
   itemDescriptionLocal: {
     fontSize: 15,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 22,
     marginTop: 8,
     fontStyle: 'italic',
   },
   section: {
-    padding: 20,
-    borderBottomWidth: 8,
-    borderBottomColor: '#f3f4f6',
+    marginHorizontal: 16,
+    marginBottom: 16,
+    padding: 24,
+    backgroundColor: '#ffffff',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -340,11 +350,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
   },
   sectionSubtitle: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     marginBottom: 16,
   },
   participantsGrid: {
@@ -372,7 +382,7 @@ const styles = StyleSheet.create({
   participantName: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
   },
   participantNameCroatian: {
     fontSize: 15,
@@ -389,7 +399,7 @@ const styles = StyleSheet.create({
   },
   participantDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 20,
   },
   emptySection: {
@@ -401,7 +411,7 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#4b5563',
+    color: '#636e72',
     marginTop: 16,
   },
   emptySubtext: {

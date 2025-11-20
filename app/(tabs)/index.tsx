@@ -393,7 +393,7 @@ const styles = StyleSheet.create({
   },
   headerSubtitle: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     marginTop: 2,
   },
   loadingText: {
@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 18,
     fontFamily: fonts.semiBold,
-    color: '#4b5563',
+    color: '#636e72',
     marginTop: 16,
   },
   emptySubtext: {

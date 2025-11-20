@@ -862,7 +862,7 @@ const styles = StyleSheet.create({
   },
   participantDescription: {
     fontSize: 16,
-    color: '#4b5563',
+    color: '#636e72',
     lineHeight: 26,
     marginBottom: 8,
   },
@@ -935,7 +935,7 @@ const styles = StyleSheet.create({
   detailLabel: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#6b7280',
+    color: '#636e72',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginBottom: 6,
@@ -952,7 +952,7 @@ const styles = StyleSheet.create({
   },
   detailTextExpanded: {
     fontSize: 14,
-    color: '#4b5563',
+    color: '#636e72',
     lineHeight: 22,
     marginTop: 12,
     paddingTop: 12,
@@ -987,12 +987,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 4,
   },
   sectionSubtitle: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     marginBottom: 16,
   },
   emptyEvents: {
@@ -1024,7 +1024,7 @@ const styles = StyleSheet.create({
   eventTitle: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 2,
   },
   eventTitleLocal: {
@@ -1041,7 +1041,7 @@ const styles = StyleSheet.create({
   },
   eventDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 20,
   },
   hierarchyGrid: {
@@ -1075,7 +1075,7 @@ const styles = StyleSheet.create({
   },
   hierarchyDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 20,
     marginBottom: 8,
   },
@@ -1110,13 +1110,13 @@ const styles = StyleSheet.create({
   instrumentName: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: '#2d3436',
     marginLeft: 10,
     flex: 1,
   },
   instrumentDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     lineHeight: 20,
     marginBottom: 8,
   },
@@ -1164,7 +1164,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
   },
   modalCloseButton: {
     paddingVertical: 6,
@@ -1182,7 +1182,7 @@ const styles = StyleSheet.create({
   modalParticipantName: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#111827',
+    color: '#2d3436',
     marginBottom: 8,
   },
   modalParticipantNameCroatian: {
@@ -1193,7 +1193,7 @@ const styles = StyleSheet.create({
   },
   modalParticipantDescription: {
     fontSize: 16,
-    color: '#4b5563',
+    color: '#636e72',
     lineHeight: 26,
     marginBottom: 24,
   },
@@ -1261,7 +1261,7 @@ const styles = StyleSheet.create({
   },
   formationPersonText: {
     fontSize: 12,
-    color: '#4b5563',
+    color: '#636e72',
     fontWeight: '600',
   },
   formationCircle: {
@@ -1464,7 +1464,7 @@ const styles = StyleSheet.create({
   },
   formationLegendText: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     fontWeight: '500',
   },
   formationPositions: {
@@ -1634,13 +1634,13 @@ const styles = StyleSheet.create({
   roleText: {
     flex: 1,
     fontSize: 15,
-    color: '#111827',
+    color: '#2d3436',
     lineHeight: 22,
     fontWeight: '600',
   },
   roleSubtext: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#636e72',
     fontWeight: '400',
     fontStyle: 'italic',
   },
