@@ -16,9 +16,9 @@ interface GlassTabBarProps {
 const tabs = [
   { name: 'index', icon: CalendarDays, gradient: theme.colors.primary.gradient },
   { name: 'browse', icon: UsersRound, gradient: theme.colors.secondary.gradient },
-  { name: 'social', icon: Camera, gradient: theme.colors.accent.gradient },
-  { name: 'search', icon: Search, gradient: theme.colors.success.gradient },
-  { name: 'glossary', icon: BookText, gradient: theme.colors.primary.gradient },
+  { name: 'social', icon: Camera, gradient: ['#4facfe', '#00f2fe', '#43e97b'] as const },
+  { name: 'search', icon: Search, gradient: theme.colors.accent.gradient },
+  { name: 'glossary', icon: BookText, gradient: theme.colors.success.gradient },
 ];
 
 const TAB_COUNT = 5;
