@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f7',
-    overflow: 'hidden',
   },
   header: {
     paddingTop: 60,

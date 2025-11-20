@@ -166,7 +166,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f7',
-    overflow: 'hidden',
   },
   centerContainer: {
     flex: 1,
