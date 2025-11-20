@@ -392,9 +392,11 @@ export default function ParticipantDetailScreen() {
                     <Shirt size={20} color="#9ca3af" />
                   </View>
                   <View style={styles.detailCardContent}>
-                    <Text style={styles.detailLabel}>
-                      {participant.name === 'Mesopustari' ? 'UNIFORME' : 'NOŠNJE'}
-                    </Text>
+                    {participant.name_croatian !== 'Stari svati' && (
+                      <Text style={styles.detailLabel}>
+                        {participant.name === 'Mesopustari' ? 'UNIFORME' : 'NOŠNJE'}
+                      </Text>
+                    )}
                     <Text style={styles.detailText}>
                       {participant.costume_description}
                     </Text>
