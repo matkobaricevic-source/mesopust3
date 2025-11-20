@@ -17,6 +17,10 @@ import { Event, UserPhoto } from '@/types/database';
 import { Camera, LogIn, LogOut, Send, X, ImageIcon } from 'lucide-react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { fonts } from '@/constants/fonts';
+import { theme } from '@/constants/theme';
+import { ModernButton } from '@/components/ModernButton';
+import { ModernCard } from '@/components/ModernCard';
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
 interface PhotoWithEvent extends UserPhoto {
   events: Event;
@@ -361,7 +365,7 @@ export default function SocialScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: theme.colors.background.secondary,
   },
   centerContainer: {
     flex: 1,

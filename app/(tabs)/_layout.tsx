@@ -3,7 +3,7 @@ import { View, StyleSheet, Dimensions, Platform } from 'react-native';
 // Add GestureHandlerRootView import
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'; 
 import Animated, { useSharedValue, useAnimatedStyle, withSpring, runOnJS } from 'react-native-reanimated';
-import { SwipeableTabBar } from '@/components/SwipeableTabBar';
+import { GlassTabBar } from '@/components/GlassTabBar';
 import IndexScreen from './index';
 import BrowseScreen from './browse';
 import SocialScreen from './social';
@@ -103,7 +103,7 @@ export default function TabLayout() {
             ))}
           </Animated.View>
         </GestureDetector>
-        <SwipeableTabBar
+        <GlassTabBar
           currentIndex={currentPage}
           scrollOffset={scrollOffset}
           onTabPress={handleTabPress}

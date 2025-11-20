@@ -7,26 +7,17 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
-  Dimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Participant } from '@/types/database';
-import { Users, Music, Heart, ChevronRight } from 'lucide-react-native';
+import { Users, Music, Shirt } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
-
-const { width: screenWidth } = Dimensions.get('window');
-const getResponsiveImageHeight = () => {
-  if (screenWidth < 375) return 140;
-  if (screenWidth < 414) return 180;
-  return 200;
-};
-const getResponsivePadding = () => {
-  if (screenWidth < 375) return 12;
-  return 16;
-};
+import { theme } from '@/constants/theme';
+import { ModernCard } from '@/components/ModernCard';
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
 export default function ParticipantsScreen() {
   const [participants, setParticipants] = useState<Participant[]>([]);
@@ -67,8 +58,8 @@ export default function ParticipantsScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#dc2626" />
-        <Text style={styles.loadingText}>Učitavanje sudionika...</Text>
+        <ActivityIndicator size="large" color={theme.colors.primary.main} />
+        <Text style={styles.loadingText}>Učitavanje...</Text>
       </View>
     );
   }
@@ -90,7 +81,7 @@ export default function ParticipantsScreen() {
     <View style={styles.container}>
       {participants.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Users size={64} color="#d1d5db" />
+          <Users size={64} color={theme.colors.neutral[300]} strokeWidth={1.5} />
           <Text style={styles.emptyText}>Nema dostupnih sudionika</Text>
         </View>
       ) : (
@@ -100,61 +91,72 @@ export default function ParticipantsScreen() {
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
-            <View style={styles.header}>
-              <View style={styles.headerContent}>
-                <Text style={styles.headerTitle}>Sudionici mesopusta</Text>
-              </View>
-            </View>
+            <Animated.View entering={FadeIn} style={styles.header}>
+              <LinearGradient
+                colors={theme.colors.secondary.gradient}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.headerGradient}
+              >
+                <Text style={styles.headerTitle}>Sudionici{'\n'}Mesopusta</Text>
+                <Text style={styles.headerSubtitle}>Otkrijte sve uloge i ljude</Text>
+              </LinearGradient>
+            </Animated.View>
           }
-          renderItem={({ item }) => (
-            <View style={styles.participantCardWrapper}>
-              <TouchableOpacity
-                style={styles.participantCard}
-                onPress={() => handleParticipantPress(item)}
-                activeOpacity={0.7}>
-              <View style={styles.imageContainer}>
-                {item.image_url && getImageSource(item.image_url) ? (
-                  <Image
-                    source={getImageSource(item.image_url)!}
-                    style={styles.participantImage}
-                    resizeMode="cover"
+          renderItem={({ item, index }) => (
+            <Animated.View
+              entering={FadeInDown.delay(index * 80).springify()}
+              style={styles.participantCardWrapper}
+            >
+              <ModernCard onPress={() => handleParticipantPress(item)}>
+                <View style={styles.imageContainer}>
+                  {item.image_url && getImageSource(item.image_url) ? (
+                    <Image
+                      source={getImageSource(item.image_url)!}
+                      style={styles.participantImage}
+                      resizeMode="cover"
+                    />
+                  ) : (
+                    <LinearGradient
+                      colors={theme.colors.secondary.gradient}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 1 }}
+                      style={styles.participantImagePlaceholder}
+                    >
+                      <Users size={48} color="rgba(255,255,255,0.8)" strokeWidth={1.5} />
+                    </LinearGradient>
+                  )}
+                  <LinearGradient
+                    colors={['transparent', 'rgba(0,0,0,0.8)']}
+                    style={styles.imageGradient}
                   />
-                ) : (
-                  <View style={styles.participantImagePlaceholder}>
-                    <Users size={48} color="#9ca3af" />
-                  </View>
-                )}
-                <LinearGradient
-                  colors={['transparent', 'rgba(0,0,0,0.7)']}
-                  style={styles.imageGradient}
-                />
-                <View style={styles.overlayContent}>
-                  <Text style={styles.participantNameOverlay}>
-                    {item.name_croatian || item.name}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.participantContent}>
-                <Text style={styles.participantDescription} numberOfLines={3}>
-                  {item.description_croatian || item.description}
-                </Text>
-                {item.song_rhythm && (
-                  <View style={styles.badge}>
-                    <Music size={14} color="#dc2626" />
-                    <Text style={styles.badgeText}>{item.song_rhythm}</Text>
-                  </View>
-                )}
-                {item.costume_description && (
-                  <View style={styles.badge}>
-                    <Heart size={14} color="#dc2626" />
-                    <Text style={styles.badgeText}>
-                      {item.name === 'Mesopustari' ? 'Mesopustarske uniforme' : 'Tradicionalne nošnje'}
+                  <View style={styles.overlayContent}>
+                    <Text style={styles.participantNameOverlay}>
+                      {item.name_croatian || item.name}
                     </Text>
                   </View>
-                )}
-              </View>
-              </TouchableOpacity>
-            </View>
+                </View>
+                <View style={styles.participantContent}>
+                  <Text style={styles.participantDescription} numberOfLines={3}>
+                    {item.description_croatian || item.description}
+                  </Text>
+                  <View style={styles.badgesContainer}>
+                    {item.song_rhythm && (
+                      <View style={styles.badge}>
+                        <Music size={14} color={theme.colors.primary.main} strokeWidth={2} />
+                        <Text style={styles.badgeText}>Glazba</Text>
+                      </View>
+                    )}
+                    {item.costume_description && (
+                      <View style={styles.badge}>
+                        <Shirt size={14} color={theme.colors.primary.main} strokeWidth={2} />
+                        <Text style={styles.badgeText}>Nošnja</Text>
+                      </View>
+                    )}
+                  </View>
+                </View>
+              </ModernCard>
+            </Animated.View>
           )}
         />
       )}
@@ -165,146 +167,140 @@ export default function ParticipantsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f7',
+    backgroundColor: theme.colors.background.secondary,
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
-    padding: 20,
+    backgroundColor: theme.colors.background.secondary,
+    padding: theme.spacing.lg,
   },
   header: {
-    paddingTop: 60,
-    paddingBottom: 20,
-    width: '100%',
-    alignItems: 'center',
+    marginBottom: theme.spacing.lg,
+    overflow: 'hidden',
+    borderRadius: theme.borderRadius.xl,
+    marginHorizontal: theme.spacing.md,
   },
-  headerContent: {
-    width: '100%',
-    maxWidth: 600,
-    paddingHorizontal: 20,
+  headerGradient: {
+    padding: theme.spacing.xl,
+    paddingTop: 80,
+    paddingBottom: theme.spacing.xl,
   },
   headerTitle: {
-    fontSize: 32,
+    ...theme.typography.display,
+    fontSize: 36,
+    color: theme.colors.text.inverse,
     fontFamily: fonts.title,
-    color: '#111827',
+    marginBottom: theme.spacing.sm,
   },
   headerSubtitle: {
-    fontSize: 14,
-    color: '#6b7280',
-    marginTop: 2,
+    ...theme.typography.body1,
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontFamily: fonts.regular,
   },
   loadingText: {
-    marginTop: 16,
-    fontSize: 16,
-    color: '#6b7280',
+    marginTop: theme.spacing.md,
+    ...theme.typography.body1,
+    color: theme.colors.text.secondary,
   },
   errorText: {
-    fontSize: 16,
-    color: '#dc2626',
+    ...theme.typography.body1,
+    color: theme.colors.error.main,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: theme.spacing.lg,
   },
   retryButton: {
-    backgroundColor: '#111827',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 8,
+    backgroundColor: theme.colors.primary.main,
+    paddingHorizontal: theme.spacing.lg,
+    paddingVertical: theme.spacing.md,
+    borderRadius: theme.borderRadius.md,
   },
   retryButtonText: {
-    color: '#ffffff',
-    fontSize: 16,
-    fontWeight: '600',
+    color: theme.colors.text.inverse,
+    ...theme.typography.button,
   },
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: theme.spacing.lg,
   },
   emptyText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#4b5563',
-    marginTop: 16,
+    ...theme.typography.h4,
+    color: theme.colors.text.secondary,
+    marginTop: theme.spacing.md,
   },
   listContent: {
-    paddingHorizontal: getResponsivePadding(),
+    paddingTop: theme.spacing.lg,
     paddingBottom: 120,
   },
   participantCardWrapper: {
-    marginBottom: 24,
-    width: '100%',
-  },
-  participantCard: {
-    backgroundColor: '#ffffff',
-    borderRadius: 20,
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    marginBottom: theme.spacing.lg,
+    paddingHorizontal: theme.spacing.md,
   },
   imageContainer: {
     position: 'relative',
     width: '100%',
+    height: 200,
   },
   participantImage: {
     width: '100%',
-    height: getResponsiveImageHeight(),
+    height: '100%',
+  },
+  participantImagePlaceholder: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imageGradient: {
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
-    height: 120,
+    height: 100,
   },
   overlayContent: {
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
-    padding: 20,
-  },
-  participantImagePlaceholder: {
-    width: '100%',
-    height: 220,
-    backgroundColor: '#1f2937',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  participantContent: {
-    padding: 20,
-    paddingTop: 20,
+    padding: theme.spacing.lg,
   },
   participantNameOverlay: {
-    fontSize: 22,
+    ...theme.typography.h3,
+    color: theme.colors.text.inverse,
     fontFamily: fonts.title,
-    color: '#ffffff',
+  },
+  participantContent: {
+    padding: theme.spacing.lg,
   },
   participantDescription: {
-    fontSize: 15,
-    fontFamily: fonts.regular,
-    color: '#4b5563',
-    lineHeight: 22,
-    marginBottom: 8,
+    ...theme.typography.body1,
+    color: theme.colors.text.secondary,
+    lineHeight: 24,
+    marginBottom: theme.spacing.md,
+  },
+  badgesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: theme.spacing.sm,
   },
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fef2f2',
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
-    marginTop: 8,
-    alignSelf: 'flex-start',
+    backgroundColor: theme.colors.primary.main + '15',
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    borderRadius: theme.borderRadius.full,
     borderWidth: 1,
-    borderColor: '#fecaca',
+    borderColor: theme.colors.primary.light + '30',
+    gap: theme.spacing.xs,
   },
   badgeText: {
-    fontSize: 13,
-    fontFamily: fonts.semiBold,
-    color: '#dc2626',
-    marginLeft: 6,
+    ...theme.typography.caption,
+    fontWeight: '600',
+    color: theme.colors.primary.main,
   },
 });

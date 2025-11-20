@@ -13,21 +13,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Event, Category } from '@/types/database';
-import { Calendar, ChevronDown, ChevronUp } from 'lucide-react-native';
+import { Calendar, ChevronDown } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming, interpolate } from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming, interpolate, FadeIn, FadeInDown } from 'react-native-reanimated';
 import { fonts } from '@/constants/fonts';
+import { theme } from '@/constants/theme';
+import { ModernCard } from '@/components/ModernCard';
+import { BlurView } from 'expo-blur';
 
 const { width: screenWidth } = Dimensions.get('window');
-const getResponsiveImageHeight = () => {
-  if (screenWidth < 375) return 140;
-  if (screenWidth < 414) return 180;
-  return 200;
-};
-const getResponsivePadding = () => {
-  if (screenWidth < 375) return 12;
-  return 16;
-};
+const CARD_PADDING = theme.spacing.md;
 
 interface EventWithCategories extends Event {
   categories?: Category[];
@@ -40,7 +35,8 @@ function AnimatedEventCard({
   onToggle,
   onEventPress,
   onCategoryPress,
-  onSubEventPress
+  onSubEventPress,
+  index
 }: {
   item: EventWithCategories;
   isExpanded: boolean;
@@ -48,6 +44,7 @@ function AnimatedEventCard({
   onEventPress: () => void;
   onCategoryPress: (id: string) => void;
   onSubEventPress: (id: string) => void;
+  index: number;
 }) {
   const animation = useSharedValue(isExpanded ? 1 : 0);
 
@@ -71,88 +68,100 @@ function AnimatedEventCard({
   const hasExpandableContent = hasCategories || hasSubEvents;
 
   return (
-    <View style={[styles.eventCard, isZeca && styles.eventCardZecaInner]}>
-      <TouchableOpacity
-        style={styles.eventCardContent}
-        onPress={onEventPress}
-        activeOpacity={0.8}>
+    <Animated.View
+      entering={FadeInDown.delay(index * 100).springify()}
+      style={styles.eventCardWrapper}
+    >
+      <ModernCard onPress={onEventPress}>
         <View style={styles.imageContainer}>
           {item.image_url && getImageSource(item.image_url) ? (
             <Image
               source={getImageSource(item.image_url)!}
-              style={[styles.eventImage, isZeca && styles.zecaImage]}
+              style={styles.eventImage}
               resizeMode="cover"
             />
           ) : (
-            <View style={[styles.eventImagePlaceholder, isZeca && styles.zecaImagePlaceholder]}>
-              <Calendar size={isZeca ? 32 : 48} color="#9ca3af" />
-            </View>
+            <LinearGradient
+              colors={theme.colors.primary.gradient}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.eventImagePlaceholder}
+            >
+              <Calendar size={48} color="rgba(255,255,255,0.8)" strokeWidth={1.5} />
+            </LinearGradient>
           )}
           <LinearGradient
-            colors={['transparent', 'rgba(0,0,0,0.7)']}
+            colors={['transparent', 'rgba(0,0,0,0.8)']}
             style={styles.imageGradient}
           />
           <View style={styles.overlayContent}>
-            <Text style={[styles.eventTitle, isZeca && styles.zecaTitle]}>
+            {item.day_name && (
+              <View style={styles.dayBadge}>
+                <BlurView intensity={20} tint="dark" style={styles.dayBadgeBlur}>
+                  <Text style={styles.dayBadgeText}>{item.day_name}</Text>
+                </BlurView>
+              </View>
+            )}
+            <Text style={styles.eventTitle}>
               {item.title_local || item.title}
             </Text>
-            {item.day_name && (
-              <Text style={styles.dayName}>{item.day_name}</Text>
-            )}
           </View>
         </View>
+
         <View style={styles.eventContent}>
-          <Text style={[styles.eventDescription, isZeca && styles.zecaDescription]} numberOfLines={isZeca ? 2 : 3}>
+          <Text style={styles.eventDescription} numberOfLines={3}>
             {item.description_croatian || item.description}
           </Text>
         </View>
-      </TouchableOpacity>
 
-      {hasExpandableContent && (
-        <>
-          <TouchableOpacity
-            style={styles.expandButton}
-            onPress={onToggle}
-            activeOpacity={0.7}>
-            <Text style={styles.expandButtonText}>
-              {isExpanded ? 'Sakrij' : hasCategories ? 'Prikaži dane' : 'Prikaži događaje'}
-            </Text>
-            <Animated.View style={chevronAnimatedStyle}>
-              <ChevronDown size={18} color="#6b7280" />
+        {hasExpandableContent && (
+          <>
+            <TouchableOpacity
+              style={styles.expandButton}
+              onPress={onToggle}
+              activeOpacity={0.7}>
+              <Text style={styles.expandButtonText}>
+                {isExpanded ? 'Sakrij detalje' : hasCategories ? 'Prikaži dane' : 'Prikaži događaje'}
+              </Text>
+              <Animated.View style={chevronAnimatedStyle}>
+                <ChevronDown size={18} color={theme.colors.text.secondary} strokeWidth={2} />
+              </Animated.View>
+            </TouchableOpacity>
+
+            <Animated.View style={contentAnimatedStyle}>
+              <View style={styles.categoriesSection}>
+                {hasSubEvents && item.sub_events!
+                  .filter(subEvent => subEvent.title !== 'Zeča')
+                  .map((subEvent) => (
+                    <TouchableOpacity
+                      key={subEvent.id}
+                      style={styles.categoryItem}
+                      onPress={() => onSubEventPress(subEvent.id)}
+                      activeOpacity={0.7}>
+                      <View style={styles.categoryDot} />
+                      <Text style={styles.categoryItemTitle}>
+                        {subEvent.title_local || subEvent.title}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                {hasCategories && item.categories!.map((category) => (
+                  <TouchableOpacity
+                    key={category.id}
+                    style={styles.categoryItem}
+                    onPress={() => onCategoryPress(category.id)}
+                    activeOpacity={0.7}>
+                    <View style={styles.categoryDot} />
+                    <Text style={styles.categoryItemTitle}>
+                      {category.title_local || category.title}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
             </Animated.View>
-          </TouchableOpacity>
-
-          <Animated.View style={[styles.categoriesSection, contentAnimatedStyle]}>
-            {hasSubEvents && item.sub_events!
-              .filter(subEvent => subEvent.title !== 'Zeča')
-              .map((subEvent) => (
-                <TouchableOpacity
-                  key={subEvent.id}
-                  style={styles.categoryItem}
-                  onPress={() => onSubEventPress(subEvent.id)}
-                  activeOpacity={0.7}>
-                  <View style={styles.categoryDot} />
-                  <Text style={styles.categoryItemTitle}>
-                    {subEvent.title_local || subEvent.title}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            {hasCategories && item.categories!.map((category) => (
-              <TouchableOpacity
-                key={category.id}
-                style={styles.categoryItem}
-                onPress={() => onCategoryPress(category.id)}
-                activeOpacity={0.7}>
-                <View style={styles.categoryDot} />
-                <Text style={styles.categoryItemTitle}>
-                  {category.title_local || category.title}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </Animated.View>
-        </>
-      )}
-    </View>
+          </>
+        )}
+      </ModernCard>
+    </Animated.View>
   );
 }
 
@@ -203,7 +212,6 @@ export default function HomeScreen() {
         })
       );
 
-      // Custom sort: Move Zeča right after Napovidanje
       const napovidanjeIndex = eventsWithCategories.findIndex(e =>
         e.title === 'Napovidanje dovčen i dovičan' || e.title === 'Napovidanje dovcen i dovican'
       );
@@ -212,15 +220,10 @@ export default function HomeScreen() {
       let sortedEvents = [...eventsWithCategories];
 
       if (napovidanjeIndex !== -1 && zecaIndex !== -1) {
-        // Remove Zeča from its current position
         const [zeca] = sortedEvents.splice(zecaIndex, 1);
-
-        // Find Napovidanje again (index may have shifted)
         const newNapovidanjeIndex = sortedEvents.findIndex(e =>
           e.title === 'Napovidanje dovčen i dovičan' || e.title === 'Napovidanje dovcen i dovican'
         );
-
-        // Insert Zeča right after Napovidanje
         sortedEvents.splice(newNapovidanjeIndex + 1, 0, zeca);
       }
 
@@ -230,18 +233,6 @@ export default function HomeScreen() {
     } finally {
       setLoading(false);
     }
-  }
-
-  function isEventHappeningToday(event: EventWithCategories): boolean {
-    if (!event.event_date) return false;
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const eventDate = new Date(event.event_date);
-    eventDate.setHours(0, 0, 0, 0);
-
-    return today.getTime() === eventDate.getTime();
   }
 
   function handleEventPress(event: EventWithCategories) {
@@ -271,8 +262,8 @@ export default function HomeScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#dc2626" />
-        <Text style={styles.loadingText}>Učitavanje događaja...</Text>
+        <ActivityIndicator size="large" color={theme.colors.primary.main} />
+        <Text style={styles.loadingText}>Učitavanje...</Text>
       </View>
     );
   }
@@ -292,10 +283,10 @@ export default function HomeScreen() {
     <View style={styles.container}>
       {events.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Calendar size={64} color="#d1d5db" />
+          <Calendar size={64} color={theme.colors.neutral[300]} strokeWidth={1.5} />
           <Text style={styles.emptyText}>Nema zakazanih događaja</Text>
           <Text style={styles.emptySubtext}>
-            Provjerite kasnije za događaje Mesopusta
+            Provjerite kasnije za nove događaje
           </Text>
         </View>
       ) : (
@@ -305,54 +296,31 @@ export default function HomeScreen() {
           contentContainerStyle={styles.listContent}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={
-            <View style={styles.header}>
-              <View style={styles.headerContent}>
-                <Text style={styles.headerTitle}>Novljanski mesopust i Novljansko kolo</Text>
-              </View>
-            </View>
+            <Animated.View entering={FadeIn} style={styles.header}>
+              <LinearGradient
+                colors={[theme.colors.primary.main, theme.colors.primary.dark]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.headerGradient}
+              >
+                <Text style={styles.headerTitle}>Novljanski{'\n'}Mesopust</Text>
+                <Text style={styles.headerSubtitle}>Tradicija koja živi</Text>
+              </LinearGradient>
+            </Animated.View>
           }
-          renderItem={({ item }) => {
+          renderItem={({ item, index }) => {
             const isExpanded = expandedEvents.has(item.id);
-            const isZeca = item.title === 'Zeča';
-            const isHappeningToday = isEventHappeningToday(item);
 
             return (
-              <View style={styles.eventCardWrapper}>
-                {isHappeningToday && (
-                  <View style={[styles.liveBadge, isZeca && styles.liveBadgeOffset]}>
-                    <View style={styles.liveDot} />
-                    <Text style={styles.liveBadgeText}>UŽIVO</Text>
-                  </View>
-                )}
-                <View style={[
-                  isZeca && styles.zecaCard,
-                  isHappeningToday && styles.eventCardLive
-                ]}>
-                  {isZeca && (
-                    <View style={styles.zecaNotice}>
-                      <Text style={styles.zecaNoticeText}>Nije dio narodne pučke drame</Text>
-                    </View>
-                  )}
-                  {item.day_name && isZeca && (
-                    <View style={styles.zecaBadge}>
-                      <Text style={styles.zecaBadgeText}>{item.day_name}</Text>
-                    </View>
-                  )}
-                  {item.day_name && !isZeca && (
-                    <View style={styles.zecaBadge}>
-                      <Text style={styles.zecaBadgeText}>{item.day_name}</Text>
-                    </View>
-                  )}
-                  <AnimatedEventCard
-                    item={item}
-                    isExpanded={isExpanded}
-                    onToggle={() => toggleEventExpand(item.id)}
-                    onEventPress={() => handleEventPress(item)}
-                    onCategoryPress={handleCategoryPress}
-                    onSubEventPress={handleSubEventPress}
-                  />
-                </View>
-              </View>
+              <AnimatedEventCard
+                item={item}
+                isExpanded={isExpanded}
+                onToggle={() => toggleEventExpand(item.id)}
+                onEventPress={() => handleEventPress(item)}
+                onCategoryPress={handleCategoryPress}
+                onSubEventPress={handleSubEventPress}
+                index={index}
+              />
             );
           }}
         />
@@ -364,156 +332,98 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f7',
+    backgroundColor: theme.colors.background.secondary,
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
-    padding: 20,
+    backgroundColor: theme.colors.background.secondary,
+    padding: theme.spacing.lg,
   },
   header: {
-    paddingTop: 60,
-    paddingBottom: 20,
-    width: '100%',
-    alignItems: 'center',
+    marginBottom: theme.spacing.lg,
+    overflow: 'hidden',
+    borderRadius: theme.borderRadius.xl,
+    marginHorizontal: CARD_PADDING,
   },
-  headerContent: {
-    width: '100%',
-    maxWidth: 600,
-    paddingHorizontal: 20,
+  headerGradient: {
+    padding: theme.spacing.xl,
+    paddingTop: 80,
+    paddingBottom: theme.spacing.xl,
   },
   headerTitle: {
-    fontSize: 32,
+    ...theme.typography.display,
+    fontSize: 36,
+    color: theme.colors.text.inverse,
     fontFamily: fonts.title,
-    color: '#111827',
+    marginBottom: theme.spacing.sm,
   },
   headerSubtitle: {
-    fontSize: 14,
-    color: '#6b7280',
-    marginTop: 2,
+    ...theme.typography.body1,
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontFamily: fonts.regular,
   },
   loadingText: {
-    marginTop: 16,
-    fontSize: 16,
-    fontFamily: fonts.medium,
-    color: '#6b7280',
+    marginTop: theme.spacing.md,
+    ...theme.typography.body1,
+    color: theme.colors.text.secondary,
   },
   errorText: {
-    fontSize: 16,
-    color: '#dc2626',
+    ...theme.typography.body1,
+    color: theme.colors.error.main,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: theme.spacing.lg,
   },
   retryButton: {
-    backgroundColor: '#111827',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 8,
+    backgroundColor: theme.colors.primary.main,
+    paddingHorizontal: theme.spacing.lg,
+    paddingVertical: theme.spacing.md,
+    borderRadius: theme.borderRadius.md,
   },
   retryButtonText: {
-    color: '#ffffff',
-    fontSize: 16,
-    fontFamily: fonts.semiBold,
+    color: theme.colors.text.inverse,
+    ...theme.typography.button,
   },
   emptyContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    padding: theme.spacing.lg,
   },
   emptyText: {
-    fontSize: 18,
-    fontFamily: fonts.semiBold,
-    color: '#4b5563',
-    marginTop: 16,
+    ...theme.typography.h4,
+    color: theme.colors.text.secondary,
+    marginTop: theme.spacing.md,
   },
   emptySubtext: {
-    fontSize: 14,
-    fontFamily: fonts.regular,
-    color: '#9ca3af',
-    marginTop: 8,
+    ...theme.typography.body2,
+    color: theme.colors.text.tertiary,
+    marginTop: theme.spacing.sm,
     textAlign: 'center',
   },
   listContent: {
-    paddingHorizontal: getResponsivePadding(),
+    paddingTop: theme.spacing.lg,
     paddingBottom: 120,
   },
   eventCardWrapper: {
-    marginBottom: 24,
-    width: '100%',
-  },
-  eventCard: {
-    backgroundColor: '#ffffff',
-    borderRadius: 20,
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-  },
-  eventCardContent: {
-    width: '100%',
-  },
-  eventCardZecaInner: {
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-  },
-  expandButton: {
-    backgroundColor: '#f9fafb',
-    marginTop: -20,
-    marginHorizontal: 20,
-    marginBottom: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-  },
-  expandButtonText: {
-    fontSize: 14,
-    fontFamily: fonts.medium,
-    color: '#6b7280',
-  },
-  categoriesSection: {
-    backgroundColor: '#f9fafb',
-    marginHorizontal: 20,
-    marginTop: -32,
-    marginBottom: 20,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-    paddingVertical: 8,
-  },
-  categoryItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    gap: 12,
-  },
-  categoryDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#dc2626',
-  },
-  categoryItemTitle: {
-    fontSize: 15,
-    fontFamily: fonts.semiBold,
-    color: '#111827',
-    flex: 1,
+    marginBottom: theme.spacing.lg,
+    paddingHorizontal: CARD_PADDING,
   },
   imageContainer: {
     position: 'relative',
     width: '100%',
+    height: 220,
   },
   eventImage: {
     width: '100%',
-    height: getResponsiveImageHeight(),
+    height: '100%',
+  },
+  eventImagePlaceholder: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imageGradient: {
     position: 'absolute',
@@ -527,121 +437,74 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    padding: 20,
+    padding: theme.spacing.lg,
   },
-  eventImagePlaceholder: {
-    width: '100%',
-    height: 200,
-    backgroundColor: '#000000',
-    justifyContent: 'center',
-    alignItems: 'center',
+  dayBadge: {
+    alignSelf: 'flex-start',
+    marginBottom: theme.spacing.sm,
+    borderRadius: theme.borderRadius.full,
+    overflow: 'hidden',
   },
-  eventContent: {
-    padding: 20,
-    paddingTop: 20,
+  dayBadgeBlur: {
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+  },
+  dayBadgeText: {
+    ...theme.typography.caption,
+    color: theme.colors.text.inverse,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   eventTitle: {
-    fontSize: 22,
+    ...theme.typography.h3,
+    color: theme.colors.text.inverse,
     fontFamily: fonts.title,
-    color: '#ffffff',
   },
-  dayName: {
-    fontSize: 12,
-    fontFamily: fonts.medium,
-    color: 'rgba(255, 255, 255, 0.8)',
-    marginTop: 4,
+  eventContent: {
+    padding: theme.spacing.lg,
   },
   eventDescription: {
-    fontSize: 15,
-    fontFamily: fonts.regular,
-    color: '#4b5563',
-    lineHeight: 22,
+    ...theme.typography.body1,
+    color: theme.colors.text.secondary,
+    lineHeight: 24,
   },
-  zecaBadge: {
-    position: 'absolute',
-    top: 64,
-    left: 16,
-    backgroundColor: '#6b7280',
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
-    zIndex: 10,
-  },
-  zecaBadgeText: {
-    fontSize: 11,
-    fontFamily: fonts.semiBold,
-    color: '#ffffff',
-    letterSpacing: 0.3,
-  },
-  liveBadge: {
-    position: 'absolute',
-    top: 12,
-    right: 16,
-    backgroundColor: '#dc2626',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 20,
-    zIndex: 10,
+  expandButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    justifyContent: 'center',
+    gap: theme.spacing.sm,
+    paddingVertical: theme.spacing.md,
+    marginHorizontal: theme.spacing.lg,
+    marginBottom: theme.spacing.md,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.neutral[200],
   },
-  liveBadgeOffset: {
-    right: 'auto',
-    left: 150,
+  expandButtonText: {
+    ...theme.typography.body2,
+    fontWeight: '600',
+    color: theme.colors.text.secondary,
   },
-  liveDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: '#ffffff',
+  categoriesSection: {
+    paddingHorizontal: theme.spacing.lg,
+    paddingBottom: theme.spacing.md,
   },
-  liveBadgeText: {
-    fontSize: 11,
-    fontFamily: fonts.bold,
-    color: '#ffffff',
-    letterSpacing: 0.5,
+  categoryItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: theme.spacing.sm,
+    gap: theme.spacing.md,
   },
-  eventCardLive: {
-    borderColor: '#dc2626',
-    borderWidth: 2,
+  categoryDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: theme.colors.primary.main,
   },
-  zecaCard: {
-    opacity: 0.95,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-  },
-  zecaTitle: {
-    fontSize: 16,
-    fontFamily: fonts.semiBold,
-  },
-  zecaTitleLocal: {
-    fontSize: 14,
-  },
-  zecaDescription: {
-    fontSize: 13,
-  },
-  zecaImage: {
-    height: 140,
-  },
-  zecaImagePlaceholder: {
-    height: 140,
-  },
-  zecaNotice: {
-    backgroundColor: '#fef3c7',
-    borderWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#fbbf24',
-    borderBottomColor: '#fbbf24',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  zecaNoticeText: {
-    fontSize: 13,
-    fontFamily: fonts.medium,
-    color: '#78350f',
-    textAlign: 'center',
+  categoryItemTitle: {
+    ...theme.typography.body1,
+    fontWeight: '600',
+    color: theme.colors.text.primary,
+    flex: 1,
   },
 });

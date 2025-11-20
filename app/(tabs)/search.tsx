@@ -9,10 +9,14 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Search as SearchIcon, Calendar, Users, Package, BookOpen, Music, Shirt, Crown } from 'lucide-react-native';
 import { fonts } from '@/constants/fonts';
+import { theme } from '@/constants/theme';
+import { ModernCard } from '@/components/ModernCard';
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
 interface SearchResult {
   id: string;
@@ -285,11 +289,17 @@ export default function SearchScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.headerContent}>
+      <Animated.View entering={FadeIn} style={styles.header}>
+        <LinearGradient
+          colors={theme.colors.accent.gradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.headerGradient}
+        >
           <Text style={styles.headerTitle}>Pretraga</Text>
-        </View>
-      </View>
+          <Text style={styles.headerSubtitle}>Pronađite sve što vas zanima</Text>
+        </LinearGradient>
+      </Animated.View>
 
       <View style={styles.searchContainer}>
         <View style={styles.searchInputContainer}>
@@ -366,46 +376,49 @@ export default function SearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: theme.colors.background.secondary,
   },
   header: {
-    backgroundColor: '#f5f5f7',
-    paddingTop: 60,
-    paddingBottom: 20,
-    width: '100%',
-    alignItems: 'center',
+    marginHorizontal: theme.spacing.md,
+    marginTop: theme.spacing.lg,
+    marginBottom: theme.spacing.md,
+    overflow: 'hidden',
+    borderRadius: theme.borderRadius.xl,
   },
-  headerContent: {
-    width: '100%',
-    maxWidth: 600,
-    paddingHorizontal: 20,
+  headerGradient: {
+    padding: theme.spacing.xl,
+    paddingTop: 80,
+    paddingBottom: theme.spacing.xl,
   },
   headerTitle: {
-    fontSize: 32,
+    ...theme.typography.display,
+    fontSize: 36,
+    color: theme.colors.text.inverse,
     fontFamily: fonts.title,
-    color: '#111827',
+    marginBottom: theme.spacing.sm,
+  },
+  headerSubtitle: {
+    ...theme.typography.body1,
+    color: 'rgba(255, 255, 255, 0.9)',
   },
   searchContainer: {
-    padding: 16,
-    backgroundColor: '#ffffff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.md,
   },
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    backgroundColor: theme.colors.background.primary,
+    borderRadius: theme.borderRadius.xl,
+    paddingHorizontal: theme.spacing.lg,
+    paddingVertical: theme.spacing.md,
+    ...theme.shadows.md,
   },
   searchInput: {
     flex: 1,
-    marginLeft: 12,
-    fontSize: 16,
-    color: '#111827',
+    marginLeft: theme.spacing.md,
+    ...theme.typography.body1,
+    color: theme.colors.text.primary,
   },
   loadingContainer: {
     padding: 20,

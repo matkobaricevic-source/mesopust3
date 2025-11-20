@@ -3,64 +3,80 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  Image,
 } from 'react-native';
 import { MapPin, Calendar as CalendarIcon, Heart } from 'lucide-react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { fonts } from '@/constants/fonts';
+import { theme } from '@/constants/theme';
+import { ModernCard } from '@/components/ModernCard';
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
 export default function InfoScreen() {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <View style={styles.header}>
-        <View style={styles.headerContent}>
+      <Animated.View entering={FadeIn} style={styles.header}>
+        <LinearGradient
+          colors={theme.colors.success.gradient || ['#10B981', '#059669']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.headerGradient}
+        >
           <Text style={styles.headerTitle}>Mesopust</Text>
-        </View>
-      </View>
+          <Text style={styles.headerSubtitle}>Kulturna baština</Text>
+        </LinearGradient>
+      </Animated.View>
 
       <View style={styles.content}>
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <MapPin size={24} color="#dc2626" />
-            <Text style={styles.sectionTitle}>Lokacija</Text>
-          </View>
-          <Text style={styles.sectionText}>
-            <Text style={styles.bold}>Novi Vinodolski</Text> je povijesni grad na
-            hrvatskom Jadranu gdje se Mesopust slavi već generacijama, predstavljajući
-            važan dio lokalne kulturne baštine.
-          </Text>
-        </View>
+        <Animated.View entering={FadeInDown.delay(100).springify()}>
+          <ModernCard style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <MapPin size={24} color={theme.colors.primary.main} strokeWidth={2} />
+              <Text style={styles.sectionTitle}>Lokacija</Text>
+            </View>
+            <Text style={styles.sectionText}>
+              <Text style={styles.bold}>Novi Vinodolski</Text> je povijesni grad na
+              hrvatskom Jadranu gdje se Mesopust slavi već generacijama, predstavljajući
+              važan dio lokalne kulturne baštine.
+            </Text>
+          </ModernCard>
+        </Animated.View>
 
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <CalendarIcon size={24} color="#dc2626" />
-            <Text style={styles.sectionTitle}>Što je Mesopust?</Text>
-          </View>
-          <Text style={styles.sectionText}>
-            Mesopust je tradicionalna karnevalska proslava koja obilježava
-            razdoblje prije korizme u kršćanskom kalendaru. Riječ "Mesopust" dolazi
-            od "meso" i "pustiti", što se odnosi na oproštaj od mesa prije posta.
-          </Text>
-        </View>
+        <Animated.View entering={FadeInDown.delay(200).springify()}>
+          <ModernCard style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <CalendarIcon size={24} color={theme.colors.primary.main} strokeWidth={2} />
+              <Text style={styles.sectionTitle}>Što je Mesopust?</Text>
+            </View>
+            <Text style={styles.sectionText}>
+              Mesopust je tradicionalna karnevalska proslava koja obilježava
+              razdoblje prije korizme u kršćanskom kalendaru. Riječ "Mesopust" dolazi
+              od "meso" i "pustiti", što se odnosi na oproštaj od mesa prije posta.
+            </Text>
+          </ModernCard>
+        </Animated.View>
 
+        <Animated.View entering={FadeInDown.delay(300).springify()}>
+          <ModernCard style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Heart size={24} color={theme.colors.primary.main} strokeWidth={2} />
+              <Text style={styles.sectionTitle}>Kulturni značaj</Text>
+            </View>
+            <Text style={styles.sectionText}>
+              Tradicija Mesopusta čuva hrvatsku kulturnu baštinu i okuplja
+              zajednicu. Povezuje mlađe generacije s njihovim precima kroz
+              glazbu, ples i tradicionalne običaje. Slavlje prikazuje regionalni
+              identitet i čuva priče i tradicije Novog Vinodolskog.
+            </Text>
+          </ModernCard>
+        </Animated.View>
 
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Heart size={24} color="#dc2626" />
-            <Text style={styles.sectionTitle}>Kulturni značaj</Text>
-          </View>
-          <Text style={styles.sectionText}>
-            Tradicija Mesopusta čuva hrvatsku kulturnu baštinu i okuplja
-            zajednicu. Povezuje mlađe generacije s njihovim precima kroz
-            glazbu, ples i tradicionalne običaje. Slavlje prikazuje regionalni
-            identitet i čuva priče i tradicije Novog Vinodolskog.
-          </Text>
-        </View>
-
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            Doživite živu tradiciju Mesopusta
-          </Text>
-        </View>
+        <Animated.View entering={FadeInDown.delay(400).springify()}>
+          <ModernCard gradient gradientColors={theme.colors.primary.gradient} style={styles.footer}>
+            <Text style={styles.footerText}>
+              Doživite živu tradiciju Mesopusta
+            </Text>
+          </ModernCard>
+        </Animated.View>
       </View>
     </ScrollView>
   );
@@ -69,117 +85,67 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f7',
+    backgroundColor: theme.colors.background.secondary,
   },
   header: {
-    paddingTop: 60,
-    paddingBottom: 20,
-    width: '100%',
-    alignItems: 'center',
+    marginHorizontal: theme.spacing.md,
+    marginTop: theme.spacing.lg,
+    marginBottom: theme.spacing.lg,
+    overflow: 'hidden',
+    borderRadius: theme.borderRadius.xl,
   },
-  headerContent: {
-    width: '100%',
-    maxWidth: 600,
-    paddingHorizontal: 20,
+  headerGradient: {
+    padding: theme.spacing.xl,
+    paddingTop: 80,
+    paddingBottom: theme.spacing.xl,
   },
   headerTitle: {
-    fontSize: 32,
+    ...theme.typography.display,
+    fontSize: 36,
+    color: theme.colors.text.inverse,
     fontFamily: fonts.title,
-    color: '#111827',
+    marginBottom: theme.spacing.sm,
+  },
+  headerSubtitle: {
+    ...theme.typography.body1,
+    color: 'rgba(255, 255, 255, 0.9)',
   },
   content: {
-    padding: 20,
-    paddingBottom: 100,
+    paddingHorizontal: theme.spacing.md,
+    paddingBottom: 120,
+    gap: theme.spacing.lg,
   },
   section: {
-    marginBottom: 20,
-    backgroundColor: '#ffffff',
-    borderRadius: 20,
-    padding: 24,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    padding: theme.spacing.lg,
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: theme.spacing.md,
+    gap: theme.spacing.md,
   },
   sectionTitle: {
-    fontSize: 22,
+    ...theme.typography.h4,
+    color: theme.colors.text.primary,
     fontWeight: '700',
-    color: '#111827',
-    marginLeft: 12,
   },
   sectionText: {
-    fontSize: 16,
-    color: '#374151',
+    ...theme.typography.body1,
+    color: theme.colors.text.secondary,
     lineHeight: 26,
-    marginBottom: 12,
-  },
-  sectionTextCroatian: {
-    fontSize: 15,
-    color: '#6b7280',
-    lineHeight: 24,
-    fontStyle: 'italic',
   },
   bold: {
     fontWeight: '700',
-    color: '#111827',
-  },
-  participantCard: {
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-  },
-  participantTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#111827',
-    marginBottom: 8,
-  },
-  participantText: {
-    fontSize: 15,
-    color: '#374151',
-    lineHeight: 24,
-    marginBottom: 8,
-  },
-  participantTextCroatian: {
-    fontSize: 14,
-    color: '#6b7280',
-    lineHeight: 22,
-    fontStyle: 'italic',
+    color: theme.colors.text.primary,
   },
   footer: {
-    marginTop: 20,
-    paddingTop: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#e5e7eb',
+    padding: theme.spacing.xl,
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
-    borderRadius: 12,
-    padding: 24,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
   },
   footerText: {
-    fontSize: 16,
+    ...theme.typography.h4,
+    color: theme.colors.text.inverse,
+    textAlign: 'center',
     fontWeight: '600',
-    color: '#111827',
-    textAlign: 'center',
-  },
-  footerTextCroatian: {
-    fontSize: 15,
-    color: '#6b7280',
-    marginTop: 4,
-    textAlign: 'center',
-    fontStyle: 'italic',
   },
 });
