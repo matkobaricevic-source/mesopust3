@@ -234,45 +234,93 @@ export default function ParticipantsScreen() {
                     {isFormationExpanded && (
                       <View style={styles.dropdownContent}>
                         <View style={styles.formationScheme}>
-                          {/* Formation visual representation */}
-                          <View style={styles.formationRow}>
-                            <View style={styles.formationPosition}>
-                              <Crown size={16} color={theme.colors.accent.main} strokeWidth={2} />
-                              <Text style={styles.formationText}>Advitor</Text>
+                          <Text style={styles.formationHeader}>Formacija u Dva Reda</Text>
+
+                          {/* Three columns: Left row, Center, Right row */}
+                          <View style={styles.formationContainer}>
+                            {/* Left Row */}
+                            <View style={styles.formationColumn}>
+                              <Text style={styles.formationColumnTitle}>Lijevi Red</Text>
+                              <View style={styles.formationMember}>
+                                <Award size={14} color={theme.colors.primary.main} strokeWidth={2} />
+                                <Text style={styles.formationMemberText}>Prvi Kapetan</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Vela Sopila</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Vela Trumbeta</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Veli Bubanj</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Srednji Bubanj</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Zvončići</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Triangul</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Kasir</Text>
+                              </View>
+                            </View>
+
+                            {/* Center */}
+                            <View style={styles.formationColumn}>
+                              <Text style={styles.formationColumnTitle}>Sredina</Text>
+                              <View style={[styles.formationMember, styles.formationLeader]}>
+                                <Crown size={16} color={theme.colors.accent.main} strokeWidth={2} />
+                                <Text style={styles.formationLeaderText}>Advitor</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Flag size={14} color={theme.colors.secondary.main} strokeWidth={2} />
+                                <Text style={styles.formationMemberText}>Bandiraš</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Magaziner</Text>
+                              </View>
+                            </View>
+
+                            {/* Right Row */}
+                            <View style={styles.formationColumn}>
+                              <Text style={styles.formationColumnTitle}>Desni Red</Text>
+                              <View style={styles.formationMember}>
+                                <Award size={14} color={theme.colors.primary.main} strokeWidth={2} />
+                                <Text style={styles.formationMemberText}>Drugi Kapetan</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Mala Sopila</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Manja Trumbeta</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Odgovaralica</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Činele</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Mali Bubanj</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Avan</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Kosa</Text>
+                              </View>
+                              <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Kasir</Text>
+                              </View>
                             </View>
                           </View>
-                          <View style={styles.formationRow}>
-                            <View style={styles.formationPosition}>
-                              <Award size={16} color={theme.colors.primary.main} strokeWidth={2} />
-                              <Text style={styles.formationText}>Prvi Kapetan</Text>
-                            </View>
-                            <View style={styles.formationPosition}>
-                              <Award size={16} color={theme.colors.primary.main} strokeWidth={2} />
-                              <Text style={styles.formationText}>Drugi Kapetan</Text>
-                            </View>
-                          </View>
-                          <View style={styles.formationRow}>
-                            <View style={styles.formationPositionSmall}>
-                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
-                            </View>
-                            <View style={styles.formationPositionSmall}>
-                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
-                            </View>
-                            <View style={styles.formationPositionSmall}>
-                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
-                            </View>
-                          </View>
-                          <View style={styles.formationRow}>
-                            <View style={styles.formationPositionSmall}>
-                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
-                            </View>
-                            <View style={styles.formationPositionSmall}>
-                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
-                            </View>
-                            <View style={styles.formationPositionSmall}>
-                              <Text style={styles.formationTextSmall}>Mesopustar</Text>
-                            </View>
-                          </View>
+
+                          <Text style={styles.formationNote}>
+                            * Bandiraš stoji između Advitora i Magazinera od mesopusne nedilje do čiste srede
+                          </Text>
                         </View>
                       </View>
                     )}
@@ -538,41 +586,69 @@ const styles = StyleSheet.create({
   },
   formationScheme: {
     paddingVertical: theme.spacing.md,
-    gap: theme.spacing.lg,
   },
-  formationRow: {
+  formationHeader: {
+    ...theme.typography.body1,
+    fontFamily: fonts.title,
+    fontWeight: '600',
+    color: theme.colors.text.primary,
+    textAlign: 'center',
+    marginBottom: theme.spacing.md,
+  },
+  formationContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: theme.spacing.md,
-  },
-  formationPosition: {
-    alignItems: 'center',
-    backgroundColor: theme.colors.neutral[100],
-    paddingHorizontal: theme.spacing.lg,
-    paddingVertical: theme.spacing.md,
-    borderRadius: theme.borderRadius.md,
-    minWidth: 120,
+    justifyContent: 'space-between',
     gap: theme.spacing.xs,
   },
-  formationPositionSmall: {
-    alignItems: 'center',
-    backgroundColor: theme.colors.neutral[100],
-    paddingHorizontal: theme.spacing.md,
-    paddingVertical: theme.spacing.sm,
-    borderRadius: theme.borderRadius.sm,
-    minWidth: 80,
+  formationColumn: {
+    flex: 1,
+    gap: theme.spacing.xs,
   },
-  formationText: {
-    ...theme.typography.body2,
-    fontWeight: '600',
-    color: theme.colors.text.primary,
-    textAlign: 'center',
-  },
-  formationTextSmall: {
+  formationColumnTitle: {
     ...theme.typography.caption,
-    fontWeight: '600',
+    fontWeight: '700',
+    color: theme.colors.text.secondary,
+    textAlign: 'center',
+    marginBottom: theme.spacing.xs,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  formationMember: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.colors.neutral[100],
+    paddingHorizontal: theme.spacing.xs,
+    paddingVertical: theme.spacing.xs,
+    borderRadius: theme.borderRadius.sm,
+    gap: 4,
+    minHeight: 28,
+  },
+  formationLeader: {
+    backgroundColor: theme.colors.accent.main + '15',
+    borderWidth: 1,
+    borderColor: theme.colors.accent.main + '40',
+  },
+  formationMemberText: {
+    ...theme.typography.caption,
+    fontSize: 10,
     color: theme.colors.text.primary,
     textAlign: 'center',
+  },
+  formationLeaderText: {
+    ...theme.typography.caption,
+    fontSize: 10,
+    fontWeight: '700',
+    color: theme.colors.text.primary,
+    textAlign: 'center',
+  },
+  formationNote: {
+    ...theme.typography.caption,
+    fontSize: 9,
+    color: theme.colors.text.tertiary,
+    fontStyle: 'italic',
+    marginTop: theme.spacing.md,
+    textAlign: 'center',
+    lineHeight: 12,
   },
 });
