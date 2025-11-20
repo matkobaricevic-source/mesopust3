@@ -210,8 +210,31 @@ export default function SearchScreen() {
         });
       }
 
-      allResults.sort((a: any, b: any) => b.relevance - a.relevance);
-      setResults(allResults);
+      // Deduplicate: If both glossary and instrument exist for same term, prefer instrument
+      const deduplicatedResults = new Map();
+
+      allResults.forEach((result: any) => {
+        const normalizedTitle = (result.title_local || result.title).toLowerCase().trim();
+        const existing = deduplicatedResults.get(normalizedTitle);
+
+        if (!existing) {
+          deduplicatedResults.set(normalizedTitle, result);
+        } else {
+          // Prefer instrument over glossary
+          if (result.type === 'instrument' && existing.type === 'glossary') {
+            deduplicatedResults.set(normalizedTitle, result);
+          } else if (result.type === 'glossary' && existing.type === 'instrument') {
+            // Keep existing instrument
+          } else if (result.relevance > existing.relevance) {
+            // For other cases, keep the one with higher relevance
+            deduplicatedResults.set(normalizedTitle, result);
+          }
+        }
+      });
+
+      const finalResults = Array.from(deduplicatedResults.values());
+      finalResults.sort((a: any, b: any) => b.relevance - a.relevance);
+      setResults(finalResults);
     } catch (err) {
       console.error('Search error:', err);
     } finally {
