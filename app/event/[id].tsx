@@ -223,10 +223,7 @@ export default function EventDetailScreen() {
             <View style={styles.eventImagePlaceholder} />
           )}
           <View style={styles.heroContent}>
-            <Text style={styles.eventTitle}>{event.title}</Text>
-            {event.title_local && event.title_local !== event.title && (
-              <Text style={styles.eventTitleLocal}>{event.title_local}</Text>
-            )}
+            <Text style={styles.eventTitle}>{event.title_local || event.title}</Text>
           </View>
         </View>
 
