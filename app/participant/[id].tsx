@@ -750,6 +750,14 @@ export default function ParticipantDetailScreen() {
             <Text style={styles.modalParticipantDescription}>
               {participant.description || participant.description_croatian}
             </Text>
+            {participant.name_croatian === 'Stari svati' && participant.costume_description && (
+              <>
+                <View style={{ height: 16 }} />
+                <Text style={styles.modalParticipantDescription}>
+                  {participant.costume_description}
+                </Text>
+              </>
+            )}
           </ScrollView>
         </View>
       </Modal>
