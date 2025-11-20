@@ -708,7 +708,7 @@ export default function ParticipantDetailScreen() {
                   onPress={() => handleEventPress(event)}
                   activeOpacity={0.7}>
                   <Text style={styles.eventTitle}>{event.title}</Text>
-                  {event.title_local && (
+                  {event.title_local && event.title !== 'Mlada mesopustova' && (
                     <Text style={styles.eventTitleLocal}>
                       {event.title_local}
                     </Text>
