@@ -204,7 +204,7 @@ export default function EventDetailScreen() {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.content} bounces={false}>
+      <ScrollView style={styles.content} bounces={false} showsVerticalScrollIndicator={false}>
         <View style={styles.heroContainer}>
           {event.image_url && getImageSource(event.image_url) ? (
             <>
@@ -668,7 +668,7 @@ export default function EventDetailScreen() {
               <Text style={styles.modalCloseButtonText}>Zatvori</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView style={styles.modalContent}>
+          <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
             <Text style={styles.modalEventTitle}>{event.title}</Text>
             {event.title_local && (
               <Text style={styles.modalEventTitleLocal}>{event.title_local}</Text>
@@ -698,7 +698,7 @@ export default function EventDetailScreen() {
               <Text style={styles.modalCloseButtonText}>Zatvori</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView style={styles.modalContent}>
+          <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
             <Text style={styles.modalEventTitle}>Što je "dešpet"?</Text>
             <Text style={styles.modalEventDescription}>
               U starija vremena, nakon službenog dijela napovidanja, mesopustari su se raspuštali i odlazili na prela – druženja po kućama kod mladih djevojaka. Nakon što bi prela završila, znali su napraviti "dešpet" (šaljivu nepodopštinu) obiteljima koje imaju neudanu djevojku, osobito onima koji im nisu otvorili vrata. Ukrali bi nešto i izložili to na Placu (glavnom gradskom trgu, centru), pazeći da se ukradeno ne uništi. Ujutro bi ukradene stvari bile dostupne za povratak kući. Premda su prela nestala, bar u navedenom obliku („po kućama"), dešpet se i dalje prakticira.
@@ -721,7 +721,7 @@ export default function EventDetailScreen() {
               <Text style={styles.modalCloseButtonText}>Zatvori</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView style={styles.modalContent}>
+          <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
             <Text style={styles.modalEventTitle}>Kršćenje i imenovanje Mesopusta</Text>
             <Text style={styles.modalEventDescription}>
               U proceduri kršćenja, Mesopust dobiva godišnje (aktualno) ime koje izruguje, osuđuje ili ironizira neki mjesni događaj ili pojavu.
@@ -747,7 +747,7 @@ export default function EventDetailScreen() {
               <Text style={styles.modalCloseButtonText}>Zatvori</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView style={styles.modalContent}>
+          <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
             <Text style={styles.modalEventTitle}>Izrada lutke Mesopusta</Text>
             <Text style={styles.modalEventDescription}>
               Od slame se napravi lutka u ljudskoj veličini koja predstavlja Mesopust. Lutka se oblaži u tradicionalnu odjeću: bijele hlače, bijelu košulju i crnu jaketu (sako).

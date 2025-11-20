@@ -121,7 +121,7 @@ export default function ItemDetailScreen() {
         </Text>
       </View>
 
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {item.image_url && getImageSource(item.image_url) && (
           <Image
             source={getImageSource(item.image_url)!}

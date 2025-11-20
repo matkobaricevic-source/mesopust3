@@ -298,7 +298,7 @@ export default function ParticipantDetailScreen() {
         </Text>
       </View>
 
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {participant.image_url && getImageSource(participant.image_url) && (
           <Image
             source={getImageSource(participant.image_url)!}
@@ -738,7 +738,7 @@ export default function ParticipantDetailScreen() {
               <Text style={styles.modalCloseButtonText}>Zatvori</Text>
             </TouchableOpacity>
           </View>
-          <ScrollView style={styles.modalContent}>
+          <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
             <Text style={styles.modalParticipantName}>{participant.name}</Text>
             {participant.name_croatian && (
               <Text style={styles.modalParticipantNameCroatian}>

@@ -114,7 +114,7 @@ export default function UniformDetailScreen() {
         </Text>
       </View>
 
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.roleInfo}>
           <Text style={styles.roleTitleCroatian}>{role.title_croatian}</Text>
           {role.description_croatian && (

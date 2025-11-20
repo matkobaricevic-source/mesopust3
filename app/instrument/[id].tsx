@@ -134,7 +134,7 @@ export default function InstrumentDetailScreen() {
         </Text>
       </View>
 
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {instrument.image_url && getImageSource(instrument.image_url) && (
           <Image
             source={getImageSource(instrument.image_url)!}

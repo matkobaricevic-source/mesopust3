@@ -128,7 +128,7 @@ export default function CategoryDetailScreen() {
         </Text>
       </View>
 
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.categoryInfo}>
           <Text style={styles.categoryTitle}>{category.title}</Text>
           {category.title_local && (
