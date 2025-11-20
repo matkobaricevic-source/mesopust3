@@ -135,68 +135,68 @@ export default function ParticipantsScreen() {
             </LinearGradient>
           </Animated.View>
 
-          {/* Mesopustari Hierarchy Section */}
-          {mesopustari && mesopustariRoles.length > 0 && (
+          {/* Mesopustari with Hierarchy Section */}
+          {mesopustari && (
             <Animated.View
               entering={FadeInDown.delay(100).springify()}
-              style={styles.section}
+              style={styles.participantCardWrapper}
             >
-              <TouchableOpacity
-                onPress={() => handleParticipantPress(mesopustari)}
-                activeOpacity={0.7}
-              >
-                <ModernCard>
-                  <View style={styles.imageContainer}>
-                    {mesopustari.image_url && getImageSource(mesopustari.image_url) ? (
-                      <Image
-                        source={getImageSource(mesopustari.image_url)!}
-                        style={styles.participantImage}
-                        resizeMode="cover"
-                      />
-                    ) : (
-                      <LinearGradient
-                        colors={theme.colors.secondary.gradient}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
-                        style={styles.participantImagePlaceholder}
-                      >
-                        <Users size={48} color="rgba(255,255,255,0.8)" strokeWidth={1.5} />
-                      </LinearGradient>
-                    )}
-                    <LinearGradient
-                      colors={['transparent', 'rgba(0,0,0,0.8)']}
-                      style={styles.imageGradient}
+              <ModernCard onPress={() => handleParticipantPress(mesopustari)}>
+                <View style={styles.imageContainer}>
+                  {mesopustari.image_url && getImageSource(mesopustari.image_url) ? (
+                    <Image
+                      source={getImageSource(mesopustari.image_url)!}
+                      style={styles.participantImage}
+                      resizeMode="cover"
                     />
-                    <View style={styles.overlayContent}>
-                      <Text style={styles.participantNameOverlay}>
-                        {mesopustari.name_croatian || mesopustari.name}
-                      </Text>
-                    </View>
+                  ) : (
+                    <LinearGradient
+                      colors={theme.colors.secondary.gradient}
+                      start={{ x: 0, y: 0 }}
+                      end={{ x: 1, y: 1 }}
+                      style={styles.participantImagePlaceholder}
+                    >
+                      <Users size={48} color="rgba(255,255,255,0.8)" strokeWidth={1.5} />
+                    </LinearGradient>
+                  )}
+                  <LinearGradient
+                    colors={['transparent', 'rgba(0,0,0,0.8)']}
+                    style={styles.imageGradient}
+                  />
+                  <View style={styles.overlayContent}>
+                    <Text style={styles.participantNameOverlay}>
+                      {mesopustari.name_croatian || mesopustari.name}
+                    </Text>
                   </View>
-                </ModernCard>
-              </TouchableOpacity>
+                </View>
+                <View style={styles.participantContent}>
+                  <Text style={styles.participantDescription} numberOfLines={3}>
+                    {mesopustari.description_croatian || mesopustari.description}
+                  </Text>
 
-              <View style={styles.hierarchySection}>
-                <Text style={styles.sectionTitle}>Hijerarhija i Formacija</Text>
-                {mesopustariRoles.map((role, index) => (
-                  <Animated.View
-                    key={role.id}
-                    entering={FadeInDown.delay(200 + index * 60).springify()}
-                    style={styles.roleCard}
-                  >
-                    <View style={styles.roleHeader}>
-                      {getHierarchyIcon(role.display_order)}
-                      <View style={styles.roleTitleContainer}>
-                        <Text style={styles.roleTitle}>{role.title_croatian}</Text>
-                        <Text style={styles.roleSubtitle}>{role.title}</Text>
-                      </View>
+                  {/* Hierarchy and Formation */}
+                  {mesopustariRoles.length > 0 && (
+                    <View style={styles.hierarchyContainer}>
+                      <Text style={styles.hierarchyTitle}>Hijerarhija i Formacija</Text>
+                      {mesopustariRoles.map((role, index) => (
+                        <View key={role.id} style={styles.hierarchyRole}>
+                          <View style={styles.roleIconContainer}>
+                            {getHierarchyIcon(role.display_order)}
+                          </View>
+                          <View style={styles.roleInfo}>
+                            <Text style={styles.hierarchyRoleName}>{role.title_croatian}</Text>
+                            {role.description_croatian && (
+                              <Text style={styles.hierarchyRoleDesc} numberOfLines={2}>
+                                {role.description_croatian}
+                              </Text>
+                            )}
+                          </View>
+                        </View>
+                      ))}
                     </View>
-                    {role.description_croatian && (
-                      <Text style={styles.roleDescription}>{role.description_croatian}</Text>
-                    )}
-                  </Animated.View>
-                ))}
-              </View>
+                  )}
+                </View>
+              </ModernCard>
             </Animated.View>
           )}
 
@@ -402,54 +402,45 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: theme.colors.primary.main,
   },
-  section: {
-    marginBottom: theme.spacing.xl,
-    paddingHorizontal: theme.spacing.md,
-  },
-  sectionTitle: {
-    ...theme.typography.h3,
-    fontFamily: fonts.title,
-    color: theme.colors.text.primary,
-    marginTop: theme.spacing.xl,
-    marginBottom: theme.spacing.lg,
-    paddingHorizontal: theme.spacing.sm,
-  },
-  hierarchySection: {
+  hierarchyContainer: {
     marginTop: theme.spacing.lg,
+    paddingTop: theme.spacing.lg,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.neutral[200],
   },
-  roleCard: {
-    backgroundColor: theme.colors.background.primary,
-    borderRadius: theme.borderRadius.lg,
-    padding: theme.spacing.lg,
-    marginBottom: theme.spacing.md,
-    ...theme.shadows.sm,
-    borderLeftWidth: 3,
-    borderLeftColor: theme.colors.primary.main,
-  },
-  roleHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: theme.spacing.sm,
-    gap: theme.spacing.md,
-  },
-  roleTitleContainer: {
-    flex: 1,
-  },
-  roleTitle: {
+  hierarchyTitle: {
     ...theme.typography.h4,
     fontFamily: fonts.title,
     color: theme.colors.text.primary,
+    marginBottom: theme.spacing.md,
+  },
+  hierarchyRole: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: theme.spacing.md,
+    marginBottom: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+  },
+  roleIconContainer: {
+    width: 32,
+    height: 32,
+    borderRadius: theme.borderRadius.md,
+    backgroundColor: theme.colors.neutral[100],
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  roleInfo: {
+    flex: 1,
+  },
+  hierarchyRoleName: {
+    ...theme.typography.body1,
+    fontWeight: '600',
+    color: theme.colors.text.primary,
     marginBottom: 2,
   },
-  roleSubtitle: {
-    ...theme.typography.caption,
-    color: theme.colors.text.secondary,
-    fontStyle: 'italic',
-  },
-  roleDescription: {
+  hierarchyRoleDesc: {
     ...theme.typography.body2,
     color: theme.colors.text.secondary,
-    lineHeight: 20,
-    marginTop: theme.spacing.sm,
+    lineHeight: 18,
   },
 });
