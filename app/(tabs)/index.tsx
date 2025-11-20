@@ -49,17 +49,11 @@ function AnimatedEventCard({
   onCategoryPress: (id: string) => void;
   onSubEventPress: (id: string) => void;
 }) {
-  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const animation = useSharedValue(isExpanded ? 1 : 0);
-  const descriptionAnimation = useSharedValue(0);
 
   useEffect(() => {
     animation.value = withTiming(isExpanded ? 1 : 0, { duration: 300 });
   }, [isExpanded]);
-
-  useEffect(() => {
-    descriptionAnimation.value = withTiming(isDescriptionExpanded ? 1 : 0, { duration: 300 });
-  }, [isDescriptionExpanded]);
 
   const chevronAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${interpolate(animation.value, [0, 1], [0, 180])}deg` }],
@@ -108,36 +102,9 @@ function AnimatedEventCard({
           </View>
         </View>
         <View style={styles.eventContent}>
-          {isZeca ? (
-            <View>
-              <View style={styles.descriptionContainer}>
-                <Text
-                  style={[styles.eventDescription, styles.zecaDescription]}
-                  numberOfLines={isDescriptionExpanded ? undefined : 4}>
-                  {item.description_croatian || item.description}
-                </Text>
-                {!isDescriptionExpanded && (
-                  <LinearGradient
-                    colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}
-                    style={styles.descriptionFade}
-                    pointerEvents="none"
-                  />
-                )}
-              </View>
-              <TouchableOpacity
-                style={styles.readMoreButton}
-                onPress={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
-                activeOpacity={0.7}>
-                <Text style={styles.readMoreText}>
-                  {isDescriptionExpanded ? 'Prikaži manje' : 'Prikaži više'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <Text style={styles.eventDescription} numberOfLines={3}>
-              {item.description_croatian || item.description}
-            </Text>
-          )}
+          <Text style={[styles.eventDescription, isZeca && styles.zecaDescription]} numberOfLines={isZeca ? 2 : 3}>
+            {item.description_croatian || item.description}
+          </Text>
         </View>
       </TouchableOpacity>
 
@@ -677,24 +644,5 @@ const styles = StyleSheet.create({
     fontFamily: fonts.medium,
     color: '#78350f',
     textAlign: 'center',
-  },
-  descriptionContainer: {
-    position: 'relative',
-  },
-  descriptionFade: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 40,
-  },
-  readMoreButton: {
-    marginTop: 8,
-    alignSelf: 'flex-start',
-  },
-  readMoreText: {
-    fontSize: 14,
-    fontFamily: fonts.semiBold,
-    color: '#dc2626',
   },
 });

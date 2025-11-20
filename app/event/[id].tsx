@@ -52,6 +52,7 @@ export default function EventDetailScreen() {
   const [showMisenjeInfo, setShowMisenjeInfo] = useState(false);
   const [showEventSteps, setShowEventSteps] = useState(false);
   const [showCrossroads, setShowCrossroads] = useState(false);
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const eventStepsAnimation = useSharedValue(0);
   const crossroadsAnimation = useSharedValue(0);
   const router = useRouter();
@@ -229,7 +230,34 @@ export default function EventDetailScreen() {
         </View>
 
         <View style={styles.eventInfo}>
-          <Text style={styles.eventDescription}>{event.description_croatian || event.description}</Text>
+          {event.title === 'Zeča' ? (
+            <View>
+              <View style={styles.descriptionContainer}>
+                <Text
+                  style={styles.eventDescription}
+                  numberOfLines={isDescriptionExpanded ? undefined : 4}>
+                  {event.description_croatian || event.description}
+                </Text>
+                {!isDescriptionExpanded && (
+                  <LinearGradient
+                    colors={['rgba(255,255,255,0)', 'rgba(255,255,255,1)']}
+                    style={styles.descriptionFade}
+                    pointerEvents="none"
+                  />
+                )}
+              </View>
+              <TouchableOpacity
+                style={styles.readMoreButton}
+                onPress={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                activeOpacity={0.7}>
+                <Text style={styles.readMoreText}>
+                  {isDescriptionExpanded ? 'Prikaži manje' : 'Prikaži više'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <Text style={styles.eventDescription}>{event.description_croatian || event.description}</Text>
+          )}
 
           {event.costume_note && (
             <View style={styles.costumeNoteCard}>
@@ -1319,5 +1347,24 @@ const styles = StyleSheet.create({
     color: '#78350f',
     flex: 1,
     lineHeight: 18,
+  },
+  descriptionContainer: {
+    position: 'relative',
+  },
+  descriptionFade: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 50,
+  },
+  readMoreButton: {
+    marginTop: 12,
+    alignSelf: 'flex-start',
+  },
+  readMoreText: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#dc2626',
   },
 });
