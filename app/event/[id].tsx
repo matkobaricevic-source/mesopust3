@@ -53,6 +53,7 @@ export default function EventDetailScreen() {
   const [showEventSteps, setShowEventSteps] = useState(false);
   const [showCrossroads, setShowCrossroads] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [showPozivanjeInfo, setShowPozivanjeInfo] = useState(false);
   const eventStepsAnimation = useSharedValue(0);
   const crossroadsAnimation = useSharedValue(0);
   const router = useRouter();
@@ -267,6 +268,44 @@ export default function EventDetailScreen() {
               </View>
               <Text style={styles.costumeNoteDescription}>Mesopustari su obučeni u civilnu odjeću</Text>
             </View>
+          )}
+
+          {event.title === 'Zeča' && (
+            <TouchableOpacity
+              style={styles.collapsibleCard}
+              onPress={() => setShowPozivanjeInfo(!showPozivanjeInfo)}
+              activeOpacity={0.7}>
+              <View style={styles.collapsibleHeader}>
+                <View style={styles.collapsibleTitleContainer}>
+                  <Info size={20} color="#dc2626" />
+                  <Text style={styles.collapsibleTitle}>IZVEDBA POZIVANJA NA ZEČU</Text>
+                </View>
+                {showPozivanjeInfo ? (
+                  <ChevronUp size={20} color="#6b7280" />
+                ) : (
+                  <ChevronDown size={20} color="#6b7280" />
+                )}
+              </View>
+              {showPozivanjeInfo && (
+                <View style={styles.collapsibleContent}>
+                  <Text style={styles.collapsibleQuote}>
+                    „Spravljajte se spravljajte, vesla su na barki-i-i-i!"
+                  </Text>
+                  <Text style={styles.collapsibleQuote}>
+                    „ Gremo na Zeču pobirat datul-e-e-e-e!"
+                  </Text>
+                  <Text style={styles.collapsibleText}>
+                    Opis simbolike i značenja pozivanja na Zeču zabilježen je u knjizi „Narodno kolo i mesopusni običaji" autora Srećka Kabalina:
+                  </Text>
+                  <Text style={styles.collapsibleDescription}>
+                    "Riječ „ZEČA" izmijenjeno je ime za pusti i nenastanjeni otok ZEC koji se nalazi u Povelebitskom kanalu, u trokutu između Novog Vinodolskog, Senja i Baške na otoku Krku. Obzirom da na Zecu žive samo galebovi i gušterice, smatra se da u ovom pozivu kulminira mesopusna lakrdija oko mesopusne ženidbe udovaca i udovica, kada ih upućuju upravo tamo na svadbeno putovanje i po datule.
+                  </Text>
+                  <Text style={styles.collapsibleDescription}>
+                    Simbolike radi uobičajeno je da se mlađe snahe, koje imaju smisla za humor i maškare, obuku u „kotige"-dugačko žensko krilo postavljeno janjećom kožom-i takav prsluk, na leđima užem oprte slamnice, pokrivače i jastuke, kao da se spremaju na putovanje. U ruci običavaju nositi petrolejsku lampu (fenjer), često sa crveno obojenim staklom te skupa sa mesopustarima obilaze gradom pozivajući „na Zeču"."
+                  </Text>
+                </View>
+              )}
+            </TouchableOpacity>
           )}
 
           {event.id === '4bacfe02-bdda-4bdf-8f4d-c589647fb0c3' && (
@@ -1407,6 +1446,59 @@ const styles = StyleSheet.create({
   criticalNoteText: {
     fontSize: 14,
     color: '#991b1b',
+    lineHeight: 22,
+    marginBottom: 12,
+  },
+  collapsibleCard: {
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 16,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
+  collapsibleHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  collapsibleTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    flex: 1,
+  },
+  collapsibleTitle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#dc2626',
+    letterSpacing: 0.3,
+    flex: 1,
+  },
+  collapsibleContent: {
+    marginTop: 16,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#e5e7eb',
+  },
+  collapsibleQuote: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#dc2626',
+    fontStyle: 'italic',
+    marginBottom: 12,
+    lineHeight: 24,
+  },
+  collapsibleText: {
+    fontSize: 14,
+    color: '#374151',
+    lineHeight: 22,
+    marginBottom: 12,
+    fontWeight: '600',
+  },
+  collapsibleDescription: {
+    fontSize: 14,
+    color: '#4b5563',
     lineHeight: 22,
     marginBottom: 12,
   },
