@@ -246,6 +246,9 @@ export default function ParticipantsScreen() {
                                 <Text style={styles.formationMemberText}>Prvi Kapetan</Text>
                               </View>
                               <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Kasir</Text>
+                              </View>
+                              <View style={styles.formationMember}>
                                 <Text style={styles.formationMemberText}>Vela Sopila</Text>
                               </View>
                               <View style={styles.formationMember}>
@@ -266,14 +269,13 @@ export default function ParticipantsScreen() {
                               <View style={styles.formationMember}>
                                 <Text style={styles.formationMemberText}>Kosa</Text>
                               </View>
-                              <View style={styles.formationMember}>
-                                <Text style={styles.formationMemberText}>Kasir</Text>
-                              </View>
                             </View>
 
                             {/* Center */}
                             <View style={styles.formationColumn}>
                               <Text style={styles.formationColumnTitle}>Sredina</Text>
+                              <View style={styles.formationSpacer} />
+                              <View style={styles.formationSpacer} />
                               <View style={[styles.formationMember, styles.formationLeader]}>
                                 <Crown size={16} color={theme.colors.accent.main} strokeWidth={2} />
                                 <Text style={styles.formationLeaderText}>Advitor</Text>
@@ -299,6 +301,9 @@ export default function ParticipantsScreen() {
                                 <Text style={styles.formationMemberText}>Drugi Kapetan</Text>
                               </View>
                               <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Kasir</Text>
+                              </View>
+                              <View style={styles.formationMember}>
                                 <Text style={styles.formationMemberText}>Mala Sopila</Text>
                               </View>
                               <View style={styles.formationMember}>
@@ -315,9 +320,6 @@ export default function ParticipantsScreen() {
                               </View>
                               <View style={styles.formationMember}>
                                 <Text style={styles.formationMemberText}>Avan</Text>
-                              </View>
-                              <View style={styles.formationMember}>
-                                <Text style={styles.formationMemberText}>Kasir</Text>
                               </View>
                             </View>
                           </View>
