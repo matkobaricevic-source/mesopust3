@@ -71,7 +71,7 @@ function AnimatedEventCard({
   const hasExpandableContent = hasCategories || hasSubEvents;
 
   return (
-    <View style={styles.eventCard}>
+    <View style={[styles.eventCard, isZeca && styles.eventCardZecaInner]}>
       <TouchableOpacity
         style={styles.eventCardContent}
         onPress={onEventPress}
@@ -433,6 +433,10 @@ const styles = StyleSheet.create({
   },
   eventCardContent: {
     width: '100%',
+  },
+  eventCardZecaInner: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
   },
   expandButton: {
     backgroundColor: '#f9fafb',
