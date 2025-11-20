@@ -24,14 +24,9 @@ export default function InfoScreen() {
             <Text style={styles.sectionTitle}>Lokacija</Text>
           </View>
           <Text style={styles.sectionText}>
-            <Text style={styles.bold}>Novi Vinodolski</Text>, a historic town on
-            the Croatian Adriatic coast. The Mesopust tradition has been
-            celebrated here for generations, representing an important part of
-            the local cultural heritage.
-          </Text>
-          <Text style={styles.sectionTextCroatian}>
-            Novi Vinodolski je povijesni grad na hrvatskom Jadranu gdje se
-            Mesopust slavi već generacijama.
+            <Text style={styles.bold}>Novi Vinodolski</Text> je povijesni grad na
+            hrvatskom Jadranu gdje se Mesopust slavi već generacijama, predstavljajući
+            važan dio lokalne kulturne baštine.
           </Text>
         </View>
 
@@ -41,14 +36,9 @@ export default function InfoScreen() {
             <Text style={styles.sectionTitle}>Što je Mesopust?</Text>
           </View>
           <Text style={styles.sectionText}>
-            Mesopust is a traditional carnival celebration that marks the period
-            before Lent in the Christian calendar. The word "Mesopust" comes
-            from "meso" (meat) and "pustiti" (to abstain), referring to the
-            farewell to meat before the fasting period.
-          </Text>
-          <Text style={styles.sectionTextCroatian}>
             Mesopust je tradicionalna karnevalska proslava koja obilježava
-            razdoblje prije korizme u kršćanskom kalendaru.
+            razdoblje prije korizme u kršćanskom kalendaru. Riječ "Mesopust" dolazi
+            od "meso" i "pustiti", što se odnosi na oproštaj od mesa prije posta.
           </Text>
         </View>
 
@@ -61,28 +51,18 @@ export default function InfoScreen() {
           <View style={styles.participantCard}>
             <Text style={styles.participantTitle}>Mesopustari</Text>
             <Text style={styles.participantText}>
-              A group of men who play traditional instruments and perform to the
-              rhythm of "Još Hrvatska Ni Propala" (Croatia Has Not Yet Fallen).
-              They wear traditional Croatian folk attire and lead the Mesopust
-              celebrations with their energetic music.
-            </Text>
-            <Text style={styles.participantTextCroatian}>
-              Muška skupina koja svira tradicionalne instrumente i izvodi
-              Glazba koju sviraju mesopustari po pjesmi Još Hrvatska ni propala.
+              Muška skupina koja svira tradicionalne instrumente i izvodi glazbu
+              po pjesmi "Još Hrvatska ni propala". Nose tradicijsku hrvatsku narodnu
+              nošnju i predvode mesopusna slavlja svojom energičnom glazbom.
             </Text>
           </View>
 
           <View style={styles.participantCard}>
             <Text style={styles.participantTitle}>Novljansko Kolo</Text>
             <Text style={styles.participantText}>
-              Traditional folk dancers wearing beautiful Croatian national
-              costumes. The kolo is a circle dance that symbolizes unity and
-              community, featuring intricate steps and choreography passed down
-              through generations.
-            </Text>
-            <Text style={styles.participantTextCroatian}>
               Tradicionalni narodni plesači u prekrasnim hrvatskim narodnim
-              nošnjama. Kolo je kružni ples koji simbolizira jedinstvo zajednice.
+              nošnjama. Kolo je kružni ples koji simbolizira jedinstvo zajednice,
+              sa zamršenim koracima i koreografijom koja se prenosi kroz generacije.
             </Text>
           </View>
         </View>
@@ -93,24 +73,15 @@ export default function InfoScreen() {
             <Text style={styles.sectionTitle}>Kulturni značaj</Text>
           </View>
           <Text style={styles.sectionText}>
-            The Mesopust tradition preserves Croatian cultural heritage and
-            brings the community together. It connects younger generations with
-            their ancestors through music, dance, and traditional customs. The
-            celebration showcases regional identity and keeps alive the stories
-            and traditions of Novi Vinodolski.
-          </Text>
-          <Text style={styles.sectionTextCroatian}>
             Tradicija Mesopusta čuva hrvatsku kulturnu baštinu i okuplja
             zajednicu. Povezuje mlađe generacije s njihovim precima kroz
-            glazbu, ples i tradicionalne običaje.
+            glazbu, ples i tradicionalne običaje. Slavlje prikazuje regionalni
+            identitet i čuva priče i tradicije Novog Vinodolskog.
           </Text>
         </View>
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            Experience the living tradition of Mesopust
-          </Text>
-          <Text style={styles.footerTextCroatian}>
             Doživite živu tradiciju Mesopusta
           </Text>
         </View>
