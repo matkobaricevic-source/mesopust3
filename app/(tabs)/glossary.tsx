@@ -20,7 +20,7 @@ export default function InfoScreen() {
       <View style={styles.content}>
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MapPin size={24} color="#dc2626" />
+            <MapPin size={24} color="#a855f7" />
             <Text style={styles.sectionTitle}>Lokacija</Text>
           </View>
           <Text style={styles.sectionText}>
@@ -32,7 +32,7 @@ export default function InfoScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <CalendarIcon size={24} color="#dc2626" />
+            <CalendarIcon size={24} color="#a855f7" />
             <Text style={styles.sectionTitle}>Što je Mesopust?</Text>
           </View>
           <Text style={styles.sectionText}>
@@ -45,7 +45,7 @@ export default function InfoScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Heart size={24} color="#dc2626" />
+            <Heart size={24} color="#a855f7" />
             <Text style={styles.sectionTitle}>Kulturni značaj</Text>
           </View>
           <Text style={styles.sectionText}>
@@ -69,7 +69,7 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f7',
+    backgroundColor: '#faf5ff',
   },
   header: {
     paddingTop: 60,
@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 32,
     fontFamily: fonts.title,
-    color: '#111827',
+    color: '#7c3aed',
+    textAlign: 'center',
   },
   content: {
     padding: 20,
@@ -94,10 +95,14 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
     backgroundColor: '#ffffff',
-    borderRadius: 20,
+    borderRadius: 24,
     padding: 24,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderWidth: 0,
+    shadowColor: '#7c3aed',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 6,
   },
   sectionHeader: {
     flexDirection: 'row',

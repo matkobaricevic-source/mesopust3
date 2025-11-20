@@ -273,14 +273,14 @@ export default function SearchScreen() {
   }
 
   function getResultIcon(type: string) {
-    if (type === 'event') return <Calendar size={18} color="#dc2626" />;
-    if (type === 'participant') return <Users size={18} color="#dc2626" />;
-    if (type === 'item') return <Package size={18} color="#dc2626" />;
-    if (type === 'glossary') return <BookOpen size={18} color="#dc2626" />;
-    if (type === 'instrument') return <Music size={18} color="#dc2626" />;
-    if (type === 'uniform') return <Shirt size={18} color="#dc2626" />;
-    if (type === 'role') return <Crown size={18} color="#dc2626" />;
-    return <Package size={18} color="#dc2626" />;
+    if (type === 'event') return <Calendar size={18} color="#a855f7" />;
+    if (type === 'participant') return <Users size={18} color="#a855f7" />;
+    if (type === 'item') return <Package size={18} color="#a855f7" />;
+    if (type === 'glossary') return <BookOpen size={18} color="#a855f7" />;
+    if (type === 'instrument') return <Music size={18} color="#a855f7" />;
+    if (type === 'uniform') return <Shirt size={18} color="#a855f7" />;
+    if (type === 'role') return <Crown size={18} color="#a855f7" />;
+    return <Package size={18} color="#a855f7" />;
   }
 
   return (
@@ -307,7 +307,7 @@ export default function SearchScreen() {
 
       {loading && (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="small" color="#dc2626" />
+          <ActivityIndicator size="small" color="#a855f7" />
         </View>
       )}
 
@@ -366,10 +366,10 @@ export default function SearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#faf5ff',
   },
   header: {
-    backgroundColor: '#f5f5f7',
+    backgroundColor: '#faf5ff',
     paddingTop: 60,
     paddingBottom: 20,
     width: '100%',
@@ -383,23 +383,28 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 32,
     fontFamily: fonts.title,
-    color: '#111827',
+    color: '#7c3aed',
+    textAlign: 'center',
   },
   searchContainer: {
     padding: 16,
-    backgroundColor: '#ffffff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    backgroundColor: '#faf5ff',
+    borderBottomWidth: 0,
   },
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    backgroundColor: '#ffffff',
+    borderRadius: 24,
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    borderWidth: 2,
+    borderColor: '#e9d5ff',
+    shadowColor: '#7c3aed',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
   },
   searchInput: {
     flex: 1,
@@ -434,16 +439,15 @@ const styles = StyleSheet.create({
   },
   resultCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 12,
-    padding: 16,
+    borderRadius: 16,
+    padding: 18,
     marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+    shadowColor: '#7c3aed',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    elevation: 4,
+    borderWidth: 0,
   },
   resultHeader: {
     flexDirection: 'row',
@@ -467,7 +471,7 @@ const styles = StyleSheet.create({
   resultTitleLocal: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#dc2626',
+    color: '#a855f7',
     marginBottom: 8,
   },
   resultDescription: {
