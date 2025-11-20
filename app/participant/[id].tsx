@@ -231,7 +231,7 @@ export default function ParticipantDetailScreen() {
             <Animated.View entering={FadeInDown.delay(500).springify()}>
               <View style={styles.sectionHeader}>
                 <Crown size={24} color={theme.colors.primary.main} strokeWidth={2} />
-                <Text style={styles.sectionTitle}>Uloge ({hierarchyRoles.length})</Text>
+                <Text style={styles.sectionTitle}>Uloge u hijerarhiji ({hierarchyRoles.length})</Text>
               </View>
               {hierarchyRoles.map((role, index) => (
                 <Animated.View
@@ -239,13 +239,20 @@ export default function ParticipantDetailScreen() {
                   entering={FadeInDown.delay(500 + index * 50).springify()}
                   style={styles.cardWrapper}
                 >
-                  <ModernCard>
+                  <ModernCard
+                    onPress={role.related_participant_id ? () => router.push(`/participant/${role.related_participant_id}`) : undefined}
+                  >
                     <View style={styles.roleCard}>
-                      <Text style={styles.roleTitle}>
-                        {role.title_croatian || role.title}
-                      </Text>
-                      {role.description_croatian && (
-                        <Text style={styles.roleDescription}>{role.description_croatian}</Text>
+                      <View style={styles.roleCardContent}>
+                        <Text style={styles.roleTitle}>
+                          {role.title_croatian || role.title}
+                        </Text>
+                        {role.description_croatian && (
+                          <Text style={styles.roleDescription}>{role.description_croatian}</Text>
+                        )}
+                      </View>
+                      {role.related_participant_id && (
+                        <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
                       )}
                     </View>
                   </ModernCard>
@@ -432,7 +439,13 @@ const styles = StyleSheet.create({
     color: theme.colors.text.secondary,
   },
   roleCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.md,
     padding: theme.spacing.lg,
+  },
+  roleCardContent: {
+    flex: 1,
   },
   roleTitle: {
     ...theme.typography.body1,

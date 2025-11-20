@@ -83,6 +83,7 @@ export interface HierarchyRole {
   title_croatian: string;
   description: string;
   description_croatian: string;
+  related_participant_id: string | null;
   display_order: number;
   created_at: string;
 }
