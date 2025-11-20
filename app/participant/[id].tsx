@@ -741,7 +741,6 @@ export default function ParticipantDetailScreen() {
             </TouchableOpacity>
           </View>
           <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
-            <Text style={styles.modalParticipantName}>{participant.name_croatian || participant.name}</Text>
             <Text style={styles.modalParticipantDescription}>
               {participant.description_croatian || participant.description}
             </Text>
