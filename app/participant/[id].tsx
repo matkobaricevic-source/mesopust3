@@ -713,9 +713,9 @@ export default function ParticipantDetailScreen() {
                       {event.title_local}
                     </Text>
                   )}
-                  {event.role_description && event.role_description !== event.title && event.title !== 'Mlada mesopustova' && (
+                  {/* Temporarily hidden: {event.role_description && event.role_description !== event.title && event.title !== 'Mlada mesopustova' && (
                     <Text style={styles.eventRole}>{event.role_description}</Text>
-                  )}
+                  )} */}
                   <Text style={styles.eventDescription} numberOfLines={2}>
                     {event.description_croatian || event.description}
                   </Text>
