@@ -308,10 +308,6 @@ export default function ParticipantDetailScreen() {
         )}
 
         <View style={styles.participantInfo}>
-          <Text style={styles.participantNameCroatian}>
-            {participant.name_croatian}
-          </Text>
-
           <View style={styles.darkContainer}>
             <Text style={styles.participantDescriptionCroatian}>
               {participant.description_croatian}
