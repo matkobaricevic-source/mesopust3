@@ -33,6 +33,8 @@ export default function TabLayout() {
   };
 
   const panGesture = Gesture.Pan()
+    .activeOffsetX([-10, 10])
+    .failOffsetY([-10, 10])
     .onStart(() => {
       startX.value = translateX.value;
     })
@@ -124,6 +126,5 @@ const styles = StyleSheet.create({
   page: {
     width,
     flex: 1,
-    overflow: 'hidden',
   },
 });
