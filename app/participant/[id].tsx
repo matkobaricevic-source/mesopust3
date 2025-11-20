@@ -748,7 +748,7 @@ export default function ParticipantDetailScreen() {
               </Text>
             )}
             <Text style={styles.modalParticipantDescription}>
-              {participant.description || participant.description_croatian}
+              {participant.description_croatian || participant.description}
             </Text>
             {participant.name_croatian === 'Stari svati' && participant.costume_description && (
               <>
