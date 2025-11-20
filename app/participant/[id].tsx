@@ -483,13 +483,6 @@ export default function ParticipantDetailScreen() {
                     <Crown size={20} color="#f59e0b" />
                   </TouchableOpacity>
                   <View style={styles.formationSpacer} />
-                  <TouchableOpacity style={styles.formationCircleSupport} onPress={() => navigateToRole('magaziner')} activeOpacity={0.7}>
-                    <PackageOpen size={16} color="#059669" />
-                  </TouchableOpacity>
-                  <View style={styles.formationSpacer} />
-                  <View style={styles.formationSpacer} />
-                  <View style={styles.formationSpacer} />
-                  <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
                   <View style={styles.formationSpacer} />
@@ -499,6 +492,12 @@ export default function ParticipantDetailScreen() {
                   <View style={styles.formationSpacer} />
                   <TouchableOpacity style={styles.formationCircleFlag} onPress={() => navigateToInstrument('bandira')} activeOpacity={0.7}>
                     <Flag size={18} color="#15803d" />
+                  </TouchableOpacity>
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <TouchableOpacity style={styles.formationCircleSupport} onPress={() => navigateToRole('magaziner')} activeOpacity={0.7}>
+                    <PackageOpen size={16} color="#059669" />
                   </TouchableOpacity>
                 </View>
 
