@@ -297,11 +297,6 @@ export default function HomeScreen() {
 
             return (
               <View style={styles.eventCardWrapper}>
-                {item.day_name && (
-                  <View style={styles.zecaBadge}>
-                    <Text style={styles.zecaBadgeText}>{item.day_name}</Text>
-                  </View>
-                )}
                 {isHappeningToday && (
                   <View style={[styles.liveBadge, isZeca && styles.liveBadgeOffset]}>
                     <View style={styles.liveDot} />
@@ -315,6 +310,16 @@ export default function HomeScreen() {
                   {isZeca && (
                     <View style={styles.zecaNotice}>
                       <Text style={styles.zecaNoticeText}>Nije dio narodne pučke drame</Text>
+                    </View>
+                  )}
+                  {item.day_name && isZeca && (
+                    <View style={styles.zecaBadge}>
+                      <Text style={styles.zecaBadgeText}>{item.day_name}</Text>
+                    </View>
+                  )}
+                  {item.day_name && !isZeca && (
+                    <View style={styles.zecaBadge}>
+                      <Text style={styles.zecaBadgeText}>{item.day_name}</Text>
                     </View>
                   )}
                   <AnimatedEventCard
@@ -426,6 +431,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e5e7eb',
   },
+  eventCardContent: {
+    width: '100%',
+  },
   expandButton: {
     backgroundColor: '#f9fafb',
     marginTop: -20,
@@ -527,7 +535,7 @@ const styles = StyleSheet.create({
   },
   zecaBadge: {
     position: 'absolute',
-    top: 12,
+    top: 64,
     left: 16,
     backgroundColor: '#6b7280',
     paddingHorizontal: 14,
@@ -576,6 +584,8 @@ const styles = StyleSheet.create({
   },
   zecaCard: {
     opacity: 0.95,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
   },
   zecaTitle: {
     fontSize: 16,
