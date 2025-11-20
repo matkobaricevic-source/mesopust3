@@ -580,20 +580,25 @@ export default function EventDetailScreen() {
           </View>
         )}
 
-        {(categories.length > 0 || subEvents.length > 0) && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Događaji</Text>
-            <Text style={styles.sectionSubtitle}>
-              {(() => {
-                const filteredCount = categories.filter(c => c.title_local !== 'Napovidanje (izvedba)' && c.title_local !== 'Treto napovidanje - izvedba').length + subEvents.length;
-                return `${filteredCount} ${filteredCount === 1 ? 'događaj' : 'događaja'}`;
-              })()}
-            </Text>
+        {(() => {
+          const filteredCategories = categories.filter(c => c.title_local !== 'Napovidanje (izvedba)' && c.title_local !== 'Treto napovidanje - izvedba');
+          const hasEvents = filteredCategories.length > 0 || subEvents.length > 0;
 
-            <View style={styles.categoriesGrid}>
-              {(() => {
-                const allItems = [...categories.filter(c => c.title_local !== 'Napovidanje (izvedba)' && c.title_local !== 'Treto napovidanje - izvedba').map(c => ({ ...c, type: 'category' })), ...subEvents.map(e => ({ ...e, type: 'event' }))]
-                  .sort((a, b) => a.display_order - b.display_order);
+          if (!hasEvents) return null;
+
+          const filteredCount = filteredCategories.length + subEvents.length;
+
+          return (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Događaji</Text>
+              <Text style={styles.sectionSubtitle}>
+                {filteredCount} {filteredCount === 1 ? 'događaj' : 'događaja'}
+              </Text>
+
+              <View style={styles.categoriesGrid}>
+                {(() => {
+                  const allItems = [...filteredCategories.map(c => ({ ...c, type: 'category' })), ...subEvents.map(e => ({ ...e, type: 'event' }))]
+                    .sort((a, b) => a.display_order - b.display_order);
 
                 const zecaIndex = allItems.findIndex(item => item.title === 'Zeča');
                 const tretiCetvrtakIndex = allItems.findIndex(item => item.title === 'Treti četrtak - Poberuhi');
@@ -643,7 +648,8 @@ export default function EventDetailScreen() {
               })()}
             </View>
           </View>
-        )}
+          );
+        })()}
 
         {participants.length > 0 && (
           <View style={styles.section}>
