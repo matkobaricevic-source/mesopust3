@@ -67,7 +67,7 @@ export default function ParticipantsScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#dc2626" />
+        <ActivityIndicator size="large" color="#e07856" />
         <Text style={styles.loadingText}>Učitavanje sudionika...</Text>
       </View>
     );
@@ -140,13 +140,13 @@ export default function ParticipantsScreen() {
                 </Text>
                 {item.song_rhythm && (
                   <View style={styles.badge}>
-                    <Music size={14} color="#dc2626" />
+                    <Music size={14} color="#e07856" />
                     <Text style={styles.badgeText}>{item.song_rhythm}</Text>
                   </View>
                 )}
                 {item.costume_description && (
                   <View style={styles.badge}>
-                    <Heart size={14} color="#dc2626" />
+                    <Heart size={14} color="#e07856" />
                     <Text style={styles.badgeText}>
                       {item.name === 'Mesopustari' ? 'Mesopustarske uniforme' : 'Tradicionalne nošnje'}
                     </Text>
@@ -165,21 +165,21 @@ export default function ParticipantsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     padding: 20,
   },
   header: {
     paddingTop: 60,
-    paddingBottom: 24,
+    paddingBottom: 32,
     width: '100%',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   headerContent: {
     width: '100%',
@@ -187,11 +187,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   headerTitle: {
-    fontSize: 34,
+    fontSize: 32,
     fontFamily: fonts.title,
-    color: '#1a1a1a',
-    letterSpacing: -1,
-    fontWeight: '900',
+    color: '#2c2c2c',
+    letterSpacing: -0.5,
+    fontWeight: '600',
   },
   headerSubtitle: {
     fontSize: 14,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: '#dc2626',
+    color: '#e07856',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -242,15 +242,13 @@ const styles = StyleSheet.create({
   },
   participantCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 20,
+    borderRadius: 16,
     overflow: 'hidden',
-    shadowColor: '#f093fb',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.12,
-    shadowRadius: 16,
-    elevation: 6,
-    borderWidth: 0.5,
-    borderColor: 'rgba(240, 147, 251, 0.2)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 20,
+    elevation: 2,
   },
   imageContainer: {
     position: 'relative',
@@ -300,22 +298,19 @@ const styles = StyleSheet.create({
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 24,
+    backgroundColor: '#fef7f0',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
     marginTop: 8,
     alignSelf: 'flex-start',
-    shadowColor: '#fa709a',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: '#e07856',
   },
   badgeText: {
     fontSize: 13,
     fontFamily: fonts.semiBold,
-    color: '#dc2626',
+    color: '#e07856',
     marginLeft: 6,
   },
 });

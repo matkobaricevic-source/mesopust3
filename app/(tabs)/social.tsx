@@ -163,7 +163,7 @@ export default function SocialScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#dc2626" />
+        <ActivityIndicator size="large" color="#e07856" />
       </View>
     );
   }
@@ -180,7 +180,7 @@ export default function SocialScreen() {
         </View>
         <ScrollView style={styles.content} contentContainerStyle={styles.authContainer} showsVerticalScrollIndicator={false}>
           <View style={styles.authCard}>
-            <LogIn size={48} color="#dc2626" style={styles.authIcon} />
+            <LogIn size={48} color="#e07856" style={styles.authIcon} />
             <Text style={styles.authTitle}>
               {isSignUp ? 'Kreiraj račun' : 'Prijavi se pa slikaj kadi si da si vidimo'}
             </Text>
@@ -241,7 +241,7 @@ export default function SocialScreen() {
           resizeMode="cover"
         />
         <TouchableOpacity onPress={signOut} style={styles.signOutButton}>
-          <LogOut size={20} color="#dc2626" />
+          <LogOut size={20} color="#e07856" />
         </TouchableOpacity>
       </View>
 
@@ -361,19 +361,19 @@ export default function SocialScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     paddingTop: 60,
     paddingBottom: 8,
     paddingHorizontal: 16,
@@ -431,7 +431,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     borderRadius: 12,
     padding: 14,
     fontSize: 16,
@@ -439,7 +439,7 @@ const styles = StyleSheet.create({
   },
   authButton: {
     width: '100%',
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     borderRadius: 12,
     padding: 16,
     alignItems: 'center',
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   toggleText: {
-    color: '#dc2626',
+    color: '#e07856',
     fontSize: 14,
     marginTop: 16,
   },
@@ -474,7 +474,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   imagePickerButton: {
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     borderRadius: 16,
     padding: 40,
     alignItems: 'center',
@@ -500,7 +500,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 8,
     right: 8,
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     borderRadius: 20,
     width: 32,
     height: 32,
@@ -528,8 +528,8 @@ const styles = StyleSheet.create({
     borderColor: '#e5e7eb',
   },
   eventOptionSelected: {
-    backgroundColor: '#dc2626',
-    borderColor: '#dc2626',
+    backgroundColor: '#e07856',
+    borderColor: '#e07856',
   },
   eventOptionText: {
     color: '#374151',
@@ -554,7 +554,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     borderRadius: 8,
     padding: 14,
     gap: 8,
@@ -620,7 +620,7 @@ const styles = StyleSheet.create({
   photoEvent: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     marginBottom: 4,
   },
   photoCaption: {

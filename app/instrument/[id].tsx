@@ -101,7 +101,7 @@ export default function InstrumentDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#dc2626" />
+        <ActivityIndicator size="large" color="#e07856" />
       </View>
     );
   }
@@ -146,7 +146,7 @@ export default function InstrumentDetailScreen() {
         <View style={styles.instrumentInfo}>
           <View style={styles.topRow}>
             <View style={styles.categoryBadge}>
-              <Music size={16} color="#dc2626" />
+              <Music size={16} color="#e07856" />
               <Text style={styles.categoryText}>Instrument</Text>
             </View>
             {instrument.audio_url && Platform.OS === 'web' && (
@@ -174,7 +174,7 @@ export default function InstrumentDetailScreen() {
 
           {instrument.playing_technique && (
             <View style={styles.techniqueCard}>
-              <Disc3 size={20} color="#dc2626" />
+              <Disc3 size={20} color="#e07856" />
               <View style={styles.techniqueContent}>
                 <Text style={styles.techniqueLabel}>Tehnika sviranja</Text>
                 {instrument.playing_technique_croatian && (
@@ -186,7 +186,7 @@ export default function InstrumentDetailScreen() {
 
           {instrument.event_specific_notes && (
             <View style={styles.notesCard}>
-              <Music size={16} color="#dc2626" />
+              <Music size={16} color="#e07856" />
               <Text style={styles.notesText}>{instrument.event_specific_notes}</Text>
             </View>
           )}
@@ -222,13 +222,13 @@ export default function InstrumentDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     padding: 20,
   },
   header: {
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 16,
@@ -265,12 +265,12 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     flex: 1,
   },
   errorText: {
     fontSize: 16,
-    color: '#dc2626',
+    color: '#e07856',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -324,14 +324,14 @@ const styles = StyleSheet.create({
   categoryText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   audioButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 8,
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
   instrumentNameLocal: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     marginBottom: 12,
   },
   instrumentDescription: {
@@ -403,7 +403,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 12,
     borderLeftWidth: 3,
-    borderLeftColor: '#dc2626',
+    borderLeftColor: '#e07856',
     gap: 8,
   },
   notesText: {
@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
     borderLeftWidth: 4,
-    borderLeftColor: '#dc2626',
+    borderLeftColor: '#e07856',
   },
   participantHeader: {
     marginBottom: 8,
@@ -458,7 +458,7 @@ const styles = StyleSheet.create({
   participantNameCroatian: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#dc2626',
+    color: '#e07856',
     marginTop: 2,
   },
   participantDescription: {

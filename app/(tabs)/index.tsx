@@ -271,7 +271,7 @@ export default function HomeScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#dc2626" />
+        <ActivityIndicator size="large" color="#e07856" />
         <Text style={styles.loadingText}>Učitavanje događaja...</Text>
       </View>
     );
@@ -364,21 +364,21 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     padding: 20,
   },
   header: {
     paddingTop: 60,
-    paddingBottom: 24,
+    paddingBottom: 32,
     width: '100%',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   headerContent: {
     width: '100%',
@@ -386,11 +386,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   headerTitle: {
-    fontSize: 34,
+    fontSize: 32,
     fontFamily: fonts.title,
-    color: '#1a1a1a',
-    letterSpacing: -1,
-    fontWeight: '900',
+    color: '#2c2c2c',
+    letterSpacing: -0.5,
+    fontWeight: '600',
   },
   headerSubtitle: {
     fontSize: 14,
@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: '#dc2626',
+    color: '#e07856',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -449,15 +449,13 @@ const styles = StyleSheet.create({
   },
   eventCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 20,
+    borderRadius: 16,
     overflow: 'hidden',
-    shadowColor: '#667eea',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.12,
-    shadowRadius: 16,
-    elevation: 6,
-    borderWidth: 0.5,
-    borderColor: 'rgba(102, 126, 234, 0.1)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 20,
+    elevation: 2,
   },
   eventCardContent: {
     width: '100%',
@@ -467,37 +465,36 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
   },
   expandButton: {
-    backgroundColor: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    backgroundColor: '#f5f3f0',
     marginTop: -20,
     marginHorizontal: 20,
     marginBottom: 20,
-    paddingVertical: 16,
+    paddingVertical: 14,
     paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    borderRadius: 28,
-    shadowColor: '#667eea',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: '#e8e4df',
   },
   expandButtonText: {
-    fontSize: 15,
+    fontSize: 14,
     fontFamily: fonts.medium,
-    color: '#ffffff',
-    fontWeight: '700',
-    letterSpacing: 0.3,
+    color: '#6b6b6b',
+    fontWeight: '500',
+    letterSpacing: 0,
   },
   categoriesSection: {
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#f5f3f0',
     marginHorizontal: 20,
     marginTop: -32,
     marginBottom: 20,
-    borderRadius: 16,
+    borderRadius: 12,
     paddingVertical: 8,
+    borderWidth: 1,
+    borderColor: '#e8e4df',
   },
   categoryItem: {
     flexDirection: 'row',
@@ -510,14 +507,14 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
   },
   categoryItemTitle: {
-    fontSize: 16,
+    fontSize: 15,
     fontFamily: fonts.semiBold,
-    color: '#1a1a1a',
+    color: '#2c2c2c',
     flex: 1,
-    fontWeight: '600',
+    fontWeight: '500',
   },
   imageContainer: {
     position: 'relative',
@@ -553,14 +550,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   eventTitle: {
-    fontSize: 26,
+    fontSize: 22,
     fontFamily: fonts.title,
     color: '#ffffff',
-    fontWeight: '800',
-    letterSpacing: -0.5,
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
+    fontWeight: '600',
+    letterSpacing: -0.3,
   },
   dayName: {
     fontSize: 12,
@@ -594,7 +588,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 12,
     right: 16,
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 20,
@@ -620,7 +614,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   eventCardLive: {
-    borderColor: '#dc2626',
+    borderColor: '#e07856',
     borderWidth: 2,
   },
   zecaCard: {

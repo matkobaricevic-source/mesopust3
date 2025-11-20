@@ -185,7 +185,7 @@ export default function EventDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#dc2626" />
+        <ActivityIndicator size="large" color="#e07856" />
       </View>
     );
   }
@@ -274,7 +274,7 @@ export default function EventDetailScreen() {
               activeOpacity={0.7}>
               <View style={styles.collapsibleHeader}>
                 <View style={styles.collapsibleTitleContainer}>
-                  <Info size={20} color="#dc2626" />
+                  <Info size={20} color="#e07856" />
                   <Text style={styles.collapsibleTitle}>IZVEDBA POZIVANJA NA ZEČU</Text>
                 </View>
                 {showPozivanjeInfo ? (
@@ -327,7 +327,7 @@ export default function EventDetailScreen() {
                 }}
                 activeOpacity={0.7}>
                 <View style={styles.costumeNoteHeader}>
-                  <Info size={18} color="#dc2626" />
+                  <Info size={18} color="#e07856" />
                   <Text style={styles.performanceNoteText}>Napovidanje (izvedba)</Text>
                 </View>
               </TouchableOpacity>
@@ -418,7 +418,7 @@ export default function EventDetailScreen() {
                   </Text>
                 </View>
                 <Animated.View style={chevronAnimatedStyle}>
-                  <ChevronDown size={24} color="#dc2626" />
+                  <ChevronDown size={24} color="#e07856" />
                 </Animated.View>
               </View>
             </TouchableOpacity>
@@ -468,7 +468,7 @@ export default function EventDetailScreen() {
                           </View>
                           {step.step_number === 3 && event?.title === 'Napovidanje' && (
                             <View style={styles.stationTimeNote}>
-                              <Clock size={14} color="#dc2626" />
+                              <Clock size={14} color="#e07856" />
                               <Text style={styles.stationTimeNoteText}>
                                 1. Četrtak 22:00 • 2. Četrtak 23:00 • 3. Četrtak 00:00
                               </Text>
@@ -494,7 +494,7 @@ export default function EventDetailScreen() {
                           activeOpacity={0.7}>
                           <View style={styles.timelineMarker}>
                             <View style={styles.timelinePerformanceMarker}>
-                              <Info size={16} color="#dc2626" />
+                              <Info size={16} color="#e07856" />
                             </View>
                             <View style={styles.timelineLine} />
                           </View>
@@ -510,7 +510,7 @@ export default function EventDetailScreen() {
                               <Text style={styles.performanceTitle}>
                                 {napovidanjePerformance.title_local || napovidanjePerformance.title}
                               </Text>
-                              <ChevronRight size={20} color="#dc2626" style={styles.performanceChevron} />
+                              <ChevronRight size={20} color="#e07856" style={styles.performanceChevron} />
                             </View>
                           </View>
                         </TouchableOpacity>
@@ -541,7 +541,7 @@ export default function EventDetailScreen() {
                   </Text>
                 </View>
                 <Animated.View style={chevronCrossroadsAnimatedStyle}>
-                  <ChevronDown size={24} color="#dc2626" />
+                  <ChevronDown size={24} color="#e07856" />
                 </Animated.View>
               </View>
             </TouchableOpacity>
@@ -668,7 +668,7 @@ export default function EventDetailScreen() {
                   onPress={() => handleParticipantPress(participant)}
                   activeOpacity={0.7}>
                   <View style={styles.participantHeader}>
-                    <Users size={20} color="#dc2626" />
+                    <Users size={20} color="#e07856" />
                     <View style={styles.participantHeaderText}>
                       <Text style={styles.participantName}>
                         {participant.name}
@@ -729,7 +729,7 @@ export default function EventDetailScreen() {
             {event.title === 'Zeča' && (
               <View style={styles.criticalNoteCard}>
                 <View style={styles.criticalNoteHeader}>
-                  <AlertCircle size={20} color="#dc2626" />
+                  <AlertCircle size={20} color="#e07856" />
                   <Text style={styles.criticalNoteTitle}>Očuvanje tradicije</Text>
                 </View>
                 <Text style={styles.criticalNoteText}>
@@ -835,14 +835,14 @@ export default function EventDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     width: '100%',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     padding: 20,
   },
   heroContainer: {
@@ -890,7 +890,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: '#dc2626',
+    color: '#e07856',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -949,7 +949,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   costumeNoteCard: {
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     borderRadius: 16,
     padding: 18,
     marginTop: 16,
@@ -992,7 +992,7 @@ const styles = StyleSheet.create({
   performanceNoteText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     letterSpacing: 0.5,
   },
   infoNoteCard: {
@@ -1031,7 +1031,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
     borderLeftWidth: 4,
-    borderLeftColor: '#dc2626',
+    borderLeftColor: '#e07856',
   },
   subEventContent: {
     flex: 1,
@@ -1045,7 +1045,7 @@ const styles = StyleSheet.create({
   subEventTitleLocal: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#dc2626',
+    color: '#e07856',
     marginBottom: 4,
   },
   subEventDescription: {
@@ -1082,11 +1082,11 @@ const styles = StyleSheet.create({
   categoryCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     borderRadius: 16,
     padding: 18,
     borderLeftWidth: 4,
-    borderLeftColor: '#dc2626',
+    borderLeftColor: '#e07856',
   },
   categoryCardIndented: {
     marginLeft: 24,
@@ -1123,7 +1123,7 @@ const styles = StyleSheet.create({
   categoryTitleLocal: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#dc2626',
+    color: '#e07856',
     marginBottom: 4,
   },
   categoryDescription: {
@@ -1137,7 +1137,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   participantCard: {
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     borderRadius: 16,
     padding: 20,
     width: '100%',
@@ -1160,12 +1160,12 @@ const styles = StyleSheet.create({
   participantNameCroatian: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#dc2626',
+    color: '#e07856',
     marginTop: 2,
   },
   participantRole: {
     fontSize: 13,
-    color: '#dc2626',
+    color: '#e07856',
     fontWeight: '600',
     marginBottom: 8,
     fontStyle: 'italic',
@@ -1179,7 +1179,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     borderRadius: 14,
     paddingVertical: 16,
     paddingHorizontal: 24,
@@ -1195,12 +1195,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     borderRadius: 16,
     paddingVertical: 18,
     paddingHorizontal: 24,
     marginTop: 20,
-    shadowColor: '#dc2626',
+    shadowColor: '#e07856',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -1239,7 +1239,7 @@ const styles = StyleSheet.create({
   modalCloseButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
   },
   modalContent: {
     flex: 1,
@@ -1254,7 +1254,7 @@ const styles = StyleSheet.create({
   modalEventTitleLocal: {
     fontSize: 22,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     marginBottom: 16,
   },
   modalEventDescription: {
@@ -1304,7 +1304,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -1314,7 +1314,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: '#fef2f2',
     borderWidth: 2,
-    borderColor: '#dc2626',
+    borderColor: '#e07856',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -1331,7 +1331,7 @@ const styles = StyleSheet.create({
   },
   timelineContent: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     borderRadius: 12,
     overflow: 'hidden',
     marginBottom: 12,
@@ -1351,7 +1351,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   stationNumber: {
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
   },
   stationNumberText: {
     fontSize: 13,
@@ -1378,7 +1378,7 @@ const styles = StyleSheet.create({
   performanceTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     flex: 1,
   },
   performanceChevron: {
@@ -1425,7 +1425,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   crossroadNumber: {
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
   },
   crossroadNumberText: {
     fontSize: 13,
@@ -1474,7 +1474,7 @@ const styles = StyleSheet.create({
   readMoreText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
   },
   criticalNoteCard: {
     backgroundColor: '#fef2f2',
@@ -1493,7 +1493,7 @@ const styles = StyleSheet.create({
   criticalNoteTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#dc2626',
+    color: '#e07856',
     letterSpacing: 0.3,
   },
   criticalNoteText: {
@@ -1524,7 +1524,7 @@ const styles = StyleSheet.create({
   collapsibleTitle: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#dc2626',
+    color: '#e07856',
     letterSpacing: 0.3,
     flex: 1,
   },
@@ -1537,7 +1537,7 @@ const styles = StyleSheet.create({
   collapsibleQuote: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     fontStyle: 'italic',
     marginBottom: 12,
     lineHeight: 24,

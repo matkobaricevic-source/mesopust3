@@ -88,7 +88,7 @@ export default function ItemDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#dc2626" />
+        <ActivityIndicator size="large" color="#e07856" />
       </View>
     );
   }
@@ -132,7 +132,7 @@ export default function ItemDetailScreen() {
 
         <View style={styles.itemInfo}>
           <View style={styles.categoryBadge}>
-            <Package size={16} color="#dc2626" />
+            <Package size={16} color="#e07856" />
             <Text style={styles.categoryText}>{getCategoryLabel(item.category)}</Text>
           </View>
 
@@ -203,14 +203,14 @@ export default function ItemDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     width: '100%',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     padding: 20,
   },
   header: {
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 16,
@@ -245,12 +245,12 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     flex: 1,
   },
   errorText: {
     fontSize: 16,
-    color: '#dc2626',
+    color: '#e07856',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
   categoryText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   itemNameLocal: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     marginBottom: 12,
   },
   itemDescription: {
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
     borderLeftWidth: 4,
-    borderLeftColor: '#dc2626',
+    borderLeftColor: '#e07856',
     width: '100%',
     maxWidth: 600,
   },
@@ -387,12 +387,12 @@ const styles = StyleSheet.create({
   participantNameCroatian: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#dc2626',
+    color: '#e07856',
     marginTop: 2,
   },
   usageNotes: {
     fontSize: 13,
-    color: '#dc2626',
+    color: '#e07856',
     fontWeight: '600',
     marginBottom: 8,
     fontStyle: 'italic',

@@ -273,14 +273,14 @@ export default function SearchScreen() {
   }
 
   function getResultIcon(type: string) {
-    if (type === 'event') return <Calendar size={18} color="#dc2626" />;
-    if (type === 'participant') return <Users size={18} color="#dc2626" />;
-    if (type === 'item') return <Package size={18} color="#dc2626" />;
-    if (type === 'glossary') return <BookOpen size={18} color="#dc2626" />;
-    if (type === 'instrument') return <Music size={18} color="#dc2626" />;
-    if (type === 'uniform') return <Shirt size={18} color="#dc2626" />;
-    if (type === 'role') return <Crown size={18} color="#dc2626" />;
-    return <Package size={18} color="#dc2626" />;
+    if (type === 'event') return <Calendar size={18} color="#e07856" />;
+    if (type === 'participant') return <Users size={18} color="#e07856" />;
+    if (type === 'item') return <Package size={18} color="#e07856" />;
+    if (type === 'glossary') return <BookOpen size={18} color="#e07856" />;
+    if (type === 'instrument') return <Music size={18} color="#e07856" />;
+    if (type === 'uniform') return <Shirt size={18} color="#e07856" />;
+    if (type === 'role') return <Crown size={18} color="#e07856" />;
+    return <Package size={18} color="#e07856" />;
   }
 
   return (
@@ -307,7 +307,7 @@ export default function SearchScreen() {
 
       {loading && (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="small" color="#dc2626" />
+          <ActivityIndicator size="small" color="#e07856" />
         </View>
       )}
 
@@ -366,10 +366,10 @@ export default function SearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   header: {
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     paddingTop: 60,
     paddingBottom: 24,
     width: '100%',
@@ -388,7 +388,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     padding: 16,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   searchInputContainer: {
     flexDirection: 'row',
@@ -467,7 +467,7 @@ const styles = StyleSheet.create({
   resultTitleLocal: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#dc2626',
+    color: '#e07856',
     marginBottom: 8,
   },
   resultDescription: {

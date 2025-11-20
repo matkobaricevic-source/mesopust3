@@ -80,7 +80,7 @@ export default function UniformDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#dc2626" />
+        <ActivityIndicator size="large" color="#e07856" />
       </View>
     );
   }
@@ -282,7 +282,7 @@ export default function UniformDetailScreen() {
                             style={styles.moreInfoButton}
                             onPress={() => router.push(item.additional_info_url as any)}>
                             <Text style={styles.moreInfoButtonText}>Saznaj više</Text>
-                            <ChevronRight size={18} color="#dc2626" />
+                            <ChevronRight size={18} color="#e07856" />
                           </TouchableOpacity>
                         )}
                       </View>
@@ -313,7 +313,7 @@ export default function UniformDetailScreen() {
                   )}
                   <View style={styles.instrumentContent}>
                     <View style={styles.instrumentHeader}>
-                      <Disc3 size={18} color="#dc2626" />
+                      <Disc3 size={18} color="#e07856" />
                       <Text style={styles.instrumentName}>
                         {instrument.name_croatian}
                       </Text>
@@ -325,7 +325,7 @@ export default function UniformDetailScreen() {
                     )}
                     {instrument.playing_technique_croatian && (
                       <View style={styles.techniqueBadge}>
-                        <Music size={14} color="#dc2626" />
+                        <Music size={14} color="#e07856" />
                         <Text style={styles.techniqueBadgeText}>
                           {instrument.playing_technique_croatian}
                         </Text>
@@ -345,13 +345,13 @@ export default function UniformDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     padding: 20,
   },
   header: {
@@ -361,7 +361,7 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 16,
@@ -386,12 +386,12 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     flex: 1,
   },
   errorText: {
     fontSize: 16,
-    color: '#dc2626',
+    color: '#e07856',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
   roleTitleCroatian: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     marginBottom: 12,
   },
   roleDescription: {
@@ -504,7 +504,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -559,7 +559,7 @@ const styles = StyleSheet.create({
   moreInfoButtonText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     marginRight: 4,
   },
   instrumentsGrid: {
@@ -590,7 +590,7 @@ const styles = StyleSheet.create({
   instrumentName: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     marginLeft: 8,
     flex: 1,
   },
@@ -619,7 +619,7 @@ const styles = StyleSheet.create({
   techniqueBadgeText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#dc2626',
+    color: '#e07856',
     marginLeft: 6,
   },
   rolesHeader: {
@@ -658,7 +658,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#dc2626',
+    backgroundColor: '#e07856',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,

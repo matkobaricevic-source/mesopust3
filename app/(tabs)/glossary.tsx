@@ -20,7 +20,7 @@ export default function InfoScreen() {
       <View style={styles.content}>
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MapPin size={24} color="#dc2626" />
+            <MapPin size={24} color="#e07856" />
             <Text style={styles.sectionTitle}>Lokacija</Text>
           </View>
           <Text style={styles.sectionText}>
@@ -32,7 +32,7 @@ export default function InfoScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <CalendarIcon size={24} color="#dc2626" />
+            <CalendarIcon size={24} color="#e07856" />
             <Text style={styles.sectionTitle}>Što je Mesopust?</Text>
           </View>
           <Text style={styles.sectionText}>
@@ -45,7 +45,7 @@ export default function InfoScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Heart size={24} color="#dc2626" />
+            <Heart size={24} color="#e07856" />
             <Text style={styles.sectionTitle}>Kulturni značaj</Text>
           </View>
           <Text style={styles.sectionText}>
@@ -69,14 +69,14 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   header: {
     paddingTop: 60,
     paddingBottom: 24,
     width: '100%',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
   },
   headerContent: {
     width: '100%',
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingTop: 20,
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#faf8f5',
     borderRadius: 16,
     padding: 24,
   },

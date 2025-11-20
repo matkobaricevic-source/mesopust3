@@ -86,7 +86,7 @@ export default function InstrumentsScreen() {
   if (loading) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color="#dc2626" />
+        <ActivityIndicator size="large" color="#e07856" />
       </View>
     );
   }
@@ -110,7 +110,7 @@ export default function InstrumentsScreen() {
         </TouchableOpacity>
         <View style={styles.headerContent}>
           <View style={styles.headerIcon}>
-            <Music size={32} color="#dc2626" />
+            <Music size={32} color="#e07856" />
           </View>
           <View>
             <Text style={styles.headerTitle}>Instrumenti</Text>
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: '#dc2626',
+    color: '#e07856',
     textAlign: 'center',
   },
   header: {
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   },
   instrumentViewMore: {
     fontSize: 13,
-    color: '#dc2626',
+    color: '#e07856',
     fontWeight: '500',
   },
 });
