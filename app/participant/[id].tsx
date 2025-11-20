@@ -474,6 +474,11 @@ export default function ParticipantDetailScreen() {
                 <View style={styles.formationColumnMiddle}>
                   <Text style={styles.formationColumnLabel}>Srednji red</Text>
                   <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
+                  <View style={styles.formationSpacer} />
                   <TouchableOpacity style={styles.formationCircleLeader} onPress={() => navigateToRole('advitor')} activeOpacity={0.7}>
                     <Crown size={20} color="#f59e0b" />
                   </TouchableOpacity>
