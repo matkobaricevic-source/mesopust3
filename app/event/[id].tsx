@@ -29,7 +29,7 @@ interface EventCrossroad {
   title: string;
   image_url: string | null;
 }
-import { ArrowLeft, Users, ChevronRight, Info, Shirt, HelpCircle, ChevronDown, ChevronUp, Clock } from 'lucide-react-native';
+import { ArrowLeft, Users, ChevronRight, Info, Shirt, HelpCircle, ChevronDown, ChevronUp, Clock, AlertCircle } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 
 interface ParticipantWithRole extends Participant {
@@ -254,6 +254,22 @@ export default function EventDetailScreen() {
                   {isDescriptionExpanded ? 'Prikaži manje' : 'Prikaži više'}
                 </Text>
               </TouchableOpacity>
+
+              <View style={styles.criticalNoteCard}>
+                <View style={styles.criticalNoteHeader}>
+                  <AlertCircle size={20} color="#dc2626" />
+                  <Text style={styles.criticalNoteTitle}>Očuvanje tradicije</Text>
+                </View>
+                <Text style={styles.criticalNoteText}>
+                  Iako se običaj s vremenom prilagođava, u duhu očuvanja autentičnosti, prioritet je zadržati ono što je izvorno. Običaj nalaže povratak tradicionalnim kostimima (kotige i sarze), s obzirom na to da su prikazi u kostimima mornara i kapetana sve učestaliji.
+                </Text>
+                <Text style={styles.criticalNoteText}>
+                  Izvorni prikaz podrazumijeva pjevanje narodnih pjesama, dok se elementi poput baklji i razne netradicionalne glazbe ne nalaze u temeljnoj izvedbi običaja.
+                </Text>
+                <Text style={styles.criticalNoteText}>
+                  Da bi se očuvala izvorna simbolika civilne odjeće na ,napovidanjima', poželjno je da se ,mesopustari' — koji danas sudjeluju u ,Zeči', iako to nije dio tradicije — nakon tog segmenta vrate u civilno ruho, što je danas izvedivo jer ,Zeča' započinje za dana, a ne predvečer, kao nekada. Na taj bi se način očuvala nekadašnja praksa, a ,mesopustari' bi ostali usmjereni na obavljanje svog dijela običaja i svoje primarne obveze, što zahtijeva punu usredotočenost.
+                </Text>
+              </View>
             </View>
           ) : (
             <Text style={styles.eventDescription}>{event.description_croatian || event.description}</Text>
@@ -1366,5 +1382,31 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
     color: '#dc2626',
+  },
+  criticalNoteCard: {
+    backgroundColor: '#fef2f2',
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 16,
+    borderWidth: 2,
+    borderColor: '#fecaca',
+  },
+  criticalNoteHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 12,
+  },
+  criticalNoteTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#dc2626',
+    letterSpacing: 0.3,
+  },
+  criticalNoteText: {
+    fontSize: 14,
+    color: '#991b1b',
+    lineHeight: 22,
+    marginBottom: 12,
   },
 });
