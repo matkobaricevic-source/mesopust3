@@ -204,7 +204,9 @@ export default function HomeScreen() {
       );
 
       // Custom sort: Move Zeča right after Napovidanje
-      const napovidanjeIndex = eventsWithCategories.findIndex(e => e.title === 'Napovidanje dovčen i dovičan');
+      const napovidanjeIndex = eventsWithCategories.findIndex(e =>
+        e.title === 'Napovidanje dovčen i dovičan' || e.title === 'Napovidanje dovcen i dovican'
+      );
       const zecaIndex = eventsWithCategories.findIndex(e => e.title === 'Zeča');
 
       let sortedEvents = [...eventsWithCategories];
@@ -214,7 +216,9 @@ export default function HomeScreen() {
         const [zeca] = sortedEvents.splice(zecaIndex, 1);
 
         // Find Napovidanje again (index may have shifted)
-        const newNapovidanjeIndex = sortedEvents.findIndex(e => e.title === 'Napovidanje dovčen i dovičan');
+        const newNapovidanjeIndex = sortedEvents.findIndex(e =>
+          e.title === 'Napovidanje dovčen i dovičan' || e.title === 'Napovidanje dovcen i dovican'
+        );
 
         // Insert Zeča right after Napovidanje
         sortedEvents.splice(newNapovidanjeIndex + 1, 0, zeca);
