@@ -86,6 +86,23 @@ export default function ParticipantsScreen() {
     return <Users size={20} color={theme.colors.neutral[400]} strokeWidth={2} />;
   }
 
+  function findParticipantByName(searchName: string) {
+    return participants.find((p) =>
+      p.name_croatian?.toLowerCase().includes(searchName.toLowerCase())
+    );
+  }
+
+  function handleFormationRolePress(roleName: string) {
+    const participant = findParticipantByName(roleName);
+    if (participant) {
+      router.push(`/participant/${participant.id}`);
+    }
+  }
+
+  function handleHierarchyRolePress(role: HierarchyRole) {
+    router.push(`/participant/${role.participant_id}`);
+  }
+
   if (loading) {
     return (
       <View style={styles.centerContainer}>
@@ -197,7 +214,12 @@ export default function ParticipantsScreen() {
                           {mesopustariRoles
                             .filter(r => r.display_order <= 4)
                             .map((role, index) => (
-                              <View key={role.id} style={styles.hierarchyRole}>
+                              <TouchableOpacity
+                                key={role.id}
+                                style={styles.hierarchyRole}
+                                onPress={() => handleHierarchyRolePress(role)}
+                                activeOpacity={0.7}
+                              >
                                 <View style={styles.roleIconContainer}>
                                   {getHierarchyIcon(role.display_order)}
                                 </View>
@@ -209,8 +231,11 @@ export default function ParticipantsScreen() {
                                     </Text>
                                   )}
                                 </View>
-                              </View>
+                              </TouchableOpacity>
                             ))}
+                          <Text style={styles.formationTip}>
+                            💡 Dodirnite bilo koju ulogu za više detalja
+                          </Text>
                         </View>
                       )}
                     </View>
@@ -236,39 +261,79 @@ export default function ParticipantsScreen() {
                         <View style={styles.formationScheme}>
                           <Text style={styles.formationHeader}>Formacija u Dva Reda</Text>
 
+                          <Text style={styles.formationExplanation}>
+                            Mesopustari stoje i kreću se u dva reda sa sinkroniziranim korakom. Advitor dirigira zoge iz sredine, dok bandiraš nosi zastavu i puše u žviždaljku.
+                          </Text>
+
                           {/* Three columns: Left row, Center, Right row */}
                           <View style={styles.formationContainer}>
                             {/* Left Row */}
                             <View style={styles.formationColumn}>
                               <Text style={styles.formationColumnTitle}>Lijevi Red</Text>
-                              <View style={styles.formationMember}>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Kapetan')}
+                                activeOpacity={0.7}
+                              >
                                 <Award size={14} color={theme.colors.primary.main} strokeWidth={2} />
                                 <Text style={styles.formationMemberText}>Prvi Kapetan</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Kasir')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Kasir</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Sopila')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Vela Sopila</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Trumbeta')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Vela Trumbeta</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Bubanj')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Veli Bubanj</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Bubanj')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Srednji Bubanj</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Zvončić')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Zvončići</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Triangul')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Triangul</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Kosa')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Kosa</Text>
-                              </View>
+                              </TouchableOpacity>
                             </View>
 
                             {/* Center */}
@@ -276,56 +341,103 @@ export default function ParticipantsScreen() {
                               <Text style={styles.formationColumnTitle}>Sredina</Text>
                               <View style={styles.formationSpacer} />
                               <View style={styles.formationSpacer} />
-                              <View style={[styles.formationMember, styles.formationLeader]}>
+                              <TouchableOpacity
+                                style={[styles.formationMember, styles.formationLeader]}
+                                onPress={() => handleFormationRolePress('Advitor')}
+                                activeOpacity={0.7}
+                              >
                                 <Crown size={16} color={theme.colors.accent.main} strokeWidth={2} />
                                 <Text style={styles.formationLeaderText}>Advitor</Text>
-                              </View>
+                              </TouchableOpacity>
                               <View style={styles.formationSpacer} />
                               <View style={styles.formationSpacer} />
-                              <View style={styles.formationMember}>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Bandiraš')}
+                                activeOpacity={0.7}
+                              >
                                 <Flag size={14} color={theme.colors.secondary.main} strokeWidth={2} />
                                 <Text style={styles.formationMemberText}>Bandiraš</Text>
-                              </View>
+                              </TouchableOpacity>
                               <View style={styles.formationSpacer} />
                               <View style={styles.formationSpacer} />
-                              <View style={styles.formationMember}>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Magaziner')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Magaziner</Text>
-                              </View>
+                              </TouchableOpacity>
                             </View>
 
                             {/* Right Row */}
                             <View style={styles.formationColumn}>
                               <Text style={styles.formationColumnTitle}>Desni Red</Text>
-                              <View style={styles.formationMember}>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Kapetan')}
+                                activeOpacity={0.7}
+                              >
                                 <Award size={14} color={theme.colors.primary.main} strokeWidth={2} />
                                 <Text style={styles.formationMemberText}>Drugi Kapetan</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Kasir')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Kasir</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Sopila')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Mala Sopila</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Trumbeta')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Manja Trumbeta</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Odgovaralica')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Odgovaralica</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Činele')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Činele</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Bubanj')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Mali Bubanj</Text>
-                              </View>
-                              <View style={styles.formationMember}>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Avan')}
+                                activeOpacity={0.7}
+                              >
                                 <Text style={styles.formationMemberText}>Avan</Text>
-                              </View>
+                              </TouchableOpacity>
                             </View>
                           </View>
 
                           <Text style={styles.formationNote}>
                             * Bandiraš stoji između Advitora i Magazinera od mesopusne nedilje do čiste srede
+                          </Text>
+                          <Text style={styles.formationTip}>
+                            💡 Dodirnite bilo koju ulogu za više informacija
                           </Text>
                         </View>
                       </View>
@@ -659,5 +771,21 @@ const styles = StyleSheet.create({
     marginTop: theme.spacing.md,
     textAlign: 'center',
     lineHeight: 12,
+  },
+  formationExplanation: {
+    ...theme.typography.body2,
+    color: theme.colors.text.secondary,
+    lineHeight: 20,
+    marginBottom: theme.spacing.md,
+    textAlign: 'center',
+    paddingHorizontal: theme.spacing.sm,
+  },
+  formationTip: {
+    ...theme.typography.caption,
+    fontSize: 10,
+    color: theme.colors.accent.main,
+    textAlign: 'center',
+    marginTop: theme.spacing.sm,
+    fontWeight: '500',
   },
 });
