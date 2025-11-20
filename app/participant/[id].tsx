@@ -294,7 +294,7 @@ export default function ParticipantDetailScreen() {
           </View>
         </TouchableOpacity>
         <Text style={styles.headerTitle} numberOfLines={1}>
-          {participant.name}
+          {participant.name_croatian || participant.name}
         </Text>
       </View>
 
