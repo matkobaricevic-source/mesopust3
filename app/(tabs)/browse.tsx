@@ -264,6 +264,9 @@ export default function ParticipantsScreen() {
                                 <Text style={styles.formationMemberText}>Triangul</Text>
                               </View>
                               <View style={styles.formationMember}>
+                                <Text style={styles.formationMemberText}>Kosa</Text>
+                              </View>
+                              <View style={styles.formationMember}>
                                 <Text style={styles.formationMemberText}>Kasir</Text>
                               </View>
                             </View>
@@ -275,10 +278,14 @@ export default function ParticipantsScreen() {
                                 <Crown size={16} color={theme.colors.accent.main} strokeWidth={2} />
                                 <Text style={styles.formationLeaderText}>Advitor</Text>
                               </View>
+                              <View style={styles.formationSpacer} />
+                              <View style={styles.formationSpacer} />
                               <View style={styles.formationMember}>
                                 <Flag size={14} color={theme.colors.secondary.main} strokeWidth={2} />
                                 <Text style={styles.formationMemberText}>Bandiraš</Text>
                               </View>
+                              <View style={styles.formationSpacer} />
+                              <View style={styles.formationSpacer} />
                               <View style={styles.formationMember}>
                                 <Text style={styles.formationMemberText}>Magaziner</Text>
                               </View>
@@ -308,9 +315,6 @@ export default function ParticipantsScreen() {
                               </View>
                               <View style={styles.formationMember}>
                                 <Text style={styles.formationMemberText}>Avan</Text>
-                              </View>
-                              <View style={styles.formationMember}>
-                                <Text style={styles.formationMemberText}>Kosa</Text>
                               </View>
                               <View style={styles.formationMember}>
                                 <Text style={styles.formationMemberText}>Kasir</Text>
@@ -622,6 +626,9 @@ const styles = StyleSheet.create({
     paddingVertical: theme.spacing.xs,
     borderRadius: theme.borderRadius.sm,
     gap: 4,
+    minHeight: 28,
+  },
+  formationSpacer: {
     minHeight: 28,
   },
   formationLeader: {
