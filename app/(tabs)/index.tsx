@@ -297,6 +297,11 @@ export default function HomeScreen() {
 
             return (
               <View style={styles.eventCardWrapper}>
+                {isZeca && (
+                  <View style={styles.zecaNotice}>
+                    <Text style={styles.zecaNoticeText}>Nije dio narodne pučke drame</Text>
+                  </View>
+                )}
                 {item.day_name && (
                   <View style={styles.zecaBadge}>
                     <Text style={styles.zecaBadgeText}>{item.day_name}</Text>
@@ -587,5 +592,20 @@ const styles = StyleSheet.create({
   },
   zecaImagePlaceholder: {
     height: 140,
+  },
+  zecaNotice: {
+    backgroundColor: '#fef3c7',
+    borderWidth: 1,
+    borderColor: '#fbbf24',
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    marginBottom: 12,
+  },
+  zecaNoticeText: {
+    fontSize: 13,
+    fontFamily: fonts.medium,
+    color: '#78350f',
+    textAlign: 'center',
   },
 });
