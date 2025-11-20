@@ -120,13 +120,13 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
     paddingHorizontal: theme.spacing.sm,
     position: 'relative',
   },
   tab: {
     flex: 1,
-    height: 56,
+    height: 48,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 2,
@@ -134,10 +134,10 @@ const styles = StyleSheet.create({
   indicator: {
     position: 'absolute',
     width: `${100 / TAB_COUNT}%`,
-    height: 56,
+    height: 48,
     borderRadius: theme.borderRadius.lg,
     zIndex: 1,
-    top: theme.spacing.md,
+    top: theme.spacing.sm,
     overflow: 'hidden',
   },
   indicatorGradient: {

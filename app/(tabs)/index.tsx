@@ -298,7 +298,7 @@ export default function HomeScreen() {
           ListHeaderComponent={
             <Animated.View entering={FadeIn} style={styles.header}>
               <LinearGradient
-                colors={[theme.colors.primary.main, theme.colors.primary.dark]}
+                colors={theme.colors.primary.gradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.headerGradient}
