@@ -163,7 +163,7 @@ export default function SocialScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#e07856" />
+        <ActivityIndicator size="large" color="#dc2626" />
       </View>
     );
   }
@@ -180,7 +180,7 @@ export default function SocialScreen() {
         </View>
         <ScrollView style={styles.content} contentContainerStyle={styles.authContainer} showsVerticalScrollIndicator={false}>
           <View style={styles.authCard}>
-            <LogIn size={48} color="#e07856" style={styles.authIcon} />
+            <LogIn size={48} color="#dc2626" style={styles.authIcon} />
             <Text style={styles.authTitle}>
               {isSignUp ? 'Kreiraj račun' : 'Prijavi se pa slikaj kadi si da si vidimo'}
             </Text>
@@ -241,7 +241,7 @@ export default function SocialScreen() {
           resizeMode="cover"
         />
         <TouchableOpacity onPress={signOut} style={styles.signOutButton}>
-          <LogOut size={20} color="#e07856" />
+          <LogOut size={20} color="#dc2626" />
         </TouchableOpacity>
       </View>
 
@@ -361,19 +361,21 @@ export default function SocialScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
     paddingTop: 60,
     paddingBottom: 8,
     paddingHorizontal: 16,
@@ -383,7 +385,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 32,
     fontFamily: fonts.title,
-    color: '#2d3436',
+    color: '#111827',
   },
   headerLogo: {
     height: 140,
@@ -404,44 +406,45 @@ const styles = StyleSheet.create({
   },
   authCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 20,
-    padding: 32,
+    borderRadius: 16,
+    padding: 24,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
   },
   authIcon: {
     marginBottom: 16,
   },
   authTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
     marginBottom: 8,
-    textAlign: 'center',
   },
   authSubtitle: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     textAlign: 'center',
     marginBottom: 24,
   },
   input: {
     width: '100%',
-    backgroundColor: '#faf8f5',
-    borderRadius: 12,
-    padding: 14,
+    backgroundColor: '#f9fafb',
+    borderRadius: 8,
+    padding: 12,
     fontSize: 16,
     marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   authButton: {
     width: '100%',
-    backgroundColor: '#e07856',
-    borderRadius: 12,
-    padding: 16,
+    backgroundColor: '#dc2626',
+    borderRadius: 8,
+    padding: 14,
     alignItems: 'center',
     marginTop: 8,
   },
@@ -451,39 +454,33 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   toggleText: {
-    color: '#e07856',
+    color: '#dc2626',
     fontSize: 14,
     marginTop: 16,
   },
   uploadSection: {
     backgroundColor: '#ffffff',
-    margin: 16,
-    marginBottom: 0,
     padding: 20,
-    borderRadius: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 3,
+    borderBottomWidth: 8,
+    borderBottomColor: '#f3f4f6',
   },
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
     marginBottom: 16,
   },
   imagePickerButton: {
-    backgroundColor: '#faf8f5',
-    borderRadius: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
     padding: 40,
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#dfe6e9',
+    borderColor: '#e5e7eb',
     borderStyle: 'dashed',
   },
   imagePickerText: {
-    color: '#636e72',
+    color: '#6b7280',
     fontSize: 16,
     marginTop: 8,
   },
@@ -500,7 +497,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 8,
     right: 8,
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     borderRadius: 20,
     width: 32,
     height: 32,
@@ -528,8 +525,8 @@ const styles = StyleSheet.create({
     borderColor: '#e5e7eb',
   },
   eventOptionSelected: {
-    backgroundColor: '#e07856',
-    borderColor: '#e07856',
+    backgroundColor: '#dc2626',
+    borderColor: '#dc2626',
   },
   eventOptionText: {
     color: '#374151',
@@ -554,7 +551,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     borderRadius: 8,
     padding: 14,
     gap: 8,
@@ -568,19 +565,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   noEventBanner: {
-    backgroundColor: '#ffffff',
-    margin: 16,
+    backgroundColor: '#f9fafb',
     padding: 32,
     alignItems: 'center',
-    borderRadius: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 2,
+    borderBottomWidth: 8,
+    borderBottomColor: '#f3f4f6',
   },
   noEventText: {
-    color: '#636e72',
+    color: '#6b7280',
     fontSize: 16,
     textAlign: 'center',
     marginTop: 12,
@@ -602,13 +594,13 @@ const styles = StyleSheet.create({
   },
   photoCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 16,
+    borderRadius: 12,
     overflow: 'hidden',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
   },
   photoImage: {
     width: '100%',
@@ -620,7 +612,7 @@ const styles = StyleSheet.create({
   photoEvent: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     marginBottom: 4,
   },
   photoCaption: {

@@ -67,7 +67,7 @@ export default function ParticipantsScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#e07856" />
+        <ActivityIndicator size="large" color="#dc2626" />
         <Text style={styles.loadingText}>Učitavanje sudionika...</Text>
       </View>
     );
@@ -140,13 +140,13 @@ export default function ParticipantsScreen() {
                 </Text>
                 {item.song_rhythm && (
                   <View style={styles.badge}>
-                    <Music size={14} color="#e07856" />
+                    <Music size={14} color="#dc2626" />
                     <Text style={styles.badgeText}>{item.song_rhythm}</Text>
                   </View>
                 )}
                 {item.costume_description && (
                   <View style={styles.badge}>
-                    <Heart size={14} color="#e07856" />
+                    <Heart size={14} color="#dc2626" />
                     <Text style={styles.badgeText}>
                       {item.name === 'Mesopustari' ? 'Mesopustarske uniforme' : 'Tradicionalne nošnje'}
                     </Text>
@@ -165,21 +165,20 @@ export default function ParticipantsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f5f5f7',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
     padding: 20,
   },
   header: {
-    paddingTop: 64,
-    paddingBottom: 40,
+    paddingTop: 60,
+    paddingBottom: 20,
     width: '100%',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
   },
   headerContent: {
     width: '100%',
@@ -187,26 +186,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   headerTitle: {
-    fontSize: 42,
+    fontSize: 32,
     fontFamily: fonts.title,
-    color: '#1a1a1a',
-    letterSpacing: -2,
-    fontWeight: '300',
-    lineHeight: 46,
+    color: '#111827',
   },
   headerSubtitle: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     marginTop: 2,
   },
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#636e72',
+    color: '#6b7280',
   },
   errorText: {
     fontSize: 16,
-    color: '#e07856',
+    color: '#dc2626',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -230,7 +226,7 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#636e72',
+    color: '#4b5563',
     marginTop: 16,
   },
   listContent: {
@@ -243,13 +239,10 @@ const styles = StyleSheet.create({
   },
   participantCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 24,
+    borderRadius: 20,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.03,
-    shadowRadius: 24,
-    elevation: 1,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   imageContainer: {
     position: 'relative',
@@ -281,7 +274,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   participantContent: {
-    padding: 24,
+    padding: 20,
     paddingTop: 20,
   },
   participantNameOverlay: {
@@ -292,30 +285,26 @@ const styles = StyleSheet.create({
   participantDescription: {
     fontSize: 15,
     fontFamily: fonts.regular,
-    color: '#636e72',
-    lineHeight: 24,
+    color: '#4b5563',
+    lineHeight: 22,
     marginBottom: 8,
   },
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff7f0',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 24,
-    marginTop: 12,
+    backgroundColor: '#fef2f2',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginTop: 8,
     alignSelf: 'flex-start',
-    borderWidth: 0,
-    shadowColor: '#e07856',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 1,
+    borderWidth: 1,
+    borderColor: '#fecaca',
   },
   badgeText: {
     fontSize: 13,
     fontFamily: fonts.semiBold,
-    color: '#e07856',
+    color: '#dc2626',
     marginLeft: 6,
   },
 });

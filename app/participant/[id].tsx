@@ -263,7 +263,7 @@ export default function ParticipantDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#e07856" />
+        <ActivityIndicator size="large" color="#dc2626" />
       </View>
     );
   }
@@ -312,21 +312,10 @@ export default function ParticipantDetailScreen() {
         )}
 
         <View style={styles.participantInfo}>
-          <Text style={styles.participantNameCroatian}>
-            {participant.name_croatian}
-          </Text>
-          <Text style={styles.participantName}>
-            {participant.name}
-          </Text>
-          <View style={styles.descriptionDivider} />
-          <Text style={styles.participantDescription}>
-            {participant.description}
-          </Text>
-          <Text style={styles.participantDescriptionCroatian}>
-            {participant.description_croatian}
-          </Text>
-
-          <View style={styles.detailsContainer}>
+          <View style={styles.darkContainer}>
+            <Text style={styles.participantDescriptionCroatian}>
+              {participant.description_croatian}
+            </Text>
 
 
             {participant.song_rhythm && (
@@ -416,16 +405,14 @@ export default function ParticipantDetailScreen() {
               </View>
             )}
 
+            <TouchableOpacity
+              style={styles.moreInfoButton}
+              onPress={() => setShowDetailedInfo(true)}
+              activeOpacity={0.7}>
+              <Info size={20} color="#ffffff" />
+              <Text style={styles.moreInfoButtonText}>Više informacija</Text>
+            </TouchableOpacity>
           </View>
-
-          <TouchableOpacity
-            style={styles.moreInfoButton}
-            onPress={() => setShowDetailedInfo(true)}
-            activeOpacity={0.7}>
-            <Info size={18} color="#e07856" />
-            <Text style={styles.moreInfoButtonText}>Detaljnije</Text>
-            <ChevronRight size={18} color="#e07856" />
-          </TouchableOpacity>
         </View>
 
         {participant.name === 'Mesopustari' && (
@@ -634,7 +621,7 @@ export default function ParticipantDetailScreen() {
                     onPress={() => handleRolePress(role)}
                     activeOpacity={0.7}>
                     <View style={styles.hierarchyHeader}>
-                      <Users size={20} color="#e07856" />
+                      <Users size={20} color="#dc2626" />
                       <View style={styles.hierarchyHeaderText}>
                         <Text style={styles.hierarchyTitle}>
                           {role.title_croatian}
@@ -774,14 +761,14 @@ export default function ParticipantDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#ffffff',
     width: '100%',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
     padding: 20,
   },
   header: {
@@ -791,10 +778,12 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
     paddingTop: 60,
-    paddingBottom: 20,
-    paddingHorizontal: 20,
+    paddingBottom: 16,
+    paddingHorizontal: 16,
     zIndex: 100,
   },
   headerBackButton: {
@@ -807,21 +796,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
     elevation: 3,
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
     flex: 1,
   },
   errorText: {
     fontSize: 16,
-    color: '#e07856',
+    color: '#dc2626',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -849,75 +840,50 @@ const styles = StyleSheet.create({
     height: 280,
   },
   participantInfo: {
-    marginHorizontal: 0,
-    marginTop: -60,
-    paddingTop: 80,
-    paddingHorizontal: 32,
-    paddingBottom: 48,
+    padding: 20,
     backgroundColor: '#ffffff',
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 32,
-    elevation: 8,
-    marginBottom: 0,
+    borderBottomWidth: 8,
+    borderBottomColor: '#f3f4f6',
   },
   participantName: {
-    fontSize: 48,
-    fontWeight: '200',
-    color: '#1a1a1a',
-    marginBottom: 24,
-    letterSpacing: -2.5,
-    lineHeight: 52,
-    marginTop: 8,
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#111827',
+    marginBottom: 8,
   },
   participantNameCroatian: {
-    fontSize: 11,
-    fontWeight: '500',
-    color: '#b8b8b8',
-    marginBottom: 8,
-    letterSpacing: 3,
-    textTransform: 'uppercase',
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#111827',
+    marginBottom: 16,
   },
   participantDescription: {
-    fontSize: 19,
-    color: '#2a2a2a',
-    lineHeight: 32,
-    marginBottom: 20,
-    fontWeight: '300',
-    letterSpacing: 0.3,
+    fontSize: 16,
+    color: '#4b5563',
+    lineHeight: 26,
+    marginBottom: 8,
   },
   participantDescriptionCroatian: {
     fontSize: 15,
-    color: '#8a8a8a',
-    lineHeight: 26,
-    marginBottom: 40,
-    fontWeight: '300',
-    fontStyle: 'italic',
+    color: '#9ca3af',
+    lineHeight: 23,
+    marginBottom: 16,
   },
-  descriptionDivider: {
-    width: 60,
-    height: 2,
-    backgroundColor: '#e07856',
-    marginBottom: 32,
-  },
-  detailsContainer: {
-    gap: 20,
+  darkContainer: {
+    backgroundColor: '#1f2937',
+    borderRadius: 20,
+    padding: 20,
+    marginTop: 4,
   },
   detailCard: {
-    backgroundColor: '#fafaf8',
-    borderRadius: 24,
-    padding: 32,
-    marginTop: 0,
-    marginBottom: 20,
-    borderWidth: 0,
-    marginHorizontal: -8,
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.03,
-    shadowRadius: 16,
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
     elevation: 2,
   },
   detailCardHeader: {
@@ -938,13 +904,13 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   audioPlayButton: {
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     width: 32,
     height: 32,
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#e07856',
+    shadowColor: '#dc2626',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
@@ -960,32 +926,30 @@ const styles = StyleSheet.create({
   },
   visualizerBar: {
     width: 6,
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     borderRadius: 3,
   },
   detailLabel: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: '600',
-    color: '#b8b8b8',
+    color: '#6b7280',
     textTransform: 'uppercase',
-    letterSpacing: 2.5,
-    marginBottom: 12,
+    letterSpacing: 0.5,
+    marginBottom: 6,
   },
   detailText: {
-    fontSize: 15,
-    color: '#4a4a4a',
-    lineHeight: 24,
-    fontWeight: '300',
+    fontSize: 14,
+    color: '#9ca3af',
+    lineHeight: 20,
   },
   detailHint: {
     fontSize: 12,
-    color: '#c8c8c8',
+    color: '#9ca3af',
     fontStyle: 'italic',
-    fontWeight: '300',
   },
   detailTextExpanded: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#4b5563',
     lineHeight: 22,
     marginTop: 12,
     paddingTop: 12,
@@ -997,12 +961,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 8,
     marginTop: 16,
-    shadowColor: '#e07856',
+    shadowColor: '#dc2626',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
@@ -1014,30 +978,19 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   section: {
-    marginHorizontal: 0,
-    marginBottom: 0,
-    marginTop: 24,
-    padding: 32,
-    paddingTop: 48,
-    backgroundColor: '#fafaf8',
-    borderRadius: 0,
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
+    padding: 20,
+    backgroundColor: '#ffffff',
   },
   sectionTitle: {
-    fontSize: 36,
-    fontWeight: '200',
-    color: '#1a1a1a',
-    marginBottom: 8,
-    letterSpacing: -1.5,
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#111827',
+    marginBottom: 4,
   },
   sectionSubtitle: {
     fontSize: 14,
-    color: '#9a9a9a',
-    marginBottom: 40,
-    fontWeight: '300',
-    letterSpacing: 0.3,
-    lineHeight: 22,
+    color: '#6b7280',
+    marginBottom: 16,
   },
   emptyEvents: {
     padding: 40,
@@ -1055,40 +1008,37 @@ const styles = StyleSheet.create({
   },
   eventCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 20,
-    padding: 32,
-    borderWidth: 0,
+    borderRadius: 12,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
     width: '100%',
     maxWidth: 600,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 20,
-    elevation: 2,
-    marginHorizontal: 16,
   },
   eventTitle: {
-    fontSize: 24,
-    fontWeight: '300',
-    color: '#1a1a1a',
-    marginBottom: 8,
-    letterSpacing: -0.8,
+    fontSize: 17,
+    fontWeight: '600',
+    color: '#111827',
+    marginBottom: 2,
   },
   eventTitleLocal: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#e07856',
+    color: '#dc2626',
     marginBottom: 8,
   },
   eventRole: {
     fontSize: 13,
-    color: '#e07856',
+    color: '#dc2626',
     fontWeight: '600',
     marginBottom: 8,
   },
   eventDescription: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 20,
   },
   hierarchyGrid: {
@@ -1096,15 +1046,15 @@ const styles = StyleSheet.create({
   },
   hierarchyCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 20,
-    padding: 32,
-    borderWidth: 0,
+    borderRadius: 12,
+    padding: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 20,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
     elevation: 2,
-    marginHorizontal: 16,
+    borderLeftWidth: 4,
+    borderLeftColor: '#dc2626',
   },
   hierarchyHeader: {
     flexDirection: 'row',
@@ -1116,36 +1066,35 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   hierarchyTitle: {
-    fontSize: 24,
-    fontWeight: '300',
-    color: '#1a1a1a',
-    letterSpacing: -0.8,
-    marginBottom: 8,
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#dc2626',
   },
   hierarchyDescription: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 20,
     marginBottom: 8,
   },
   hierarchyViewUniform: {
     fontSize: 13,
-    color: '#e07856',
+    color: '#dc2626',
     fontWeight: '600',
   },
   instrumentsGrid: {
     gap: 12,
   },
   instrumentCard: {
-    backgroundColor: '#fafaf8',
-    borderRadius: 18,
-    padding: 24,
-    borderWidth: 0,
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    padding: 14,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.02,
-    shadowRadius: 12,
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
     elevation: 1,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   instrumentContent: {
     flex: 1,
@@ -1158,40 +1107,41 @@ const styles = StyleSheet.create({
   instrumentName: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
     marginLeft: 10,
     flex: 1,
   },
   instrumentDescription: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 20,
     marginBottom: 8,
   },
   instrumentViewMore: {
     fontSize: 13,
-    color: '#e07856',
+    color: '#dc2626',
     fontWeight: '500',
   },
   moreInfoButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: 'transparent',
-    borderRadius: 0,
+    justifyContent: 'center',
+    backgroundColor: '#dc2626',
+    borderRadius: 12,
     paddingVertical: 16,
-    paddingHorizontal: 0,
-    marginTop: 32,
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-    paddingTop: 24,
+    paddingHorizontal: 20,
+    marginTop: 16,
+    shadowColor: '#dc2626',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
   },
   moreInfoButtonText: {
-    fontSize: 14,
-    fontWeight: '400',
-    color: '#e07856',
-    letterSpacing: 0.5,
-    flex: 1,
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#ffffff',
+    marginLeft: 8,
   },
   modalContainer: {
     flex: 1,
@@ -1211,7 +1161,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
   },
   modalCloseButton: {
     paddingVertical: 6,
@@ -1220,7 +1170,7 @@ const styles = StyleSheet.create({
   modalCloseButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
   },
   modalContent: {
     flex: 1,
@@ -1229,18 +1179,18 @@ const styles = StyleSheet.create({
   modalParticipantName: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
     marginBottom: 8,
   },
   modalParticipantNameCroatian: {
     fontSize: 22,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     marginBottom: 16,
   },
   modalParticipantDescription: {
     fontSize: 16,
-    color: '#636e72',
+    color: '#4b5563',
     lineHeight: 26,
     marginBottom: 24,
   },
@@ -1261,16 +1211,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   formationContainer: {
-    backgroundColor: '#ffffff',
-    borderRadius: 24,
-    padding: 40,
-    borderWidth: 0,
-    marginHorizontal: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 20,
-    elevation: 2,
+    backgroundColor: '#f9fafb',
+    borderRadius: 16,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   formationRow: {
     flexDirection: 'row',
@@ -1292,79 +1237,76 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   formationColumnLabel: {
-    fontSize: 10,
-    fontWeight: '500',
-    color: '#c8c8c8',
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#dc2626',
     textTransform: 'uppercase',
-    letterSpacing: 2.5,
-    marginBottom: 20,
+    letterSpacing: 0.5,
+    marginBottom: 8,
     textAlign: 'center',
   },
   formationPerson: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 24,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    gap: 12,
-    borderWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.02,
-    shadowRadius: 12,
-    elevation: 1,
+    backgroundColor: '#f9fafb',
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    gap: 10,
+    borderWidth: 1.5,
+    borderColor: '#d1d5db',
   },
   formationPersonText: {
-    fontSize: 14,
-    color: '#4a4a4a',
-    fontWeight: '400',
-    letterSpacing: 0.2,
+    fontSize: 12,
+    color: '#4b5563',
+    fontWeight: '600',
   },
   formationCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#f5f5f5',
-    borderWidth: 0,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#ffffff',
+    borderWidth: 2,
+    borderColor: '#d1d5db',
     justifyContent: 'center',
     alignItems: 'center',
   },
   formationCircleLeader: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#fff7f0',
-    borderWidth: 0,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#fffbeb',
+    borderWidth: 3,
+    borderColor: '#f59e0b',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 4,
-    shadowColor: '#e07856',
+    shadowColor: '#f59e0b',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
+    marginVertical: 4,
   },
   formationPersonCaptain: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff7f0',
-    borderRadius: 28,
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    gap: 12,
-    borderWidth: 0,
-    shadowColor: '#e07856',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 2,
+    backgroundColor: '#fef3c7',
+    borderRadius: 24,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    gap: 10,
+    borderWidth: 2.5,
+    borderColor: '#f59e0b',
+    shadowColor: '#f59e0b',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    elevation: 4,
   },
   formationPersonCaptainText: {
-    fontSize: 14,
-    color: '#d86f4a',
-    fontWeight: '500',
-    letterSpacing: 0.3,
+    fontSize: 13,
+    color: '#d97706',
+    fontWeight: '700',
   },
   formationPersonFlag: {
     flexDirection: 'row',
@@ -1519,7 +1461,7 @@ const styles = StyleSheet.create({
   },
   formationLegendText: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     fontWeight: '500',
   },
   formationPositions: {
@@ -1563,44 +1505,41 @@ const styles = StyleSheet.create({
   },
   formationHeader: {
     width: '100%',
-    marginBottom: 32,
+    marginBottom: 16,
   },
   formationHeaderContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    backgroundColor: 'transparent',
-    borderRadius: 0,
-    borderWidth: 0,
+    padding: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   formationDescHeader: {
     width: '100%',
-    marginTop: 24,
-    marginBottom: 20,
+    marginTop: 16,
+    marginBottom: 12,
   },
   formationDescHeaderContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 20,
-    paddingHorizontal: 24,
-    backgroundColor: '#fafaf8',
-    borderRadius: 20,
-    borderWidth: 0,
-    borderLeftWidth: 4,
-    borderLeftColor: '#d4cfc7',
+    padding: 14,
+    backgroundColor: '#1f2937',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#374151',
   },
   formationDescTitleContainer: {
     flex: 1,
   },
   formationDescTitle: {
-    fontSize: 16,
-    fontWeight: '400',
-    color: '#1a1a1a',
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#ffffff',
     marginBottom: 2,
-    letterSpacing: -0.2,
   },
   formationDescSubtitle: {
     fontSize: 12,
@@ -1613,7 +1552,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f4',
     borderRadius: 10,
     borderLeftWidth: 3,
-    borderLeftColor: '#e07856',
+    borderLeftColor: '#dc2626',
   },
   zogaInfoContent: {
     flexDirection: 'row',
@@ -1678,7 +1617,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -1692,30 +1631,28 @@ const styles = StyleSheet.create({
   roleText: {
     flex: 1,
     fontSize: 15,
-    color: '#2d3436',
+    color: '#111827',
     lineHeight: 22,
     fontWeight: '600',
   },
   roleSubtext: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     fontWeight: '400',
     fontStyle: 'italic',
   },
   uniformHeader: {
     width: '100%',
-    marginBottom: 16,
+    marginBottom: 8,
   },
   uniformHeaderContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 20,
-    paddingHorizontal: 24,
-    backgroundColor: '#fafaf8',
-    borderRadius: 20,
-    borderWidth: 0,
-    borderLeftWidth: 4,
-    borderLeftColor: '#e07856',
+    padding: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
 });

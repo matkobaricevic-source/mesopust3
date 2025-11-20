@@ -101,7 +101,7 @@ export default function InstrumentDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#e07856" />
+        <ActivityIndicator size="large" color="#dc2626" />
       </View>
     );
   }
@@ -146,7 +146,7 @@ export default function InstrumentDetailScreen() {
         <View style={styles.instrumentInfo}>
           <View style={styles.topRow}>
             <View style={styles.categoryBadge}>
-              <Music size={16} color="#e07856" />
+              <Music size={16} color="#dc2626" />
               <Text style={styles.categoryText}>Instrument</Text>
             </View>
             {instrument.audio_url && Platform.OS === 'web' && (
@@ -174,7 +174,7 @@ export default function InstrumentDetailScreen() {
 
           {instrument.playing_technique && (
             <View style={styles.techniqueCard}>
-              <Disc3 size={20} color="#e07856" />
+              <Disc3 size={20} color="#dc2626" />
               <View style={styles.techniqueContent}>
                 <Text style={styles.techniqueLabel}>Tehnika sviranja</Text>
                 {instrument.playing_technique_croatian && (
@@ -186,7 +186,7 @@ export default function InstrumentDetailScreen() {
 
           {instrument.event_specific_notes && (
             <View style={styles.notesCard}>
-              <Music size={16} color="#e07856" />
+              <Music size={16} color="#dc2626" />
               <Text style={styles.notesText}>{instrument.event_specific_notes}</Text>
             </View>
           )}
@@ -222,13 +222,13 @@ export default function InstrumentDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
     padding: 20,
   },
   header: {
@@ -238,7 +238,9 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 16,
@@ -265,12 +267,12 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     flex: 1,
   },
   errorText: {
     fontSize: 16,
-    color: '#e07856',
+    color: '#dc2626',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -294,20 +296,10 @@ const styles = StyleSheet.create({
     height: 280,
   },
   instrumentInfo: {
-    marginHorizontal: 0,
-    marginTop: -60,
-    paddingTop: 80,
-    paddingHorizontal: 32,
-    paddingBottom: 48,
+    padding: 20,
     backgroundColor: '#ffffff',
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 32,
-    elevation: 8,
-    marginBottom: 0,
+    borderBottomWidth: 8,
+    borderBottomColor: '#f3f4f6',
   },
   topRow: {
     flexDirection: 'row',
@@ -327,14 +319,14 @@ const styles = StyleSheet.create({
   categoryText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   audioButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 8,
@@ -346,32 +338,25 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   instrumentName: {
-    fontSize: 48,
-    fontWeight: '200',
-    color: '#1a1a1a',
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#111827',
     marginBottom: 8,
-    letterSpacing: -2.5,
-    lineHeight: 52,
   },
   instrumentNameLocal: {
-    fontSize: 11,
-    fontWeight: '500',
-    color: '#b8b8b8',
-    marginBottom: 32,
-    letterSpacing: 3,
-    textTransform: 'uppercase',
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#dc2626',
+    marginBottom: 12,
   },
   instrumentDescription: {
-    fontSize: 19,
-    color: '#2a2a2a',
-    lineHeight: 32,
-    fontWeight: '300',
-    letterSpacing: 0.3,
-    marginBottom: 40,
+    fontSize: 16,
+    color: '#4b5563',
+    lineHeight: 24,
   },
   instrumentDescriptionLocal: {
     fontSize: 15,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 22,
     marginTop: 8,
     fontStyle: 'italic',
@@ -413,7 +398,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 12,
     borderLeftWidth: 3,
-    borderLeftColor: '#e07856',
+    borderLeftColor: '#dc2626',
     gap: 8,
   },
   notesText: {
@@ -423,16 +408,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   section: {
-    marginHorizontal: 16,
-    marginBottom: 16,
-    padding: 24,
-    backgroundColor: '#ffffff',
-    borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 3,
+    padding: 20,
+    borderBottomWidth: 8,
+    borderBottomColor: '#f3f4f6',
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -443,7 +421,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
   },
   participantCard: {
     backgroundColor: '#ffffff',
@@ -455,7 +433,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
     borderLeftWidth: 4,
-    borderLeftColor: '#e07856',
+    borderLeftColor: '#dc2626',
   },
   participantHeader: {
     marginBottom: 8,
@@ -463,17 +441,17 @@ const styles = StyleSheet.create({
   participantName: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
   },
   participantNameCroatian: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#e07856',
+    color: '#dc2626',
     marginTop: 2,
   },
   participantDescription: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 20,
   },
 });

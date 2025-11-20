@@ -185,7 +185,7 @@ export default function EventDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#e07856" />
+        <ActivityIndicator size="large" color="#dc2626" />
       </View>
     );
   }
@@ -274,7 +274,7 @@ export default function EventDetailScreen() {
               activeOpacity={0.7}>
               <View style={styles.collapsibleHeader}>
                 <View style={styles.collapsibleTitleContainer}>
-                  <Info size={20} color="#e07856" />
+                  <Info size={20} color="#dc2626" />
                   <Text style={styles.collapsibleTitle}>IZVEDBA POZIVANJA NA ZEČU</Text>
                 </View>
                 {showPozivanjeInfo ? (
@@ -327,7 +327,7 @@ export default function EventDetailScreen() {
                 }}
                 activeOpacity={0.7}>
                 <View style={styles.costumeNoteHeader}>
-                  <Info size={18} color="#e07856" />
+                  <Info size={18} color="#dc2626" />
                   <Text style={styles.performanceNoteText}>Napovidanje (izvedba)</Text>
                 </View>
               </TouchableOpacity>
@@ -418,7 +418,7 @@ export default function EventDetailScreen() {
                   </Text>
                 </View>
                 <Animated.View style={chevronAnimatedStyle}>
-                  <ChevronDown size={24} color="#e07856" />
+                  <ChevronDown size={24} color="#dc2626" />
                 </Animated.View>
               </View>
             </TouchableOpacity>
@@ -468,7 +468,7 @@ export default function EventDetailScreen() {
                           </View>
                           {step.step_number === 3 && event?.title === 'Napovidanje' && (
                             <View style={styles.stationTimeNote}>
-                              <Clock size={14} color="#e07856" />
+                              <Clock size={14} color="#dc2626" />
                               <Text style={styles.stationTimeNoteText}>
                                 1. Četrtak 22:00 • 2. Četrtak 23:00 • 3. Četrtak 00:00
                               </Text>
@@ -494,7 +494,7 @@ export default function EventDetailScreen() {
                           activeOpacity={0.7}>
                           <View style={styles.timelineMarker}>
                             <View style={styles.timelinePerformanceMarker}>
-                              <Info size={16} color="#e07856" />
+                              <Info size={16} color="#dc2626" />
                             </View>
                             <View style={styles.timelineLine} />
                           </View>
@@ -510,7 +510,7 @@ export default function EventDetailScreen() {
                               <Text style={styles.performanceTitle}>
                                 {napovidanjePerformance.title_local || napovidanjePerformance.title}
                               </Text>
-                              <ChevronRight size={20} color="#e07856" style={styles.performanceChevron} />
+                              <ChevronRight size={20} color="#dc2626" style={styles.performanceChevron} />
                             </View>
                           </View>
                         </TouchableOpacity>
@@ -541,7 +541,7 @@ export default function EventDetailScreen() {
                   </Text>
                 </View>
                 <Animated.View style={chevronCrossroadsAnimatedStyle}>
-                  <ChevronDown size={24} color="#e07856" />
+                  <ChevronDown size={24} color="#dc2626" />
                 </Animated.View>
               </View>
             </TouchableOpacity>
@@ -668,7 +668,7 @@ export default function EventDetailScreen() {
                   onPress={() => handleParticipantPress(participant)}
                   activeOpacity={0.7}>
                   <View style={styles.participantHeader}>
-                    <Users size={20} color="#e07856" />
+                    <Users size={20} color="#dc2626" />
                     <View style={styles.participantHeaderText}>
                       <Text style={styles.participantName}>
                         {participant.name}
@@ -729,7 +729,7 @@ export default function EventDetailScreen() {
             {event.title === 'Zeča' && (
               <View style={styles.criticalNoteCard}>
                 <View style={styles.criticalNoteHeader}>
-                  <AlertCircle size={20} color="#e07856" />
+                  <AlertCircle size={20} color="#dc2626" />
                   <Text style={styles.criticalNoteTitle}>Očuvanje tradicije</Text>
                 </View>
                 <Text style={styles.criticalNoteText}>
@@ -835,14 +835,14 @@ export default function EventDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f5f5f7',
     width: '100%',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
     padding: 20,
   },
   heroContainer: {
@@ -890,7 +890,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: '#e07856',
+    color: '#dc2626',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -919,30 +919,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#1f2937',
   },
   eventInfo: {
-    marginTop: -60,
-    marginHorizontal: 0,
-    paddingTop: 80,
-    paddingHorizontal: 32,
-    paddingBottom: 48,
+    marginTop: -30,
+    marginHorizontal: 16,
+    padding: 24,
     backgroundColor: '#ffffff',
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 32,
-    elevation: 8,
-    marginBottom: 0,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    marginBottom: 16,
   },
   eventTitle: {
-    fontSize: 48,
-    fontWeight: '300',
+    fontSize: 32,
+    fontWeight: '700',
     color: '#ffffff',
     marginBottom: 4,
-    letterSpacing: -2,
-    lineHeight: 52,
   },
   eventTitleLocal: {
     fontSize: 20,
@@ -950,18 +940,18 @@ const styles = StyleSheet.create({
     color: '#fca5a5',
   },
   eventDescription: {
-    fontSize: 19,
-    color: '#2a2a2a',
-    lineHeight: 32,
-    marginBottom: 32,
-    fontWeight: '300',
-    letterSpacing: 0.3,
+    fontSize: 16,
+    color: '#4b5563',
+    lineHeight: 26,
+    marginBottom: 8,
   },
   costumeNoteCard: {
-    backgroundColor: '#faf8f5',
-    borderRadius: 16,
-    padding: 18,
+    backgroundColor: '#f9fafb',
+    borderRadius: 14,
+    padding: 16,
     marginTop: 16,
+    borderWidth: 1.5,
+    borderColor: '#e5e7eb',
   },
   costumeNoteHeader: {
     flexDirection: 'row',
@@ -973,8 +963,8 @@ const styles = StyleSheet.create({
   costumeNoteText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#636e72',
-    letterSpacing: 0.3,
+    color: '#6b7280',
+    letterSpacing: 0.5,
   },
   costumeNoteDescription: {
     fontSize: 13,
@@ -1001,7 +991,7 @@ const styles = StyleSheet.create({
   performanceNoteText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     letterSpacing: 0.5,
   },
   infoNoteCard: {
@@ -1021,7 +1011,7 @@ const styles = StyleSheet.create({
   infoNoteText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#636e72',
+    color: '#6b7280',
     textAlign: 'center',
     flex: 1,
   },
@@ -1040,7 +1030,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
     borderLeftWidth: 4,
-    borderLeftColor: '#e07856',
+    borderLeftColor: '#dc2626',
   },
   subEventContent: {
     flex: 1,
@@ -1048,45 +1038,39 @@ const styles = StyleSheet.create({
   subEventTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
     marginBottom: 2,
   },
   subEventTitleLocal: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#e07856',
+    color: '#dc2626',
     marginBottom: 4,
   },
   subEventDescription: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 20,
   },
   section: {
-    marginHorizontal: 0,
-    marginBottom: 0,
-    marginTop: 24,
-    padding: 32,
-    paddingTop: 48,
-    backgroundColor: '#fafaf8',
-    borderRadius: 0,
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
+    marginHorizontal: 16,
+    marginBottom: 16,
+    padding: 24,
+    backgroundColor: '#ffffff',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   sectionTitle: {
-    fontSize: 36,
-    fontWeight: '200',
-    color: '#1a1a1a',
-    marginBottom: 8,
-    letterSpacing: -1.5,
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#111827',
+    marginBottom: 4,
   },
   sectionSubtitle: {
     fontSize: 14,
-    color: '#9a9a9a',
-    marginBottom: 32,
-    fontWeight: '300',
-    letterSpacing: 0.3,
-    lineHeight: 22,
+    color: '#6b7280',
+    marginBottom: 16,
   },
   categoriesGrid: {
     gap: 12,
@@ -1094,11 +1078,11 @@ const styles = StyleSheet.create({
   categoryCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
-    borderRadius: 16,
-    padding: 18,
+    backgroundColor: '#f9fafb',
+    borderRadius: 14,
+    padding: 16,
     borderLeftWidth: 4,
-    borderLeftColor: '#e07856',
+    borderLeftColor: '#dc2626',
   },
   categoryCardIndented: {
     marginLeft: 24,
@@ -1120,7 +1104,7 @@ const styles = StyleSheet.create({
   sameDayText: {
     fontSize: 13,
     fontWeight: '500',
-    color: '#636e72',
+    color: '#6b7280',
     fontStyle: 'italic',
   },
   categoryContent: {
@@ -1129,19 +1113,19 @@ const styles = StyleSheet.create({
   categoryTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
     marginBottom: 2,
   },
   categoryTitleLocal: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#e07856',
+    color: '#dc2626',
     marginBottom: 4,
   },
   categoryDescription: {
     fontSize: 14,
-    color: '#636e72',
-    lineHeight: 22,
+    color: '#6b7280',
+    lineHeight: 20,
   },
   participantsGrid: {
     gap: 12,
@@ -1149,9 +1133,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   participantCard: {
-    backgroundColor: '#faf8f5',
-    borderRadius: 16,
-    padding: 20,
+    backgroundColor: '#f9fafb',
+    borderRadius: 14,
+    padding: 18,
     width: '100%',
     maxWidth: 600,
   },
@@ -1167,31 +1151,31 @@ const styles = StyleSheet.create({
   participantName: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
   },
   participantNameCroatian: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#e07856',
+    color: '#dc2626',
     marginTop: 2,
   },
   participantRole: {
     fontSize: 13,
-    color: '#e07856',
+    color: '#dc2626',
     fontWeight: '600',
     marginBottom: 8,
     fontStyle: 'italic',
   },
   participantDescription: {
     fontSize: 14,
-    color: '#636e72',
-    lineHeight: 22,
+    color: '#6b7280',
+    lineHeight: 20,
   },
   relatedEventButtonMain: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     borderRadius: 14,
     paddingVertical: 16,
     paddingHorizontal: 24,
@@ -1207,16 +1191,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e07856',
-    borderRadius: 16,
-    paddingVertical: 18,
+    backgroundColor: '#dc2626',
+    borderRadius: 14,
+    paddingVertical: 16,
     paddingHorizontal: 24,
     marginTop: 20,
-    shadowColor: '#e07856',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 4,
   },
   moreInfoButtonText: {
     fontSize: 16,
@@ -1242,7 +1221,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
   },
   modalCloseButton: {
     paddingVertical: 6,
@@ -1251,7 +1230,7 @@ const styles = StyleSheet.create({
   modalCloseButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
   },
   modalContent: {
     flex: 1,
@@ -1260,18 +1239,18 @@ const styles = StyleSheet.create({
   modalEventTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
     marginBottom: 8,
   },
   modalEventTitleLocal: {
     fontSize: 22,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     marginBottom: 16,
   },
   modalEventDescription: {
     fontSize: 16,
-    color: '#636e72',
+    color: '#4b5563',
     lineHeight: 26,
     marginBottom: 24,
   },
@@ -1316,7 +1295,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -1326,7 +1305,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: '#fef2f2',
     borderWidth: 2,
-    borderColor: '#e07856',
+    borderColor: '#dc2626',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -1343,10 +1322,12 @@ const styles = StyleSheet.create({
   },
   timelineContent: {
     flex: 1,
-    backgroundColor: '#faf8f5',
-    borderRadius: 12,
+    backgroundColor: '#f9fafb',
+    borderRadius: 8,
     overflow: 'hidden',
     marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   timelineImage: {
     width: '100%',
@@ -1359,11 +1340,11 @@ const styles = StyleSheet.create({
   timelineStepTitle: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#2d3436',
-    lineHeight: 22,
+    color: '#374151',
+    lineHeight: 20,
   },
   stationNumber: {
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
   },
   stationNumberText: {
     fontSize: 13,
@@ -1390,7 +1371,7 @@ const styles = StyleSheet.create({
   performanceTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     flex: 1,
   },
   performanceChevron: {
@@ -1437,7 +1418,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   crossroadNumber: {
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
   },
   crossroadNumberText: {
     fontSize: 13,
@@ -1486,7 +1467,7 @@ const styles = StyleSheet.create({
   readMoreText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
   },
   criticalNoteCard: {
     backgroundColor: '#fef2f2',
@@ -1505,7 +1486,7 @@ const styles = StyleSheet.create({
   criticalNoteTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#e07856',
+    color: '#dc2626',
     letterSpacing: 0.3,
   },
   criticalNoteText: {
@@ -1536,7 +1517,7 @@ const styles = StyleSheet.create({
   collapsibleTitle: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#e07856',
+    color: '#dc2626',
     letterSpacing: 0.3,
     flex: 1,
   },
@@ -1549,7 +1530,7 @@ const styles = StyleSheet.create({
   collapsibleQuote: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     fontStyle: 'italic',
     marginBottom: 12,
     lineHeight: 24,
@@ -1563,7 +1544,7 @@ const styles = StyleSheet.create({
   },
   collapsibleDescription: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#4b5563',
     lineHeight: 22,
     marginBottom: 12,
   },

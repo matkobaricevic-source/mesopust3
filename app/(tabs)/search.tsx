@@ -273,14 +273,14 @@ export default function SearchScreen() {
   }
 
   function getResultIcon(type: string) {
-    if (type === 'event') return <Calendar size={18} color="#e07856" />;
-    if (type === 'participant') return <Users size={18} color="#e07856" />;
-    if (type === 'item') return <Package size={18} color="#e07856" />;
-    if (type === 'glossary') return <BookOpen size={18} color="#e07856" />;
-    if (type === 'instrument') return <Music size={18} color="#e07856" />;
-    if (type === 'uniform') return <Shirt size={18} color="#e07856" />;
-    if (type === 'role') return <Crown size={18} color="#e07856" />;
-    return <Package size={18} color="#e07856" />;
+    if (type === 'event') return <Calendar size={18} color="#dc2626" />;
+    if (type === 'participant') return <Users size={18} color="#dc2626" />;
+    if (type === 'item') return <Package size={18} color="#dc2626" />;
+    if (type === 'glossary') return <BookOpen size={18} color="#dc2626" />;
+    if (type === 'instrument') return <Music size={18} color="#dc2626" />;
+    if (type === 'uniform') return <Shirt size={18} color="#dc2626" />;
+    if (type === 'role') return <Crown size={18} color="#dc2626" />;
+    return <Package size={18} color="#dc2626" />;
   }
 
   return (
@@ -307,7 +307,7 @@ export default function SearchScreen() {
 
       {loading && (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="small" color="#e07856" />
+          <ActivityIndicator size="small" color="#dc2626" />
         </View>
       )}
 
@@ -366,12 +366,12 @@ export default function SearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
   },
   header: {
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f5f5f7',
     paddingTop: 60,
-    paddingBottom: 24,
+    paddingBottom: 20,
     width: '100%',
     alignItems: 'center',
   },
@@ -381,33 +381,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   headerTitle: {
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: fonts.title,
-    color: '#2d3436',
-    letterSpacing: -0.5,
+    color: '#111827',
   },
   searchContainer: {
     padding: 16,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
   },
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
     paddingHorizontal: 16,
-    paddingVertical: 14,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 2,
+    paddingVertical: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   searchInput: {
     flex: 1,
     marginLeft: 12,
     fontSize: 16,
-    color: '#2d3436',
+    color: '#111827',
   },
   loadingContainer: {
     padding: 20,
@@ -422,7 +420,7 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#636e72',
+    color: '#4b5563',
     marginTop: 16,
   },
   emptySubtext: {
@@ -436,14 +434,16 @@ const styles = StyleSheet.create({
   },
   resultCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 16,
-    padding: 18,
+    borderRadius: 12,
+    padding: 16,
     marginBottom: 12,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   resultHeader: {
     flexDirection: 'row',
@@ -453,7 +453,7 @@ const styles = StyleSheet.create({
   resultType: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#636e72',
+    color: '#6b7280',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginLeft: 6,
@@ -461,18 +461,18 @@ const styles = StyleSheet.create({
   resultTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
     marginBottom: 4,
   },
   resultTitleLocal: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#e07856',
+    color: '#dc2626',
     marginBottom: 8,
   },
   resultDescription: {
     fontSize: 14,
-    color: '#636e72',
-    lineHeight: 22,
+    color: '#6b7280',
+    lineHeight: 20,
   },
 });

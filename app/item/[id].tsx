@@ -88,7 +88,7 @@ export default function ItemDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#e07856" />
+        <ActivityIndicator size="large" color="#dc2626" />
       </View>
     );
   }
@@ -132,7 +132,7 @@ export default function ItemDetailScreen() {
 
         <View style={styles.itemInfo}>
           <View style={styles.categoryBadge}>
-            <Package size={16} color="#e07856" />
+            <Package size={16} color="#dc2626" />
             <Text style={styles.categoryText}>{getCategoryLabel(item.category)}</Text>
           </View>
 
@@ -203,14 +203,14 @@ export default function ItemDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
     width: '100%',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
     padding: 20,
   },
   header: {
@@ -220,7 +220,9 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 16,
@@ -236,21 +238,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
     elevation: 3,
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     flex: 1,
   },
   errorText: {
     fontSize: 16,
-    color: '#e07856',
+    color: '#dc2626',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -275,20 +279,10 @@ const styles = StyleSheet.create({
     height: 280,
   },
   itemInfo: {
-    marginHorizontal: 0,
-    marginTop: -60,
-    paddingTop: 80,
-    paddingHorizontal: 32,
-    paddingBottom: 48,
+    padding: 20,
     backgroundColor: '#ffffff',
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 32,
-    elevation: 8,
-    marginBottom: 0,
+    borderBottomWidth: 8,
+    borderBottomColor: '#f3f4f6',
   },
   categoryBadge: {
     flexDirection: 'row',
@@ -304,51 +298,38 @@ const styles = StyleSheet.create({
   categoryText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   itemName: {
-    fontSize: 48,
-    fontWeight: '200',
-    color: '#1a1a1a',
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#111827',
     marginBottom: 8,
-    letterSpacing: -2.5,
-    lineHeight: 52,
   },
   itemNameLocal: {
-    fontSize: 11,
-    fontWeight: '500',
-    color: '#b8b8b8',
-    marginBottom: 32,
-    letterSpacing: 3,
-    textTransform: 'uppercase',
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#dc2626',
+    marginBottom: 12,
   },
   itemDescription: {
-    fontSize: 19,
-    color: '#2a2a2a',
-    lineHeight: 32,
-    fontWeight: '300',
-    letterSpacing: 0.3,
-    marginBottom: 40,
+    fontSize: 16,
+    color: '#4b5563',
+    lineHeight: 24,
   },
   itemDescriptionLocal: {
     fontSize: 15,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 22,
     marginTop: 8,
     fontStyle: 'italic',
   },
   section: {
-    marginHorizontal: 0,
-    marginBottom: 0,
-    marginTop: 24,
-    padding: 32,
-    paddingTop: 48,
-    backgroundColor: '#fafaf8',
-    borderRadius: 0,
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
+    padding: 20,
+    borderBottomWidth: 8,
+    borderBottomColor: '#f3f4f6',
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -359,11 +340,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
   },
   sectionSubtitle: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     marginBottom: 16,
   },
   participantsGrid: {
@@ -381,7 +362,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
     borderLeftWidth: 4,
-    borderLeftColor: '#e07856',
+    borderLeftColor: '#dc2626',
     width: '100%',
     maxWidth: 600,
   },
@@ -391,24 +372,24 @@ const styles = StyleSheet.create({
   participantName: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
   },
   participantNameCroatian: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#e07856',
+    color: '#dc2626',
     marginTop: 2,
   },
   usageNotes: {
     fontSize: 13,
-    color: '#e07856',
+    color: '#dc2626',
     fontWeight: '600',
     marginBottom: 8,
     fontStyle: 'italic',
   },
   participantDescription: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 20,
   },
   emptySection: {
@@ -420,7 +401,7 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#636e72',
+    color: '#4b5563',
     marginTop: 16,
   },
   emptySubtext: {

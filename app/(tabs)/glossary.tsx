@@ -20,7 +20,7 @@ export default function InfoScreen() {
       <View style={styles.content}>
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MapPin size={24} color="#e07856" />
+            <MapPin size={24} color="#dc2626" />
             <Text style={styles.sectionTitle}>Lokacija</Text>
           </View>
           <Text style={styles.sectionText}>
@@ -32,7 +32,7 @@ export default function InfoScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <CalendarIcon size={24} color="#e07856" />
+            <CalendarIcon size={24} color="#dc2626" />
             <Text style={styles.sectionTitle}>Što je Mesopust?</Text>
           </View>
           <Text style={styles.sectionText}>
@@ -45,7 +45,7 @@ export default function InfoScreen() {
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Heart size={24} color="#e07856" />
+            <Heart size={24} color="#dc2626" />
             <Text style={styles.sectionTitle}>Kulturni značaj</Text>
           </View>
           <Text style={styles.sectionText}>
@@ -69,14 +69,13 @@ export default function InfoScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f5f5f7',
   },
   header: {
     paddingTop: 60,
-    paddingBottom: 24,
+    paddingBottom: 20,
     width: '100%',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
   },
   headerContent: {
     width: '100%',
@@ -84,10 +83,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   headerTitle: {
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: fonts.title,
-    color: '#2d3436',
-    letterSpacing: -0.5,
+    color: '#111827',
   },
   content: {
     padding: 20,
@@ -96,13 +94,10 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
     backgroundColor: '#ffffff',
-    borderRadius: 16,
+    borderRadius: 20,
     padding: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 3,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -110,26 +105,26 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
     marginLeft: 12,
   },
   sectionText: {
     fontSize: 16,
-    color: '#636e72',
+    color: '#374151',
     lineHeight: 26,
     marginBottom: 12,
   },
   sectionTextCroatian: {
     fontSize: 15,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 24,
     fontStyle: 'italic',
   },
   bold: {
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
   },
   participantCard: {
     backgroundColor: '#ffffff',
@@ -147,7 +142,7 @@ const styles = StyleSheet.create({
   participantTitle: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#2d3436',
+    color: '#111827',
     marginBottom: 8,
   },
   participantText: {
@@ -158,27 +153,31 @@ const styles = StyleSheet.create({
   },
   participantTextCroatian: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     lineHeight: 22,
     fontStyle: 'italic',
   },
   footer: {
     marginTop: 20,
     paddingTop: 20,
+    borderTopWidth: 1,
+    borderTopColor: '#e5e7eb',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
-    borderRadius: 16,
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
     padding: 24,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
   footerText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
     textAlign: 'center',
   },
   footerTextCroatian: {
     fontSize: 15,
-    color: '#636e72',
+    color: '#6b7280',
     marginTop: 4,
     textAlign: 'center',
     fontStyle: 'italic',

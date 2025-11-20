@@ -80,7 +80,7 @@ export default function UniformDetailScreen() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#e07856" />
+        <ActivityIndicator size="large" color="#dc2626" />
       </View>
     );
   }
@@ -282,7 +282,7 @@ export default function UniformDetailScreen() {
                             style={styles.moreInfoButton}
                             onPress={() => router.push(item.additional_info_url as any)}>
                             <Text style={styles.moreInfoButtonText}>Saznaj više</Text>
-                            <ChevronRight size={18} color="#e07856" />
+                            <ChevronRight size={18} color="#dc2626" />
                           </TouchableOpacity>
                         )}
                       </View>
@@ -313,7 +313,7 @@ export default function UniformDetailScreen() {
                   )}
                   <View style={styles.instrumentContent}>
                     <View style={styles.instrumentHeader}>
-                      <Disc3 size={18} color="#e07856" />
+                      <Disc3 size={18} color="#dc2626" />
                       <Text style={styles.instrumentName}>
                         {instrument.name_croatian}
                       </Text>
@@ -325,7 +325,7 @@ export default function UniformDetailScreen() {
                     )}
                     {instrument.playing_technique_croatian && (
                       <View style={styles.techniqueBadge}>
-                        <Music size={14} color="#e07856" />
+                        <Music size={14} color="#dc2626" />
                         <Text style={styles.techniqueBadgeText}>
                           {instrument.playing_technique_croatian}
                         </Text>
@@ -345,13 +345,13 @@ export default function UniformDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#f9fafb',
     padding: 20,
   },
   header: {
@@ -361,7 +361,9 @@ const styles = StyleSheet.create({
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
     paddingTop: 60,
     paddingBottom: 16,
     paddingHorizontal: 16,
@@ -377,21 +379,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
     elevation: 3,
   },
   headerTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     flex: 1,
   },
   errorText: {
     fontSize: 16,
-    color: '#e07856',
+    color: '#dc2626',
     textAlign: 'center',
     marginBottom: 20,
   },
@@ -411,70 +415,41 @@ const styles = StyleSheet.create({
     paddingTop: 100,
   },
   roleInfo: {
-    marginHorizontal: 0,
-    marginTop: -60,
-    paddingTop: 80,
-    paddingHorizontal: 32,
-    paddingBottom: 48,
+    padding: 20,
     backgroundColor: '#ffffff',
-    borderTopLeftRadius: 32,
-    borderTopRightRadius: 32,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 32,
-    elevation: 8,
-    marginBottom: 0,
+    borderBottomWidth: 8,
+    borderBottomColor: '#f3f4f6',
   },
   roleTitle: {
-    fontSize: 48,
-    fontWeight: '200',
-    color: '#1a1a1a',
-    marginBottom: 8,
-    letterSpacing: -2.5,
-    lineHeight: 52,
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#111827',
+    marginBottom: 4,
   },
   roleTitleCroatian: {
-    fontSize: 11,
-    fontWeight: '500',
-    color: '#b8b8b8',
-    marginBottom: 32,
-    letterSpacing: 3,
-    textTransform: 'uppercase',
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#dc2626',
+    marginBottom: 12,
   },
   roleDescription: {
-    fontSize: 19,
-    color: '#2a2a2a',
-    lineHeight: 32,
-    fontWeight: '300',
-    letterSpacing: 0.3,
-    marginBottom: 40,
+    fontSize: 16,
+    color: '#4b5563',
+    lineHeight: 24,
   },
   section: {
-    marginHorizontal: 0,
-    marginBottom: 0,
-    marginTop: 24,
-    padding: 32,
-    paddingTop: 48,
-    backgroundColor: '#fafaf8',
-    borderRadius: 0,
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
+    padding: 20,
   },
   sectionTitle: {
-    fontSize: 36,
-    fontWeight: '200',
-    color: '#1a1a1a',
-    marginBottom: 8,
-    letterSpacing: -1.5,
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#111827',
+    marginBottom: 4,
   },
   sectionSubtitle: {
     fontSize: 14,
-    color: '#9a9a9a',
-    marginBottom: 32,
-    fontWeight: '300',
-    letterSpacing: 0.3,
-    lineHeight: 22,
+    color: '#6b7280',
+    marginBottom: 16,
   },
   emptyUniform: {
     padding: 40,
@@ -500,14 +475,13 @@ const styles = StyleSheet.create({
   },
   uniformItem: {
     backgroundColor: '#ffffff',
-    borderRadius: 20,
-    padding: 28,
-    marginHorizontal: 16,
+    borderRadius: 12,
+    padding: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 20,
-    elevation: 2,
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   uniformItemHeader: {
     flexDirection: 'row',
@@ -518,7 +492,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -535,24 +509,24 @@ const styles = StyleSheet.create({
   uniformItemTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#2d3436',
+    color: '#111827',
     marginBottom: 2,
   },
   uniformItemSecondaryName: {
     fontSize: 15,
     fontWeight: '400',
-    color: '#636e72',
+    color: '#6b7280',
   },
   uniformItemSubtitle: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     fontStyle: 'italic',
     marginBottom: 8,
     marginLeft: 44,
   },
   uniformItemDescription: {
     fontSize: 15,
-    color: '#636e72',
+    color: '#4b5563',
     lineHeight: 22,
     marginLeft: 44,
     marginBottom: 12,
@@ -573,7 +547,7 @@ const styles = StyleSheet.create({
   moreInfoButtonText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     marginRight: 4,
   },
   instrumentsGrid: {
@@ -604,19 +578,19 @@ const styles = StyleSheet.create({
   instrumentName: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     marginLeft: 8,
     flex: 1,
   },
   instrumentNameEnglish: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     fontStyle: 'italic',
     marginBottom: 8,
   },
   instrumentDescription: {
     fontSize: 15,
-    color: '#636e72',
+    color: '#4b5563',
     lineHeight: 22,
     marginBottom: 8,
   },
@@ -633,7 +607,7 @@ const styles = StyleSheet.create({
   techniqueBadgeText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#e07856',
+    color: '#dc2626',
     marginLeft: 6,
   },
   rolesHeader: {
@@ -672,7 +646,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#e07856',
+    backgroundColor: '#dc2626',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -686,13 +660,13 @@ const styles = StyleSheet.create({
   roleText: {
     flex: 1,
     fontSize: 15,
-    color: '#2d3436',
+    color: '#111827',
     lineHeight: 22,
     fontWeight: '600',
   },
   roleSubtext: {
     fontSize: 14,
-    color: '#636e72',
+    color: '#6b7280',
     fontWeight: '400',
     fontStyle: 'italic',
   },
