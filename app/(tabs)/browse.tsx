@@ -445,17 +445,17 @@ export default function ParticipantsScreen() {
                               </TouchableOpacity>
                               <TouchableOpacity
                                 style={styles.formationMember}
-                                onPress={() => handleFormationRolePress('Trumbeta')}
-                                activeOpacity={0.7}
-                              >
-                                <Text style={styles.formationMemberText}>Manja Trumbeta</Text>
-                              </TouchableOpacity>
-                              <TouchableOpacity
-                                style={styles.formationMember}
                                 onPress={() => handleFormationRolePress('Odgovaralica')}
                                 activeOpacity={0.7}
                               >
                                 <Text style={styles.formationMemberText}>Odgovaralica</Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity
+                                style={styles.formationMember}
+                                onPress={() => handleFormationRolePress('Trumbeta')}
+                                activeOpacity={0.7}
+                              >
+                                <Text style={styles.formationMemberText}>Manja Trumbeta</Text>
                               </TouchableOpacity>
                               <TouchableOpacity
                                 style={styles.formationMember}
