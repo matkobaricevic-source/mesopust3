@@ -5,7 +5,7 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
-import { MapPin, Calendar as CalendarIcon, Users, Heart } from 'lucide-react-native';
+import { MapPin, Calendar as CalendarIcon, Heart } from 'lucide-react-native';
 import { fonts } from '@/constants/fonts';
 
 export default function InfoScreen() {
@@ -42,30 +42,6 @@ export default function InfoScreen() {
           </Text>
         </View>
 
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Users size={24} color="#dc2626" />
-            <Text style={styles.sectionTitle}>Glavni sudionici</Text>
-          </View>
-
-          <View style={styles.participantCard}>
-            <Text style={styles.participantTitle}>Mesopustari</Text>
-            <Text style={styles.participantText}>
-              Muška skupina koja svira tradicionalne instrumente i izvodi glazbu
-              po pjesmi "Još Hrvatska ni propala". Nose tradicijsku hrvatsku narodnu
-              nošnju i predvode mesopusna slavlja svojom energičnom glazbom.
-            </Text>
-          </View>
-
-          <View style={styles.participantCard}>
-            <Text style={styles.participantTitle}>Novljansko Kolo</Text>
-            <Text style={styles.participantText}>
-              Tradicionalni narodni plesači u prekrasnim hrvatskim narodnim
-              nošnjama. Kolo je kružni ples koji simbolizira jedinstvo zajednice,
-              sa zamršenim koracima i koreografijom koja se prenosi kroz generacije.
-            </Text>
-          </View>
-        </View>
 
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
