@@ -69,16 +69,10 @@ export function GlassTabBar({ currentIndex, scrollOffset, onTabPress }: GlassTab
   const insets = useSafeAreaInsets();
 
   const indicatorStyle = useAnimatedStyle(() => {
-    const tabWidth = 100 / TAB_COUNT;
-    const translateX = interpolate(
-      scrollOffset.value,
-      [0, 1, 2, 3, 4],
-      [tabWidth * 0, tabWidth * 1, tabWidth * 2, tabWidth * 3, tabWidth * 4],
-      Extrapolation.CLAMP
-    );
+    const progress = scrollOffset.value;
 
     return {
-      transform: [{ translateX: `${translateX}%` }],
+      left: `${(progress * 100) / TAB_COUNT}%`,
     };
   });
 
@@ -143,7 +137,6 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: theme.borderRadius.lg,
     zIndex: 1,
-    left: 0,
     top: theme.spacing.md,
     overflow: 'hidden',
   },
