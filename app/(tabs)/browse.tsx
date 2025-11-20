@@ -243,7 +243,7 @@ export default function ParticipantsScreen() {
                   </Text>
 
                   {/* Hierarchy Dropdown */}
-                  {mesopustariRoles.filter(r => r.display_order <= 4).length > 0 && (
+                  {mesopustariRoles.length > 0 && (
                     <View style={styles.dropdownContainer}>
                       <TouchableOpacity
                         style={styles.dropdownHeader}
@@ -261,7 +261,6 @@ export default function ParticipantsScreen() {
                       {isHierarchyExpanded && (
                         <View style={styles.dropdownContent}>
                           {mesopustariRoles
-                            .filter(r => r.display_order <= 4)
                             .map((role, index) => (
                               <TouchableOpacity
                                 key={role.id}
