@@ -610,7 +610,8 @@ export default function ParticipantDetailScreen() {
               {hierarchyRoles
                 .filter(role =>
                   role.title_croatian !== 'Magaziner' &&
-                  role.title_croatian !== 'Bandiraš'
+                  role.title_croatian !== 'Bandiraš' &&
+                  role.title_croatian !== 'Kasir'
                 )
                 .map((role) => (
                   <TouchableOpacity
