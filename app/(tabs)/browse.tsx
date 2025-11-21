@@ -302,7 +302,7 @@ export default function ParticipantsScreen() {
                     {isFormationExpanded && (
                       <View style={styles.dropdownContent}>
                         <View style={styles.formationScheme}>
-                          <Text style={styles.formationHeader}>Formacija u Dva Reda</Text>
+                          <Text style={styles.formationHeader}>Formacija u dva reda</Text>
 
                           <Text style={styles.formationExplanation}>
                             Mesopustari stoje i kreću se u dva reda sa sinkroniziranim korakom kojeg predvode kapitani. Advitor dirigira zogu iz sredine.
