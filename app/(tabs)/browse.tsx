@@ -12,7 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Participant } from '@/types/database';
-import { Users, Music, Shirt, Crown, Award, Flag, ChevronDown, ChevronUp } from 'lucide-react-native';
+import { Users, Music, Shirt, Crown, Award, Flag, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
 import { theme } from '@/constants/theme';
@@ -273,6 +273,7 @@ export default function ParticipantsScreen() {
                                     </Text>
                                   )}
                                 </View>
+                                <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
                               </TouchableOpacity>
                             ))}
                           <Text style={styles.formationTip}>
