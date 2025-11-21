@@ -12,7 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Participant } from '@/types/database';
-import { Users, Music, Shirt, Crown, Award, Flag, ChevronDown, ChevronUp, ChevronRight } from 'lucide-react-native';
+import { Users, Music, Shirt, Crown, Award, Flag, ChevronDown, ChevronUp, ChevronRight, Music4 } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
 import { theme } from '@/constants/theme';
@@ -497,6 +497,43 @@ export default function ParticipantsScreen() {
               </ModernCard>
             </Animated.View>
           )}
+
+          {/* Mesopustarska Zoga */}
+          <Animated.View
+            entering={FadeInDown.delay(300).springify()}
+            style={styles.participantCardWrapper}
+          >
+            <ModernCard onPress={() => router.push('/zoga')}>
+              <View style={styles.imageContainer}>
+                <LinearGradient
+                  colors={theme.colors.secondary.gradient}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.participantImagePlaceholder}
+                >
+                  <Music4 size={64} color="rgba(255,255,255,0.9)" strokeWidth={1.5} />
+                </LinearGradient>
+                <LinearGradient
+                  colors={['transparent', 'rgba(0,0,0,0.8)']}
+                  style={styles.imageGradient}
+                />
+                <View style={styles.overlayContent}>
+                  <Text style={styles.participantNameOverlay}>Mesopustarska zoga</Text>
+                </View>
+              </View>
+              <View style={styles.participantContent}>
+                <Text style={styles.participantDescription} numberOfLines={3}>
+                  Tradicionalna glazba koju sviraju mesopustari. Saznajte više o njenoj povijesti i kada se svira u različitim tempima.
+                </Text>
+                <View style={styles.badgesContainer}>
+                  <View style={styles.badge}>
+                    <Music size={14} color={theme.colors.primary.main} strokeWidth={2} />
+                    <Text style={styles.badgeText}>Glazba</Text>
+                  </View>
+                </View>
+              </View>
+            </ModernCard>
+          </Animated.View>
 
           {/* Other Participants */}
           {otherParticipants.map((item, index) => (
