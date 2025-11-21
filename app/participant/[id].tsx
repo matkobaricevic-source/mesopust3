@@ -36,6 +36,7 @@ export default function ParticipantDetailScreen() {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isInstrumentsExpanded, setIsInstrumentsExpanded] = useState(false);
   const [isRolesExpanded, setIsRolesExpanded] = useState(false);
+  const [expandedRoleDescriptions, setExpandedRoleDescriptions] = useState<Set<string>>(new Set());
   const router = useRouter();
 
   useEffect(() => {
@@ -262,31 +263,65 @@ export default function ParticipantDetailScreen() {
                   )}
                 </View>
               </TouchableOpacity>
-              {isRolesExpanded && hierarchyRoles.map((role, index) => (
-                <Animated.View
-                  key={role.id}
-                  entering={FadeInDown.delay(50 + index * 30).springify()}
-                  style={styles.cardWrapper}
-                >
-                  <ModernCard
-                    onPress={() => router.push(`/role/${role.id}`)}
+              {isRolesExpanded && hierarchyRoles.map((role, index) => {
+                const isRoleDescExpanded = expandedRoleDescriptions.has(role.id);
+                const roleDescription = role.description_croatian || '';
+                const shouldTruncateRole = roleDescription.length > 150;
+
+                return (
+                  <Animated.View
+                    key={role.id}
+                    entering={FadeInDown.delay(50 + index * 30).springify()}
+                    style={styles.cardWrapper}
                   >
-                    <View style={styles.roleCard}>
-                      <View style={styles.roleCardContent}>
-                        <Text style={styles.roleTitle}>
-                          {role.title_croatian || role.title}
-                        </Text>
-                        {role.description_croatian && (
-                          <Text style={styles.roleDescription}>{role.description_croatian}</Text>
+                    <ModernCard
+                      onPress={() => router.push(`/role/${role.id}`)}
+                    >
+                      <View style={styles.roleCard}>
+                        <View style={styles.roleCardContent}>
+                          <Text style={styles.roleTitle}>
+                            {role.title_croatian || role.title}
+                          </Text>
+                          {role.description_croatian && (
+                            <>
+                              <Text
+                                style={styles.roleDescription}
+                                numberOfLines={!isRoleDescExpanded && shouldTruncateRole ? 3 : undefined}
+                              >
+                                {roleDescription}
+                              </Text>
+                              {shouldTruncateRole && (
+                                <TouchableOpacity
+                                  style={styles.roleReadMoreButton}
+                                  onPress={(e) => {
+                                    e.stopPropagation();
+                                    setExpandedRoleDescriptions(prev => {
+                                      const newSet = new Set(prev);
+                                      if (newSet.has(role.id)) {
+                                        newSet.delete(role.id);
+                                      } else {
+                                        newSet.add(role.id);
+                                      }
+                                      return newSet;
+                                    });
+                                  }}
+                                >
+                                  <Text style={styles.roleReadMoreText}>
+                                    {isRoleDescExpanded ? 'Prikaži manje' : 'Prikaži više'}
+                                  </Text>
+                                </TouchableOpacity>
+                              )}
+                            </>
+                          )}
+                        </View>
+                        {role.related_participant_id && (
+                          <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
                         )}
                       </View>
-                      {role.related_participant_id && (
-                        <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
-                      )}
-                    </View>
-                  </ModernCard>
-                </Animated.View>
-              ))}
+                    </ModernCard>
+                  </Animated.View>
+                );
+              })}
             </Animated.View>
           )}
 
@@ -494,6 +529,15 @@ const styles = StyleSheet.create({
     ...theme.typography.body2,
     color: theme.colors.text.secondary,
     lineHeight: 22,
+  },
+  roleReadMoreButton: {
+    marginTop: theme.spacing.sm,
+  },
+  roleReadMoreText: {
+    ...theme.typography.body2,
+    color: theme.colors.primary.main,
+    fontWeight: '600',
+    fontSize: 13,
   },
   eventCard: {
     flexDirection: 'row',
