@@ -221,20 +221,20 @@ function AnimatedEventCard({
 
         {/* Tijek događaja for Napovidanje */}
         {isNapovidanje && hasSteps && (
-          <>
+          <View style={styles.dropdownContainer}>
             <TouchableOpacity
-              style={styles.expandButton}
+              style={styles.dropdownHeader}
               onPress={onToggleSteps}
               activeOpacity={0.7}>
-              <Clock size={18} color={theme.colors.primary.main} strokeWidth={2} />
-              <Text style={styles.expandButtonText}>Tijek događaja</Text>
+              <Clock size={20} color={theme.colors.primary.main} strokeWidth={2} />
+              <Text style={styles.dropdownTitle}>Tijek događaja</Text>
               <Animated.View style={stepsChevronAnimatedStyle}>
-                <ChevronDown size={18} color={theme.colors.text.secondary} strokeWidth={2} />
+                <ChevronDown size={20} color={theme.colors.text.secondary} strokeWidth={2} />
               </Animated.View>
             </TouchableOpacity>
 
             <Animated.View style={stepsContentAnimatedStyle}>
-              <View style={styles.stepsSection}>
+              <View style={styles.dropdownContent}>
                 {item.event_steps!.map((step) => (
                   <View key={step.id} style={styles.stepItem}>
                     <View style={styles.stepNumberBadge}>
@@ -250,25 +250,25 @@ function AnimatedEventCard({
                 ))}
               </View>
             </Animated.View>
-          </>
+          </View>
         )}
 
         {/* Raskrižja for Napovidanje */}
         {isNapovidanje && hasCrossroads && (
-          <>
+          <View style={styles.dropdownContainer}>
             <TouchableOpacity
-              style={styles.expandButton}
+              style={styles.dropdownHeader}
               onPress={onToggleCrossroads}
               activeOpacity={0.7}>
-              <MapPin size={18} color={theme.colors.secondary.main} strokeWidth={2} />
-              <Text style={styles.expandButtonText}>Raskrižja</Text>
+              <MapPin size={20} color={theme.colors.secondary.main} strokeWidth={2} />
+              <Text style={styles.dropdownTitle}>Raskrižja</Text>
               <Animated.View style={crossroadsChevronAnimatedStyle}>
-                <ChevronDown size={18} color={theme.colors.text.secondary} strokeWidth={2} />
+                <ChevronDown size={20} color={theme.colors.text.secondary} strokeWidth={2} />
               </Animated.View>
             </TouchableOpacity>
 
             <Animated.View style={crossroadsContentAnimatedStyle}>
-              <View style={styles.crossroadsSection}>
+              <View style={styles.dropdownContent}>
                 {item.event_crossroads!.map((crossroad) => (
                   <View key={crossroad.id} style={styles.crossroadItem}>
                     <MapPin size={16} color={theme.colors.secondary.main} strokeWidth={2} />
@@ -279,7 +279,7 @@ function AnimatedEventCard({
                 ))}
               </View>
             </Animated.View>
-          </>
+          </View>
         )}
       </ModernCard>
     </Animated.View>
@@ -684,16 +684,36 @@ const styles = StyleSheet.create({
     color: theme.colors.text.primary,
     flex: 1,
   },
-  stepsSection: {
+  dropdownContainer: {
+    marginTop: theme.spacing.md,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.neutral[200],
+    paddingTop: theme.spacing.md,
     paddingHorizontal: theme.spacing.lg,
-    paddingBottom: theme.spacing.md,
+  },
+  dropdownHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: theme.spacing.sm,
+    paddingVertical: theme.spacing.sm,
+  },
+  dropdownTitle: {
+    ...theme.typography.body1,
+    fontFamily: fonts.title,
+    color: theme.colors.text.primary,
+    fontWeight: '600',
+    flex: 1,
+  },
+  dropdownContent: {
+    marginTop: theme.spacing.sm,
+    paddingLeft: theme.spacing.sm,
   },
   stepItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: theme.spacing.sm,
-    paddingVertical: theme.spacing.xs,
+    marginBottom: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
   },
   stepNumberBadge: {
     width: 28,
@@ -724,15 +744,11 @@ const styles = StyleSheet.create({
     color: theme.colors.text.secondary,
     lineHeight: 16,
   },
-  crossroadsSection: {
-    paddingHorizontal: theme.spacing.lg,
-    paddingBottom: theme.spacing.md,
-    gap: theme.spacing.xs,
-  },
   crossroadItem: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: theme.spacing.sm,
+    marginBottom: theme.spacing.sm,
     paddingVertical: theme.spacing.xs,
   },
   crossroadTitle: {
