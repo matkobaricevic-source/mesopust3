@@ -354,7 +354,7 @@ S tim se „napovidanje" na raskrižju završava, „advitor" najavljuje „zogu
                 >
                   <View style={styles.sectionHeaderLeft}>
                     <MapPin size={24} color={theme.colors.primary.main} strokeWidth={2} />
-                    <Text style={styles.sectionTitle}>Križanja ({eventCrossroads.length})</Text>
+                    <Text style={styles.sectionTitle}>Raskrižja ({eventCrossroads.length})</Text>
                   </View>
                   <Animated.View style={crossroadsChevronAnimatedStyle}>
                     <ChevronDown size={20} color={theme.colors.text.secondary} strokeWidth={2} />
