@@ -37,6 +37,7 @@ export default function ParticipantsScreen() {
   const [error, setError] = useState<string | null>(null);
   const [isHierarchyExpanded, setIsHierarchyExpanded] = useState(false);
   const [isFormationExpanded, setIsFormationExpanded] = useState(false);
+  const [isZogaExpanded, setIsZogaExpanded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -493,47 +494,71 @@ export default function ParticipantsScreen() {
                       </View>
                     )}
                   </View>
+
+                  {/* Mesopustarska Zoga Dropdown */}
+                  <View style={styles.dropdownContainer}>
+                    <TouchableOpacity
+                      style={styles.dropdownHeader}
+                      onPress={() => setIsZogaExpanded(!isZogaExpanded)}
+                      activeOpacity={0.7}
+                    >
+                      <Music4 size={20} color={theme.colors.primary.main} strokeWidth={2} />
+                      <Text style={styles.dropdownTitle}>Mesopustarska zoga</Text>
+                      {isZogaExpanded ? (
+                        <ChevronUp size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                      ) : (
+                        <ChevronDown size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                      )}
+                    </TouchableOpacity>
+                    {isZogaExpanded && (
+                      <View style={styles.dropdownContent}>
+                        <TouchableOpacity
+                          onPress={() => router.push('/zoga')}
+                          activeOpacity={0.7}
+                        >
+                          <Text style={styles.zogaDescription}>
+                            Tradicionalna glazba koju sviraju mesopustari. Zoga se svira u različitim tempima ovisno o trenutku ili događaju.
+                          </Text>
+
+                          <View style={styles.tempoList}>
+                            <Text style={styles.tempoListTitle}>Tempi izvođenja:</Text>
+                            <View style={styles.tempoItem}>
+                              <View style={styles.tempoBullet} />
+                              <Text style={styles.tempoText}>Jako spora</Text>
+                            </View>
+                            <View style={styles.tempoItem}>
+                              <View style={styles.tempoBullet} />
+                              <Text style={styles.tempoText}>Spora</Text>
+                            </View>
+                            <View style={styles.tempoItem}>
+                              <View style={styles.tempoBullet} />
+                              <Text style={styles.tempoText}>Srednje spora</Text>
+                            </View>
+                            <View style={styles.tempoItem}>
+                              <View style={styles.tempoBullet} />
+                              <Text style={styles.tempoText}>Srednja uobičajena</Text>
+                            </View>
+                            <View style={styles.tempoItem}>
+                              <View style={styles.tempoBullet} />
+                              <Text style={styles.tempoText}>Srednje brza</Text>
+                            </View>
+                            <View style={styles.tempoItem}>
+                              <View style={styles.tempoBullet} />
+                              <Text style={styles.tempoText}>Brza</Text>
+                            </View>
+                          </View>
+
+                          <Text style={styles.formationTip}>
+                            💡 Dodirnite za više informacija o zogi
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    )}
+                  </View>
                 </View>
               </ModernCard>
             </Animated.View>
           )}
-
-          {/* Mesopustarska Zoga */}
-          <Animated.View
-            entering={FadeInDown.delay(300).springify()}
-            style={styles.participantCardWrapper}
-          >
-            <ModernCard onPress={() => router.push('/zoga')}>
-              <View style={styles.imageContainer}>
-                <LinearGradient
-                  colors={theme.colors.secondary.gradient}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  style={styles.participantImagePlaceholder}
-                >
-                  <Music4 size={64} color="rgba(255,255,255,0.9)" strokeWidth={1.5} />
-                </LinearGradient>
-                <LinearGradient
-                  colors={['transparent', 'rgba(0,0,0,0.8)']}
-                  style={styles.imageGradient}
-                />
-                <View style={styles.overlayContent}>
-                  <Text style={styles.participantNameOverlay}>Mesopustarska zoga</Text>
-                </View>
-              </View>
-              <View style={styles.participantContent}>
-                <Text style={styles.participantDescription} numberOfLines={3}>
-                  Tradicionalna glazba koju sviraju mesopustari. Saznajte više o njenoj povijesti i kada se svira u različitim tempima.
-                </Text>
-                <View style={styles.badgesContainer}>
-                  <View style={styles.badge}>
-                    <Music size={14} color={theme.colors.primary.main} strokeWidth={2} />
-                    <Text style={styles.badgeText}>Glazba</Text>
-                  </View>
-                </View>
-              </View>
-            </ModernCard>
-          </Animated.View>
 
           {/* Other Participants */}
           {otherParticipants.map((item, index) => (
@@ -876,5 +901,38 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: theme.spacing.sm,
     fontWeight: '500',
+  },
+  zogaDescription: {
+    ...theme.typography.body2,
+    color: theme.colors.text.primary,
+    lineHeight: 20,
+    marginBottom: theme.spacing.md,
+  },
+  tempoList: {
+    gap: theme.spacing.xs,
+    marginTop: theme.spacing.sm,
+    marginBottom: theme.spacing.md,
+  },
+  tempoListTitle: {
+    ...theme.typography.body2,
+    fontWeight: '600',
+    color: theme.colors.text.primary,
+    marginBottom: theme.spacing.xs,
+  },
+  tempoItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.xs,
+    paddingVertical: 2,
+  },
+  tempoBullet: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: theme.colors.primary.main,
+  },
+  tempoText: {
+    ...theme.typography.body2,
+    color: theme.colors.text.secondary,
   },
 });
