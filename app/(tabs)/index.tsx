@@ -207,13 +207,15 @@ function AnimatedEventCard({
 
                   return (
                     <StepWrapper key={step.id} {...stepWrapperProps}>
-                      {!isLink && (
+                      {isLink ? (
+                        <View style={styles.linkDot} />
+                      ) : (
                         <View style={styles.stepNumberBadge}>
                           <Text style={styles.stepNumberText}>{step.step_number}</Text>
                         </View>
                       )}
                       <View style={styles.stepInfo}>
-                        <Text style={[styles.stepTitle, isClickable && styles.stepTitleClickable]}>
+                        <Text style={[styles.stepTitle, isClickable && styles.stepTitleClickable, isLink && styles.stepTitleLink]}>
                           {step.title}
                         </Text>
                         {step.note && (
@@ -223,7 +225,7 @@ function AnimatedEventCard({
                       {isClickable && (
                         <ChevronDown
                           size={16}
-                          color={theme.colors.primary.main}
+                          color={isLink ? '#FFD700' : theme.colors.primary.main}
                           strokeWidth={2}
                           style={{ transform: [{ rotate: '-90deg' }] }}
                         />
@@ -795,18 +797,24 @@ const styles = StyleSheet.create({
     marginHorizontal: -theme.spacing.sm,
   },
   stepItemLink: {
-    backgroundColor: '#1a1a2e',
+    backgroundColor: theme.colors.primary.main + '10',
     borderRadius: theme.borderRadius.md,
-    paddingHorizontal: theme.spacing.md,
-    paddingVertical: theme.spacing.md,
+    paddingHorizontal: theme.spacing.sm,
     marginHorizontal: -theme.spacing.sm,
-    marginTop: theme.spacing.sm,
-    marginBottom: theme.spacing.sm,
-    borderWidth: 1,
-    borderColor: theme.colors.primary.main + '30',
+  },
+  linkDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#FFD700',
+    marginRight: theme.spacing.xs,
   },
   stepTitleClickable: {
     color: theme.colors.primary.main,
+  },
+  stepTitleLink: {
+    color: '#FFD700',
+    fontWeight: '600',
   },
   crossroadItem: {
     flexDirection: 'row',
