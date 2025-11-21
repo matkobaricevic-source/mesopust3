@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
   headerTitle: {
     ...theme.typography.display,
     fontSize: 36,
-    color: theme.colors.text.inverse,
+    color: '#000000',
     fontFamily: fonts.title,
     marginBottom: theme.spacing.sm,
   },
   headerSubtitle: {
     ...theme.typography.body1,
-    color: 'rgba(255, 255, 255, 0.9)',
+    color: 'rgba(0, 0, 0, 0.7)',
   },
   content: {
     paddingHorizontal: theme.spacing.md,
