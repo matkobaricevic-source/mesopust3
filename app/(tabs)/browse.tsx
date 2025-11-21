@@ -535,7 +535,7 @@ export default function ParticipantsScreen() {
                           activeOpacity={0.7}
                         >
                           <Text style={styles.zogaDescription}>
-                            Tradicionalna glazba koju sviraju mesopustari. Zoga se svira u različitim brzinama ovisno o trenutku ili događaju.
+                            Zoga je glazbeni izraz, tradicionalna glazba koju izvode "mesopustari", a temelji se na pjesmi "Još Hrvatska ni propala"
                           </Text>
 
                           <View style={styles.tempoList}>
