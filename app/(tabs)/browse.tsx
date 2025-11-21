@@ -301,7 +301,11 @@ export default function ParticipantsScreen() {
                     </TouchableOpacity>
                     {isFormationExpanded && (
                       <View style={styles.dropdownContent}>
-                        <View style={styles.formationScheme}>
+                        <TouchableOpacity
+                          style={styles.formationScheme}
+                          onPress={() => router.push('/formacija')}
+                          activeOpacity={0.7}
+                        >
                           <Text style={styles.formationHeader}>Formacija u dva reda</Text>
 
                           <Text style={styles.formationExplanation}>
@@ -482,7 +486,7 @@ export default function ParticipantsScreen() {
                           <Text style={styles.formationTip}>
                             💡 Dodirnite bilo koju ulogu za više informacija
                           </Text>
-                        </View>
+                        </TouchableOpacity>
                       </View>
                     )}
                   </View>
