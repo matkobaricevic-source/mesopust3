@@ -13,7 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Event, Category } from '@/types/database';
-import { Calendar, ChevronDown } from 'lucide-react-native';
+import { Calendar, ChevronDown, Clock, MapPin } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, interpolate, FadeIn, FadeInDown } from 'react-native-reanimated';
 import { fonts } from '@/constants/fonts';
@@ -24,9 +24,26 @@ import { BlurView } from 'expo-blur';
 const { width: screenWidth } = Dimensions.get('window');
 const CARD_PADDING = theme.spacing.md;
 
+interface EventStep {
+  id: string;
+  step_number: number;
+  title: string;
+  image_url: string | null;
+  note: string | null;
+}
+
+interface EventCrossroad {
+  id: string;
+  crossroad_number: number;
+  title: string;
+  image_url: string | null;
+}
+
 interface EventWithCategories extends Event {
   categories?: Category[];
   sub_events?: Event[];
+  event_steps?: EventStep[];
+  event_crossroads?: EventCrossroad[];
 }
 
 function AnimatedEventCard({
@@ -36,7 +53,11 @@ function AnimatedEventCard({
   onEventPress,
   onCategoryPress,
   onSubEventPress,
-  index
+  index,
+  isStepsExpanded,
+  isCrossroadsExpanded,
+  onToggleSteps,
+  onToggleCrossroads
 }: {
   item: EventWithCategories;
   isExpanded: boolean;
@@ -45,15 +66,37 @@ function AnimatedEventCard({
   onCategoryPress: (id: string) => void;
   onSubEventPress: (id: string) => void;
   index: number;
+  isStepsExpanded?: boolean;
+  isCrossroadsExpanded?: boolean;
+  onToggleSteps?: () => void;
+  onToggleCrossroads?: () => void;
 }) {
   const animation = useSharedValue(isExpanded ? 1 : 0);
+  const stepsAnimation = useSharedValue(isStepsExpanded ? 1 : 0);
+  const crossroadsAnimation = useSharedValue(isCrossroadsExpanded ? 1 : 0);
 
   useEffect(() => {
     animation.value = withTiming(isExpanded ? 1 : 0, { duration: 300 });
   }, [isExpanded]);
 
+  useEffect(() => {
+    stepsAnimation.value = withTiming(isStepsExpanded ? 1 : 0, { duration: 300 });
+  }, [isStepsExpanded]);
+
+  useEffect(() => {
+    crossroadsAnimation.value = withTiming(isCrossroadsExpanded ? 1 : 0, { duration: 300 });
+  }, [isCrossroadsExpanded]);
+
   const chevronAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${interpolate(animation.value, [0, 1], [0, 180])}deg` }],
+  }));
+
+  const stepsChevronAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${interpolate(stepsAnimation.value, [0, 1], [0, 180])}deg` }],
+  }));
+
+  const crossroadsChevronAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${interpolate(crossroadsAnimation.value, [0, 1], [0, 180])}deg` }],
   }));
 
   const contentAnimatedStyle = useAnimatedStyle(() => ({
@@ -62,9 +105,24 @@ function AnimatedEventCard({
     overflow: 'hidden',
   }));
 
+  const stepsContentAnimatedStyle = useAnimatedStyle(() => ({
+    maxHeight: interpolate(stepsAnimation.value, [0, 1], [0, 1000]),
+    opacity: interpolate(stepsAnimation.value, [0, 0.5, 1], [0, 1, 1]),
+    overflow: 'hidden',
+  }));
+
+  const crossroadsContentAnimatedStyle = useAnimatedStyle(() => ({
+    maxHeight: interpolate(crossroadsAnimation.value, [0, 1], [0, 500]),
+    opacity: interpolate(crossroadsAnimation.value, [0, 0.5, 1], [0, 1, 1]),
+    overflow: 'hidden',
+  }));
+
   const isZeca = item.title === 'Zeča';
+  const isNapovidanje = item.title === 'Napovidanje dovcen i dovican' || item.title === 'Napovidanje dovčen i dovičan';
   const hasCategories = item.categories && item.categories.length > 0;
   const hasSubEvents = item.sub_events && item.sub_events.length > 0;
+  const hasSteps = item.event_steps && item.event_steps.length > 0;
+  const hasCrossroads = item.event_crossroads && item.event_crossroads.length > 0;
   const hasExpandableContent = hasCategories || hasSubEvents;
 
   return (
@@ -160,6 +218,69 @@ function AnimatedEventCard({
             </Animated.View>
           </>
         )}
+
+        {/* Tijek događaja for Napovidanje */}
+        {isNapovidanje && hasSteps && (
+          <>
+            <TouchableOpacity
+              style={styles.expandButton}
+              onPress={onToggleSteps}
+              activeOpacity={0.7}>
+              <Clock size={18} color={theme.colors.primary.main} strokeWidth={2} />
+              <Text style={styles.expandButtonText}>Tijek događaja</Text>
+              <Animated.View style={stepsChevronAnimatedStyle}>
+                <ChevronDown size={18} color={theme.colors.text.secondary} strokeWidth={2} />
+              </Animated.View>
+            </TouchableOpacity>
+
+            <Animated.View style={stepsContentAnimatedStyle}>
+              <View style={styles.stepsSection}>
+                {item.event_steps!.map((step) => (
+                  <View key={step.id} style={styles.stepItem}>
+                    <View style={styles.stepNumberBadge}>
+                      <Text style={styles.stepNumberText}>{step.step_number}</Text>
+                    </View>
+                    <View style={styles.stepInfo}>
+                      <Text style={styles.stepTitle}>{step.title}</Text>
+                      {step.note && (
+                        <Text style={styles.stepNote}>{step.note}</Text>
+                      )}
+                    </View>
+                  </View>
+                ))}
+              </View>
+            </Animated.View>
+          </>
+        )}
+
+        {/* Raskrižja for Napovidanje */}
+        {isNapovidanje && hasCrossroads && (
+          <>
+            <TouchableOpacity
+              style={styles.expandButton}
+              onPress={onToggleCrossroads}
+              activeOpacity={0.7}>
+              <MapPin size={18} color={theme.colors.secondary.main} strokeWidth={2} />
+              <Text style={styles.expandButtonText}>Raskrižja</Text>
+              <Animated.View style={crossroadsChevronAnimatedStyle}>
+                <ChevronDown size={18} color={theme.colors.text.secondary} strokeWidth={2} />
+              </Animated.View>
+            </TouchableOpacity>
+
+            <Animated.View style={crossroadsContentAnimatedStyle}>
+              <View style={styles.crossroadsSection}>
+                {item.event_crossroads!.map((crossroad) => (
+                  <View key={crossroad.id} style={styles.crossroadItem}>
+                    <MapPin size={16} color={theme.colors.secondary.main} strokeWidth={2} />
+                    <Text style={styles.crossroadTitle}>
+                      {crossroad.crossroad_number}. {crossroad.title}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+            </Animated.View>
+          </>
+        )}
       </ModernCard>
     </Animated.View>
   );
@@ -168,6 +289,8 @@ function AnimatedEventCard({
 export default function HomeScreen() {
   const [events, setEvents] = useState<EventWithCategories[]>([]);
   const [expandedEvents, setExpandedEvents] = useState<Set<string>>(new Set());
+  const [expandedSteps, setExpandedSteps] = useState<Set<string>>(new Set());
+  const [expandedCrossroads, setExpandedCrossroads] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -196,7 +319,7 @@ export default function HomeScreen() {
             .select('*')
             .eq('event_id', event.id)
             .eq('show_in_main_menu', true)
-            .order('display_order', { ascending: true });
+            .order('display_order', { ascending: true});
 
           const { data: subEventsData } = await supabase
             .from('events')
@@ -204,10 +327,34 @@ export default function HomeScreen() {
             .eq('parent_event_id', event.id)
             .order('display_order', { ascending: true });
 
+          // Load steps and crossroads for Napovidanje event
+          const isNapovidanje = event.title === 'Napovidanje dovcen i dovican' || event.title === 'Napovidanje dovčen i dovičan';
+          let stepsData = [];
+          let crossroadsData = [];
+
+          if (isNapovidanje) {
+            const { data: steps } = await supabase
+              .from('event_steps')
+              .select('*')
+              .eq('event_id', event.id)
+              .order('step_number', { ascending: true });
+
+            const { data: crossroads } = await supabase
+              .from('event_crossroads')
+              .select('*')
+              .eq('event_id', event.id)
+              .order('crossroad_number', { ascending: true });
+
+            stepsData = steps || [];
+            crossroadsData = crossroads || [];
+          }
+
           return {
             ...event,
             categories: categoriesData || [],
             sub_events: subEventsData || [],
+            event_steps: stepsData,
+            event_crossroads: crossroadsData,
           };
         })
       );
@@ -249,6 +396,30 @@ export default function HomeScreen() {
 
   function toggleEventExpand(eventId: string) {
     setExpandedEvents((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(eventId)) {
+        newSet.delete(eventId);
+      } else {
+        newSet.add(eventId);
+      }
+      return newSet;
+    });
+  }
+
+  function toggleStepsExpand(eventId: string) {
+    setExpandedSteps((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(eventId)) {
+        newSet.delete(eventId);
+      } else {
+        newSet.add(eventId);
+      }
+      return newSet;
+    });
+  }
+
+  function toggleCrossroadsExpand(eventId: string) {
+    setExpandedCrossroads((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(eventId)) {
         newSet.delete(eventId);
@@ -310,6 +481,8 @@ export default function HomeScreen() {
           }
           renderItem={({ item, index }) => {
             const isExpanded = expandedEvents.has(item.id);
+            const isStepsExpanded = expandedSteps.has(item.id);
+            const isCrossroadsExpanded = expandedCrossroads.has(item.id);
 
             return (
               <AnimatedEventCard
@@ -320,6 +493,10 @@ export default function HomeScreen() {
                 onCategoryPress={handleCategoryPress}
                 onSubEventPress={handleSubEventPress}
                 index={index}
+                isStepsExpanded={isStepsExpanded}
+                isCrossroadsExpanded={isCrossroadsExpanded}
+                onToggleSteps={() => toggleStepsExpand(item.id)}
+                onToggleCrossroads={() => toggleCrossroadsExpand(item.id)}
               />
             );
           }}
@@ -504,6 +681,62 @@ const styles = StyleSheet.create({
   categoryItemTitle: {
     ...theme.typography.body1,
     fontWeight: '600',
+    color: theme.colors.text.primary,
+    flex: 1,
+  },
+  stepsSection: {
+    paddingHorizontal: theme.spacing.lg,
+    paddingBottom: theme.spacing.md,
+    gap: theme.spacing.sm,
+  },
+  stepItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: theme.spacing.sm,
+    paddingVertical: theme.spacing.xs,
+  },
+  stepNumberBadge: {
+    width: 28,
+    height: 28,
+    borderRadius: theme.borderRadius.md,
+    backgroundColor: theme.colors.primary.main,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  stepNumberText: {
+    ...theme.typography.caption,
+    fontSize: 12,
+    fontWeight: '700',
+    color: theme.colors.text.inverse,
+  },
+  stepInfo: {
+    flex: 1,
+  },
+  stepTitle: {
+    ...theme.typography.body2,
+    fontWeight: '600',
+    color: theme.colors.text.primary,
+    marginBottom: 2,
+  },
+  stepNote: {
+    ...theme.typography.caption,
+    fontSize: 11,
+    color: theme.colors.text.secondary,
+    lineHeight: 16,
+  },
+  crossroadsSection: {
+    paddingHorizontal: theme.spacing.lg,
+    paddingBottom: theme.spacing.md,
+    gap: theme.spacing.xs,
+  },
+  crossroadItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+    paddingVertical: theme.spacing.xs,
+  },
+  crossroadTitle: {
+    ...theme.typography.body2,
     color: theme.colors.text.primary,
     flex: 1,
   },
