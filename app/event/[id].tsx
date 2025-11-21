@@ -267,13 +267,16 @@ export default function EventDetailScreen() {
                               activeOpacity={0.7}
                             >
                               <Text style={styles.napovidanjeStepTitle}>Izvedba "Napovidanja"</Text>
-                              <ChevronDown
-                                size={20}
-                                color={theme.colors.primary.main}
+                              <Animated.View
                                 style={{
                                   transform: [{ rotate: isNapovidanjeStepExpanded ? '180deg' : '0deg' }],
                                 }}
-                              />
+                              >
+                                <ChevronDown
+                                  size={20}
+                                  color={theme.colors.primary.main}
+                                />
+                              </Animated.View>
                             </TouchableOpacity>
                             {isNapovidanjeStepExpanded && (
                               <View style={styles.napovidanjeStepContent}>
