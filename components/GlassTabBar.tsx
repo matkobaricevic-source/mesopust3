@@ -23,7 +23,7 @@ const tabs = [
 const TAB_COUNT = 4;
 
 function AnimatedIcon({ icon: IconComponent, index, scrollOffset }: { icon: any; index: number; scrollOffset: SharedValue<number> }) {
-  const [color, setColor] = useState('#FFFFFF');
+  const [color, setColor] = useState('#000000');
 
   useAnimatedReaction(
     () => {
@@ -31,7 +31,7 @@ function AnimatedIcon({ icon: IconComponent, index, scrollOffset }: { icon: any;
       return interpolateColor(
         distance,
         [0, 1],
-        ['#FFFFFF', '#737373']
+        ['#000000', '#737373']
       );
     },
     (result) => {
