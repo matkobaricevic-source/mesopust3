@@ -270,6 +270,7 @@ const styles = StyleSheet.create({
   },
   section: {
     gap: theme.spacing.md,
+    padding: theme.spacing.lg,
   },
   sectionTitle: {
     fontFamily: fonts.heading,
