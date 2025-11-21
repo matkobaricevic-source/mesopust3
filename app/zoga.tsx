@@ -1,12 +1,21 @@
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'expo-blur';
+import { useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
-import { Music4 } from 'lucide-react-native';
+import { ArrowLeft, Music4, ChevronDown, ChevronUp } from 'lucide-react-native';
 import { fonts } from '@/constants/fonts';
 import { theme } from '@/constants/theme';
 import { ModernCard } from '@/components/ModernCard';
-import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
 interface ZogaInfo {
   id: string;
@@ -37,6 +46,8 @@ export default function ZogaScreen() {
   const [zogaMoments, setZogaMoments] = useState<ZogaMoment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
+  const router = useRouter();
 
   useEffect(() => {
     loadZogaData();
@@ -70,6 +81,18 @@ export default function ZogaScreen() {
     return zogaMoments.filter((m) => m.tempo_category_id === categoryId);
   };
 
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(categoryId)) {
+        newSet.delete(categoryId);
+      } else {
+        newSet.add(categoryId);
+      }
+      return newSet;
+    });
+  };
+
   if (loading) {
     return (
       <View style={styles.centerContainer}>
@@ -88,27 +111,38 @@ export default function ZogaScreen() {
 
   return (
     <View style={styles.container}>
+      <LinearGradient
+        colors={theme.colors.secondary.gradient}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.headerGradient}
+      >
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+          activeOpacity={0.7}
+        >
+          <BlurView intensity={20} tint="dark" style={styles.backButtonBlur}>
+            <ArrowLeft size={24} color="#FFFFFF" strokeWidth={2} />
+          </BlurView>
+        </TouchableOpacity>
+
+        <Music4 size={64} color="rgba(255,255,255,0.95)" strokeWidth={1.5} />
+        <Text style={styles.headerTitle}>Mesopustarska zoga</Text>
+        <Text style={styles.headerSubtitle}>Tradicionalna glazba mesopustara</Text>
+      </LinearGradient>
+
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <Animated.View entering={FadeIn} style={styles.header}>
-          <LinearGradient
-            colors={theme.colors.secondary.gradient}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.headerGradient}
-          >
-            <Music4 size={48} color="rgba(255,255,255,0.95)" strokeWidth={1.5} />
-            <Text style={styles.headerTitle}>Mesopustarska zoga</Text>
-            <Text style={styles.headerSubtitle}>Tradicionalna glazba mesopustara</Text>
-          </LinearGradient>
-        </Animated.View>
-
         {zogaInfo && (
-          <Animated.View entering={FadeInDown.delay(100).springify()}>
+          <Animated.View
+            entering={FadeInDown.delay(100).springify()}
+            style={styles.cardWrapper}
+          >
             <ModernCard>
-              <View style={styles.infoSection}>
+              <View style={styles.section}>
                 <Text style={styles.sectionTitle}>O zogi</Text>
                 <Text style={styles.descriptionText}>{zogaInfo.description_croatian}</Text>
               </View>
@@ -116,51 +150,65 @@ export default function ZogaScreen() {
           </Animated.View>
         )}
 
-        <Animated.View entering={FadeInDown.delay(200).springify()}>
-          <View style={styles.tempoSection}>
-            <Text style={styles.sectionTitle}>Tempo i trenutci izvedbe</Text>
-            <Text style={styles.sectionSubtitle}>
-              Zoga se svira različitim tempom ovisno o trenutku ili događaju
-            </Text>
-          </View>
-        </Animated.View>
+        <Animated.View
+          entering={FadeInDown.delay(200).springify()}
+          style={styles.cardWrapper}
+        >
+          <ModernCard>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Brzine izvođenja</Text>
+              <Text style={styles.sectionDescription}>
+                Zoga se svira različitim brzinama ovisno o trenutku ili događaju
+              </Text>
 
-        {tempoCategories.map((category, index) => {
-          const moments = getMomentsForCategory(category.id);
-          if (moments.length === 0) return null;
+              {tempoCategories.map((category) => {
+                const moments = getMomentsForCategory(category.id);
+                const isExpanded = expandedCategories.has(category.id);
 
-          return (
-            <Animated.View
-              key={category.id}
-              entering={FadeInDown.delay(300 + index * 100).springify()}
-            >
-              <ModernCard>
-                <View style={styles.categoryCard}>
-                  <View style={styles.categoryHeader}>
-                    <Text style={styles.categoryName}>{category.name}</Text>
-                  </View>
-                  <View style={styles.momentsContainer}>
-                    {moments.map((moment) => (
-                      <View key={moment.id} style={styles.momentItem}>
-                        <View style={styles.momentBullet} />
-                        <View style={styles.momentContent}>
-                          <Text style={styles.momentName}>
-                            {moment.moment_name_croatian || moment.moment_name}
-                          </Text>
-                          {moment.description_croatian && (
-                            <Text style={styles.momentDescription}>
-                              {moment.description_croatian}
-                            </Text>
-                          )}
+                return (
+                  <View key={category.id} style={styles.tempoCategory}>
+                    <TouchableOpacity
+                      style={styles.tempoCategoryHeader}
+                      onPress={() => toggleCategory(category.id)}
+                      activeOpacity={0.7}
+                    >
+                      <Text style={styles.tempoCategoryName}>{category.name}</Text>
+                      <View style={styles.tempoCategoryRight}>
+                        <View style={styles.momentCount}>
+                          <Text style={styles.momentCountText}>{moments.length}</Text>
                         </View>
+                        {isExpanded ? (
+                          <ChevronUp size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                        ) : (
+                          <ChevronDown size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                        )}
                       </View>
-                    ))}
+                    </TouchableOpacity>
+
+                    {isExpanded && moments.length > 0 && (
+                      <View style={styles.momentsContainer}>
+                        {moments.map((moment, index) => (
+                          <View
+                            key={moment.id}
+                            style={[
+                              styles.momentItem,
+                              index === moments.length - 1 && styles.momentItemLast,
+                            ]}
+                          >
+                            <View style={styles.momentBullet} />
+                            <Text style={styles.momentText}>
+                              {moment.moment_name_croatian || moment.moment_name}
+                            </Text>
+                          </View>
+                        ))}
+                      </View>
+                    )}
                   </View>
-                </View>
-              </ModernCard>
-            </Animated.View>
-          );
-        })}
+                );
+              })}
+            </View>
+          </ModernCard>
+        </Animated.View>
       </ScrollView>
     </View>
   );
@@ -177,24 +225,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: theme.colors.background.primary,
   },
-  scrollContent: {
-    paddingBottom: 32,
-  },
-  header: {
-    marginBottom: 24,
-  },
   headerGradient: {
-    padding: 40,
-    paddingTop: 80,
+    paddingTop: 60,
+    paddingBottom: 40,
+    paddingHorizontal: theme.spacing.lg,
     alignItems: 'center',
-    gap: 8,
+    gap: 12,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 60,
+    left: theme.spacing.lg,
+    zIndex: 10,
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  backButtonBlur: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerTitle: {
     fontFamily: fonts.heading,
     fontSize: 32,
+    fontWeight: '700',
     color: theme.colors.text.inverse,
     textAlign: 'center',
-    marginTop: 16,
+    marginTop: 8,
   },
   headerSubtitle: {
     fontFamily: fonts.body,
@@ -202,81 +260,109 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.9)',
     textAlign: 'center',
   },
-  infoSection: {
-    gap: 16,
+  scrollContent: {
+    padding: theme.spacing.lg,
+    paddingTop: theme.spacing.md,
+    gap: theme.spacing.md,
+  },
+  cardWrapper: {
+    marginBottom: theme.spacing.sm,
+  },
+  section: {
+    gap: theme.spacing.md,
   },
   sectionTitle: {
     fontFamily: fonts.heading,
-    fontSize: 22,
-    color: theme.colors.text.primary,
-    marginBottom: 8,
-  },
-  sectionSubtitle: {
-    fontFamily: fonts.body,
-    fontSize: 14,
-    color: theme.colors.text.secondary,
-    marginTop: 8,
-    marginBottom: 16,
-  },
-  descriptionText: {
-    fontFamily: fonts.body,
-    fontSize: 15,
-    lineHeight: 24,
-    color: theme.colors.text.primary,
-  },
-  tempoSection: {
-    paddingHorizontal: 20,
-    marginTop: 8,
-    marginBottom: 16,
-  },
-  categoryCard: {
-    gap: 16,
-  },
-  categoryHeader: {
-    paddingBottom: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.neutral[300],
-  },
-  categoryName: {
-    fontFamily: fonts.heading,
-    fontSize: 20,
-    color: theme.colors.primary.main,
-  },
-  momentsContainer: {
-    gap: 16,
-  },
-  momentItem: {
-    flexDirection: 'row',
-    gap: 12,
-    alignItems: 'flex-start',
-  },
-  momentBullet: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: theme.colors.primary.main,
-    marginTop: 6,
-  },
-  momentContent: {
-    flex: 1,
-    gap: 4,
-  },
-  momentName: {
-    fontFamily: fonts.body,
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: '600',
     color: theme.colors.text.primary,
   },
-  momentDescription: {
+  sectionDescription: {
     fontFamily: fonts.body,
     fontSize: 14,
     lineHeight: 20,
     color: theme.colors.text.secondary,
+    marginTop: -8,
+  },
+  descriptionText: {
+    fontFamily: fonts.body,
+    fontSize: 16,
+    lineHeight: 24,
+    color: theme.colors.text.primary,
+  },
+  tempoCategory: {
+    marginTop: theme.spacing.sm,
+  },
+  tempoCategoryHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.md,
+    backgroundColor: theme.colors.background.tertiary,
+    borderRadius: theme.borderRadius.md,
+  },
+  tempoCategoryName: {
+    fontFamily: fonts.body,
+    fontSize: 16,
+    fontWeight: '600',
+    color: theme.colors.text.primary,
+    flex: 1,
+  },
+  tempoCategoryRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
+  },
+  momentCount: {
+    backgroundColor: theme.colors.primary.main,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 10,
+    minWidth: 24,
+    alignItems: 'center',
+  },
+  momentCountText: {
+    fontFamily: fonts.body,
+    fontSize: 12,
+    fontWeight: '600',
+    color: theme.colors.text.inverse,
+  },
+  momentsContainer: {
+    marginTop: theme.spacing.sm,
+    paddingLeft: theme.spacing.md,
+    gap: theme.spacing.sm,
+  },
+  momentItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: theme.spacing.sm,
+    paddingBottom: theme.spacing.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.neutral[200],
+  },
+  momentItemLast: {
+    borderBottomWidth: 0,
+    paddingBottom: 0,
+  },
+  momentBullet: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: theme.colors.primary.main,
+    marginTop: 7,
+  },
+  momentText: {
+    flex: 1,
+    fontFamily: fonts.body,
+    fontSize: 14,
+    lineHeight: 20,
+    color: theme.colors.text.primary,
   },
   errorText: {
     fontFamily: fonts.body,
     fontSize: 16,
-    color: theme.colors.error,
+    color: theme.colors.error.main,
     textAlign: 'center',
   },
 });

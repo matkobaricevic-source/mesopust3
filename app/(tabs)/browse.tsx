@@ -38,6 +38,9 @@ export default function ParticipantsScreen() {
   const [isHierarchyExpanded, setIsHierarchyExpanded] = useState(false);
   const [isFormationExpanded, setIsFormationExpanded] = useState(false);
   const [isZogaExpanded, setIsZogaExpanded] = useState(false);
+  const [expandedTempos, setExpandedTempos] = useState<Set<string>>(new Set());
+  const [tempoCategories, setTempoCategories] = useState<any[]>([]);
+  const [zogaMoments, setZogaMoments] = useState<any[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -64,10 +67,25 @@ export default function ParticipantsScreen() {
         .select('*')
         .order('display_order', { ascending: true });
 
+      // Load zoga tempo categories and moments
+      const { data: tempoCategoriesData, error: tempoCategoriesError } = await supabase
+        .from('zoga_tempo_categories')
+        .select('*')
+        .order('display_order', { ascending: true });
+
+      const { data: zogaMomentsData, error: zogaMomentsError } = await supabase
+        .from('zoga_moments')
+        .select('*')
+        .order('display_order', { ascending: true });
+
       if (hierarchyError) throw hierarchyError;
+      if (tempoCategoriesError) throw tempoCategoriesError;
+      if (zogaMomentsError) throw zogaMomentsError;
 
       setParticipants(participantsData || []);
       setHierarchyRoles(hierarchyData || []);
+      setTempoCategories(tempoCategoriesData || []);
+      setZogaMoments(zogaMomentsData || []);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : 'Failed to load participants'
@@ -517,39 +535,62 @@ export default function ParticipantsScreen() {
                           activeOpacity={0.7}
                         >
                           <Text style={styles.zogaDescription}>
-                            Tradicionalna glazba koju sviraju mesopustari. Zoga se svira u različitim tempima ovisno o trenutku ili događaju.
+                            Tradicionalna glazba koju sviraju mesopustari. Zoga se svira u različitim brzinama ovisno o trenutku ili događaju.
                           </Text>
 
                           <View style={styles.tempoList}>
-                            <Text style={styles.tempoListTitle}>Tempi izvođenja:</Text>
-                            <View style={styles.tempoItem}>
-                              <View style={styles.tempoBullet} />
-                              <Text style={styles.tempoText}>Jako spora</Text>
-                            </View>
-                            <View style={styles.tempoItem}>
-                              <View style={styles.tempoBullet} />
-                              <Text style={styles.tempoText}>Spora</Text>
-                            </View>
-                            <View style={styles.tempoItem}>
-                              <View style={styles.tempoBullet} />
-                              <Text style={styles.tempoText}>Srednje spora</Text>
-                            </View>
-                            <View style={styles.tempoItem}>
-                              <View style={styles.tempoBullet} />
-                              <Text style={styles.tempoText}>Srednja uobičajena</Text>
-                            </View>
-                            <View style={styles.tempoItem}>
-                              <View style={styles.tempoBullet} />
-                              <Text style={styles.tempoText}>Srednje brza</Text>
-                            </View>
-                            <View style={styles.tempoItem}>
-                              <View style={styles.tempoBullet} />
-                              <Text style={styles.tempoText}>Brza</Text>
-                            </View>
+                            <Text style={styles.tempoListTitle}>Brzine izvođenja:</Text>
+                            {tempoCategories.map((category) => {
+                              const moments = zogaMoments.filter(m => m.tempo_category_id === category.id);
+                              const isExpanded = expandedTempos.has(category.id);
+
+                              return (
+                                <View key={category.id} style={styles.tempoCategory}>
+                                  <TouchableOpacity
+                                    style={styles.tempoCategoryButton}
+                                    onPress={() => {
+                                      setExpandedTempos(prev => {
+                                        const newSet = new Set(prev);
+                                        if (newSet.has(category.id)) {
+                                          newSet.delete(category.id);
+                                        } else {
+                                          newSet.add(category.id);
+                                        }
+                                        return newSet;
+                                      });
+                                    }}
+                                    activeOpacity={0.7}
+                                  >
+                                    <View style={styles.tempoBullet} />
+                                    <Text style={styles.tempoText}>{category.name}</Text>
+                                    <View style={styles.momentBadge}>
+                                      <Text style={styles.momentBadgeText}>{moments.length}</Text>
+                                    </View>
+                                    {isExpanded ? (
+                                      <ChevronUp size={16} color={theme.colors.text.secondary} strokeWidth={2} />
+                                    ) : (
+                                      <ChevronDown size={16} color={theme.colors.text.secondary} strokeWidth={2} />
+                                    )}
+                                  </TouchableOpacity>
+                                  {isExpanded && moments.length > 0 && (
+                                    <View style={styles.tempoMoments}>
+                                      {moments.map((moment: any) => (
+                                        <View key={moment.id} style={styles.momentItemSmall}>
+                                          <View style={styles.momentDot} />
+                                          <Text style={styles.momentTextSmall}>
+                                            {moment.moment_name_croatian || moment.moment_name}
+                                          </Text>
+                                        </View>
+                                      ))}
+                                    </View>
+                                  )}
+                                </View>
+                              );
+                            })}
                           </View>
 
                           <Text style={styles.formationTip}>
-                            💡 Dodirnite za više informacija o zogi
+                            💡 Dodirnite različite brzine za više detalja ili dodirnite ovdje za potpune informacije
                           </Text>
                         </TouchableOpacity>
                       </View>
@@ -917,13 +958,16 @@ const styles = StyleSheet.create({
     ...theme.typography.body2,
     fontWeight: '600',
     color: theme.colors.text.primary,
+    marginBottom: theme.spacing.sm,
+  },
+  tempoCategory: {
     marginBottom: theme.spacing.xs,
   },
-  tempoItem: {
+  tempoCategoryButton: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: theme.spacing.xs,
-    paddingVertical: 2,
+    paddingVertical: 6,
   },
   tempoBullet: {
     width: 6,
@@ -934,5 +978,45 @@ const styles = StyleSheet.create({
   tempoText: {
     ...theme.typography.body2,
     color: theme.colors.text.secondary,
+    flex: 1,
+  },
+  momentBadge: {
+    backgroundColor: theme.colors.primary.main,
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    borderRadius: 8,
+    minWidth: 18,
+    alignItems: 'center',
+  },
+  momentBadgeText: {
+    ...theme.typography.caption,
+    fontSize: 10,
+    fontWeight: '600',
+    color: theme.colors.text.inverse,
+  },
+  tempoMoments: {
+    marginTop: theme.spacing.xs,
+    marginLeft: 20,
+    gap: theme.spacing.xs,
+  },
+  momentItemSmall: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: theme.spacing.xs,
+    paddingVertical: 2,
+  },
+  momentDot: {
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: theme.colors.secondary.main,
+    marginTop: 6,
+  },
+  momentTextSmall: {
+    ...theme.typography.caption,
+    fontSize: 11,
+    color: theme.colors.text.secondary,
+    flex: 1,
+    lineHeight: 16,
   },
 });
