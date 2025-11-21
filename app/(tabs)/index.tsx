@@ -693,6 +693,7 @@ const styles = StyleSheet.create({
   dropdownContainer: {
     marginTop: theme.spacing.md,
     paddingHorizontal: theme.spacing.lg,
+    paddingBottom: theme.spacing.md,
   },
   dropdownBorder: {
     height: 1,
