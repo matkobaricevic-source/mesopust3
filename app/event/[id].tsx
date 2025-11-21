@@ -47,6 +47,7 @@ export default function EventDetailScreen() {
   const [error, setError] = useState<string | null>(null);
   const [showEventSteps, setShowEventSteps] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [isNapovidanjeExpanded, setIsNapovidanjeExpanded] = useState(false);
   const eventStepsAnimation = useSharedValue(0);
   const router = useRouter();
 
@@ -305,30 +306,51 @@ export default function EventDetailScreen() {
             </Animated.View>
           )}
 
-          {categories.length > 0 && (
-            <Animated.View entering={FadeInDown.delay(500).springify()}>
-              <View style={styles.sectionHeaderStatic}>
-                <MapPin size={24} color={theme.colors.primary.main} strokeWidth={2} />
-                <Text style={styles.sectionTitle}>Dani ({categories.length})</Text>
-              </View>
-              {categories.map((category, index) => (
-                <Animated.View
-                  key={category.id}
-                  entering={FadeInDown.delay(500 + index * 50).springify()}
-                  style={styles.categoryCardWrapper}
-                >
-                  <ModernCard onPress={() => router.push(`/category/${category.id}`)}>
-                    <View style={styles.categoryCard}>
-                      <Text style={styles.categoryTitle}>
-                        {category.title_local || category.title}
-                      </Text>
-                      <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
-                    </View>
-                  </ModernCard>
-                </Animated.View>
-              ))}
-            </Animated.View>
-          )}
+          <Animated.View entering={FadeInDown.delay(500).springify()}>
+            <ModernCard style={styles.napovidanjeCard}>
+              <Text style={styles.napovidanjeTitle}>Izvedba "Napovidanja"</Text>
+              <Text
+                style={styles.napovidanjeText}
+                numberOfLines={isNapovidanjeExpanded ? undefined : 4}
+              >
+                {`„Napovid" započinje „mesopustarski kapitan": „Ovo j' prvo napovidanje dovcen i dovican! Ženi se ženi!"
+Prisutni narod i ostali „mesopustari" pitaju: „A Ki-i-i-i?"
+„Kapitan" odgovara:  „A teta Ivana Šeguljka"
+Narod i „mesopustari" ponovno pitaju: „A za koga-a-a-a?"
+„Kapitan": „A za Radovana Sokolića!"
+
+Narod izvedenu napovid „oženjenog" para poprati smijehom i odobravanjem a „mesopustari" zasviraju „tuš" – specifični glazbeni manifest udaranja bubnja, otpuštanje prodornog tona tona „vele trumbete" i „odgovaralice" uz ubacivanje ostalih instrumenata.
+„Napovidanje" se na jednom raskrižju ponavlja minimalno dva puta, s mogućnošću izvođenja i više puta.
+Objavu drugoga para preuzima „drugi kapitan", čime započinje izmjena „kapitana" koja se nastavlja na svim raskrižjima:
+„Drugi kapitan": „A još je jedna!"
+Narod i „mesopustari": „A Ka-a-a-a?"
+„Kapitan": „A (teta) …..(ime, prezime/obiteljski nadimak udovice)"
+Narod i „mesopustari": „A za koga-a-a-a?"
+„Kapitan": „A za …(ime, prezime,/obiteljski nadimak udovca)"
+
+I ovaj put narod izvedenu „napovid" oženjenog para poprati smijehom i odobravanjem a „mesopustari" zasviraju „tuš" – specifični glazbeni manifest udaranja bubnja, otpuštanje prodornog tona tona „vele trumbete" i „odgovaralice" uz ubacivanje ostalih instrumenata.
+
+Zaključno, „kapitan" izgovara: „Ako ki zna kakovu zapreku kumstva, srodstva ili niku (kakovu) drugu, neka klade guzenjak pod prdenjak, mokru krpu na guzicu i nek se javi (ime nekog mesopustara) da ne bude kakovoga šušura!"
+
+S tim se „napovidanje" na raskrižju završava, „advitor" najavljuje „zogu" sa „Bubanj i mužika složno udaraj!" nakon čega se cijela povorka premješta na sljedeće raskrižje.`}
+              </Text>
+              <TouchableOpacity
+                style={styles.readMoreButton}
+                onPress={() => setIsNapovidanjeExpanded(!isNapovidanjeExpanded)}
+              >
+                <Text style={styles.readMoreText}>
+                  {isNapovidanjeExpanded ? 'Prikaži manje' : 'Prikaži više'}
+                </Text>
+                <ChevronDown
+                  size={16}
+                  color={theme.colors.primary.main}
+                  style={{
+                    transform: [{ rotate: isNapovidanjeExpanded ? '180deg' : '0deg' }],
+                  }}
+                />
+              </TouchableOpacity>
+            </ModernCard>
+          </Animated.View>
 
           {subEvents.length > 0 && (
             <Animated.View entering={FadeInDown.delay(600).springify()}>
@@ -632,5 +654,19 @@ const styles = StyleSheet.create({
   },
   bottomSpacer: {
     height: 100,
+  },
+  napovidanjeCard: {
+    padding: theme.spacing.lg,
+  },
+  napovidanjeTitle: {
+    ...theme.typography.h4,
+    color: theme.colors.text.primary,
+    fontWeight: '700',
+    marginBottom: theme.spacing.md,
+  },
+  napovidanjeText: {
+    ...theme.typography.body1,
+    color: theme.colors.text.secondary,
+    lineHeight: 26,
   },
 });
