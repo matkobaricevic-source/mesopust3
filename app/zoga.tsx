@@ -273,21 +273,21 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontFamily: fonts.heading,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '600',
     color: theme.colors.text.primary,
   },
   sectionDescription: {
     fontFamily: fonts.body,
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: 13,
+    lineHeight: 18,
     color: theme.colors.text.secondary,
     marginTop: -8,
   },
   descriptionText: {
     fontFamily: fonts.body,
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: 14,
+    lineHeight: 21,
     color: theme.colors.text.primary,
   },
   tempoCategory: {
