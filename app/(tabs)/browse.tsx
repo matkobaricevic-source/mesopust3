@@ -356,11 +356,11 @@ export default function ParticipantsScreen() {
                               <Text style={styles.formationColumnTitle}>Lijevi Red</Text>
                               <TouchableOpacity
                                 style={styles.formationMember}
-                                onPress={() => handleFormationRolePress('Kapetan')}
+                                onPress={() => handleFormationRolePress('Drugi kapitan')}
                                 activeOpacity={0.7}
                               >
                                 <Award size={14} color={theme.colors.primary.main} strokeWidth={2} />
-                                <Text style={styles.formationMemberText}>Drugi Kapetan</Text>
+                                <Text style={styles.formationMemberText}>Drugi kapitan</Text>
                               </TouchableOpacity>
                               <TouchableOpacity
                                 style={styles.formationMember}
@@ -459,11 +459,11 @@ export default function ParticipantsScreen() {
                               <Text style={styles.formationColumnTitle}>Desni Red</Text>
                               <TouchableOpacity
                                 style={styles.formationMember}
-                                onPress={() => handleFormationRolePress('Kapetan')}
+                                onPress={() => handleFormationRolePress('Prvi kapitan')}
                                 activeOpacity={0.7}
                               >
                                 <Award size={14} color={theme.colors.primary.main} strokeWidth={2} />
-                                <Text style={styles.formationMemberText}>Prvi Kapetan</Text>
+                                <Text style={styles.formationMemberText}>Prvi kapitan</Text>
                               </TouchableOpacity>
                               <TouchableOpacity
                                 style={styles.formationMember}
