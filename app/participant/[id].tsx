@@ -818,7 +818,7 @@ const styles = StyleSheet.create({
     padding: 7,
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: theme.colors.border.primary,
+    borderColor: theme.colors.neutral[300],
   },
   highlightedMember: {
     backgroundColor: theme.colors.accent.main + '15',
