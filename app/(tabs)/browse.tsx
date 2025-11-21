@@ -96,55 +96,14 @@ export default function ParticipantsScreen() {
   function handleFormationRolePress(roleName: string) {
     const lowerRoleName = roleName.toLowerCase();
 
-    // Handle Advitor - goes to hierarchy role page
-    if (lowerRoleName.includes('advitor')) {
-      const advitorRole = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'advitor');
-      if (advitorRole) {
-        router.push(`/role/${advitorRole.id}`);
-        return;
-      }
-    }
+    // Try to find an exact match in hierarchy roles first
+    const exactRole = hierarchyRoles.find(
+      r => r.title_croatian?.toLowerCase() === lowerRoleName
+    );
 
-    // Handle Captains - goes to their specific hierarchy role pages
-    if (lowerRoleName.includes('prvi kapetan')) {
-      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'prvi kapitan');
-      if (role) {
-        router.push(`/role/${role.id}`);
-        return;
-      }
-    }
-
-    if (lowerRoleName.includes('drugi kapetan')) {
-      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'drugi kapitan');
-      if (role) {
-        router.push(`/role/${role.id}`);
-        return;
-      }
-    }
-
-    // Handle support roles (Kasir, Bandiraš, Magaziner) - go to their hierarchy role pages
-    if (lowerRoleName.includes('kasir')) {
-      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'kasir');
-      if (role) {
-        router.push(`/role/${role.id}`);
-        return;
-      }
-    }
-
-    if (lowerRoleName.includes('bandiraš')) {
-      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'bandiraš');
-      if (role) {
-        router.push(`/role/${role.id}`);
-        return;
-      }
-    }
-
-    if (lowerRoleName.includes('magaziner')) {
-      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'magaziner');
-      if (role) {
-        router.push(`/role/${role.id}`);
-        return;
-      }
+    if (exactRole) {
+      router.push(`/role/${exactRole.id}`);
+      return;
     }
 
     // Handle instruments - extract base instrument name and find it
