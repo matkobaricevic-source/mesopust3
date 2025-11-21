@@ -19,7 +19,7 @@ export default function FormacijaScreen() {
         colors={[theme.colors.background.primary, theme.colors.background.secondary]}
         style={styles.gradient}
       >
-        <ScrollView style={styles.scrollView} contentContainerStyle={styles.content}>
+        <ScrollView style={styles.scrollView} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
           {/* Header */}
           <Animated.View entering={FadeIn.duration(500)} style={styles.header}>
             <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
@@ -29,7 +29,7 @@ export default function FormacijaScreen() {
               <View style={styles.iconContainer}>
                 <Users size={32} color={theme.colors.primary.main} strokeWidth={2} />
               </View>
-              <Text style={styles.title}>Formacija</Text>
+              <Text style={styles.title}>Formacija mesopustara</Text>
             </View>
           </Animated.View>
 
@@ -39,7 +39,13 @@ export default function FormacijaScreen() {
               <Text style={styles.formationHeader}>Formacija u dva reda</Text>
 
               <Text style={styles.formationExplanation}>
-                Mesopustari stoje i kreću se u dva reda sa sinkroniziranim korakom kojeg predvode kapitani. Advitor dirigira zogu iz sredine.
+                Formacija je precizno raspoređena: red s ,advitorove ' desne strane predvodi , prvi mesopusni kapitan', dok red s lijeve strane vodi ,drugi kapitan'.{'\n\n'}
+                U desnom redu, odmah iza ,kapitana', postrojavaju se ,mesopustari' s instrumentima, jedan iza drugoga, sljedećim redoslijedom: ,mala sopila', ,odgovaralica', ,činele', ,mali bubanj', ,avan' i ,kosa'.{'\n\n'}
+                U lijevom redu, također redom, slijede: ,vela sopila', ,vela trumbeta', ,veli bubanj', ,srednji bubanj', ,zvončići' i ,triangul'.{'\n\n'}
+                Posljednje mjesto u oba reda uvijek je rezervirano za ,kasire' (blagajnike).{'\n\n'}
+                U sredini dvoreda stoji ,advitor' (otprilike između vele ,trumbete' i ,odgovaralice') a iza njega magaziner. Od ,mesopusne nedilje' do ,čiste srede' (kada ,mesopustari' nose svoje svečane odore) između ,advitora' i ,magazinera' stoji ,bandiraš' koji nosi ,bandiru' (zastavu) i puše po ritmu ,zoge' u ,švikavac' (žviždaljku).{'\n\n'}
+                Na ,advitorov' znak „Bubanj i mužika složno udaraj!" ,zasopu sopile' prva dva takta a zatim kreću u korak sa lijevom nogom (lijeva noga je sinkronizirana sa izvedenim tonom ,vele trumbete').{'\n\n'}
+                Svi se ,mesopustari' kreću u ritmu ,zoge' čiji tempo dirigira ,advitor', prema naprijed, sa sinkroniziranim korakom bez odstupanja.
               </Text>
 
               {/* Three columns: Left row, Center, Right row */}
