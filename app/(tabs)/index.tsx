@@ -31,6 +31,7 @@ interface EventStep {
   image_url: string | null;
   note: string | null;
   related_event_id: string | null;
+  is_link: boolean;
 }
 
 interface EventCrossroad {
@@ -194,20 +195,23 @@ function AnimatedEventCard({
               <View style={styles.dropdownContent}>
                 {item.event_steps!.map((step) => {
                   const isClickable = step.related_event_id !== null;
+                  const isLink = step.is_link === true;
                   const StepWrapper = isClickable ? TouchableOpacity : View;
                   const stepWrapperProps = isClickable ? {
                     onPress: () => onStepPress?.(step.related_event_id!),
                     activeOpacity: 0.7,
-                    style: [styles.stepItem, styles.stepItemClickable]
+                    style: [styles.stepItem, isLink ? styles.stepItemLink : styles.stepItemClickable]
                   } : {
                     style: styles.stepItem
                   };
 
                   return (
                     <StepWrapper key={step.id} {...stepWrapperProps}>
-                      <View style={styles.stepNumberBadge}>
-                        <Text style={styles.stepNumberText}>{step.step_number}</Text>
-                      </View>
+                      {!isLink && (
+                        <View style={styles.stepNumberBadge}>
+                          <Text style={styles.stepNumberText}>{step.step_number}</Text>
+                        </View>
+                      )}
                       <View style={styles.stepInfo}>
                         <Text style={[styles.stepTitle, isClickable && styles.stepTitleClickable]}>
                           {step.title}
@@ -789,6 +793,17 @@ const styles = StyleSheet.create({
     borderRadius: theme.borderRadius.md,
     paddingHorizontal: theme.spacing.sm,
     marginHorizontal: -theme.spacing.sm,
+  },
+  stepItemLink: {
+    backgroundColor: theme.colors.primary.main + '15',
+    borderRadius: theme.borderRadius.md,
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    marginHorizontal: -theme.spacing.sm,
+    marginTop: theme.spacing.xs,
+    marginBottom: theme.spacing.xs,
+    borderLeftWidth: 3,
+    borderLeftColor: theme.colors.primary.main,
   },
   stepTitleClickable: {
     color: theme.colors.primary.main,

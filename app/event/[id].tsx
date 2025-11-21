@@ -30,6 +30,8 @@ interface EventStep {
   title: string;
   image_url: string | null;
   note: string | null;
+  related_event_id: string | null;
+  is_link: boolean;
 }
 
 interface EventCrossroad {
