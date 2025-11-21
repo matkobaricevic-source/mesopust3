@@ -97,6 +97,7 @@ export default function ParticipantsScreen() {
   function handleFormationRolePress(roleName: string) {
     const lowerRoleName = roleName.toLowerCase();
 
+    // Handle Advitor - goes to hierarchy role page
     if (lowerRoleName.includes('advitor')) {
       const advitorRole = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'advitor');
       if (advitorRole) {
@@ -105,28 +106,68 @@ export default function ParticipantsScreen() {
       }
     }
 
-    if (lowerRoleName.includes('kapetan') || lowerRoleName.includes('kasir') ||
-        lowerRoleName.includes('bandiraš') || lowerRoleName.includes('magaziner')) {
-      const mesopustari = participants.find(p => p.name_croatian?.toLowerCase() === 'mesopustari');
-      if (mesopustari) {
-        router.push(`/participant/${mesopustari.id}`);
+    // Handle Captains - goes to their specific hierarchy role pages
+    if (lowerRoleName.includes('prvi kapetan')) {
+      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'prvi kapitan');
+      if (role) {
+        router.push(`/role/${role.id}`);
         return;
       }
     }
 
+    if (lowerRoleName.includes('drugi kapetan')) {
+      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'drugi kapitan');
+      if (role) {
+        router.push(`/role/${role.id}`);
+        return;
+      }
+    }
+
+    // Handle support roles (Kasir, Bandiraš, Magaziner) - go to their hierarchy role pages
+    if (lowerRoleName.includes('kasir')) {
+      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'kasir');
+      if (role) {
+        router.push(`/role/${role.id}`);
+        return;
+      }
+    }
+
+    if (lowerRoleName.includes('bandiraš')) {
+      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'bandiraš');
+      if (role) {
+        router.push(`/role/${role.id}`);
+        return;
+      }
+    }
+
+    if (lowerRoleName.includes('magaziner')) {
+      const role = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'magaziner');
+      if (role) {
+        router.push(`/role/${role.id}`);
+        return;
+      }
+    }
+
+    // Handle instruments - extract base instrument name and find it
     const mesopustari = participants.find(p => p.name_croatian?.toLowerCase() === 'mesopustari');
     if (mesopustari && mesopustari.instruments && mesopustari.instruments.length > 0) {
-      const instrumentName = roleName
-        .replace('vela', '')
-        .replace('veli', '')
-        .replace('mala', '')
-        .replace('mali', '')
-        .replace('manja', '')
-        .replace('srednji', '')
-        .trim()
-        .toLowerCase();
+      // Remove size qualifiers to get the base instrument name
+      let instrumentName = roleName
+        .toLowerCase()
+        .replace(/^vela\s+/i, '')
+        .replace(/^veli\s+/i, '')
+        .replace(/^mala\s+/i, '')
+        .replace(/^mali\s+/i, '')
+        .replace(/^manja\s+/i, '')
+        .replace(/^srednji\s+/i, '')
+        .trim();
+
+      // Handle special name mappings
+      if (instrumentName === 'zvončići') instrumentName = 'zvonca';
+      if (instrumentName === 'triangul') instrumentName = 'triangl';
 
       const instrument = mesopustari.instruments.find((i: any) =>
+        i.name_croatian?.toLowerCase() === instrumentName ||
         i.name_croatian?.toLowerCase().includes(instrumentName) ||
         instrumentName.includes(i.name_croatian?.toLowerCase())
       );
@@ -137,6 +178,7 @@ export default function ParticipantsScreen() {
       }
     }
 
+    // Fallback to Mesopustari participant page
     if (mesopustari) {
       router.push(`/participant/${mesopustari.id}`);
     }
