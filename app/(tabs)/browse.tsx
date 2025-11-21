@@ -274,7 +274,9 @@ export default function ParticipantsScreen() {
                                     </Text>
                                   )}
                                 </View>
-                                <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
+                                <View style={styles.chevronContainer}>
+                                  <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
+                                </View>
                               </TouchableOpacity>
                             ))}
                           <Text style={styles.formationTip}>
@@ -747,6 +749,11 @@ const styles = StyleSheet.create({
     ...theme.typography.body2,
     color: theme.colors.text.secondary,
     lineHeight: 18,
+  },
+  chevronContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: theme.spacing.sm,
   },
   formationScheme: {
     paddingVertical: theme.spacing.md,
