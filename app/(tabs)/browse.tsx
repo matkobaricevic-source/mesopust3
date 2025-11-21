@@ -143,13 +143,7 @@ export default function ParticipantsScreen() {
   }
 
   function handleHierarchyRolePress(role: HierarchyRole) {
-    if (role.related_participant_id) {
-      router.push(`/participant/${role.related_participant_id}`);
-    } else if (role.title_croatian === 'Mesopustar') {
-      router.push(`/role/${role.id}`);
-    } else {
-      router.push(`/participant/${role.participant_id}`);
-    }
+    router.push(`/role/${role.id}`);
   }
 
   if (loading) {
