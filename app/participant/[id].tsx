@@ -266,10 +266,10 @@ export default function ParticipantDetailScreen() {
               {isRolesExpanded && hierarchyRoles.map((role, index) => {
                 const isRoleDescExpanded = expandedRoleDescriptions.has(role.id);
                 const roleDescription = role.description_croatian || '';
-                const truncateLength = 120;
+                const truncateLength = 80;
                 const shouldTruncateRole = roleDescription.length > truncateLength;
                 const displayDescription = (!isRoleDescExpanded && shouldTruncateRole)
-                  ? roleDescription.substring(0, truncateLength) + '...'
+                  ? roleDescription.substring(0, truncateLength).trim() + '...'
                   : roleDescription;
 
                 return (
