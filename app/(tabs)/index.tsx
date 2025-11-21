@@ -225,7 +225,7 @@ function AnimatedEventCard({
                       {isClickable && (
                         <ChevronDown
                           size={16}
-                          color={isLink ? '#FFD700' : theme.colors.primary.main}
+                          color={isLink ? '#D4AF37' : theme.colors.primary.main}
                           strokeWidth={2}
                           style={{ transform: [{ rotate: '-90deg' }] }}
                         />
@@ -797,7 +797,7 @@ const styles = StyleSheet.create({
     marginHorizontal: -theme.spacing.sm,
   },
   stepItemLink: {
-    backgroundColor: theme.colors.primary.main + '10',
+    backgroundColor: 'transparent',
     borderRadius: theme.borderRadius.md,
     paddingHorizontal: theme.spacing.sm,
     marginHorizontal: -theme.spacing.sm,
@@ -806,14 +806,14 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#FFD700',
+    backgroundColor: '#D4AF37',
     marginRight: theme.spacing.xs,
   },
   stepTitleClickable: {
     color: theme.colors.primary.main,
   },
   stepTitleLink: {
-    color: '#FFD700',
+    color: '#D4AF37',
     fontWeight: '600',
   },
   crossroadItem: {
