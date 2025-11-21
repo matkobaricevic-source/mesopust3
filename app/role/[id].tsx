@@ -149,6 +149,29 @@ export default function RoleDetailScreen() {
         </View>
 
         <View style={styles.content}>
+          {description && (
+            <Animated.View entering={FadeInDown.delay(200).springify()}>
+              <ModernCard style={styles.descriptionCard}>
+                <Text
+                  style={styles.description}
+                  numberOfLines={!isDescriptionExpanded && shouldTruncate ? 6 : undefined}
+                >
+                  {description}
+                </Text>
+                {shouldTruncate && (
+                  <TouchableOpacity
+                    style={styles.readMoreButton}
+                    onPress={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                  >
+                    <Text style={styles.readMoreText}>
+                      {isDescriptionExpanded ? 'Prikaži manje' : 'Prikaži više'}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </ModernCard>
+            </Animated.View>
+          )}
+
           {uniformItems.length > 0 && (
             <Animated.View entering={FadeInDown.delay(300).springify()}>
               <View style={styles.sectionHeader}>
