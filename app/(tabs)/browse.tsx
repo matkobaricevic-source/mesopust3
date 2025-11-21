@@ -305,7 +305,7 @@ export default function ParticipantsScreen() {
                           <Text style={styles.formationHeader}>Formacija u Dva Reda</Text>
 
                           <Text style={styles.formationExplanation}>
-                            Mesopustari stoje i kreću se u dva reda sa sinkroniziranim korakom. Advitor dirigira zoge iz sredine, dok bandiraš nosi zastavu i puše u žviždaljku.
+                            Mesopustari stoje i kreću se u dva reda sa sinkroniziranim korakom kojeg predvode kapitani. Advitor dirigira zogu iz sredine.
                           </Text>
 
                           {/* Three columns: Left row, Center, Right row */}
