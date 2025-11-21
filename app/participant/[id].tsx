@@ -266,7 +266,7 @@ export default function ParticipantDetailScreen() {
               {isRolesExpanded && hierarchyRoles.map((role, index) => {
                 const isRoleDescExpanded = expandedRoleDescriptions.has(role.id);
                 const roleDescription = role.description_croatian || '';
-                const shouldTruncateRole = roleDescription.length > 150;
+                const shouldTruncateRole = roleDescription.length > 80;
 
                 return (
                   <Animated.View
@@ -286,7 +286,7 @@ export default function ParticipantDetailScreen() {
                             <>
                               <Text
                                 style={styles.roleDescription}
-                                numberOfLines={!isRoleDescExpanded && shouldTruncateRole ? 3 : undefined}
+                                numberOfLines={!isRoleDescExpanded && shouldTruncateRole ? 2 : undefined}
                               >
                                 {roleDescription}
                               </Text>
