@@ -43,7 +43,7 @@ export default function FormacijaScreen() {
                 U desnom redu, odmah iza ,kapitana', postrojavaju se ,mesopustari' s instrumentima, jedan iza drugoga, sljedećim redoslijedom: ,mala sopila', ,odgovaralica', ,činele', ,mali bubanj', ,avan' i ,kosa'.{'\n\n'}
                 U lijevom redu, također redom, slijede: ,vela sopila', ,vela trumbeta', ,veli bubanj', ,srednji bubanj', ,zvončići' i ,triangul'.{'\n\n'}
                 Posljednje mjesto u oba reda uvijek je rezervirano za ,kasire' (blagajnike).{'\n\n'}
-                U sredini dvoreda stoji ,advitor' (otprilike između vele ,trumbete' i ,odgovaralice') a iza njega magaziner. Od ,mesopusne nedilje' do ,čiste srede' (kada ,mesopustari' nose svoje svečane odore) između ,advitora' i ,magazinera' stoji ,bandiraš' koji nosi ,bandiru' (zastavu) i puše po ritmu ,zoge' u ,švikavac' (žviždaljku).{'\n\n'}
+                U sredini dvoreda stoji ,advitor' (otprilike između vele ,trumbete' i ,odgovaralice') a iza njega magaziner. Bandiraš stoji između advitora i magazinera od mesopusne nedilje do mesopusne srede (kada ,mesopustari' nose svoje svečane odore) i nosi ,bandiru' (zastavu) i puše po ritmu ,zoge' u ,švikavac' (žviždaljku).{'\n\n'}
                 Na ,advitorov' znak „Bubanj i mužika složno udaraj!" ,zasopu sopile' prva dva takta a zatim kreću u korak sa lijevom nogom (lijeva noga je sinkronizirana sa izvedenim tonom ,vele trumbete').{'\n\n'}
                 Svi se ,mesopustari' kreću u ritmu ,zoge' čiji tempo dirigira ,advitor', prema naprijed, sa sinkroniziranim korakom bez odstupanja.
               </Text>
