@@ -267,11 +267,6 @@ export default function ParticipantsScreen() {
                                 </View>
                                 <View style={styles.roleInfo}>
                                   <Text style={styles.hierarchyRoleName}>{role.title_croatian}</Text>
-                                  {role.description_croatian && (
-                                    <Text style={styles.hierarchyRoleDesc}>
-                                      {role.description_croatian}
-                                    </Text>
-                                  )}
                                 </View>
                               </TouchableOpacity>
                             ))}
