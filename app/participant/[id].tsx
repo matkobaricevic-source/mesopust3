@@ -14,7 +14,7 @@ import { BlurView } from 'expo-blur';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { Participant, Event, HierarchyRole, Instrument } from '@/types/database';
-import { ArrowLeft, Calendar, Music, Shirt, Users, ChevronRight, Crown, ChevronDown, ChevronUp } from 'lucide-react-native';
+import { ArrowLeft, Calendar, Music, Shirt, Users, ChevronRight, Crown, ChevronDown, ChevronUp, Award, User } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
 import { theme } from '@/constants/theme';
@@ -37,6 +37,21 @@ export default function ParticipantDetailScreen() {
   const [isInstrumentsExpanded, setIsInstrumentsExpanded] = useState(false);
   const [isRolesExpanded, setIsRolesExpanded] = useState(false);
   const router = useRouter();
+
+  function getHierarchyIcon(displayOrder: number) {
+    switch (displayOrder) {
+      case 1:
+        return <Crown size={20} color={theme.colors.accent.main} strokeWidth={2} />;
+      case 2:
+        return <Award size={20} color={theme.colors.primary.main} strokeWidth={2} />;
+      case 3:
+        return <Award size={20} color={theme.colors.primary.main} strokeWidth={2} />;
+      case 4:
+        return <User size={20} color={theme.colors.text.secondary} strokeWidth={2} />;
+      default:
+        return <User size={20} color={theme.colors.text.secondary} strokeWidth={2} />;
+    }
+  }
 
   useEffect(() => {
     loadParticipantDetails();
@@ -272,6 +287,9 @@ export default function ParticipantDetailScreen() {
                       onPress={() => router.push(`/role/${role.id}`)}
                     >
                       <View style={styles.roleCard}>
+                        <View style={styles.roleIconContainer}>
+                          {getHierarchyIcon(role.display_order)}
+                        </View>
                         <View style={styles.roleCardContent}>
                           <Text style={styles.roleTitle}>
                             {role.title_croatian || role.title}
@@ -477,9 +495,18 @@ const styles = StyleSheet.create({
   },
   roleCard: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: theme.spacing.md,
     padding: theme.spacing.lg,
+  },
+  roleIconContainer: {
+    width: 32,
+    height: 32,
+    borderRadius: theme.borderRadius.md,
+    backgroundColor: theme.colors.neutral[100],
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 2,
   },
   roleCardContent: {
     flex: 1,
