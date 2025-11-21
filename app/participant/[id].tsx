@@ -276,10 +276,13 @@ export default function ParticipantDetailScreen() {
                           <Text style={styles.roleTitle}>
                             {role.title_croatian || role.title}
                           </Text>
+                          {role.short_description_croatian && (
+                            <Text style={styles.roleDescription}>
+                              {role.short_description_croatian}
+                            </Text>
+                          )}
                         </View>
-                        {role.related_participant_id && (
-                          <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
-                        )}
+                        <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
                       </View>
                     </ModernCard>
                   </Animated.View>
@@ -485,7 +488,7 @@ const styles = StyleSheet.create({
     ...theme.typography.body1,
     color: theme.colors.text.primary,
     fontWeight: '600',
-    marginBottom: theme.spacing.sm,
+    marginBottom: 4,
   },
   roleDescription: {
     ...theme.typography.body2,
