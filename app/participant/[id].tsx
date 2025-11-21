@@ -36,7 +36,6 @@ export default function ParticipantDetailScreen() {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isInstrumentsExpanded, setIsInstrumentsExpanded] = useState(false);
   const [isRolesExpanded, setIsRolesExpanded] = useState(false);
-  const [expandedRoleDescriptions, setExpandedRoleDescriptions] = useState<Set<string>>(new Set());
   const router = useRouter();
 
   useEffect(() => {
@@ -263,18 +262,7 @@ export default function ParticipantDetailScreen() {
                   )}
                 </View>
               </TouchableOpacity>
-              {isRolesExpanded && hierarchyRoles.map((role, index) => {
-                const isRoleDescExpanded = expandedRoleDescriptions.has(role.id);
-                const roleDescription = role.description_croatian || '';
-                const truncateLength = 80;
-                const shouldTruncateRole = roleDescription.length > truncateLength;
-                const displayDescription = (!isRoleDescExpanded && shouldTruncateRole)
-                  ? roleDescription.substring(0, truncateLength).trim() + '...'
-                  : roleDescription;
-
-                console.log('Role:', role.title_croatian, 'Length:', roleDescription.length, 'Should truncate:', shouldTruncateRole);
-
-                return (
+              {isRolesExpanded && hierarchyRoles.map((role, index) => (
                   <Animated.View
                     key={role.id}
                     entering={FadeInDown.delay(50 + index * 30).springify()}
@@ -288,34 +276,6 @@ export default function ParticipantDetailScreen() {
                           <Text style={styles.roleTitle}>
                             {role.title_croatian || role.title}
                           </Text>
-                          {role.description_croatian && (
-                            <>
-                              <Text style={styles.roleDescription}>
-                                {displayDescription}
-                              </Text>
-                              {shouldTruncateRole && (
-                                <TouchableOpacity
-                                  style={styles.roleReadMoreButton}
-                                  onPress={(e) => {
-                                    e.stopPropagation();
-                                    setExpandedRoleDescriptions(prev => {
-                                      const newSet = new Set(prev);
-                                      if (newSet.has(role.id)) {
-                                        newSet.delete(role.id);
-                                      } else {
-                                        newSet.add(role.id);
-                                      }
-                                      return newSet;
-                                    });
-                                  }}
-                                >
-                                  <Text style={styles.roleReadMoreText}>
-                                    {isRoleDescExpanded ? 'Prikaži manje' : 'Prikaži više'}
-                                  </Text>
-                                </TouchableOpacity>
-                              )}
-                            </>
-                          )}
                         </View>
                         {role.related_participant_id && (
                           <ChevronRight size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
