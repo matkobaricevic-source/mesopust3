@@ -481,7 +481,7 @@ export default function ParticipantsScreen() {
                           </View>
 
                           <Text style={styles.formationNote}>
-                            * Bandiraš stoji između Advitora i Magazinera od mesopusne nedilje do čiste srede
+                            * Bandiraš stoji između advitora i magazinera od mesopusne nedilje do mesopusne srede
                           </Text>
                           <Text style={styles.formationTip}>
                             💡 Dodirnite bilo koju ulogu za više informacija
