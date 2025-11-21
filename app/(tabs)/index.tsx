@@ -715,6 +715,7 @@ const styles = StyleSheet.create({
   dropdownContent: {
     marginTop: theme.spacing.sm,
     paddingLeft: theme.spacing.sm,
+    paddingBottom: theme.spacing.md,
   },
   stepItem: {
     flexDirection: 'row',
