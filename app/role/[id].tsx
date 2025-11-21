@@ -13,7 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
-import { ArrowLeft, Shirt } from 'lucide-react-native';
+import { ArrowLeft, Shirt, ChevronDown, ChevronUp } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
 import { theme } from '@/constants/theme';
@@ -52,6 +52,7 @@ export default function RoleDetailScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [expandedUniformItems, setExpandedUniformItems] = useState<Set<string>>(new Set());
   const router = useRouter();
 
   useEffect(() => {
@@ -175,37 +176,51 @@ export default function RoleDetailScreen() {
             <Animated.View entering={FadeInDown.delay(300).springify()}>
               <View style={styles.sectionHeader}>
                 <Shirt size={24} color={theme.colors.primary.main} strokeWidth={2} />
-                <Text style={styles.sectionTitle}>Dijelovi uniforme ({uniformItems.length})</Text>
+                <Text style={styles.sectionTitle}>Dijelovi odore ({uniformItems.length})</Text>
               </View>
-              {uniformItems.map((item, index) => (
-                <Animated.View
-                  key={item.id}
-                  entering={FadeInDown.delay(300 + index * 50).springify()}
-                  style={styles.cardWrapper}
-                >
-                  <ModernCard>
-                    <View style={styles.uniformCard}>
-                      {item.image_url && getImageSource(item.image_url) && (
-                        <Image
-                          source={getImageSource(item.image_url)!}
-                          style={styles.uniformImage}
-                          resizeMode="cover"
-                        />
-                      )}
-                      <View style={styles.uniformInfo}>
-                        <Text style={styles.uniformTitle}>
-                          {item.item_name_croatian || item.item_name}
-                        </Text>
-                        {item.description_croatian && (
-                          <Text style={styles.uniformDescription}>
-                            {item.description_croatian}
+              {uniformItems.map((item, index) => {
+                const isExpanded = expandedUniformItems.has(item.id);
+                return (
+                  <Animated.View
+                    key={item.id}
+                    entering={FadeInDown.delay(300 + index * 50).springify()}
+                    style={styles.cardWrapper}
+                  >
+                    <ModernCard>
+                      <TouchableOpacity
+                        onPress={() => {
+                          const newSet = new Set(expandedUniformItems);
+                          if (isExpanded) {
+                            newSet.delete(item.id);
+                          } else {
+                            newSet.add(item.id);
+                          }
+                          setExpandedUniformItems(newSet);
+                        }}
+                        activeOpacity={0.7}
+                      >
+                        <View style={styles.uniformItemHeader}>
+                          <Text style={styles.uniformItemTitle}>
+                            {item.item_name_croatian || item.item_name}
                           </Text>
+                          {isExpanded ? (
+                            <ChevronUp size={18} color={theme.colors.text.tertiary} strokeWidth={2} />
+                          ) : (
+                            <ChevronDown size={18} color={theme.colors.text.tertiary} strokeWidth={2} />
+                          )}
+                        </View>
+                        {isExpanded && item.description_croatian && (
+                          <View style={styles.uniformItemContent}>
+                            <Text style={styles.uniformItemDescription}>
+                              {item.description_croatian}
+                            </Text>
+                          </View>
                         )}
-                      </View>
-                    </View>
-                  </ModernCard>
-                </Animated.View>
-              ))}
+                      </TouchableOpacity>
+                    </ModernCard>
+                  </Animated.View>
+                );
+              })}
             </Animated.View>
           )}
 
@@ -313,30 +328,29 @@ const styles = StyleSheet.create({
   cardWrapper: {
     marginBottom: theme.spacing.md,
   },
-  uniformCard: {
+  uniformItemHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: theme.spacing.md,
+    justifyContent: 'space-between',
     padding: theme.spacing.lg,
   },
-  uniformImage: {
-    width: 80,
-    height: 80,
-    borderRadius: theme.borderRadius.md,
-  },
-  uniformInfo: {
-    flex: 1,
-  },
-  uniformTitle: {
+  uniformItemTitle: {
     ...theme.typography.body1,
     color: theme.colors.text.primary,
     fontWeight: '600',
-    marginBottom: 4,
+    flex: 1,
   },
-  uniformDescription: {
+  uniformItemContent: {
+    paddingHorizontal: theme.spacing.lg,
+    paddingBottom: theme.spacing.lg,
+    paddingTop: theme.spacing.xs,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.neutral[200],
+  },
+  uniformItemDescription: {
     ...theme.typography.body2,
     color: theme.colors.text.secondary,
-    lineHeight: 20,
+    lineHeight: 22,
   },
   bottomSpacer: {
     height: 100,

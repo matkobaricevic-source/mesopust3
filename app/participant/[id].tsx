@@ -13,7 +13,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { supabase } from '@/lib/supabase';
-import { Participant, Event, HierarchyRole, Instrument, UniformItem } from '@/types/database';
+import { Participant, Event, HierarchyRole, Instrument } from '@/types/database';
 import { ArrowLeft, Calendar, Music, Shirt, Users, ChevronRight, Crown, ChevronDown, ChevronUp } from 'lucide-react-native';
 import { getImageSource } from '@/lib/imageUtils';
 import { fonts } from '@/constants/fonts';
@@ -31,14 +31,11 @@ export default function ParticipantDetailScreen() {
   const [events, setEvents] = useState<ParticipantEvent[]>([]);
   const [hierarchyRoles, setHierarchyRoles] = useState<HierarchyRole[]>([]);
   const [instruments, setInstruments] = useState<Instrument[]>([]);
-  const [uniformItems, setUniformItems] = useState<UniformItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isInstrumentsExpanded, setIsInstrumentsExpanded] = useState(false);
   const [isRolesExpanded, setIsRolesExpanded] = useState(false);
-  const [isUniformExpanded, setIsUniformExpanded] = useState(false);
-  const [expandedUniformItems, setExpandedUniformItems] = useState<Set<string>>(new Set());
   const router = useRouter();
 
   useEffect(() => {
@@ -80,17 +77,6 @@ export default function ParticipantDetailScreen() {
           .order('display_order', { ascending: true }),
       ]);
 
-      // Load uniform items for hierarchy roles
-      const roleIds = (rolesResult.data || []).map(r => r.id);
-      let uniformResult = { data: [] };
-      if (roleIds.length > 0) {
-        uniformResult = await supabase
-          .from('uniform_items')
-          .select('*')
-          .in('role_id', roleIds)
-          .order('display_order', { ascending: true });
-      }
-
       const eventsWithRoles = (eventsResult.data || []).map((ep: any) => ({
         ...ep.events,
         role_description: ep.role_description,
@@ -99,7 +85,6 @@ export default function ParticipantDetailScreen() {
       setEvents(eventsWithRoles);
       setHierarchyRoles(rolesResult.data || []);
       setInstruments(instrumentsResult.data || []);
-      setUniformItems(uniformResult.data || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load participant');
     } finally {
@@ -212,70 +197,6 @@ export default function ParticipantDetailScreen() {
                 </View>
                 <Text style={styles.infoText}>{participant.costume_description}</Text>
               </ModernCard>
-            </Animated.View>
-          )}
-
-          {uniformItems.length > 0 && (
-            <Animated.View entering={FadeInDown.delay(380).springify()}>
-              <TouchableOpacity
-                onPress={() => setIsUniformExpanded(!isUniformExpanded)}
-                activeOpacity={0.7}
-              >
-                <View style={styles.sectionHeader}>
-                  <View style={styles.sectionHeaderLeft}>
-                    <Shirt size={24} color={theme.colors.primary.main} strokeWidth={2} />
-                    <Text style={styles.sectionTitle}>Odora ({uniformItems.length})</Text>
-                  </View>
-                  {isUniformExpanded ? (
-                    <ChevronUp size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
-                  ) : (
-                    <ChevronDown size={20} color={theme.colors.text.tertiary} strokeWidth={2} />
-                  )}
-                </View>
-              </TouchableOpacity>
-              {isUniformExpanded && uniformItems.map((item, index) => {
-                const isExpanded = expandedUniformItems.has(item.id);
-                return (
-                  <Animated.View
-                    key={item.id}
-                    entering={FadeInDown.delay(50 + index * 30).springify()}
-                    style={styles.cardWrapper}
-                  >
-                    <ModernCard>
-                      <TouchableOpacity
-                        onPress={() => {
-                          const newSet = new Set(expandedUniformItems);
-                          if (isExpanded) {
-                            newSet.delete(item.id);
-                          } else {
-                            newSet.add(item.id);
-                          }
-                          setExpandedUniformItems(newSet);
-                        }}
-                        activeOpacity={0.7}
-                      >
-                        <View style={styles.uniformItemHeader}>
-                          <Text style={styles.uniformItemTitle}>
-                            {item.item_name_croatian || item.item_name}
-                          </Text>
-                          {isExpanded ? (
-                            <ChevronUp size={18} color={theme.colors.text.tertiary} strokeWidth={2} />
-                          ) : (
-                            <ChevronDown size={18} color={theme.colors.text.tertiary} strokeWidth={2} />
-                          )}
-                        </View>
-                        {isExpanded && item.description_croatian && (
-                          <View style={styles.uniformItemContent}>
-                            <Text style={styles.uniformItemDescription}>
-                              {item.description_croatian}
-                            </Text>
-                          </View>
-                        )}
-                      </TouchableOpacity>
-                    </ModernCard>
-                  </Animated.View>
-                );
-              })}
             </Animated.View>
           )}
 
@@ -600,29 +521,5 @@ const styles = StyleSheet.create({
   },
   bottomSpacer: {
     height: 100,
-  },
-  uniformItemHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: theme.spacing.lg,
-  },
-  uniformItemTitle: {
-    ...theme.typography.body1,
-    color: theme.colors.text.primary,
-    fontWeight: '600',
-    flex: 1,
-  },
-  uniformItemContent: {
-    paddingHorizontal: theme.spacing.lg,
-    paddingBottom: theme.spacing.lg,
-    paddingTop: theme.spacing.xs,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.neutral[200],
-  },
-  uniformItemDescription: {
-    ...theme.typography.body2,
-    color: theme.colors.text.secondary,
-    lineHeight: 22,
   },
 });
