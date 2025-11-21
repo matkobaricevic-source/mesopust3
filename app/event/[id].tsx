@@ -48,6 +48,7 @@ export default function EventDetailScreen() {
   const [showEventSteps, setShowEventSteps] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isNapovidanjeExpanded, setIsNapovidanjeExpanded] = useState(false);
+  const [isNapovidanjeStepExpanded, setIsNapovidanjeStepExpanded] = useState(false);
   const eventStepsAnimation = useSharedValue(0);
   const router = useRouter();
 
@@ -238,21 +239,71 @@ export default function EventDetailScreen() {
 
                 <Animated.View style={timelineAnimatedStyle}>
                   {eventSteps.map((step, index) => (
-                    <View key={step.id} style={styles.timelineItem}>
-                      <View style={styles.timelineDot} />
-                      {index < eventSteps.length - 1 && <View style={styles.timelineLine} />}
-                      <View style={styles.timelineContent}>
-                        <Text style={styles.stepNumber}>Korak {step.step_number}</Text>
-                        <Text style={styles.stepTitle}>{step.title}</Text>
-                        {step.note && <Text style={styles.stepNote}>{step.note}</Text>}
-                        {step.image_url && getImageSource(step.image_url) && (
-                          <Image
-                            source={getImageSource(step.image_url)!}
-                            style={styles.stepImage}
-                            resizeMode="cover"
-                          />
-                        )}
+                    <View key={step.id}>
+                      <View style={styles.timelineItem}>
+                        <View style={styles.timelineDot} />
+                        {(index < eventSteps.length - 1 || step.step_number === 4) && <View style={styles.timelineLine} />}
+                        <View style={styles.timelineContent}>
+                          <Text style={styles.stepNumber}>Korak {step.step_number}</Text>
+                          <Text style={styles.stepTitle}>{step.title}</Text>
+                          {step.note && <Text style={styles.stepNote}>{step.note}</Text>}
+                          {step.image_url && getImageSource(step.image_url) && (
+                            <Image
+                              source={getImageSource(step.image_url)!}
+                              style={styles.stepImage}
+                              resizeMode="cover"
+                            />
+                          )}
+                        </View>
                       </View>
+                      {step.step_number === 4 && event?.title_local === 'Napovidanje dovcen i dovican' && (
+                        <View style={styles.timelineItem}>
+                          <View style={[styles.timelineDot, styles.timelineDotSpecial]} />
+                          {index < eventSteps.length - 1 && <View style={styles.timelineLine} />}
+                          <View style={styles.timelineContent}>
+                            <TouchableOpacity
+                              style={styles.napovidanjeStepHeader}
+                              onPress={() => setIsNapovidanjeStepExpanded(!isNapovidanjeStepExpanded)}
+                              activeOpacity={0.7}
+                            >
+                              <Text style={styles.napovidanjeStepTitle}>Izvedba "Napovidanja"</Text>
+                              <ChevronDown
+                                size={20}
+                                color={theme.colors.primary.main}
+                                style={{
+                                  transform: [{ rotate: isNapovidanjeStepExpanded ? '180deg' : '0deg' }],
+                                }}
+                              />
+                            </TouchableOpacity>
+                            {isNapovidanjeStepExpanded && (
+                              <View style={styles.napovidanjeStepContent}>
+                                <Text style={styles.napovidanjeStepText}>
+                                  {`„Napovid" započinje „mesopustarski kapitan": „Ovo j' prvo napovidanje dovcen i dovican! Ženi se ženi!"
+Prisutni narod i ostali „mesopustari" pitaju: „A Ki-i-i-i?"
+„Kapitan" odgovara:  „A teta Ivana Šeguljka"
+Narod i „mesopustari" ponovno pitaju: „A za koga-a-a-a?"
+„Kapitan": „A za Radovana Sokolića!"
+
+Narod izvedenu napovid „oženjenog" para poprati smijehom i odobravanjem a „mesopustari" zasviraju „tuš" – specifični glazbeni manifest udaranja bubnja, otpuštanje prodornog tona tona „vele trumbete" i „odgovaralice" uz ubacivanje ostalih instrumenata.
+„Napovidanje" se na jednom raskrižju ponavlja minimalno dva puta, s mogućnošću izvođenja i više puta.
+Objavu drugoga para preuzima „drugi kapitan", čime započinje izmjena „kapitana" koja se nastavlja na svim raskrižjima:
+„Drugi kapitan": „A još je jedna!"
+Narod i „mesopustari": „A Ka-a-a-a?"
+„Kapitan": „A (teta) …..(ime, prezime/obiteljski nadimak udovice)"
+Narod i „mesopustari": „A za koga-a-a-a?"
+„Kapitan": „A za …(ime, prezime,/obiteljski nadimak udovca)"
+
+I ovaj put narod izvedenu „napovid" oženjenog para poprati smijehom i odobravanjem a „mesopustari" zasviraju „tuš" – specifični glazbeni manifest udaranja bubnja, otpuštanje prodornog tona tona „vele trumbete" i „odgovaralice" uz ubacivanje ostalih instrumenata.
+
+Zaključno, „kapitan" izgovara: „Ako ki zna kakovu zapreku kumstva, srodstva ili niku (kakovu) drugu, neka klade guzenjak pod prdenjak, mokru krpu na guzicu i nek se javi (ime nekog mesopustara) da ne bude kakovoga šušura!"
+
+S tim se „napovidanje" na raskrižju završava, „advitor" najavljuje „zogu" sa „Bubanj i mužika složno udaraj!" nakon čega se cijela povorka premješta na sljedeće raskrižje.`}
+                                </Text>
+                              </View>
+                            )}
+                          </View>
+                        </View>
+                      )}
                     </View>
                   ))}
                 </Animated.View>
@@ -668,5 +719,31 @@ const styles = StyleSheet.create({
     ...theme.typography.body1,
     color: theme.colors.text.secondary,
     lineHeight: 26,
+  },
+  timelineDotSpecial: {
+    backgroundColor: theme.colors.accent.main,
+  },
+  napovidanjeStepHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: theme.spacing.sm,
+  },
+  napovidanjeStepTitle: {
+    ...theme.typography.body1,
+    color: theme.colors.primary.main,
+    fontWeight: '700',
+    flex: 1,
+  },
+  napovidanjeStepContent: {
+    marginTop: theme.spacing.md,
+    paddingTop: theme.spacing.md,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.neutral[200],
+  },
+  napovidanjeStepText: {
+    ...theme.typography.body2,
+    color: theme.colors.text.secondary,
+    lineHeight: 22,
   },
 });
