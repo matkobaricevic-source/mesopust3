@@ -98,9 +98,9 @@ export default function ParticipantsScreen() {
     const lowerRoleName = roleName.toLowerCase();
 
     if (lowerRoleName.includes('advitor')) {
-      const advitor = participants.find(p => p.name_croatian?.toLowerCase() === 'advitor');
-      if (advitor) {
-        router.push(`/participant/${advitor.id}`);
+      const advitorRole = hierarchyRoles.find(r => r.title_croatian?.toLowerCase() === 'advitor');
+      if (advitorRole) {
+        router.push(`/role/${advitorRole.id}`);
         return;
       }
     }
