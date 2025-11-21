@@ -430,14 +430,15 @@ S tim se „napovidanje" na raskrižju završava, „advitor" najavljuje „zogu
             </Animated.View>
           )}
 
-          <Animated.View entering={FadeInDown.delay(500).springify()}>
-            <ModernCard style={styles.napovidanjeCard}>
-              <Text style={styles.napovidanjeTitle}>Izvedba "Napovidanja"</Text>
-              <Text
-                style={styles.napovidanjeText}
-                numberOfLines={isNapovidanjeExpanded ? undefined : 4}
-              >
-                {`„Napovid" započinje „mesopustarski kapitan": „Ovo j' prvo napovidanje dovcen i dovican! Ženi se ženi!"
+          {event.id === '4bacfe02-bdda-4bdf-8f4d-c589647fb0c3' && (
+            <Animated.View entering={FadeInDown.delay(500).springify()}>
+              <ModernCard style={styles.napovidanjeCard}>
+                <Text style={styles.napovidanjeTitle}>Izvedba "Napovidanja"</Text>
+                <Text
+                  style={styles.napovidanjeText}
+                  numberOfLines={isNapovidanjeExpanded ? undefined : 4}
+                >
+                  {`„Napovid" započinje „mesopustarski kapitan": „Ovo j' prvo napovidanje dovcen i dovican! Ženi se ženi!"
 Prisutni narod i ostali „mesopustari" pitaju: „A Ki-i-i-i?"
 „Kapitan" odgovara:  „A teta Ivana Šeguljka"
 Narod i „mesopustari" ponovno pitaju: „A za koga-a-a-a?"
@@ -457,24 +458,25 @@ I ovaj put narod izvedenu „napovid" oženjenog para poprati smijehom i odobrav
 Zaključno, „kapitan" izgovara: „Ako ki zna kakovu zapreku kumstva, srodstva ili niku (kakovu) drugu, neka klade guzenjak pod prdenjak, mokru krpu na guzicu i nek se javi (ime nekog mesopustara) da ne bude kakovoga šušura!"
 
 S tim se „napovidanje" na raskrižju završava, „advitor" najavljuje „zogu" sa „Bubanj i mužika složno udaraj!" nakon čega se cijela povorka premješta na sljedeće raskrižje.`}
-              </Text>
-              <TouchableOpacity
-                style={styles.readMoreButton}
-                onPress={() => setIsNapovidanjeExpanded(!isNapovidanjeExpanded)}
-              >
-                <Text style={styles.readMoreText}>
-                  {isNapovidanjeExpanded ? 'Prikaži manje' : 'Prikaži više'}
                 </Text>
-                <ChevronDown
-                  size={16}
-                  color={theme.colors.primary.main}
-                  style={{
-                    transform: [{ rotate: isNapovidanjeExpanded ? '180deg' : '0deg' }],
-                  }}
-                />
-              </TouchableOpacity>
-            </ModernCard>
-          </Animated.View>
+                <TouchableOpacity
+                  style={styles.readMoreButton}
+                  onPress={() => setIsNapovidanjeExpanded(!isNapovidanjeExpanded)}
+                >
+                  <Text style={styles.readMoreText}>
+                    {isNapovidanjeExpanded ? 'Prikaži manje' : 'Prikaži više'}
+                  </Text>
+                  <ChevronDown
+                    size={16}
+                    color={theme.colors.primary.main}
+                    style={{
+                      transform: [{ rotate: isNapovidanjeExpanded ? '180deg' : '0deg' }],
+                    }}
+                  />
+                </TouchableOpacity>
+              </ModernCard>
+            </Animated.View>
+          )}
 
           {subEvents.length > 0 && (
             <Animated.View entering={FadeInDown.delay(600).springify()}>
