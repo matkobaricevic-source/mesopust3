@@ -266,7 +266,11 @@ export default function ParticipantDetailScreen() {
               {isRolesExpanded && hierarchyRoles.map((role, index) => {
                 const isRoleDescExpanded = expandedRoleDescriptions.has(role.id);
                 const roleDescription = role.description_croatian || '';
-                const shouldTruncateRole = roleDescription.length > 80;
+                const truncateLength = 120;
+                const shouldTruncateRole = roleDescription.length > truncateLength;
+                const displayDescription = (!isRoleDescExpanded && shouldTruncateRole)
+                  ? roleDescription.substring(0, truncateLength) + '...'
+                  : roleDescription;
 
                 return (
                   <Animated.View
@@ -284,11 +288,8 @@ export default function ParticipantDetailScreen() {
                           </Text>
                           {role.description_croatian && (
                             <>
-                              <Text
-                                style={styles.roleDescription}
-                                numberOfLines={!isRoleDescExpanded && shouldTruncateRole ? 2 : undefined}
-                              >
-                                {roleDescription}
+                              <Text style={styles.roleDescription}>
+                                {displayDescription}
                               </Text>
                               {shouldTruncateRole && (
                                 <TouchableOpacity
