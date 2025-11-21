@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
   categoryHeader: {
     paddingBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border.light,
+    borderBottomColor: theme.colors.neutral[300],
   },
   categoryName: {
     fontFamily: fonts.heading,
