@@ -255,6 +255,7 @@ export default function ParticipantsScreen() {
                       {isHierarchyExpanded && (
                         <View style={styles.dropdownContent}>
                           {mesopustariRoles
+                            .sort((a, b) => a.display_order - b.display_order)
                             .map((role, index) => (
                               <TouchableOpacity
                                 key={role.id}
