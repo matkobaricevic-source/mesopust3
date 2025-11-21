@@ -286,7 +286,7 @@ export default function EventDetailScreen() {
                           )}
                         </View>
                       </View>
-                      {step.step_number === 4 && event?.title_local === 'Napovidanje dovcen i dovican' && (
+                      {step.step_number === 4 && event?.title_local?.trim() === 'Napovidanje dovcen i dovican' && event?.id === '4bacfe02-bdda-4bdf-8f4d-c589647fb0c3' && (
                         <View style={styles.timelineItem}>
                           <View style={[styles.timelineDot, styles.timelineDotSpecial]} />
                           {index < eventSteps.length - 1 && <View style={styles.timelineLine} />}
