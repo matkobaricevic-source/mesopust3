@@ -483,6 +483,9 @@ export default function ParticipantsScreen() {
                           <Text style={styles.formationNote}>
                             * Bandiraš stoji između advitora i magazinera od mesopusne nedilje do mesopusne srede
                           </Text>
+                          <Text style={styles.formationNote}>
+                            * Kasiri obavljaju svoju ulogu samo od mesopusne nedilje do mesopusne srede
+                          </Text>
                           <Text style={styles.formationTip}>
                             💡 Dodirnite bilo koju ulogu za više informacija
                           </Text>

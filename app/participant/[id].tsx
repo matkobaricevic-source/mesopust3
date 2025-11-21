@@ -521,7 +521,10 @@ export default function ParticipantDetailScreen() {
                       </View>
 
                       <Text style={styles.formationFootnote}>
-                        * Bandiraš stoji između Advitora i Magazinera od mesopusne srede do žitne srede
+                        * Bandiraš stoji između advitora i magazinera od mesopusne nedilje do mesopusne srede
+                      </Text>
+                      <Text style={styles.formationFootnote}>
+                        * Kasiri obavljaju svoju ulogu samo od mesopusne nedilje do mesopusne srede
                       </Text>
 
                       <Text style={styles.formationTip}>
