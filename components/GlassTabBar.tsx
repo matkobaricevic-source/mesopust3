@@ -1,5 +1,5 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { CalendarDays, UsersRound, Camera, Search, BookText } from 'lucide-react-native';
+import { CalendarDays, UsersRound, Search, BookText } from 'lucide-react-native';
 import Animated, { useAnimatedStyle, interpolate, Extrapolation, SharedValue, interpolateColor, useAnimatedReaction, runOnJS } from 'react-native-reanimated';
 import { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,12 +16,11 @@ interface GlassTabBarProps {
 const tabs = [
   { name: 'index', icon: CalendarDays, gradient: theme.colors.primary.gradient },
   { name: 'browse', icon: UsersRound, gradient: theme.colors.secondary.gradient },
-  { name: 'social', icon: Camera, gradient: ['#4facfe', '#00f2fe', '#43e97b'] as const },
   { name: 'search', icon: Search, gradient: theme.colors.accent.gradient },
   { name: 'glossary', icon: BookText, gradient: theme.colors.success.gradient },
 ];
 
-const TAB_COUNT = 5;
+const TAB_COUNT = 4;
 
 function AnimatedIcon({ icon: IconComponent, index, scrollOffset }: { icon: any; index: number; scrollOffset: SharedValue<number> }) {
   const [color, setColor] = useState('#FFFFFF');

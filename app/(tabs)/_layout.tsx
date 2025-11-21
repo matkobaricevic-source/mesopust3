@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { View, StyleSheet, Dimensions, Platform } from 'react-native';
 // Add GestureHandlerRootView import
-import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'; 
+import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { useSharedValue, useAnimatedStyle, withSpring, runOnJS } from 'react-native-reanimated';
 import { GlassTabBar } from '@/components/GlassTabBar';
 import IndexScreen from './index';
 import BrowseScreen from './browse';
-import SocialScreen from './social';
 import SearchScreen from './search';
 import GlossaryScreen from './glossary';
 
 const { width } = Dimensions.get('window');
-const TABS_COUNT = 5;
+const TABS_COUNT = 4;
 
 export default function TabLayout() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -22,7 +21,6 @@ export default function TabLayout() {
   const tabs = [
     <IndexScreen key="index" />,
     <BrowseScreen key="browse" />,
-    <SocialScreen key="social" />,
     <SearchScreen key="search" />,
     <GlossaryScreen key="glossary" />,
   ];
