@@ -283,8 +283,7 @@ export default function ParticipantDetailScreen() {
                       </View>
                     </ModernCard>
                   </Animated.View>
-                );
-              })}
+              ))}
             </Animated.View>
           )}
 
