@@ -172,56 +172,10 @@ function AnimatedEventCard({
           </Text>
         </View>
 
-        {hasExpandableContent && (
-          <>
-            <TouchableOpacity
-              style={styles.expandButton}
-              onPress={onToggle}
-              activeOpacity={0.7}>
-              <Text style={styles.expandButtonText}>
-                {isExpanded ? 'Sakrij detalje' : hasCategories ? 'Prikaži dane' : 'Prikaži događaje'}
-              </Text>
-              <Animated.View style={chevronAnimatedStyle}>
-                <ChevronDown size={18} color={theme.colors.text.secondary} strokeWidth={2} />
-              </Animated.View>
-            </TouchableOpacity>
-
-            <Animated.View style={contentAnimatedStyle}>
-              <View style={styles.categoriesSection}>
-                {hasSubEvents && item.sub_events!
-                  .filter(subEvent => subEvent.title !== 'Zeča')
-                  .map((subEvent) => (
-                    <TouchableOpacity
-                      key={subEvent.id}
-                      style={styles.categoryItem}
-                      onPress={() => onSubEventPress(subEvent.id)}
-                      activeOpacity={0.7}>
-                      <View style={styles.categoryDot} />
-                      <Text style={styles.categoryItemTitle}>
-                        {subEvent.title_local || subEvent.title}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                {hasCategories && item.categories!.map((category) => (
-                  <TouchableOpacity
-                    key={category.id}
-                    style={styles.categoryItem}
-                    onPress={() => onCategoryPress(category.id)}
-                    activeOpacity={0.7}>
-                    <View style={styles.categoryDot} />
-                    <Text style={styles.categoryItemTitle}>
-                      {category.title_local || category.title}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            </Animated.View>
-          </>
-        )}
-
         {/* Tijek događaja for Napovidanje */}
         {isNapovidanje && hasSteps && (
           <View style={styles.dropdownContainer}>
+            <View style={styles.dropdownBorder} />
             <TouchableOpacity
               style={styles.dropdownHeader}
               onPress={onToggleSteps}
@@ -256,6 +210,7 @@ function AnimatedEventCard({
         {/* Raskrižja for Napovidanje */}
         {isNapovidanje && hasCrossroads && (
           <View style={styles.dropdownContainer}>
+            <View style={styles.dropdownBorder} />
             <TouchableOpacity
               style={styles.dropdownHeader}
               onPress={onToggleCrossroads}
@@ -280,6 +235,57 @@ function AnimatedEventCard({
               </View>
             </Animated.View>
           </View>
+        )}
+
+        {/* Prikaži događaje dropdown for Napovidanje */}
+        {hasExpandableContent && (
+          <>
+            <View style={styles.dropdownContainer}>
+              <View style={styles.dropdownBorder} />
+              <TouchableOpacity
+                style={styles.dropdownHeader}
+                onPress={onToggle}
+                activeOpacity={0.7}>
+                <Text style={styles.dropdownTitle}>
+                  {isExpanded ? 'Sakrij događaje' : hasCategories ? 'Prikaži dane' : 'Prikaži događaje'}
+                </Text>
+                <Animated.View style={chevronAnimatedStyle}>
+                  <ChevronDown size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                </Animated.View>
+              </TouchableOpacity>
+
+              <Animated.View style={contentAnimatedStyle}>
+                <View style={styles.dropdownContent}>
+                  {hasSubEvents && item.sub_events!
+                    .filter(subEvent => subEvent.title !== 'Zeča')
+                    .map((subEvent) => (
+                      <TouchableOpacity
+                        key={subEvent.id}
+                        style={styles.categoryItem}
+                        onPress={() => onSubEventPress(subEvent.id)}
+                        activeOpacity={0.7}>
+                        <View style={styles.categoryDot} />
+                        <Text style={styles.categoryItemTitle}>
+                          {subEvent.title_local || subEvent.title}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
+                  {hasCategories && item.categories!.map((category) => (
+                    <TouchableOpacity
+                      key={category.id}
+                      style={styles.categoryItem}
+                      onPress={() => onCategoryPress(category.id)}
+                      activeOpacity={0.7}>
+                      <View style={styles.categoryDot} />
+                      <Text style={styles.categoryItemTitle}>
+                        {category.title_local || category.title}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </Animated.View>
+            </View>
+          </>
         )}
       </ModernCard>
     </Animated.View>
@@ -686,10 +692,12 @@ const styles = StyleSheet.create({
   },
   dropdownContainer: {
     marginTop: theme.spacing.md,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.neutral[200],
-    paddingTop: theme.spacing.md,
     paddingHorizontal: theme.spacing.lg,
+  },
+  dropdownBorder: {
+    height: 1,
+    backgroundColor: theme.colors.neutral[200],
+    marginBottom: theme.spacing.md,
   },
   dropdownHeader: {
     flexDirection: 'row',
