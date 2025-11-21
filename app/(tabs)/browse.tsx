@@ -170,7 +170,7 @@ export default function ParticipantsScreen() {
 
   // Find Mesopustari participant to show hierarchy
   const mesopustari = participants.find(p => p.name === 'Mesopustari');
-  const mesopustariRoles = hierarchyRoles.filter(r => r.participant_id === mesopustari?.id);
+  const mesopustariRoles = hierarchyRoles.filter(r => r.participant_id === mesopustari?.id && r.show_in_main_menu);
   const otherParticipants = participants.filter(p => p.name !== 'Mesopustari');
 
   return (
