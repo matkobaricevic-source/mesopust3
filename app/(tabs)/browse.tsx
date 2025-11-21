@@ -57,11 +57,10 @@ export default function ParticipantsScreen() {
 
       if (participantsError) throw participantsError;
 
-      // Load hierarchy roles for Mesopustari
+      // Load hierarchy roles (load all for formation navigation to work)
       const { data: hierarchyData, error: hierarchyError } = await supabase
         .from('hierarchy_roles')
         .select('*')
-        .eq('show_in_main_menu', true)
         .order('display_order', { ascending: true });
 
       if (hierarchyError) throw hierarchyError;
