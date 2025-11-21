@@ -115,14 +115,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     overflow: 'hidden',
+    backgroundColor: '#000000',
   },
   pagesContainer: {
     flex: 1,
     flexDirection: 'row',
     width: width * TABS_COUNT,
+    backgroundColor: '#000000',
   },
   page: {
     width,
     flex: 1,
+    backgroundColor: '#000000',
   },
 });
