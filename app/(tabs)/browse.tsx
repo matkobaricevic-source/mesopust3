@@ -545,7 +545,9 @@ export default function ParticipantsScreen() {
                     {item.costume_description && (
                       <View style={styles.badge}>
                         <Shirt size={14} color={theme.colors.primary.main} strokeWidth={2} />
-                        <Text style={styles.badgeText}>Nošnja</Text>
+                        <Text style={styles.badgeText}>
+                          {['Novljansko kolo', 'Pivači kola', 'Sopci'].includes(item.name_croatian || '') ? 'Nošnja' : 'Odora'}
+                        </Text>
                       </View>
                     )}
                   </View>
