@@ -272,6 +272,8 @@ export default function ParticipantDetailScreen() {
                   ? roleDescription.substring(0, truncateLength).trim() + '...'
                   : roleDescription;
 
+                console.log('Role:', role.title_croatian, 'Length:', roleDescription.length, 'Should truncate:', shouldTruncateRole);
+
                 return (
                   <Animated.View
                     key={role.id}
