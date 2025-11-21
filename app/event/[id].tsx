@@ -32,6 +32,13 @@ interface EventStep {
   note: string | null;
 }
 
+interface EventCrossroad {
+  id: string;
+  crossroad_number: number;
+  title: string;
+  image_url: string | null;
+}
+
 interface ParticipantWithRole extends Participant {
   role_description: string | null;
 }
@@ -43,13 +50,16 @@ export default function EventDetailScreen() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [subEvents, setSubEvents] = useState<Event[]>([]);
   const [eventSteps, setEventSteps] = useState<EventStep[]>([]);
+  const [eventCrossroads, setEventCrossroads] = useState<EventCrossroad[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showEventSteps, setShowEventSteps] = useState(false);
+  const [showCrossroads, setShowCrossroads] = useState(false);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isNapovidanjeExpanded, setIsNapovidanjeExpanded] = useState(false);
   const [isNapovidanjeStepExpanded, setIsNapovidanjeStepExpanded] = useState(false);
   const eventStepsAnimation = useSharedValue(0);
+  const crossroadsAnimation = useSharedValue(0);
   const router = useRouter();
 
   const chevronAnimatedStyle = useAnimatedStyle(() => ({
@@ -62,6 +72,16 @@ export default function EventDetailScreen() {
     overflow: 'hidden',
   }));
 
+  const crossroadsChevronAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${interpolate(crossroadsAnimation.value, [0, 1], [0, 180])}deg` }],
+  }));
+
+  const crossroadsAnimatedStyle = useAnimatedStyle(() => ({
+    maxHeight: interpolate(crossroadsAnimation.value, [0, 1], [0, 5000]),
+    opacity: interpolate(crossroadsAnimation.value, [0, 0.5, 1], [0, 1, 1]),
+    overflow: 'hidden',
+  }));
+
   useEffect(() => {
     loadEventDetails();
   }, [id]);
@@ -69,6 +89,10 @@ export default function EventDetailScreen() {
   useEffect(() => {
     eventStepsAnimation.value = withTiming(showEventSteps ? 1 : 0, { duration: 300 });
   }, [showEventSteps]);
+
+  useEffect(() => {
+    crossroadsAnimation.value = withTiming(showCrossroads ? 1 : 0, { duration: 300 });
+  }, [showCrossroads]);
 
   async function loadEventDetails() {
     try {
@@ -86,7 +110,7 @@ export default function EventDetailScreen() {
 
       setEvent(eventData);
 
-      const [participantsResult, categoriesResult, subEventsResult, stepsResult] = await Promise.all([
+      const [participantsResult, categoriesResult, subEventsResult, stepsResult, crossroadsResult] = await Promise.all([
         supabase
           .from('event_participants')
           .select('*, participants(*)')
@@ -107,6 +131,11 @@ export default function EventDetailScreen() {
           .select('*')
           .eq('event_id', id)
           .order('step_number', { ascending: true }),
+        supabase
+          .from('event_crossroads')
+          .select('*')
+          .eq('event_id', id)
+          .order('crossroad_number', { ascending: true }),
       ]);
 
       const participantsWithRoles = (participantsResult.data || []).map((ep: any) => ({
@@ -118,6 +147,7 @@ export default function EventDetailScreen() {
       setCategories(categoriesResult.data || []);
       setSubEvents(subEventsResult.data || []);
       setEventSteps(stepsResult.data || []);
+      setEventCrossroads(crossroadsResult.data || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load event');
     } finally {
@@ -307,6 +337,46 @@ S tim se „napovidanje" na raskrižju završava, „advitor" najavljuje „zogu
                           </View>
                         </View>
                       )}
+                    </View>
+                  ))}
+                </Animated.View>
+              </ModernCard>
+            </Animated.View>
+          )}
+
+          {eventCrossroads.length > 0 && (
+            <Animated.View entering={FadeInDown.delay(350).springify()}>
+              <ModernCard style={styles.sectionCard}>
+                <TouchableOpacity
+                  style={styles.sectionHeader}
+                  onPress={() => setShowCrossroads(!showCrossroads)}
+                  activeOpacity={0.7}
+                >
+                  <View style={styles.sectionHeaderLeft}>
+                    <MapPin size={24} color={theme.colors.primary.main} strokeWidth={2} />
+                    <Text style={styles.sectionTitle}>Križanja ({eventCrossroads.length})</Text>
+                  </View>
+                  <Animated.View style={crossroadsChevronAnimatedStyle}>
+                    <ChevronDown size={20} color={theme.colors.text.secondary} strokeWidth={2} />
+                  </Animated.View>
+                </TouchableOpacity>
+
+                <Animated.View style={crossroadsAnimatedStyle}>
+                  {eventCrossroads.map((crossroad, index) => (
+                    <View key={crossroad.id} style={styles.timelineItem}>
+                      <View style={styles.timelineDot} />
+                      {index < eventCrossroads.length - 1 && <View style={styles.timelineLine} />}
+                      <View style={styles.timelineContent}>
+                        <Text style={styles.stepNumber}>Križanje {crossroad.crossroad_number}</Text>
+                        <Text style={styles.stepTitle}>{crossroad.title}</Text>
+                        {crossroad.image_url && getImageSource(crossroad.image_url) && (
+                          <Image
+                            source={getImageSource(crossroad.image_url)!}
+                            style={styles.stepImage}
+                            resizeMode="cover"
+                          />
+                        )}
+                      </View>
                     </View>
                   ))}
                 </Animated.View>
