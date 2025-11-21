@@ -44,7 +44,7 @@ interface ParticipantWithRole extends Participant {
 }
 
 export default function EventDetailScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, openDescription } = useLocalSearchParams<{ id: string; openDescription?: string }>();
   const [event, setEvent] = useState<Event | null>(null);
   const [participants, setParticipants] = useState<ParticipantWithRole[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -61,6 +61,12 @@ export default function EventDetailScreen() {
   const eventStepsAnimation = useSharedValue(0);
   const crossroadsAnimation = useSharedValue(0);
   const router = useRouter();
+
+  useEffect(() => {
+    if (openDescription === 'true' && !loading) {
+      setIsDescriptionExpanded(true);
+    }
+  }, [openDescription, loading]);
 
   const chevronAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${interpolate(eventStepsAnimation.value, [0, 1], [0, 180])}deg` }],

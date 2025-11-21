@@ -30,6 +30,7 @@ interface EventStep {
   title: string;
   image_url: string | null;
   note: string | null;
+  related_event_id: string | null;
 }
 
 interface EventCrossroad {
@@ -57,7 +58,8 @@ function AnimatedEventCard({
   isStepsExpanded,
   isCrossroadsExpanded,
   onToggleSteps,
-  onToggleCrossroads
+  onToggleCrossroads,
+  onStepPress
 }: {
   item: EventWithCategories;
   isExpanded: boolean;
@@ -70,6 +72,7 @@ function AnimatedEventCard({
   isCrossroadsExpanded?: boolean;
   onToggleSteps?: () => void;
   onToggleCrossroads?: () => void;
+  onStepPress?: (eventId: string) => void;
 }) {
   const animation = useSharedValue(isExpanded ? 1 : 0);
   const stepsAnimation = useSharedValue(isStepsExpanded ? 1 : 0);
@@ -189,19 +192,41 @@ function AnimatedEventCard({
 
             <Animated.View style={stepsContentAnimatedStyle}>
               <View style={styles.dropdownContent}>
-                {item.event_steps!.map((step) => (
-                  <View key={step.id} style={styles.stepItem}>
-                    <View style={styles.stepNumberBadge}>
-                      <Text style={styles.stepNumberText}>{step.step_number}</Text>
-                    </View>
-                    <View style={styles.stepInfo}>
-                      <Text style={styles.stepTitle}>{step.title}</Text>
-                      {step.note && (
-                        <Text style={styles.stepNote}>{step.note}</Text>
+                {item.event_steps!.map((step) => {
+                  const isClickable = step.related_event_id !== null;
+                  const StepWrapper = isClickable ? TouchableOpacity : View;
+                  const stepWrapperProps = isClickable ? {
+                    onPress: () => onStepPress?.(step.related_event_id!),
+                    activeOpacity: 0.7,
+                    style: [styles.stepItem, styles.stepItemClickable]
+                  } : {
+                    style: styles.stepItem
+                  };
+
+                  return (
+                    <StepWrapper key={step.id} {...stepWrapperProps}>
+                      <View style={styles.stepNumberBadge}>
+                        <Text style={styles.stepNumberText}>{step.step_number}</Text>
+                      </View>
+                      <View style={styles.stepInfo}>
+                        <Text style={[styles.stepTitle, isClickable && styles.stepTitleClickable]}>
+                          {step.title}
+                        </Text>
+                        {step.note && (
+                          <Text style={styles.stepNote}>{step.note}</Text>
+                        )}
+                      </View>
+                      {isClickable && (
+                        <ChevronDown
+                          size={16}
+                          color={theme.colors.primary.main}
+                          strokeWidth={2}
+                          style={{ transform: [{ rotate: '-90deg' }] }}
+                        />
                       )}
-                    </View>
-                  </View>
-                ))}
+                    </StepWrapper>
+                  );
+                })}
               </View>
             </Animated.View>
           </View>
@@ -436,6 +461,10 @@ export default function HomeScreen() {
     });
   }
 
+  function handleStepPress(eventId: string) {
+    router.push(`/event/${eventId}?openDescription=true`);
+  }
+
   if (loading) {
     return (
       <View style={styles.centerContainer}>
@@ -503,6 +532,7 @@ export default function HomeScreen() {
                 isCrossroadsExpanded={isCrossroadsExpanded}
                 onToggleSteps={() => toggleStepsExpand(item.id)}
                 onToggleCrossroads={() => toggleCrossroadsExpand(item.id)}
+                onStepPress={handleStepPress}
               />
             );
           }}
@@ -753,6 +783,15 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: theme.colors.text.secondary,
     lineHeight: 16,
+  },
+  stepItemClickable: {
+    backgroundColor: theme.colors.primary.main + '10',
+    borderRadius: theme.borderRadius.md,
+    paddingHorizontal: theme.spacing.sm,
+    marginHorizontal: -theme.spacing.sm,
+  },
+  stepTitleClickable: {
+    color: theme.colors.primary.main,
   },
   crossroadItem: {
     flexDirection: 'row',
