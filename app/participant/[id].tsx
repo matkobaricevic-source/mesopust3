@@ -420,28 +420,33 @@ export default function ParticipantDetailScreen() {
 
                         <View style={styles.formationColumn}>
                           <Text style={styles.formationColumnTitle}>Sredina</Text>
+                          <View style={styles.formationSpacer} />
+                          <View style={styles.formationSpacer} />
                           <TouchableOpacity
-                            style={[styles.formationMember, styles.highlightedMember]}
+                            style={[styles.formationMember, styles.formationLeader]}
                             onPress={() => handleFormationRolePress('Advitor')}
                             activeOpacity={0.7}
                           >
-                            <Crown size={14} color={theme.colors.accent.main} strokeWidth={2} />
-                            <Text style={[styles.formationMemberText, styles.highlightedText]}>Advitor</Text>
+                            <Crown size={16} color={theme.colors.accent.main} strokeWidth={2} />
+                            <Text style={styles.formationLeaderText}>Advitor</Text>
                           </TouchableOpacity>
+                          <View style={styles.formationSpacer} />
+                          <View style={styles.formationSpacer} />
                           <TouchableOpacity
-                            style={[styles.formationMember, styles.highlightedMember]}
+                            style={styles.formationMember}
                             onPress={() => handleFormationRolePress('Bandiraš')}
                             activeOpacity={0.7}
                           >
-                            <Flag size={14} color={theme.colors.accent.main} strokeWidth={2} />
-                            <Text style={[styles.formationMemberText, styles.highlightedText]}>Bandiraš</Text>
+                            <Flag size={14} color={theme.colors.secondary.main} strokeWidth={2} />
+                            <Text style={styles.formationMemberText}>Bandiraš</Text>
                           </TouchableOpacity>
+                          <View style={styles.formationSpacer} />
+                          <View style={styles.formationSpacer} />
                           <TouchableOpacity
                             style={styles.formationMember}
                             onPress={() => handleFormationRolePress('Magaziner')}
                             activeOpacity={0.7}
                           >
-                            <User size={14} color={theme.colors.text.secondary} strokeWidth={2} />
                             <Text style={styles.formationMemberText}>Magaziner</Text>
                           </TouchableOpacity>
                         </View>
@@ -778,6 +783,7 @@ const styles = StyleSheet.create({
   },
   formationScheme: {
     gap: 12,
+    padding: theme.spacing.md,
   },
   formationHeader: {
     fontSize: 18,
@@ -820,19 +826,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.neutral[300],
   },
-  highlightedMember: {
+  formationSpacer: {
+    minHeight: 28,
+  },
+  formationLeader: {
     backgroundColor: theme.colors.accent.main + '15',
+    borderWidth: 1,
     borderColor: theme.colors.accent.main + '40',
   },
   formationMemberText: {
     fontSize: 10,
     fontFamily: fonts.body,
     color: theme.colors.text.primary,
-    flex: 1,
+    textAlign: 'center',
   },
-  highlightedText: {
+  formationLeaderText: {
+    fontSize: 10,
     fontFamily: fonts.heading,
-    color: theme.colors.accent.main,
+    fontWeight: '700',
+    color: theme.colors.text.primary,
+    textAlign: 'center',
   },
   formationFootnote: {
     fontSize: 10,
