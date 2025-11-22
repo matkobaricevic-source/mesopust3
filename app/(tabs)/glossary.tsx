@@ -143,7 +143,7 @@ export default function InfoScreen() {
         <Animated.View entering={FadeInDown.delay(400).springify()}>
           <ModernCard gradient gradientColors={theme.colors.primary.gradient} style={styles.footer}>
             <Text style={styles.footerText}>
-              Doživite živu tradiciju Mesopusta
+              Doživite živu tradiciju mesopusta
             </Text>
           </ModernCard>
         </Animated.View>
