@@ -40,7 +40,7 @@ export default function InfoScreen() {
             </View>
             <Text style={styles.sectionText}>
               <Text style={styles.bold}>Novi Vinodolski</Text> je povijesni grad na
-              hrvatskom Jadranu gdje se Mesopust slavi već generacijama, predstavljajući
+              hrvatskom Jadranu gdje se mesopust slavi već generacijama, predstavljajući
               važan dio lokalne kulturne baštine.
             </Text>
           </ModernCard>
