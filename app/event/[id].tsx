@@ -613,7 +613,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: theme.spacing.md,
-    gap: theme.spacing.sm,
+    gap: theme.spacing.lg,
   },
   descriptionCard: {
     padding: theme.spacing.lg,
@@ -637,17 +637,13 @@ const styles = StyleSheet.create({
   sectionCard: {
     paddingHorizontal: theme.spacing.lg,
     paddingTop: theme.spacing.lg,
-    paddingBottom: theme.spacing.sm,
+    paddingBottom: theme.spacing.lg,
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: theme.spacing.md,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.neutral[200],
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.neutral[200],
   },
   sectionHeaderLeft: {
     flexDirection: 'row',
