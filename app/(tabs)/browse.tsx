@@ -806,10 +806,10 @@ const styles = StyleSheet.create({
     color: theme.colors.primary.main,
   },
   dropdownContainer: {
-    marginTop: theme.spacing.sm,
+    marginTop: theme.spacing.md,
     borderTopWidth: 1,
     borderTopColor: theme.colors.neutral[200],
-    paddingTop: theme.spacing.sm,
+    paddingTop: theme.spacing.md,
   },
   dropdownHeader: {
     flexDirection: 'row',
