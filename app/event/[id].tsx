@@ -635,12 +635,19 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   sectionCard: {
-    padding: theme.spacing.lg,
+    paddingHorizontal: theme.spacing.lg,
+    paddingTop: theme.spacing.lg,
+    paddingBottom: theme.spacing.sm,
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingVertical: theme.spacing.md,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.neutral[200],
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.neutral[200],
   },
   sectionHeaderLeft: {
     flexDirection: 'row',
@@ -810,7 +817,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: theme.spacing.sm,
+    paddingVertical: theme.spacing.md,
+    borderTopWidth: 1,
+    borderTopColor: theme.colors.neutral[200],
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.neutral[200],
   },
   napovidanjeStepTitle: {
     ...theme.typography.body1,
