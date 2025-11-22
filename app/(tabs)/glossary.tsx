@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     ...theme.typography.h4,
-    color: theme.colors.text.inverse,
+    color: '#000000',
     textAlign: 'center',
     fontWeight: '600',
   },
