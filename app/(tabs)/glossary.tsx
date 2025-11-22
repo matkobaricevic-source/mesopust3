@@ -92,13 +92,16 @@ export default function InfoScreen() {
           <ModernCard style={styles.section}>
             <View style={styles.sectionHeader}>
               <Heart size={24} color={theme.colors.primary.main} strokeWidth={2} />
-              <Text style={styles.sectionTitle}>Kulturni značaj</Text>
+              <Text style={styles.sectionTitle}>Kulturološki značaj</Text>
             </View>
             <Text style={styles.sectionText}>
-              Tradicija Mesopusta čuva hrvatsku kulturnu baštinu i okuplja
-              zajednicu. Povezuje mlađe generacije s njihovim precima kroz
-              glazbu, ples i tradicionalne običaje. Slavlje prikazuje regionalni
-              identitet i čuva priče i tradicije Novog Vinodolskog.
+              Priznanje Novljanskog mesopusta kao nematerijalnog kulturnog dobra nesumnjivo je važan trenutak za Novi Vinodolski – potvrda višestoljetne tradicije i dokaz njezine kulturne težine. No, iako takav status nosi svoju snagu i vidljivost, za Novljane je vrijednost mesopusta uvijek bila i ostala mnogo veća. Ona proizlazi iz činjenice da je običaj opstao usprkos svim povijesnim mijenama, živeći kroz generacije koje su ga nosile u sebi. Njegova se snaga temelji upravo na neprekinutoj vezi između zajednice i običaja koji prati čovjeka od najranijeg djetinjstva.
+            </Text>
+            <Text style={[styles.sectionText, { marginTop: theme.spacing.md }]}>
+              Mesopust se ne može „obuzdati", jer njegova je bit u prelasku iz linearnog u cikličko vrijeme – u preokretu, privremenom oslobađanju i mijeni vlasti. Ne bi mogao preživjeti nijednu epohu da nije duboko ukorijenjen u narodu. Čak i kada se čini da je priklonjen – vjerujte, nije.
+            </Text>
+            <Text style={[styles.sectionText, { marginTop: theme.spacing.md }]}>
+              On nam oblikuje osjećaj pripadnosti, doziva ljubav predaka koji su ga s ponosom i pažnjom čuvali da ostane i za nas, i tako nas čvrsto veže uz grad, uz naš Novi.
             </Text>
           </ModernCard>
         </Animated.View>
