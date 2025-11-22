@@ -613,7 +613,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: theme.spacing.md,
-    gap: theme.spacing.lg,
+    gap: theme.spacing.md,
   },
   descriptionCard: {
     padding: theme.spacing.lg,
