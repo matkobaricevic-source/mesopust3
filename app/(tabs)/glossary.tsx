@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
-import { MapPin, Calendar as CalendarIcon, Heart } from 'lucide-react-native';
+import { MapPin, Calendar as CalendarIcon, Heart, ChevronDown } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { fonts } from '@/constants/fonts';
 import { theme } from '@/constants/theme';
@@ -12,6 +14,8 @@ import { ModernCard } from '@/components/ModernCard';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
 export default function InfoScreen() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Animated.View entering={FadeIn} style={styles.header}>
@@ -47,11 +51,40 @@ export default function InfoScreen() {
               <CalendarIcon size={24} color={theme.colors.primary.main} strokeWidth={2} />
               <Text style={styles.sectionTitle}>Što je Mesopust?</Text>
             </View>
-            <Text style={styles.sectionText}>
-              Mesopust je tradicionalna karnevalska proslava koja obilježava
-              razdoblje prije korizme u kršćanskom kalendaru. Riječ "Mesopust" dolazi
-              od "meso" i "pustiti", što se odnosi na oproštaj od mesa prije posta.
-            </Text>
+            <View>
+              <Text style={styles.sectionText}>
+                Novljanski mesopust pokladni je običaj koji seže duboko u prošlost Novog Vinodolskog i zauzima središnje mjesto u lokalnom identitetu koji se prenosi s naraštaja na naraštaj.{' '}
+                {!isExpanded && (
+                  <Text style={styles.fadeText}>
+                    Stoljećima je uspijevao sačuvati svoju jezgru...
+                  </Text>
+                )}
+              </Text>
+
+              {isExpanded && (
+                <Text style={styles.sectionText}>
+                  Stoljećima je uspijevao sačuvati svoju jezgru, ostajući osebujan i lako prepoznatljiv fenomen, a ujedno i jedna od najbolje sačuvanih usmenih narodnih drama u Hrvata. Upravo zbog te jedinstvenosti privlačio je pozornost raznih struka, znatiželjnika i putnika koji u njemu prepoznaju autentičnu baštinu našega kraja.
+                </Text>
+              )}
+
+              <TouchableOpacity
+                style={styles.readMoreButton}
+                onPress={() => setIsExpanded(!isExpanded)}
+                activeOpacity={0.7}
+              >
+                <Text style={styles.readMoreText}>
+                  {isExpanded ? 'Sakrij' : 'Pročitaj više'}
+                </Text>
+                <ChevronDown
+                  size={16}
+                  color={theme.colors.primary.main}
+                  strokeWidth={2}
+                  style={{
+                    transform: [{ rotate: isExpanded ? '180deg' : '0deg' }],
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
           </ModernCard>
         </Animated.View>
 
@@ -137,6 +170,23 @@ const styles = StyleSheet.create({
   bold: {
     fontWeight: '700',
     color: theme.colors.text.primary,
+  },
+  fadeText: {
+    color: theme.colors.text.tertiary,
+    fontStyle: 'italic',
+  },
+  readMoreButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: theme.spacing.xs,
+    marginTop: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+  },
+  readMoreText: {
+    ...theme.typography.body2,
+    color: theme.colors.primary.main,
+    fontWeight: '600',
   },
   footer: {
     padding: theme.spacing.xl,
