@@ -348,25 +348,31 @@ export default function SearchScreen() {
           keyExtractor={(item) => `${item.type}-${item.id}`}
           contentContainerStyle={styles.resultsContainer}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.resultCard}
-              onPress={() => handleResultPress(item)}
-              activeOpacity={0.7}>
-              <View style={styles.resultHeader}>
-                {getResultIcon(item.type)}
-                <Text style={styles.resultType}>
-                  {getResultTypeLabel(item.type)}
-                </Text>
-              </View>
-              <Text style={styles.resultTitle}>{item.title}</Text>
-              {item.title_local && (
-                <Text style={styles.resultTitleLocal}>{item.title_local}</Text>
-              )}
-              <Text style={styles.resultDescription} numberOfLines={2}>
-                {item.description}
-              </Text>
-            </TouchableOpacity>
+          renderItem={({ item, index }) => (
+            <Animated.View
+              entering={FadeInDown.delay(index * 50).springify()}
+              style={styles.resultCardWrapper}
+            >
+              <ModernCard onPress={() => handleResultPress(item)}>
+                <View style={styles.resultContent}>
+                  <View style={styles.resultHeader}>
+                    {getResultIcon(item.type)}
+                    <Text style={styles.resultType}>
+                      {getResultTypeLabel(item.type)}
+                    </Text>
+                  </View>
+                  <Text style={styles.resultTitle}>
+                    {item.title_local || item.title}
+                  </Text>
+                  {item.title_local && item.title !== item.title_local && (
+                    <Text style={styles.resultTitleSecondary}>{item.title}</Text>
+                  )}
+                  <Text style={styles.resultDescription} numberOfLines={2}>
+                    {item.description}
+                  </Text>
+                </View>
+              </ModernCard>
+            </Animated.View>
           )}
         />
       )}
@@ -444,49 +450,42 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   resultsContainer: {
-    padding: 16,
+    padding: theme.spacing.md,
+    paddingBottom: 120,
   },
-  resultCard: {
-    backgroundColor: '#ffffff',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
+  resultCardWrapper: {
+    marginBottom: theme.spacing.md,
+  },
+  resultContent: {
+    padding: theme.spacing.lg,
   },
   resultHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: theme.spacing.sm,
   },
   resultType: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#6b7280',
+    ...theme.typography.caption,
+    fontWeight: '700',
+    color: theme.colors.text.secondary,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginLeft: 6,
+    letterSpacing: 1,
+    marginLeft: theme.spacing.xs,
   },
   resultTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#111827',
-    marginBottom: 4,
+    ...theme.typography.h4,
+    fontFamily: fonts.title,
+    color: theme.colors.text.primary,
+    marginBottom: theme.spacing.xs,
   },
-  resultTitleLocal: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#dc2626',
-    marginBottom: 8,
+  resultTitleSecondary: {
+    ...theme.typography.body2,
+    color: theme.colors.text.tertiary,
+    marginBottom: theme.spacing.sm,
   },
   resultDescription: {
-    fontSize: 14,
-    color: '#6b7280',
-    lineHeight: 20,
+    ...theme.typography.body2,
+    color: theme.colors.text.secondary,
+    lineHeight: 22,
   },
 });
